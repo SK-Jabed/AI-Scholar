@@ -1,3 +1,5 @@
+// import { Link } from "lucide-react";
+import Link from "next/link";
 import React from "react";
 
 const Navbar = () => {
@@ -6,7 +8,7 @@ const Navbar = () => {
       <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           <div className="md:flex md:items-center md:gap-12">
-            <a className="block text-teal-600" href="#">
+            <a className="block text-teal-600" href="/">
               <span className="text-3xl font-semibold">AI Scholar</span>
             </a>
           </div>
@@ -15,13 +17,13 @@ const Navbar = () => {
             <nav aria-label="Global">
               <ul className="flex items-center gap-6 text-sm">
                 <li>
-                  <a
+                  <Link 
                     className="text-gray-500 transition hover:text-gray-500/75"
-                    href="#"
+                    href="/About"
                   >
-                    {" "}
-                    About{" "}
-                  </a>
+                 
+                    About
+                  </Link>
                 </li>
 
                 <li>
