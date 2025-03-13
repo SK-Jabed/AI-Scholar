@@ -4,6 +4,7 @@ import KeyFeatures from "@/components/key_features/KeyFeatures";
 
 import CourseCategories from "@/components/home/CourseCategories";
 import PopularCourses from "@/components/home/PopularCourses";
+import TestimonialsSection from "@/components/testimonials/TestimonialsSection";
 
 export default function Home() {
   return (
@@ -13,9 +14,10 @@ export default function Home() {
       {/*1. ToDo: Hero Section (Header, navigation)
 FAQ Section (Accordion with common questions) */}
 
-      {/*2. ToDo:  Key Features Section (Grid layout for main features)
-Student Testimonials Section (Carousel/grid for user reviews)- by Abdur Rahman  */}
-  <KeyFeatures />
+      {/*  Key Features Section */}
+      <KeyFeatures />
+      {/* Student Testimonials Section */}
+      <TestimonialsSection />
       {/* 3. toDo: Course Categories Section (Cards for different subjects)
 Popular Courses Section (Top-rated courses grid) -by Sushanto kumar
  */}
