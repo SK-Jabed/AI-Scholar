@@ -12,16 +12,16 @@ const About = () => {
     }, []);
   return (
     <div>
-      <section className="py-12 px-6 bg-gray-100 text-gray-900">
+      <section className="py-12 px-6 bg-accent-content/90 text-gray-900">
         <div className="max-w-6xl mx-auto text-center">
           <h2 className="text-4xl font-bold mb-6">About Us</h2>
-          <p className="text-lg text-gray-600 mb-8">
+          <p className="text-lg text-white mb-8">
             Our mission is to revolutionize online learning with AI-powered
             insights and seamless course management.
           </p>
 
           {/* Team Members */}
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-3 gap-6 ">
             {members.map((member, index) => (
               <div
                 key={index}
