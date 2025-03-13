@@ -4,8 +4,6 @@ import PopularCourses from "@/components/home/PopularCourses";
 export default function Home() {
   return (
     <div>
-      <h2 className="text-4xl font-semibold">Hello from AI Scholar...</h2>
-
       {/*1. ToDo: Hero Section (Header, navigation)
 FAQ Section (Accordion with common questions) */}
 

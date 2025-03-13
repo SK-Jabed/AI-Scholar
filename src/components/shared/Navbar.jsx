@@ -20,6 +20,36 @@ const Navbar = () => {
                     href="#"
                   >
                     {" "}
+                    Home{" "}
+                  </a>
+                </li>
+
+                <li>
+                  <a
+                    className="text-gray-500 transition hover:text-gray-500/75"
+                    href="#"
+                  >
+                    {" "}
+                    Courses{" "}
+                  </a>
+                </li>
+
+                <li>
+                  <a
+                    className="text-gray-500 transition hover:text-gray-500/75"
+                    href="#"
+                  >
+                    {" "}
+                    Features{" "}
+                  </a>
+                </li>
+
+                <li>
+                  <a
+                    className="text-gray-500 transition hover:text-gray-500/75"
+                    href="#"
+                  >
+                    {" "}
                     About{" "}
                   </a>
                 </li>
@@ -30,37 +60,7 @@ const Navbar = () => {
                     href="#"
                   >
                     {" "}
-                    Careers{" "}
-                  </a>
-                </li>
-
-                <li>
-                  <a
-                    className="text-gray-500 transition hover:text-gray-500/75"
-                    href="#"
-                  >
-                    {" "}
-                    History{" "}
-                  </a>
-                </li>
-
-                <li>
-                  <a
-                    className="text-gray-500 transition hover:text-gray-500/75"
-                    href="#"
-                  >
-                    {" "}
-                    Services{" "}
-                  </a>
-                </li>
-
-                <li>
-                  <a
-                    className="text-gray-500 transition hover:text-gray-500/75"
-                    href="#"
-                  >
-                    {" "}
-                    Projects{" "}
+                    Contact{" "}
                   </a>
                 </li>
 
