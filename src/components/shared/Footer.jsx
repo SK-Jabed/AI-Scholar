@@ -180,7 +180,7 @@ const Footer = () => {
                       className="text-gray-700 transition hover:text-gray-700/75"
                       href="#"
                     >
-                      Add Task
+                      Course Recommendation
                     </a>
                   </li>
 
@@ -189,7 +189,7 @@ const Footer = () => {
                       className="text-gray-700 transition hover:text-gray-700/75"
                       href="#"
                     >
-                      Edit Task
+                      Progress Tracker
                     </a>
                   </li>
 
@@ -198,7 +198,7 @@ const Footer = () => {
                       className="text-gray-700 transition hover:text-gray-700/75"
                       href="#"
                     >
-                      Drag & Drop
+                      Course Summarization
                     </a>
                   </li>
 
@@ -207,7 +207,7 @@ const Footer = () => {
                       className="text-gray-700 transition hover:text-gray-700/75"
                       href="#"
                     >
-                      Tasks Management
+                      Course Management
                     </a>
                   </li>
                 </ul>
@@ -240,7 +240,7 @@ const Footer = () => {
                       className="text-gray-700 transition hover:text-gray-700/75"
                       href="#"
                     >
-                      All Tasks
+                      All Courses
                     </a>
                   </li>
 
