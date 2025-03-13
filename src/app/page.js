@@ -1,3 +1,5 @@
+import KeyFeatures from "@/components/key_features/KeyFeatures";
+
 import CourseCategories from "@/components/home/CourseCategories";
 import PopularCourses from "@/components/home/PopularCourses";
 
@@ -9,7 +11,7 @@ FAQ Section (Accordion with common questions) */}
 
       {/*2. ToDo:  Key Features Section (Grid layout for main features)
 Student Testimonials Section (Carousel/grid for user reviews)- by Abdur Rahman  */}
-
+      <KeyFeatures />
       {/* 3. toDo: Course Categories Section (Cards for different subjects)
 Popular Courses Section (Top-rated courses grid) -by Sushanto kumar
  */}
