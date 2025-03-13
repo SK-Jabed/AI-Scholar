@@ -6,6 +6,7 @@ import CourseCategories from "@/components/home/CourseCategories";
 import PopularCourses from "@/components/home/PopularCourses";
 import TestimonialsSection from "@/components/testimonials/TestimonialsSection";
 
+
 export default function Home() {
   return (
     <div>
@@ -18,6 +19,7 @@ FAQ Section (Accordion with common questions) */}
       <KeyFeatures />
       {/* Student Testimonials Section */}
       <TestimonialsSection />
+     
       {/* 3. toDo: Course Categories Section (Cards for different subjects)
 Popular Courses Section (Top-rated courses grid) -by Sushanto kumar
  */}
