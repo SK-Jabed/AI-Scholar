@@ -5,7 +5,6 @@ import { useState } from "react";
 import { Menu, X } from "lucide-react";
 
 const Navbar = () => {
-
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
   const links = [
@@ -17,7 +16,6 @@ const Navbar = () => {
     { name: "Projects", href: "/projects" },
     { name: "Blog", href: "/blog" },
   ];
-
 
   const authLink = (
     <div className="flex space-x-3">
