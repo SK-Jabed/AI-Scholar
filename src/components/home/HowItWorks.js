@@ -44,7 +44,7 @@ export default function HowItWorks() {
       <div className="max-w-5xl mx-auto text-center">
         {/* Section Heading */}
         <motion.h2
-          className="text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600 mb-6"
+          className="text-5xl font-extrabold text-accent mb-6"
           initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
@@ -54,7 +54,7 @@ export default function HowItWorks() {
 
         {/* Section Subtitle */}
         <motion.p
-          className="text-lg text-gray-700 dark:text-gray-300 max-w-2xl mx-auto mb-12"
+          className="text-base text-light max-w-2xl mx-auto mb-12"
           initial={{ opacity: 0, y: -10 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
