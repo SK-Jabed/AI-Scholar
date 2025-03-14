@@ -1,9 +1,9 @@
 import { BookOpen } from 'lucide-react';
 import { Clock } from 'lucide-react';
-import { Award } from 'lucide-react'; // Changed from Certificate which might not be available
+import { Award } from 'lucide-react';
 import { Users } from 'lucide-react';
 import { Globe } from 'lucide-react';
-import { Smartphone } from 'lucide-react'; // Changed from DeviceMobile which might not be available
+import { Smartphone } from 'lucide-react';
 
 export   const features = [
     {

@@ -59,10 +59,4 @@ const MovingDots = () => {
   );
 };
 
-
-
-
-
-
-
 export { CardSpotlight };
