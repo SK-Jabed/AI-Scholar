@@ -19,6 +19,32 @@ const Navbar = () => {
                 <li>
                   <Link 
                     className="text-gray-500 transition hover:text-gray-500/75"
+                    href="/"
+                  >                
+                    Home
+                  </Link>
+                </li>
+                <li>
+                  <a
+                    className="text-gray-500 transition hover:text-gray-500/75"
+                    href="#"
+                  >
+                    {" "}
+                    Courses{" "}
+                  </a>
+                </li>
+                <li>
+                  <a
+                    className="text-gray-500 transition hover:text-gray-500/75"
+                    href="#"
+                  >
+                    {" "}
+                    Features{" "}
+                  </a>
+                </li>
+                <li>
+                  <Link 
+                    className="text-gray-500 transition hover:text-gray-500/75"
                     href="/About"
                   >
                  
@@ -35,37 +61,6 @@ const Navbar = () => {
                     Contact
                   </Link>
                 </li>
-
-                <li>
-                  <a
-                    className="text-gray-500 transition hover:text-gray-500/75"
-                    href="#"
-                  >
-                    {" "}
-                    History{" "}
-                  </a>
-                </li>
-
-                <li>
-                  <a
-                    className="text-gray-500 transition hover:text-gray-500/75"
-                    href="#"
-                  >
-                    {" "}
-                    Services{" "}
-                  </a>
-                </li>
-
-                <li>
-                  <a
-                    className="text-gray-500 transition hover:text-gray-500/75"
-                    href="#"
-                  >
-                    {" "}
-                    Projects{" "}
-                  </a>
-                </li>
-
                 <li>
                   <a
                     className="text-gray-500 transition hover:text-gray-500/75"
