@@ -2,6 +2,7 @@ import KeyFeatures from "@/components/key_features/KeyFeatures";
 
 import CourseCategories from "@/components/home/CourseCategories";
 import PopularCourses from "@/components/home/PopularCourses";
+import HowItWorks from "@/components/home/HowItWorks";
 import Banner from "@/components/home/Banner";
 
 export default function Home() {
@@ -11,6 +12,7 @@ export default function Home() {
 FAQ Section (Accordion with common questions) */}
       <Banner />
 
+<HowItWorks />
       {/*2. ToDo:  Key Features Section (Grid layout for main features)
 Student Testimonials Section (Carousel/grid for user reviews)- by Abdur Rahman  */}
       <KeyFeatures />
