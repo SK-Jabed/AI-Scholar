@@ -21,8 +21,9 @@ export default function RootLayout({ children }) {
         <Navbar />
         {/* Main Content */}
         <CardSpotlight>
-          <main className="min-h-screen mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8 my-8">{children}</main>
-
+          <main className="min-h-screen mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8 my-8">
+            {children}
+          </main>
         </CardSpotlight>
         {/* Footer */}
         <Footer />
