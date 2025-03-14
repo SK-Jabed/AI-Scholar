@@ -23,9 +23,26 @@
 }
 
 :root {
+<<<<<<< HEAD
+   --color-primary: #212A31;
+  --color-secondary: #2E3944;
+  --color-accent: #124E66;
+  --color-neutral: #748D92;
+  --color-light: #D3D9D4;
+}
+
+.about{
+  background: url('../../public//about.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 20px 0px 20px 0px;
+}
+=======
   --color-primary: #212a31;
   --color-secondary: #2e3944;
   --color-accent: #124e66;
   --color-neutral: #748d92;
   --color-light: #d3d9d4;
 }
+>>>>>>> e28b536b83d2a07833476e3988f068285b2ef202

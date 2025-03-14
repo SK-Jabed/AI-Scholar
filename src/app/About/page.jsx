@@ -1,8 +1,25 @@
 "use client";
+<<<<<<< HEAD
+
+import * as motion from "motion/react-client";
+=======
+>>>>>>> e28b536b83d2a07833476e3988f068285b2ef202
 
 import { motion } from "framer-motion";
 import React, { useEffect, useRef, useState } from "react";
 import "animate.css";
+<<<<<<< HEAD
+import AboutBanner from "@/components/about/AboutBanner";
+import AboutDescription from "@/components/about/AboutDescription";
+import AboutTeam from "@/components/about/AboutTeam";
+
+const About = () => {
+  return (
+    <div>
+      <AboutBanner />
+      <AboutDescription />
+      <AboutTeam/>
+=======
 
 const About = () => {
   const containerRef = useRef(null);
@@ -70,6 +87,7 @@ const About = () => {
           </div>
         </div>
       </section>
+>>>>>>> e28b536b83d2a07833476e3988f068285b2ef202
     </div>
   );
 };
