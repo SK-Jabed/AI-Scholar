@@ -6,7 +6,7 @@ import PopularCourses from "@/components/home/PopularCourses";
 import TestimonialsSection from "@/components/testimonials/TestimonialsSection";
 
 
-import HowItWorks from "@/components/home/HowItWorks";
+// import HowItWorks from "@/components/home/HowItWorks";
 
 import Banner from "@/components/home/Banner";
 import HowItWorks from "@/components/home/HowItWorks";
