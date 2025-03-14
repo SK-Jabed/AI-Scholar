@@ -2,6 +2,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/shared/Navbar";
 import Footer from "@/components/shared/Footer";
+import { CardSpotlight } from "@/components/ui/CardSpotlight";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -19,7 +20,10 @@ export default function RootLayout({ children }) {
         {/* Header */}
         <Navbar />
         {/* Main Content */}
-        <main className="min-h-screen mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8 my-8">{children}</main>
+        <CardSpotlight>
+          <main className="min-h-screen mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8 my-8">{children}</main>
+
+        </CardSpotlight>
         {/* Footer */}
         <Footer />
       </body>
