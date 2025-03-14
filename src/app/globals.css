@@ -23,9 +23,18 @@
 }
 
 :root {
+
   --color-primary: #212a31;
   --color-secondary: #2e3944;
   --color-accent: #124e66;
   --color-neutral: #748d92;
   --color-light: #d3d9d4;
+}
+
+.about{
+  background: url('../../public//about.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 20px 0px 20px 0px;
 }
