@@ -28,6 +28,12 @@
       "role": "Developer",
       "image": "https://randomuser.me/api/portraits/men/74.jpg",
       "bio": "Full-stack developer with expertise in MERN and AI."
+    },
+    {
+      "name": "Sushanto",
+      "role": "Developer",
+      "image": "https://randomuser.me/api/portraits/men/74.jpg",
+      "bio": "Full-stack developer with expertise in MERN and AI."
     }
   ]
   
