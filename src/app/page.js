@@ -1,6 +1,4 @@
-
 import KeyFeatures from "@/components/key_features/KeyFeatures";
-
 
 import CourseCategories from "@/components/home/CourseCategories";
 import PopularCourses from "@/components/home/PopularCourses";
@@ -10,16 +8,16 @@ import TestimonialsSection from "@/components/testimonials/TestimonialsSection";
 export default function Home() {
   return (
     <div>
-      <h2 className="text-4xl font-semibold">Hello from AI Scholar...</h2>
-
       {/*1. ToDo: Hero Section (Header, navigation)
 FAQ Section (Accordion with common questions) */}
+
 
       {/*  Key Features Section */}
       <KeyFeatures />
       {/* Student Testimonials Section */}
       <TestimonialsSection />
      
+
       {/* 3. toDo: Course Categories Section (Cards for different subjects)
 Popular Courses Section (Top-rated courses grid) -by Sushanto kumar
  */}
@@ -37,6 +35,5 @@ Instructor Spotlight (Cards for top instructors) */}
       {/* 6. ToDo: About Us Page (Grid layout with filters & sorting)
 Contact Page (Title, description, instructor, enroll button) */}
     </div>
-
   );
 }
