@@ -1,7 +1,5 @@
 "use client";
 import React from "react";
-import img from "../../../public/about.jpg";
-import { motion } from "framer-motion";
 import Image from "next/image";
 import { FaRegCircleCheck } from "react-icons/fa6";
 const AboutDescription = () => {
@@ -10,7 +8,7 @@ const AboutDescription = () => {
       <section className="py-16  ">
         <div className=" mx-auto grid md:grid-cols-2 gap-8 items-center shadow-xs shadow-accent p-7 rounded-xl">
           {/* Text Content */}
-          <motion.div
+          <div
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
@@ -37,10 +35,10 @@ const AboutDescription = () => {
             <p className="flex items-center gap-2">
               <FaRegCircleCheck /> Seamless Curriculum Integration
             </p>
-          </motion.div>
+          </div>
 
           {/* Image Section */}
-          <motion.div
+          <div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8 }}
@@ -52,7 +50,7 @@ const AboutDescription = () => {
               height={300} // Set height
               className="rounded-xl shadow-lg"
             />
-          </motion.div>
+          </div>
         </div>
       </section>
     </div>
