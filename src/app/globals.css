@@ -4,26 +4,17 @@
 @plugin "daisyui";
 
 /* @plugin "tailwindcss-animate"; */
-.bg-dots-pattern {
-  background-image: radial-gradient(
-    circle,
-    rgba(59, 130, 246, 0.5) 1px,
-    transparent 1px
-  );
-  background-size: 15px 15px;
-  animation: dotAnimation 20s linear infinite;
-}
-@keyframes dotAnimation {
-  0% {
-    background-position: 0 0;
-  }
-  100% {
-    background-position: 15px 15px;
-  }
-}
 
+.bg-dots-pattern {
+    background-image: radial-gradient(circle, rgba(59, 130, 246, 0.5) 1px, transparent 1px);
+    background-size: 15px 15px;
+    animation: dotAnimation 20s linear infinite;
+  }
+  @keyframes dotAnimation {
+    0% { background-position: 0 0; }
+    100% { background-position: 15px 15px; }
+  }
 :root {
-<<<<<<< HEAD
    --color-primary: #212A31;
   --color-secondary: #2E3944;
   --color-accent: #124E66;
@@ -38,11 +29,3 @@
   background-repeat: no-repeat;
   border-radius: 20px 0px 20px 0px;
 }
-=======
-  --color-primary: #212a31;
-  --color-secondary: #2e3944;
-  --color-accent: #124e66;
-  --color-neutral: #748d92;
-  --color-light: #d3d9d4;
-}
->>>>>>> e28b536b83d2a07833476e3988f068285b2ef202

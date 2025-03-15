@@ -2,16 +2,15 @@ import React from "react";
 
 const Contact = () => {
   return (
-   <div>
-      <div className="p-2 sm:p-8 lg:p-20  about">
-        <h1 className="text-2xl md:text-6xl font-semibold md:underline mb-1 ">
-          Contact us
-        </h1>
-        <p className="md:text-3xl ">Where Innovation meets </p>
-      </div>
-     <div className="flex justify-between">
-      <div className=" py-10 w-full">
+    <div className="flex justify-between">
+      <div className=" py-10 w-full" id="contact">
         <div className="container mx-auto px-4">
+          <div className="">
+            <h2 className="text-xl md:text-4xl font-bold  mb-4 p-2 md:p-6 shadow-md shadow-blue-400">
+              Contact Us
+            </h2>
+          </div>
+
           <div className="grid  contact">
             {/* Left Section: Form */}
             <div className=" p-6 shadow-lg rounded-lg">
@@ -59,7 +58,7 @@ const Contact = () => {
                   ></textarea>
                 </div>
                 <button className="w-full text-[#eae5d7] bg-[#6B8A7A] py-2 px-4 text-xl font-semibold rounded hover:bg-[#6B8A7A] transition duration-300">
-                  Send Email d
+                  Send Email
                 </button>
               </form>
             </div>
@@ -150,7 +149,6 @@ const Contact = () => {
         </div>
       </div>
     </div>
-   </div>
   );
 };
 
