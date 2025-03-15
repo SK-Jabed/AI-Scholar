@@ -100,7 +100,7 @@ const ContactInfo = () => {
                 <p>+98375834765846</p>
               </div>
             </div>
-            <div className="w-fit text-center flex flex-col gap-5 shadow-lg shadow-accent p-4 rounded-lg  w-full">
+            <div className="text-center flex flex-col gap-5 shadow-lg shadow-accent p-4 rounded-lg  w-full">
               <div className="flex justify-center py-20 bg-neutral text-primary rounded-lg">
                 <TfiEmail className="text-4xl" />
               </div>
