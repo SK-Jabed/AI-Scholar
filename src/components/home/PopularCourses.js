@@ -1,5 +1,7 @@
 import { Star } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
+import img from "../../../public/webdevbeginners.jpg.webp";
 
 const courses = [
   { title: "React & Next.js Mastery", rating: 4.9, students: "12,000+" },
@@ -20,8 +22,19 @@ export default function PopularCourses() {
         {courses.map((course, index) => (
           <div
             key={index}
-            className="p-6 bg-white shadow-md rounded-lg hover:shadow-lg transition"
+            className="p-6 bg-white shadow-md rounded-lg hover:shadow-lg transition "
           >
+            {/* image */}
+            <div className="border rounded-md">
+              <Image
+                src={img}
+                alt="curses"
+                height={100}
+                width={300}
+                className="object-cover rounded-md"
+              />
+            </div>
+
             <h3 className="text-xl font-semibold">{course.title}</h3>
             <div className="flex items-center mt-2">
               <Star size={20} className="text-yellow-500" />
