@@ -2,10 +2,11 @@
 import React from "react";
 import Image from "next/image";
 import { FaRegCircleCheck } from "react-icons/fa6";
+
 const AboutDescription = () => {
   return (
     <div className="">
-      <section className="py-16  ">
+      <section className="py-16">
         <div className=" mx-auto grid md:grid-cols-2 gap-8 items-center shadow-xs shadow-accent p-7 rounded-xl">
           {/* Text Content */}
           <div

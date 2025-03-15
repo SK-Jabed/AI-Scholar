@@ -9,7 +9,9 @@ const ContactForm = () => {
             <div className="grid  ">
               {/* Left Section: Form */}
               <div className=" p-6 shadow-sm shadow-accent rounded-lg">
-                <h3 className="text-4xl font-bold text-center  mb-6">Get in Touch</h3>
+                <h3 className="text-4xl font-bold text-center  mb-6">
+                  Get in Touch
+                </h3>
                 <form className="grid grid-cols-2 space-x-5">
                   <div className="mb-6">
                     <label htmlFor="name" className="block  font-medium mb-2">

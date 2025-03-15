@@ -1,6 +1,5 @@
 "use client";
 import { features } from "@/utils/features";
-import { CardSpotlight } from "../ui/CardSpotlight";
 
 const KeyFeatures = () => {
   return (

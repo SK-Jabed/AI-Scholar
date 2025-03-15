@@ -1,7 +1,12 @@
 "use client";
-import { motion } from "framer-motion";
-import { FaChalkboardTeacher, FaBookOpen, FaBrain, FaCertificate } from "react-icons/fa";
 import { Button } from "@/components/ui/button";
+import { motion } from "framer-motion";
+import {
+  FaBookOpen,
+  FaBrain,
+  FaCertificate,
+  FaChalkboardTeacher,
+} from "react-icons/fa";
 
 const steps = [
   {
@@ -59,8 +64,9 @@ export default function HowItWorks() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
         >
-          Follow these simple steps to embark on an AI-powered learning journey. Our advanced system
-          adapts to your needs, ensuring a smooth and engaging experience.
+          Follow these simple steps to embark on an AI-powered learning journey.
+          Our advanced system adapts to your needs, ensuring a smooth and
+          engaging experience.
         </motion.p>
 
         {/* Steps Grid */}
@@ -75,14 +81,18 @@ export default function HowItWorks() {
               transition={{ duration: 0.5, delay: index * 0.2 }}
             >
               {/* Icon Side */}
-              <div className="w-full md:w-1/3 flex justify-center">{step.icon}</div>
+              <div className="w-full md:w-1/3 flex justify-center">
+                {step.icon}
+              </div>
 
               {/* Content Side */}
               <div className="w-full md:w-2/3 text-center md:text-left">
                 <h3 className="text-2xl font-bold text-gray-800 dark:text-white mb-4">
                   {step.title}
                 </h3>
-                <p className="text-gray-600 dark:text-gray-300 mb-6">{step.description}</p>
+                <p className="text-gray-600 dark:text-gray-300 mb-6">
+                  {step.description}
+                </p>
                 <Button
                   className="px-6 py-3 bg-blue-600 text-white font-medium rounded-lg transition-all duration-300 hover:bg-blue-700 hover:shadow-lg"
                   asChild

@@ -90,35 +90,35 @@ const ContactInfo = () => {
           </ul> */}
           {/* <FaPhone/> */}
           <Marquee autoFill={true}>
-          <div className="flex justify-between">
-            <div className=" text-center flex flex-col gap-5 shadow-lg shadow-accent p-4 rounded-lg w-full">
-              <div className="flex justify-center py-20 bg-neutral text-primary rounded-lg">
-                <IoMdCall className="text-4xl" />
+            <div className="flex justify-between">
+              <div className=" text-center flex flex-col gap-5 shadow-lg shadow-accent p-4 rounded-lg w-full">
+                <div className="flex justify-center py-20 bg-neutral text-primary rounded-lg">
+                  <IoMdCall className="text-4xl" />
+                </div>
+                <div>
+                  <p className="text-2xl font-semibold">Phone</p>
+                  <p>+98375834765846</p>
+                </div>
               </div>
-              <div>
-                <p className="text-2xl font-semibold">Phone</p>
-                <p>+98375834765846</p>
+              <div className="text-center flex flex-col gap-5 shadow-lg shadow-accent p-4 rounded-lg  w-full">
+                <div className="flex justify-center py-20 bg-neutral text-primary rounded-lg">
+                  <TfiEmail className="text-4xl" />
+                </div>
+                <div>
+                  <p className="text-2xl font-semibold">Email</p>
+                  <p>aischolar@gmail.com</p>
+                </div>
               </div>
-            </div>
-            <div className="text-center flex flex-col gap-5 shadow-lg shadow-accent p-4 rounded-lg  w-full">
-              <div className="flex justify-center py-20 bg-neutral text-primary rounded-lg">
-                <TfiEmail className="text-4xl" />
+              <div className=" text-center flex flex-col gap-5 shadow-lg shadow-accent p-4 rounded-lg  w-full">
+                <div className="flex justify-center py-20 bg-neutral text-primary rounded-lg">
+                  <FaLocationDot className="text-4xl" />
+                </div>
+                <div>
+                  <p className="text-2xl font-semibold">Address</p>
+                  <p>422 1st St. Santa Rosa,t CA 94559 USA</p>
+                </div>
               </div>
-              <div>
-                <p className="text-2xl font-semibold">Email</p>
-                <p>aischolar@gmail.com</p>
-              </div>
-            </div>
-            <div className=" text-center flex flex-col gap-5 shadow-lg shadow-accent p-4 rounded-lg  w-full">
-              <div className="flex justify-center py-20 bg-neutral text-primary rounded-lg">
-                <FaLocationDot className="text-4xl" />
-              </div>
-              <div>
-                <p className="text-2xl font-semibold">Address</p>
-                <p>422 1st St. Santa Rosa,t CA 94559 USA</p>
-              </div>
-            </div>
-            {/* <div className="w-fit text-center flex flex-col gap-5 shadow-lg shadow-accent p-4 rounded-lg">
+              {/* <div className="w-fit text-center flex flex-col gap-5 shadow-lg shadow-accent p-4 rounded-lg">
               <div className="flex justify-center py-20 bg-neutral text-primary rounded-lg">
                 <IoMdCall className="text-4xl" />
               </div>
@@ -136,7 +136,7 @@ const ContactInfo = () => {
                 <p>+98375834765846</p>
               </div>
             </div> */}
-          </div>
+            </div>
           </Marquee>
         </div>
       </div>

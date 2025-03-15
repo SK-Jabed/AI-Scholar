@@ -3,10 +3,11 @@ import { Swiper, SwiperSlide } from "swiper/react";
 
 // Import Swiper styles
 import "swiper/css";
-import "swiper/css/pagination";
 import "swiper/css/navigation";
+import "swiper/css/pagination";
+
 // import required modules
-import { Autoplay, Pagination, Navigation } from "swiper/modules";
+import { Autoplay, Navigation, Pagination } from "swiper/modules";
 
 // import image
 import banner1 from "../../../public/banner1.jpg";
@@ -19,7 +20,7 @@ import Slide from "../shared/Slide";
 
 const Banner = () => {
   return (
-    <div className="z-10">
+    <div className="z-10 ">
       <Swiper
         spaceBetween={30}
         centeredSlides={true}

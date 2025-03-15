@@ -4,8 +4,6 @@ import * as motion from "motion/react-client";
 
 import React, { useEffect, useRef, useState } from "react";
 import "animate.css";
-import AboutBanner from "@/components/about/AboutBanner";
-import AboutDescription from "@/components/about/AboutDescription";
 
 const AboutTeam = () => {
   const containerRef = useRef(null);
@@ -42,6 +40,7 @@ const AboutTeam = () => {
       );
     });
   }, []);
+
   return (
     <div>
       <section className="py-12  bg-light ">
@@ -62,7 +61,9 @@ const AboutTeam = () => {
                   alt={member.name}
                   className="w-24 h-24 mx-auto rounded-full mb-4"
                 />
-                <h3 className="text-xl font-semibold text-accent">{member.name}</h3>
+                <h3 className="text-xl font-semibold text-accent">
+                  {member.name}
+                </h3>
                 <p className="text-accent font-medium">{member.role}</p>
                 <p className="text-accent">{member.bio}</p>
               </div>
