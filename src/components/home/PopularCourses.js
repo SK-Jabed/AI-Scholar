@@ -15,7 +15,7 @@ const courses = [
 export default function PopularCourses() {
   return (
     <section className="px-6 py-10">
-      <h2 className="text-3xl font-bold text-center text-gray-800">
+      <h2 className="text-2xl md:text-4xl font-bold text-center text-accent mb-8">
         Popular Courses
       </h2>
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
@@ -25,7 +25,7 @@ export default function PopularCourses() {
             className="p-6 bg-white shadow-md rounded-lg hover:shadow-lg transition "
           >
             {/* image */}
-            <div className="border rounded-md">
+            <div className="border rounded-md border-accent/20">
               <Image
                 src={img}
                 alt="curses"

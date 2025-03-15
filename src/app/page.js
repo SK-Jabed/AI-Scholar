@@ -1,9 +1,9 @@
-import KeyFeatures from "@/components/key_features/KeyFeatures";
-import CourseCategories from "@/components/home/CourseCategories";
-import PopularCourses from "@/components/home/PopularCourses";
-import TestimonialsSection from "@/components/testimonials/TestimonialsSection";
 import Banner from "@/components/home/Banner";
+import ExploreCourseCategories from "@/components/home/ExploreCourseCategories";
 import HowItWorks from "@/components/home/HowItWorks";
+import PopularCourses from "@/components/home/PopularCourses";
+import KeyFeatures from "@/components/key_features/KeyFeatures";
+import TestimonialsSection from "@/components/testimonials/TestimonialsSection";
 
 export default function Home() {
   return (
@@ -18,7 +18,7 @@ export default function Home() {
       <KeyFeatures />
 
       {/* Course Categories Section */}
-      <CourseCategories />
+      <ExploreCourseCategories />
 
       {/* Popular Courses Section */}
       <PopularCourses />
