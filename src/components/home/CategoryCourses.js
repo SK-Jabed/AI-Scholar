@@ -64,7 +64,7 @@ const CategoryCourses = () => {
             <p className="text-primary font-bold mt-2">${course.price}</p>
           </div>
           <div className="p-4 bg-gray-100 flex justify-between items-center">
-            <button className="bg-primary text-white px-4 py-2 rounded-md hover:bg-primary-dark transition">
+            <button className="bg-accent/90 text-white px-4 py-2 cursor-pointer rounded-md hover:bg-accent transition">
               Enroll Now
             </button>
             <p className="text-sm text-gray-600">{course.duration} hrs</p>

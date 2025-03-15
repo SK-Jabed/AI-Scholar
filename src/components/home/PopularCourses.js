@@ -2,6 +2,7 @@ import { Star } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import img from "../../../public/webdevbeginners.jpg.webp";
+import SectionTitle from "../shared/SectionTitle";
 
 const courses = [
   { title: "React & Next.js Mastery", rating: 4.9, students: "12,000+" },
@@ -14,10 +15,8 @@ const courses = [
 
 export default function PopularCourses() {
   return (
-    <section className="px-6 py-10">
-      <h2 className="text-2xl md:text-4xl font-bold text-center text-accent mb-8">
-        Popular Courses
-      </h2>
+    <section className="">
+      <SectionTitle title=" Popular Courses" />
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
         {courses.map((course, index) => (
           <div

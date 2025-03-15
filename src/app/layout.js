@@ -22,7 +22,7 @@ export default function RootLayout({ children }) {
 
         {/* Main Content */}
         <CardSpotlight>
-          <main className="min-h-screen mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8 my-8">
+          <main className="min-h-screen">
             {children}
           </main>
         </CardSpotlight>
