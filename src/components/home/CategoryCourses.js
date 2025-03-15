@@ -43,6 +43,7 @@ const courses = [
     image: "https://source.unsplash.com/400x300/?ai,machine",
   },
 ];
+
 const CategoryCourses = () => {
   return (
     <div className="col-span-12 md:col-span-9 grid grid-cols-1 sm:grid-cols-2  lg:grid-cols-3 gap-6">

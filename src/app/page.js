@@ -9,7 +9,7 @@ import TestimonialsSection from "@/components/testimonials/TestimonialsSection";
 export default function Home() {
   return (
     <div>
-      {/* Hero Section */}
+      {/* Banner Section */}
       <Banner />
 
       <Container>

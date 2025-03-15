@@ -22,11 +22,9 @@ export default function RootLayout({ children }) {
 
         {/* Main Content */}
         <CardSpotlight>
-          <main className="min-h-screen">
-            {children}
-          </main>
+          <main className="min-h-screen">{children}</main>
         </CardSpotlight>
-        
+
         {/* Footer */}
         <Footer />
       </body>
