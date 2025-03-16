@@ -52,7 +52,7 @@ const CategoryCourses = () => {
           className="bg-white shadow-lg rounded-lg overflow-hidden hover:shadow-xl transition"
         >
           <img
-            src={image}
+            src={course.image}
             alt={course.title}
             className="w-full h-40 object-cover"
           />
