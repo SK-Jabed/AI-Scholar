@@ -1,4 +1,6 @@
-/* eslint-disable @next/next/no-img-element */
+import Image from "next/image";
+import img from "../../../public/webdevbeginners.jpg.webp";
+
 const courses = [
   {
     title: "Full-Stack Web Development",
@@ -51,8 +53,8 @@ const CategoryCourses = () => {
           key={index}
           className="bg-white shadow-lg rounded-lg overflow-hidden hover:shadow-xl transition"
         >
-          <img
-            src={image}
+          <Image
+            src={img}
             alt={course.title}
             className="w-full h-40 object-cover"
           />
