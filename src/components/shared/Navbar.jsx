@@ -1,121 +1,116 @@
-import React from "react";
+"use client";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useState } from "react";
+import { Menu, X } from "lucide-react";
 
 const Navbar = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const pathname = usePathname();
+  const links = [
+    { name: "Home", href: "/" },
+    { name: "About", href: "/About" },
+    { name: "Contact", href: "/contact" },
+    { name: "History", href: "/history" },
+    { name: "Services", href: "/services" },
+    { name: "Projects", href: "/projects" },
+    { name: "Blog", href: "/blog" },
+  ];
+
+  const authLink = (
+    <div className="flex space-x-3">
+      <Link
+        href="/login"
+        className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white px-5 py-2 rounded-md shadow-md hover:scale-105 transition transform"
+      >
+        Login
+      </Link>
+      <Link
+        href="/register"
+        className="bg-gradient-to-r from-gray-300 to-gray-400 text-gray-900 px-5 py-2 rounded-md shadow-md hover:scale-105 transition transform"
+      >
+        Register
+      </Link>
+    </div>
+  );
+
   return (
-    <header className="bg-white">
-      <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
+    <header className="bg-white sticky top-0 z-50 mt-1.5">
+      <div className="mx-auto max-w-7xl px-6  md:py-4 lg:px-8">
         <div className="flex h-16 items-center justify-between">
-          <div className="md:flex md:items-center md:gap-12">
-            <a className="block text-teal-600" href="#">
-              <span className="text-3xl font-semibold">AI Scholar</span>
-            </a>
-          </div>
+          {/* Logo */}
+          <h1>
+            <Link
+              href="/"
+              className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-sky-500 to-indigo-500"
+            >
+              AI Scholar
+            </Link>
+          </h1>
 
-          <div className="hidden md:block">
-            <nav aria-label="Global">
-              <ul className="flex items-center gap-6 text-sm">
-                <li>
-                  <a
-                    className="text-gray-500 transition hover:text-gray-500/75"
-                    href="#"
-                  >
-                    {" "}
-                    About{" "}
-                  </a>
-                </li>
-
-                <li>
-                  <a
-                    className="text-gray-500 transition hover:text-gray-500/75"
-                    href="#"
-                  >
-                    {" "}
-                    Careers{" "}
-                  </a>
-                </li>
-
-                <li>
-                  <a
-                    className="text-gray-500 transition hover:text-gray-500/75"
-                    href="#"
-                  >
-                    {" "}
-                    History{" "}
-                  </a>
-                </li>
-
-                <li>
-                  <a
-                    className="text-gray-500 transition hover:text-gray-500/75"
-                    href="#"
-                  >
-                    {" "}
-                    Services{" "}
-                  </a>
-                </li>
-
-                <li>
-                  <a
-                    className="text-gray-500 transition hover:text-gray-500/75"
-                    href="#"
-                  >
-                    {" "}
-                    Projects{" "}
-                  </a>
-                </li>
-
-                <li>
-                  <a
-                    className="text-gray-500 transition hover:text-gray-500/75"
-                    href="#"
-                  >
-                    {" "}
-                    Blog{" "}
-                  </a>
-                </li>
-              </ul>
-            </nav>
-          </div>
-
-          <div className="flex items-center gap-4">
-            <div className="sm:flex sm:gap-4">
-              <a
-                className="rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white shadow-sm"
-                href="#"
+          {/* Desktop Menu */}
+          <nav className="hidden md:flex gap-5 md:gap-4 text-gray-700 font-medium border border-gray-300 rounded-4xl p-4">
+            {links.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={`hover:text-blue-600 transition relative ${
+                  pathname === link.href
+                    ? "text-blue-600 font-semibold after:absolute after:left-0 after:bottom-0 after:w-full after:h-0.5 after:bg-blue-600 after:transition-all"
+                    : ""
+                }`}
               >
-                Login
-              </a>
+                {link.name}
+              </Link>
+            ))}
+          </nav>
 
-              <div className="hidden sm:flex">
-                <a
-                  className="rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-teal-600"
-                  href="#"
-                >
-                  Register
-                </a>
-              </div>
-            </div>
+          {/* Auth Buttons */}
+          <div className="hidden md:flex">{authLink}</div>
 
-            <div className="block md:hidden">
-              <button className="rounded-sm bg-gray-100 p-2 text-gray-600 transition hover:text-gray-600/75">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="size-5"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M4 6h16M4 12h16M4 18h16"
-                  />
-                </svg>
-              </button>
-            </div>
-          </div>
+          {/* Mobile Menu Button */}
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            className="md:hidden p-2 text-gray-600 focus:outline-none"
+          >
+            {isOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
         </div>
+      </div>
+
+      {/* Mobile Menu */}
+      <div
+        className={`fixed top-0 left-0 w-full p-4  bg-white transform ${
+          isOpen ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0"
+        } transition-transform duration-300 ease-in-out shadow-lg md:hidden`}
+      >
+        <div className="flex justify-between p-6">
+          {/* logo */}
+          <h1 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-sky-500 to-indigo-500">
+            AI Scholar
+          </h1>
+          {/*  */}
+          <button onClick={() => setIsOpen(false)} className="text-gray-600">
+            <X size={24} />
+          </button>
+        </div>
+        {/* nav link */}
+        <nav className="flex flex-col gap-5 px-6 text-gray-700 font-medium">
+          {links.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              onClick={() => setIsOpen(false)}
+              className={`hover:text-blue-600 transition text-lg ${
+                pathname === link.href ? "text-blue-600 font-semibold" : ""
+              }`}
+            >
+              {link.name}
+            </Link>
+          ))}
+          {/* Auth Link */}
+          <div className="mt-4 mb-4">{authLink}</div>
+        </nav>
       </div>
     </header>
   );
