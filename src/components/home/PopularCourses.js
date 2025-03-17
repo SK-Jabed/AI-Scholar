@@ -1,7 +1,7 @@
 import { Star } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import img from "../../../public/webdevbeginners.jpg.webp";
+import img from "../../../public/assets/webdevbeginners.jpg.webp";
 import SectionTitle from "../shared/SectionTitle";
 
 const courses = [

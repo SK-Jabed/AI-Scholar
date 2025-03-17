@@ -97,7 +97,7 @@ const TestimonialsSection = ({
                     <div className="avatar mb-4">
                       <div className="w-24 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
                         <img
-                          src="/api/placeholder/100/100"
+                          src={testimonial.image}
                           alt={`${testimonial.name}`}
                           width="100"
                           height="100"

@@ -1,5 +1,5 @@
 import Image from "next/image";
-import img from "../../../public/webdevbeginners.jpg.webp";
+import img from "../../../public/assets/webdevbeginners.jpg.webp";
 
 const courses = [
   {
