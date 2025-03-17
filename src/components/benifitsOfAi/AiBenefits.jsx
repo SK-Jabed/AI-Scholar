@@ -36,7 +36,7 @@ const AiBenefits = () => {
       <div className="text-center">
         <div className="lg:flex items-center gap-32 ">
           <Image
-            src="/swirl-icon.png" // Ensure the image is placed inside the public folder
+            src="/icons/swirl-icon.png" // Ensure the image is placed inside the public folder
             alt="AI Technology"
             width={100}
             height={200}

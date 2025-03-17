@@ -11,6 +11,11 @@ const inter = Inter({
 export const metadata = {
   title: "AI Scholar",
   description: "This is an AI-powered Course Management System",
+  icons: {
+    icon: ["/favicon/favicon.ico?v=4"],
+    apple: ["/favicon/apple-touch-icon.png?v=4"],
+    shortcut: ["/favicon/apple-touch-icon.png"],
+  },
 };
 
 export default function RootLayout({ children }) {

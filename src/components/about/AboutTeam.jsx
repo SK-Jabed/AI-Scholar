@@ -11,7 +11,7 @@ const AboutTeam = () => {
   const [members, setMembers] = useState([]);
 
   useEffect(() => {
-    fetch("/about.json") // Fetch from the public folder
+    fetch("/json-data/about.json") // Fetch from the public folder
       .then((response) => response.json())
       .then((data) => setMembers(data))
       .catch((error) => console.error("Error loading team data:", error));

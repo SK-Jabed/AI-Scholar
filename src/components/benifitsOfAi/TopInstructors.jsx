@@ -8,7 +8,7 @@ const instructors = [
     id: 1,
     name: "John Doe",
     expertise: "AI & Machine Learning",
-    image: "/about.jpg",
+    image: "/assets/instructors/instructor-1.jpg",
     description:
       "An expert in AI with 10+ years of experience in deep learning and NLP.",
     social: {
@@ -19,9 +19,9 @@ const instructors = [
   },
   {
     id: 2,
-    name: "Sarah Smith",
+    name: "Steven Smith",
     expertise: "Cybersecurity Expert",
-    image: "/about.jpg",
+    image: "/assets/instructors/instructor-2.jpg",
     description: "Specialized in ethical hacking and cyber defense strategies.",
     social: {
       facebook: "#",
@@ -33,7 +33,7 @@ const instructors = [
     id: 3,
     name: "Michael Brown",
     expertise: "Web Development",
-    image: "/about.jpg",
+    image: "/assets/instructors/instructor-3.jpg",
     description:
       "Full-stack web developer with extensive knowledge in modern frameworks.",
     social: {
@@ -44,9 +44,9 @@ const instructors = [
   },
   {
     id: 4,
-    name: "Emily Johnson",
+    name: "Liam Johnson",
     expertise: "Data Science & AI",
-    image: "/about.jpg",
+    image: "/assets/instructors/instructor-4.jpg",
     description:
       "Data scientist with experience in machine learning and big data analytics.",
     social: {
