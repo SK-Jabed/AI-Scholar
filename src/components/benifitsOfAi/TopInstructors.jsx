@@ -1,5 +1,4 @@
 "use client";
-import React from "react";
 import Image from "next/image";
 import { FaFacebookF, FaLinkedinIn, FaTwitter } from "react-icons/fa";
 import SectionTitle from "../shared/SectionTitle";
@@ -10,7 +9,8 @@ const instructors = [
     name: "John Doe",
     expertise: "AI & Machine Learning",
     image: "/about.jpg",
-    description: "An expert in AI with 10+ years of experience in deep learning and NLP.",
+    description:
+      "An expert in AI with 10+ years of experience in deep learning and NLP.",
     social: {
       facebook: "#",
       linkedin: "#",
@@ -34,7 +34,8 @@ const instructors = [
     name: "Michael Brown",
     expertise: "Web Development",
     image: "/about.jpg",
-    description: "Full-stack web developer with extensive knowledge in modern frameworks.",
+    description:
+      "Full-stack web developer with extensive knowledge in modern frameworks.",
     social: {
       facebook: "#",
       linkedin: "#",
@@ -46,7 +47,8 @@ const instructors = [
     name: "Emily Johnson",
     expertise: "Data Science & AI",
     image: "/about.jpg",
-    description: "Data scientist with experience in machine learning and big data analytics.",
+    description:
+      "Data scientist with experience in machine learning and big data analytics.",
     social: {
       facebook: "#",
       linkedin: "#",
@@ -57,8 +59,8 @@ const instructors = [
 
 const TopInstructors = () => {
   return (
-    <section className="py-16">
-      <div className="container mx-auto px-6 lg:px-16 text-center">
+    <section className="">
+      <div className="text-center">
         {/* Section Title */}
         <div className="text-center mb-10">
           <SectionTitle
@@ -88,7 +90,9 @@ const TopInstructors = () => {
 
               {/* Instructor Details */}
               <div className="p-6 text-center">
-                <h3 className="text-xl font-semibold text-gray-800">{instructor.name}</h3>
+                <h3 className="text-xl font-semibold text-gray-800">
+                  {instructor.name}
+                </h3>
                 <p className="text-gray-600">{instructor.expertise}</p>
               </div>
 
@@ -102,19 +106,31 @@ const TopInstructors = () => {
 
                 {/* Social Media Links */}
                 <div className="flex gap-4 mb-4">
-                  <a href={instructor.social.facebook} className="text-blue-600 hover:text-blue-800 transition">
+                  <a
+                    href={instructor.social.facebook}
+                    className="text-blue-600 hover:text-blue-800 transition"
+                  >
                     <FaFacebookF size={20} />
                   </a>
-                  <a href={instructor.social.linkedin} className="text-blue-700 hover:text-blue-900 transition">
+                  <a
+                    href={instructor.social.linkedin}
+                    className="text-blue-700 hover:text-blue-900 transition"
+                  >
                     <FaLinkedinIn size={20} />
                   </a>
-                  <a href={instructor.social.twitter} className="text-blue-400 hover:text-blue-600 transition">
+                  <a
+                    href={instructor.social.twitter}
+                    className="text-blue-400 hover:text-blue-600 transition"
+                  >
                     <FaTwitter size={20} />
                   </a>
                 </div>
 
                 {/* "Go to Profile" Button */}
-                <a href="#" className="bg-green-500 hover:bg-green-700 text-white px-4 py-2 rounded-full transition">
+                <a
+                  href="#"
+                  className="bg-green-500 hover:bg-green-700 text-white px-4 py-2 rounded-full transition"
+                >
                   Go to Profile
                 </a>
               </div>

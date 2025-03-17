@@ -1,15 +1,15 @@
 "use client";
+import { Menu, X } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-import { Menu, X } from "lucide-react";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
   const links = [
     { name: "Home", href: "/" },
-    { name: "About", href: "/About" },
+    { name: "About", href: "/about" },
     { name: "Contact", href: "/contact" },
     { name: "History", href: "/history" },
     { name: "Services", href: "/services" },

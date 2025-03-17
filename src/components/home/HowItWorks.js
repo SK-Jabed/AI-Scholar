@@ -7,6 +7,7 @@ import {
   FaCertificate,
   FaChalkboardTeacher,
 } from "react-icons/fa";
+import SectionTitle from "../shared/SectionTitle";
 
 const steps = [
   {
@@ -45,29 +46,15 @@ const steps = [
 
 export default function HowItWorks() {
   return (
-    <section className="py-20 bg-gradient-to-b from-blue-50 to-white dark:from-gray-900 dark:to-gray-800">
-      <div className="max-w-5xl mx-auto text-center">
+    <section className="mt-14 ">
+      <div className=" text-center">
         {/* Section Heading */}
-        <motion.h2
-          className="text-5xl font-extrabold text-accent mb-6"
-          initial={{ opacity: 0, y: -20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-        >
-          How It Works
-        </motion.h2>
-
-        {/* Section Subtitle */}
-        <motion.p
-          className="text-base text-light max-w-2xl mx-auto mb-12"
-          initial={{ opacity: 0, y: -10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-        >
-          Follow these simple steps to embark on an AI-powered learning journey.
-          Our advanced system adapts to your needs, ensuring a smooth and
-          engaging experience.
-        </motion.p>
+        <SectionTitle
+          title={"How It Works"}
+          subTitle={
+            "   Follow these simple steps to embark on an AI-powered learning journey. Our advanced system adapts to your needs, ensuring a smooth and engaging experience."
+          }
+        />
 
         {/* Steps Grid */}
         <div className="flex flex-col gap-10">

@@ -1,7 +1,6 @@
 "use client";
-import React from "react";
-import { FaRobot, FaChartLine, FaComments, FaShieldAlt } from "react-icons/fa";
 import Image from "next/image";
+import { FaChartLine, FaComments, FaRobot, FaShieldAlt } from "react-icons/fa";
 import SectionTitle from "../shared/SectionTitle";
 
 const AiBenefits = () => {
@@ -33,9 +32,9 @@ const AiBenefits = () => {
   ];
 
   return (
-    <section className="py-16">
-      <div className="container mx-auto px-6 lg:px-16 text-center">
-        <div className="lg:flex items-center gap-32 mb-10">
+    <section className="">
+      <div className="text-center">
+        <div className="lg:flex items-center gap-32 ">
           <Image
             src="/swirl-icon.png" // Ensure the image is placed inside the public folder
             alt="AI Technology"
