@@ -53,13 +53,8 @@ const CategoryCourses = () => {
           key={index}
           className="bg-white shadow-lg rounded-lg overflow-hidden hover:shadow-xl transition"
         >
-<<<<<<< HEAD
           <Image
             src={img}
-=======
-          <img
-            src={course.image}
->>>>>>> bee3dedda4fd604fcc2be4d8db7148f79b6245bc
             alt={course.title}
             className="w-full h-40 object-cover"
           />
