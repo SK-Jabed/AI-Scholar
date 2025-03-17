@@ -123,9 +123,10 @@ An administrator reviews an AI-generated report highlighting which courses have 
 
 4. **Registration (API Register)**
    - When a new user registers, send the following details to the `/api/register` endpoint:
-     - **Name**
-     - **Email**
-     - **Password** -**role**
+     - **name**
+     - **email**
+     - **password**
+     - **role**
    - This will allow the user to sign up and log in with their credentials.
 
 ## Conclusion
