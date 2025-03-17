@@ -1,3 +1,5 @@
+import AiBenefits from "@/components/benifitsOfAi/AiBenefits";
+import TopInstructors from "@/components/benifitsOfAi/TopInstructors";
 import Banner from "@/components/home/Banner";
 import ExploreCourseCategories from "@/components/home/ExploreCourseCategories";
 import HowItWorks from "@/components/home/HowItWorks";
@@ -15,6 +17,12 @@ export default function Home() {
       <Container>
         {/* How It Works Section */}
         <HowItWorks />
+
+        {/* benefits of ai section*/}
+        <AiBenefits />
+
+        {/* top Instructors section*/}
+        <TopInstructors/>
 
         {/* Key Features Section */}
         <KeyFeatures />
