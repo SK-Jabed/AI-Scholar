@@ -1,7 +1,8 @@
 "use client";
 
 import { testimonials } from "@/utils/testimonials";
-import { useEffect, useState, useCallback } from "react";
+import { useCallback, useEffect, useState } from "react";
+import SectionTitle from "../shared/SectionTitle";
 
 const TestimonialsSection = ({
   autoRotateInterval = 5000,
@@ -57,21 +58,16 @@ const TestimonialsSection = ({
 
   return (
     <section
-      className={`py-16 ${sectionBackground}`}
+      className={`${sectionBackground}`}
       aria-labelledby="testimonials-heading"
     >
       <div className="container mx-auto px-4">
-        <div className="text-center mb-12">
-          <h2
-            id="testimonials-heading"
-            className="text-3xl font-bold mb-4 text-teal-600"
-          >
-            Student Testimonials
-          </h2>
-          <p className="text-lg max-w-2xl mx-auto text-base-content/80">
-            Hear from our community of learners about their experiences
-          </p>
-        </div>
+        <SectionTitle
+          title={"Student Testimonials"}
+          subTitle={
+            "       Hear from our community of learners about their experiences"
+          }
+        />
 
         {/* Testimonials Carousel */}
         <div
