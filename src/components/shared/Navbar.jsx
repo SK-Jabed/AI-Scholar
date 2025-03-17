@@ -25,6 +25,23 @@ const Navbar = () => {
       >
         Login
       </Link>
+
+      {/* login , logout, login with email and password handlers  */}
+
+      {/* <button onClick={() => doSocialLogin("google")}> google</button>
+      <button onClick={() => doSocialLogin("github")}> Github</button>
+      <button onClick={() => doLogout()}> Sign Out</button>
+      <button
+        onClick={() =>
+          doCredentialLogin({
+            email: "abc@gmail.com",
+            password: "145454",
+          })
+        }
+      >
+        {" "}
+        Credential
+      </button> */}
       <Link
         href="/register"
         className="bg-gradient-to-r from-gray-300 to-gray-400 text-gray-900 px-5 py-2 rounded-md shadow-md hover:scale-105 transition transform"
