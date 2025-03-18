@@ -69,7 +69,7 @@ const Register = () => {
         </div>
 
         <p className="text-sm text-gray-500 text-center mt-4">
-          Already have an account? <a href="/login" className="text-blue-500 hover:underline">Sign in</a>
+          Already on AI Scholar? <a href="/login" className="text-blue-500 hover:underline">LogIn</a>
         </p>
       </div>
     </div>
