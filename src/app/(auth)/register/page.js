@@ -1,61 +1,43 @@
-"use client";
-
-import SocialLogin from "@/components/shared/SocialLogin";
+import { FcGoogle } from "react-icons/fc";
+import { FaFacebook, FaMicrosoft } from "react-icons/fa";
 
 const Register = () => {
   return (
-    <div className="flex items-center justify-center min-h-screen">
+    <div className="flex items-center justify-center min-h-screen bg-gray-100">
       <div className="bg-white border border-blue-500 rounded p-8 w-full max-w-md">
-        <h2 className="text-2xl font-semibold text-center text-gray-700">
-          Create an Account
-        </h2>
+        <h2 className="text-2xl font-semibold text-center text-gray-700">Create an Account</h2>
         <p className="text-gray-500 text-center mb-6">Join us today!</p>
 
         <form className="space-y-4">
           <div>
-            <label className="block text-gray-600 text-sm font-medium mb-1">
-              Full Name
-            </label>
-            <input
-              type="text"
-              name="text"
-              id="text"
-              placeholder="Enter your name"
+            <label className="block text-gray-600 text-sm font-medium mb-1">Full Name</label>
+            <input 
+              type="text" 
+              placeholder="Imran Ahmed" 
               className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-              required
             />
           </div>
 
           <div>
-            <label className="block text-gray-600 text-sm font-medium mb-1">
-              Email
-            </label>
-            <input
-              type="email"
-              name="email"
-              id="email"
-              placeholder="abc@gmail.com"
+            <label className="block text-gray-600 text-sm font-medium mb-1">Email</label>
+            <input 
+              type="email" 
+              placeholder="imran@gmail.com" 
               className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-              required
             />
           </div>
 
           <div>
-            <label className="block text-gray-600 text-sm font-medium mb-1">
-              Password
-            </label>
-            <input
-              type="password"
-              name="password"
-              id="password"
-              placeholder="••••••••"
+            <label className="block text-gray-600 text-sm font-medium mb-1">Password</label>
+            <input 
+              type="password" 
+              placeholder="••••••••" 
               className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-              required
             />
           </div>
 
-          <button
-            type="submit"
+          <button 
+            type="submit" 
             className="w-full bg-blue-600 text-white font-semibold py-3 rounded-lg hover:bg-blue-700 transition duration-300"
           >
             Register
@@ -69,13 +51,25 @@ const Register = () => {
         </div>
 
         {/* Social Login Buttons */}
-        <SocialLogin />
+        <div className="space-y-3">
+          <button className="w-full flex items-center justify-center gap-2 bg-white border border-gray-300 py-3 rounded-lg shadow hover:bg-gray-100 transition">
+            <FcGoogle className="text-2xl" />
+            <span className="text-gray-700 font-medium">Sign up with Google</span>
+          </button>
+
+          <button className="w-full flex items-center justify-center gap-2 bg-blue-600 text-white py-3 rounded-lg shadow hover:bg-blue-700 transition">
+            <FaFacebook className="text-2xl" />
+            <span className="font-medium">Sign up with Facebook</span>
+          </button>
+
+          <button className="w-full flex items-center justify-center gap-2 bg-gray-800 text-white py-3 rounded-lg shadow hover:bg-gray-900 transition">
+            <FaMicrosoft className="text-2xl text-yellow-400" />
+            <span className="font-medium">Sign up with Microsoft</span>
+          </button>
+        </div>
 
         <p className="text-sm text-gray-500 text-center mt-4">
-          Already on AI Scholar?{" "}
-          <a href="/login" className="text-blue-500 hover:underline">
-            LogIn
-          </a>
+          Already on AI Scholar? <a href="/login" className="text-blue-500 hover:underline">LogIn</a>
         </p>
       </div>
     </div>
