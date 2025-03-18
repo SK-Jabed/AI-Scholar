@@ -1,7 +1,7 @@
 "use client";
  
  import { FcGoogle } from "react-icons/fc";
- import { FaFacebook, FaMicrosoft } from "react-icons/fa";
+ import { FaFacebook } from "react-icons/fa";
  
  const Login = () => {
    return (
