@@ -53,7 +53,7 @@ export default function HowItWorks() {
 
   return (
     <section className="mt-14">
-      <div className="container mx-auto px-6 text-center">
+      <div className="text-center">
         {/* Section Heading */}
         <SectionTitle
           title="How It Works"
@@ -61,7 +61,7 @@ export default function HowItWorks() {
         />
 
         {/* Steps Grid */}
-        <div className="grid md:grid-cols-2 gap-12 mt-12">
+        <div className="grid md:grid-cols-2 gap-12 mt-8">
           {steps.map((step, index) => (
             <motion.div
               key={step.id}

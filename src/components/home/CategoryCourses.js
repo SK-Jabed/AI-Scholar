@@ -1,5 +1,7 @@
+"use client";
 import Image from "next/image";
 import img from "../../../public/assets/webdevbeginners.jpg.webp";
+import { motion } from "framer-motion";
 
 const courses = [
   {
@@ -45,13 +47,18 @@ const courses = [
     image: "https://source.unsplash.com/400x300/?ai,machine",
   },
 ];
+
 const CategoryCourses = () => {
   return (
-    <div className="col-span-12 md:col-span-9 grid grid-cols-1 sm:grid-cols-2  lg:grid-cols-3 gap-6">
+    <div className="col-span-12 md:col-span-9 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
       {courses.map((course, index) => (
-        <div
+        <motion.div
           key={index}
           className="bg-white shadow-lg rounded-lg overflow-hidden hover:shadow-xl transition"
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: index * 0.2 }}
+          viewport={{ once: true }}
         >
           <Image
             src={img}
@@ -71,7 +78,7 @@ const CategoryCourses = () => {
             </button>
             <p className="text-sm text-gray-600">{course.duration} hrs</p>
           </div>
-        </div>
+        </motion.div>
       ))}
     </div>
   );

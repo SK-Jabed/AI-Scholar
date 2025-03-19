@@ -3,6 +3,9 @@
 import { testimonials } from "@/utils/testimonials";
 import { useCallback, useEffect, useState } from "react";
 import SectionTitle from "../shared/SectionTitle";
+import { motion, AnimatePresence } from "framer-motion";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const TestimonialsSection = ({
   autoRotateInterval = 5000,
@@ -12,61 +15,52 @@ const TestimonialsSection = ({
   const [activeIndex, setActiveIndex] = useState(0);
   const [isAutoRotating, setIsAutoRotating] = useState(true);
 
-  // Navigate to specific slide index
+  useEffect(() => {
+    AOS.init({ duration: 1000, once: true });
+  }, []);
+
   const goToSlide = useCallback(
     (index) => {
       const newIndex = (index + testimonials.length) % testimonials.length;
       setActiveIndex(newIndex);
-
-      // Reset auto-rotation timer when manually navigating
       setIsAutoRotating(true);
     },
     [testimonials.length]
   );
 
-  // Navigate to next slide
   const nextSlide = useCallback(() => {
     goToSlide(activeIndex + 1);
   }, [activeIndex, goToSlide]);
 
-  // Navigate to previous slide
   const prevSlide = useCallback(() => {
     goToSlide(activeIndex - 1);
   }, [activeIndex, goToSlide]);
 
-  // Handle auto-rotation of carousel
   useEffect(() => {
     let intervalId;
-
     if (isAutoRotating) {
       intervalId = setInterval(() => {
         nextSlide();
       }, autoRotateInterval);
     }
-
-    // Cleanup function to prevent memory leaks
     return () => {
-      if (intervalId) {
-        clearInterval(intervalId);
-      }
+      if (intervalId) clearInterval(intervalId);
     };
   }, [isAutoRotating, nextSlide, autoRotateInterval]);
 
-  // Pause auto-rotation when user hovers over carousel
   const handleMouseEnter = () => setIsAutoRotating(false);
   const handleMouseLeave = () => setIsAutoRotating(true);
 
   return (
     <section
+      data-aos="fade-up"
       className={`${sectionBackground}`}
       aria-labelledby="testimonials-heading"
     >
       <div className="container mx-auto px-4">
         <SectionTitle
-          title={"Student Testimonials"}
-          subTitle={
-            "       Hear from our community of learners about their experiences"
-          }
+          title="Student Testimonials"
+          subTitle="Discover the success stories of our students. Be inspired by their journey and take the first step toward your success."
         />
 
         {/* Testimonials Carousel */}
@@ -79,51 +73,54 @@ const TestimonialsSection = ({
           aria-label="Student testimonials"
         >
           <div className="overflow-hidden rounded-lg shadow-lg">
-            {testimonials.map((testimonial, index) => (
-              <div
-                key={testimonial.id}
-                id={`testimonial-${index}`}
-                className={`transition-opacity duration-500 ${
-                  index === activeIndex
-                    ? "block opacity-100"
-                    : "hidden opacity-0"
-                }`}
-                role="group"
-                aria-roledescription="slide"
-                aria-label={`${index + 1} of ${testimonials.length}`}
-              >
-                <div className={`card w-full ${cardBackground}`}>
-                  <div className="card-body items-center text-center p-8">
-                    <div className="avatar mb-4">
-                      <div className="w-24 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-                        <img
-                          src={testimonial.image}
-                          alt={`${testimonial.name}`}
-                          width="100"
-                          height="100"
-                          loading="lazy"
-                        />
+            <AnimatePresence mode="wait">
+              {testimonials.map((testimonial, index) =>
+                index === activeIndex ? (
+                  <motion.div
+                    key={testimonial.id}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -20 }}
+                    transition={{ duration: 0.5 }}
+                    id={`testimonial-${index}`}
+                    role="group"
+                    aria-roledescription="slide"
+                    aria-label={`${index + 1} of ${testimonials.length}`}
+                  >
+                    <div className={`card w-full ${cardBackground}`}>
+                      <div className="card-body items-center text-center p-8">
+                        <div className="avatar mb-4">
+                          <div className="w-24 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+                            <img
+                              src={testimonial.image}
+                              alt={testimonial.name}
+                              width="100"
+                              height="100"
+                              loading="lazy"
+                            />
+                          </div>
+                        </div>
+                        <blockquote>
+                          <p className="text-lg italic mb-6">
+                            "{testimonial.text}"
+                          </p>
+                          <footer>
+                            <cite className="not-italic">
+                              <div className="font-bold text-lg">
+                                {testimonial.name}
+                              </div>
+                              <div className="text-base-content/70">
+                                {testimonial.role}
+                              </div>
+                            </cite>
+                          </footer>
+                        </blockquote>
                       </div>
                     </div>
-                    <blockquote>
-                      <p className="text-lg italic mb-6">
-                        "{testimonial.text}"
-                      </p>
-                      <footer>
-                        <cite className="not-italic">
-                          <div className="font-bold text-lg">
-                            {testimonial.name}
-                          </div>
-                          <div className="text-base-content/70">
-                            {testimonial.role}
-                          </div>
-                        </cite>
-                      </footer>
-                    </blockquote>
-                  </div>
-                </div>
-              </div>
-            ))}
+                  </motion.div>
+                ) : null
+              )}
+            </AnimatePresence>
           </div>
 
           {/* Navigation Buttons */}
