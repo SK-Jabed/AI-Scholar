@@ -26,10 +26,14 @@ export default function RootLayout({ children }) {
         <Navbar />
 
         {/* Main Content */}
+<<<<<<< HEAD
         <CardSpotlight>
           <main className="min-h-screen">{children}</main>
         </CardSpotlight>
 
+=======
+        <main className="min-h-screen my-8">{children}</main>
+>>>>>>> d81d0ac ( conflict request)
         {/* Footer */}
         <Footer />
       </body>
