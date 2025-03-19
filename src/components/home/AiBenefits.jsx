@@ -2,6 +2,10 @@
 import Image from "next/image";
 import { FaChartLine, FaComments, FaRobot, FaShieldAlt } from "react-icons/fa";
 import SectionTitle from "../shared/SectionTitle";
+import { motion } from "framer-motion";
+import "aos/dist/aos.css";
+import { useEffect } from "react";
+import AOS from "aos";
 
 const AiBenefits = () => {
   const aiFeatures = [
@@ -31,18 +35,31 @@ const AiBenefits = () => {
     },
   ];
 
+  // Initialize AOS
+  useEffect(() => {
+    AOS.init({
+      duration: 800,
+      once: true,
+    });
+  }, []);
+
   return (
-    <section className="">
-      <div className="text-center">
-        <div className="lg:flex items-center gap-32 ">
+    <section>
+      <div className="mx-auto text-center">
+        {/* Section Title with AOS */}
+        <div
+          className="lg:flex items-center gap-32"
+          data-aos="fade-down"
+          data-aos-delay="100"
+        >
           <Image
-            src="/icons/swirl-icon.png" // Ensure the image is placed inside the public folder
+            src="/icons/swirl-icon.png"
             alt="AI Technology"
             width={100}
             height={200}
             className="hidden lg:block"
           />
-          <div className="">
+          <div>
             <SectionTitle
               title={"Benefits of AI"}
               subTitle={`Unlock the power of AI to enhance learning, automate tasks, 
@@ -51,14 +68,23 @@ const AiBenefits = () => {
           </div>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+        {/* Features Grid with Framer Motion */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mt-8">
           {aiFeatures.map((item, index) => (
-            <div
+            <motion.div
               key={index}
-              className="relative bg-white/90 backdrop-blur-md  shadow-lg rounded-xl p-6 text-center border border-green-600 hover:shadow-2xl transition-all duration-300 hover:scale-105"
+              className="relative bg-white/90 backdrop-blur-md shadow-lg rounded-xl p-6 text-center border border-green-600 hover:shadow-2xl transition-all duration-300 hover:scale-105"
+              initial={{ opacity: 0, y: 50 }} // Initial animation state
+              whileInView={{ opacity: 1, y: 0 }} // Animation when in view
+              transition={{ duration: 0.5, delay: index * 0.2 }} // Staggered delay
+              viewport={{ once: true }} // Animate only once
             >
-              {/* Floating Icon */}
-              <div className="absolute -top-6 left-1/2 transform -translate-x-1/2 bg-white shadow-md rounded-full p-4 border border-green-600">
+              {/* Floating Icon with AOS */}
+              <div
+                className="absolute -top-6 left-1/2 transform -translate-x-1/2 bg-white shadow-md rounded-full p-4 border border-green-600"
+                data-aos="zoom-in"
+                data-aos-delay={index * 100}
+              >
                 {item.icon}
               </div>
 
@@ -69,7 +95,7 @@ const AiBenefits = () => {
 
               {/* Hover Glow Effect */}
               <div className="absolute inset-0 bg-gradient-to-r from-[#124e66] to-[#1e88e5] opacity-0 transition-opacity duration-300 hover:opacity-10 rounded-xl"></div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>

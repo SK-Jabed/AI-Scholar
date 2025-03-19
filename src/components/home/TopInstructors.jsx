@@ -1,6 +1,10 @@
 "use client";
 import Image from "next/image";
 import { FaFacebookF, FaLinkedinIn, FaTwitter } from "react-icons/fa";
+import { motion } from "framer-motion";
+import { useEffect } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
 import SectionTitle from "../shared/SectionTitle";
 
 const instructors = [
@@ -58,23 +62,36 @@ const instructors = [
 ];
 
 const TopInstructors = () => {
+  useEffect(() => {
+    AOS.init({ duration: 1000 });
+  }, []);
+
   return (
-    <section className="">
+    <section>
       <div className="text-center">
         {/* Section Title */}
-        <div className="text-center mb-10">
+        <motion.div
+          initial={{ opacity: 0, y: -50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+        >
           <SectionTitle
             title={"Meet Our Top Instructors"}
             subTitle={`Learn from industry-leading professionals who bring real-world experience and expertise to every lesson.`}
           />
-        </div>
+        </motion.div>
 
         {/* Instructor Cards */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {instructors.map((instructor) => (
-            <div
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mt-10">
+          {instructors.map((instructor, index) => (
+            <motion.div
               key={instructor.id}
-              className="relative bg-white shadow-lg rounded-xl overflow-hidden border border-green-600 
+              data-aos="fade-up"
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              whileHover={{ scale: 1.05 }}
+              className="relative shadow-lg rounded-xl overflow-hidden border border-green-600 
               hover:shadow-2xl transition-all duration-300 group focus-within:ring-2 focus-within:ring-green-500"
             >
               {/* Profile Image */}
@@ -89,52 +106,55 @@ const TopInstructors = () => {
               </div>
 
               {/* Instructor Details */}
-              <div className="p-6 text-center">
-                <h3 className="text-xl font-semibold text-gray-800">
-                  {instructor.name}
-                </h3>
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.2 }}
+                className="p-6 text-center"
+              >
+                <h3 className="text-xl font-semibold">{instructor.name}</h3>
                 <p className="text-gray-600">{instructor.expertise}</p>
-              </div>
+              </motion.div>
 
               {/* Hover Overlay */}
-              <div
-                className="absolute inset-0 bg-black/80 text-white flex flex-col items-center justify-center px-6 text-sm 
+            <div
+              className="absolute inset-0 bg-black/80 text-white flex flex-col items-center justify-center px-6 text-sm 
                 opacity-0 translate-x-full transition-all duration-500 md:group-hover:opacity-100 md:group-hover:translate-x-0 
                 focus-within:opacity-100 focus-within:translate-x-0"
-              >
-                <p className="mb-4">{instructor.description}</p>
+            >
+              <p className="mb-4">{instructor.description}</p>
 
-                {/* Social Media Links */}
-                <div className="flex gap-4 mb-4">
-                  <a
-                    href={instructor.social.facebook}
-                    className="text-blue-600 hover:text-blue-800 transition"
-                  >
-                    <FaFacebookF size={20} />
-                  </a>
-                  <a
-                    href={instructor.social.linkedin}
-                    className="text-blue-700 hover:text-blue-900 transition"
-                  >
-                    <FaLinkedinIn size={20} />
-                  </a>
-                  <a
-                    href={instructor.social.twitter}
-                    className="text-blue-400 hover:text-blue-600 transition"
-                  >
-                    <FaTwitter size={20} />
-                  </a>
-                </div>
-
-                {/* "Go to Profile" Button */}
+              {/* Social Media Links */}
+              <div className="flex gap-4 mb-4">
                 <a
-                  href="#"
-                  className="bg-green-500 hover:bg-green-700 text-white px-4 py-2 rounded-full transition"
+                  href={instructor.social.facebook}
+                  className="text-blue-600 hover:text-blue-800 transition"
                 >
-                  Go to Profile
+                  <FaFacebookF size={20} />
+                </a>
+                <a
+                  href={instructor.social.linkedin}
+                  className="text-blue-700 hover:text-blue-900 transition"
+                >
+                  <FaLinkedinIn size={20} />
+                </a>
+                <a
+                  href={instructor.social.twitter}
+                  className="text-blue-400 hover:text-blue-600 transition"
+                >
+                  <FaTwitter size={20} />
                 </a>
               </div>
+
+              {/* "Go to Profile" Button */}
+              <a
+                href="#"
+                className="bg-green-500 hover:bg-green-700 text-white px-4 py-2 rounded-full transition"
+              >
+                Go to Profile
+              </a>
             </div>
+            </motion.div>
           ))}
         </div>
       </div>
