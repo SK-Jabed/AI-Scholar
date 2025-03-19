@@ -124,3 +124,14 @@
   }
 }
 
+.curve {
+  aspect-ratio: 960/600;
+  width: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.layer1 {
+  background-image: url("../../public/wave-haikei\ \(1\).svg");
+}
