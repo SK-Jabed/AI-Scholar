@@ -45,7 +45,7 @@ const AboutDescription = () => {
             transition={{ duration: 0.8 }}
           >
             <Image
-              src="/about.jpg" // Path from the public folder (No import needed)
+              src="/banners/about/about.jpg" // Path from the public folder (No import needed)
               alt="About AI Scholar"
               width={1000} // Set width
               height={300} // Set height

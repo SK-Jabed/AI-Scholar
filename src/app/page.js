@@ -1,12 +1,12 @@
-import AiBenefits from "@/components/benifitsOfAi/AiBenefits";
-import TopInstructors from "@/components/benifitsOfAi/TopInstructors";
+import AiBenefits from "@/components/home/AiBenefits";
+import TopInstructors from "@/components/home/TopInstructors";
 import Banner from "@/components/home/Banner";
 import ExploreCourseCategories from "@/components/home/ExploreCourseCategories";
 import HowItWorks from "@/components/home/HowItWorks";
+import KeyFeatures from "@/components/home/KeyFeatures";
 import PopularCourses from "@/components/home/PopularCourses";
-import KeyFeatures from "@/components/key_features/KeyFeatures";
+import TestimonialsSection from "@/components/home/TestimonialsSection";
 import Container from "@/components/shared/Container";
-import TestimonialsSection from "@/components/testimonials/TestimonialsSection";
 
 export default function Home() {
   return (
@@ -18,17 +18,17 @@ export default function Home() {
         {/* How It Works Section */}
         <HowItWorks />
 
-        {/* benefits of ai section*/}
+        {/* Benefits of AI section*/}
         <AiBenefits />
-
-        {/* top Instructors section*/}
-        <TopInstructors/>
 
         {/* Key Features Section */}
         <KeyFeatures />
 
         {/* Course Categories Section */}
         <ExploreCourseCategories />
+
+        {/* Top Instructors section*/}
+        <TopInstructors />
 
         {/* Popular Courses Section */}
         <PopularCourses />
