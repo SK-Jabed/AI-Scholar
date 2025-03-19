@@ -1,36 +1,41 @@
-import KeyFeatures from "@/components/key_features/KeyFeatures";
-
-import CourseCategories from "@/components/home/CourseCategories";
-import PopularCourses from "@/components/home/PopularCourses";
+import AiBenefits from "@/components/home/AiBenefits";
+import TopInstructors from "@/components/home/TopInstructors";
 import Banner from "@/components/home/Banner";
-import Faq from "@/components/home/Faq";
+import ExploreCourseCategories from "@/components/home/ExploreCourseCategories";
+import HowItWorks from "@/components/home/HowItWorks";
+import KeyFeatures from "@/components/home/KeyFeatures";
+import PopularCourses from "@/components/home/PopularCourses";
+import TestimonialsSection from "@/components/home/TestimonialsSection";
+import Container from "@/components/shared/Container";
 
 export default function Home() {
   return (
     <div>
-      {/*1. ToDo: Hero Section (Header, navigation)
-FAQ Section (Accordion with common questions) */}
+      {/* Banner Section */}
       <Banner />
-      <Faq />
-      {/*2. ToDo:  Key Features Section (Grid layout for main features)
-Student Testimonials Section (Carousel/grid for user reviews)- by Abdur Rahman  */}
-      <KeyFeatures />
-      {/* 3. toDo: Course Categories Section (Cards for different subjects)
-Popular Courses Section (Top-rated courses grid) -by Sushanto kumar
- */}
-      {/* Course Categories */}
-      <CourseCategories />
-      {/* Popular Courses */}
-      <PopularCourses />
 
-      {/* 4. ToDo: How It Works Section (Step-by-step process UI)
-Footer + Contact Us (Links, form, social media)- by Sheikh Jabed*/}
+      <Container>
+        {/* How It Works Section */}
+        <HowItWorks />
 
-      {/* 5. ToDo: AI Benefits Section (Infographic/icons for AI features)
-Instructor Spotlight (Cards for top instructors) */}
+        {/* Benefits of AI section*/}
+        <AiBenefits />
 
-      {/* 6. ToDo: About Us Page (Grid layout with filters & sorting)
-Contact Page (Title, description, instructor, enroll button) */}
+        {/* Key Features Section */}
+        <KeyFeatures />
+
+        {/* Course Categories Section */}
+        <ExploreCourseCategories />
+
+        {/* Top Instructors section*/}
+        <TopInstructors />
+
+        {/* Popular Courses Section */}
+        <PopularCourses />
+
+        {/* Student Testimonials Section */}
+        <TestimonialsSection />
+      </Container>
     </div>
   );
 }

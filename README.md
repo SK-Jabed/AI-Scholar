@@ -108,6 +108,27 @@ An administrator reviews an AI-generated report highlighting which courses have 
 
 ---
 
+## **Frontend Contributor Guide for Authentication Integration**
+
+1. **Social Login**
+   - **Google Login:** Use the `doSocialLogin("google")` function to trigger Google OAuth login.
+   - **GitHub Login:** Use the `doSocialLogin("github")` function to trigger GitHub OAuth login.
+2. **Sign Out**
+
+   - Use `doLogout()` to log the user out of the application.
+
+3. **Credential Login**
+
+   - For logging in with email and password, use the `doCredentialLogin()` function, passing an email and password (e.g., `{ email: "abc@gmail.com", password: "145454" }`).
+
+4. **Registration (API Register)**
+   - When a new user registers, send the following details to the `/api/register` endpoint:
+     - **name**
+     - **email**
+     - **password**
+     - **role**
+   - This will allow the user to sign up and log in with their credentials.
+
 ## Conclusion
 
 AI Scholar transforms traditional e-learning into an intelligent, data-driven, and personalized experience. With automated grading, adaptive learning paths, AI-driven analytics, and chatbot assistance, the platform empowers students and instructors alike. By integrating AI with Next.js, AI Scholar makes education more engaging, accessible, and effective.
