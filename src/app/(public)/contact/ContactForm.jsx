@@ -4,17 +4,17 @@ const ContactForm = () => {
   return (
     <div>
       <div className="flex justify-between">
-        <div className=" py-10 w-full" id="contact">
-          <div className="container mx-auto">
-            <div className="grid  ">
+        <div className="w-full" id="contact">
+          <div className="">
+            <div className="grid">
               {/* Left Section: Form */}
-              <div className=" p-6 shadow-sm shadow-accent rounded-lg">
-                <h3 className="text-4xl font-bold text-center  mb-6">
+              <div className="p-6 shadow-sm shadow-accent rounded-lg">
+                <h3 className="text-4xl font-bold text-center mb-6">
                   Get in Touch
                 </h3>
                 <form className="grid grid-cols-2 space-x-5">
                   <div className="mb-6">
-                    <label htmlFor="name" className="block  font-medium mb-2">
+                    <label htmlFor="name" className="block font-medium mb-2">
                       Name
                     </label>
                     <input
