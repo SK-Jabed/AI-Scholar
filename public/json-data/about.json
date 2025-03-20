@@ -1,39 +1,38 @@
 [
-    {
-      "name": "Rafi Ahmed",
-      "role": "Team Leader",
-      "image": "https://i.ibb.co.com/674gDdt3/rafi-ahmed-vai.jpg",
-      "bio": "Passionate about AI-driven education solutions."
-    },
-    {
-      "name": "Sheikh Jabed",
-      "role": "Developer",
-      "image": "https://i.ibb.co.com/6fQDfjw/sheikh-jabed.jpg",
-      "bio": "Full-stack developer with expertise in MERN and AI."
-    },
-    {
-      "name": "Sushanto Kumar",
-      "role": "Developer",
-      "image": "https://i.ibb.co.com/TM7MDYQd/sushanto-vai.png",
-      "bio": "Full-stack developer with expertise in MERN and AI."
-    },
-    {
-      "name": "Abdur Rahman",
-      "role": "Developer",
-      "image": "https://i.ibb.co.com/vvxw2G3g/abdur-rahman-vai.png",
-      "bio": "Full-stack developer with expertise in MERN and AI."
-    },
-    {
-      "name": "Imran Ahmed",
-      "role": "Developer",
-      "image": "https://i.ibb.co.com/s97CDRJF/imran-ahmed-vai.jpg",
-      "bio": "Full-stack developer with expertise in MERN and AI."
-    },
-    {
-      "name": "Shoyon Kumar",
-      "role": "Developer",
-      "image": "https://i.ibb.co.com/SD9B2MV2/shoyon-kumar-vai.jpg",
-      "bio": "Full-stack developer with expertise in MERN and AI."
-    }
-  ]
-  
+  {
+    "name": "Rafi Ahmed",
+    "role": "Team Leader & AI Strategist",
+    "image": "https://i.ibb.co.com/674gDdt3/rafi-ahmed-vai.jpg",
+    "bio": "Passionate about AI-driven education solutions."
+  },
+  {
+    "name": "Sheikh Jabed",
+    "role": "Full-Stack Developer",
+    "image": "https://i.ibb.co.com/6fQDfjw/sheikh-jabed.jpg",
+    "bio": "Building seamless and scalable platforms."
+  },
+  {
+    "name": "Sushanto Kumar",
+    "role": "Full-Stack Developer",
+    "image": "https://i.ibb.co.com/TM7MDYQd/sushanto-vai.png",
+    "bio": "Developing scalable and efficient systems."
+  },
+  {
+    "name": "Abdur Rahman",
+    "role": "Frontend Engineer",
+    "image": "https://i.ibb.co.com/vvxw2G3g/abdur-rahman-vai.png",
+    "bio": "Creating seamless and engaging user interfaces."
+  },
+  {
+    "name": "Imran Ahmed",
+    "role": "Frontend Developer",
+    "image": "https://i.ibb.co.com/s97CDRJF/imran-ahmed-vai.jpg",
+    "bio": "Ensuring secure and optimized services."
+  },
+  {
+    "name": "Shoyon Kumar",
+    "role": "Web Developer",
+    "image": "https://i.ibb.co.com/SD9B2MV2/shoyon-kumar-vai.jpg",
+    "bio": "Crafting intuitive and dynamic user experiences."
+  }
+]

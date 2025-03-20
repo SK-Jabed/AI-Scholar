@@ -43,29 +43,29 @@ const AboutTeam = () => {
 
   return (
     <div>
-      <section className="py-12  bg-light ">
-        <div className=" mx-auto text-center ">
-          <h2 className="text-4xl font-bold ">Meet Our Team</h2>
+      <section className="bg-light">
+        <div className="mx-auto text-center">
+          <h2 className="text-4xl md:text-5xl font-bold mb-10 text-primary">Meet Our Team</h2>
 
           {/* Team Members */}
-          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6 py-20 ">
+          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6">
             {members.map((member, index) => (
               <div
                 key={index}
                 className="bg-white p-6 rounded-xl shadow-xs shadow-accent text-center w-full "
               >
                 <motion.img
-                  whileHover={{ scale: 2.2 }}
+                  whileHover={{ scale: 1.2 }}
                   whileTap={{ scale: 0.8 }}
                   src={member.image}
                   alt={member.name}
                   className="w-24 h-24 mx-auto rounded-full mb-4"
                 />
-                <h3 className="text-xl font-semibold text-accent">
+                <h3 className="text-xl font-bold text-accent">
                   {member.name}
                 </h3>
-                <p className="text-accent font-medium">{member.role}</p>
-                <p className="text-accent">{member.bio}</p>
+                <p className="text-gray-600 font-medium">{member.role}</p>
+                <p className="text-gray-600">{member.bio}</p>
               </div>
             ))}
           </div>
