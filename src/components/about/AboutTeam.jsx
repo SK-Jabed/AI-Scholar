@@ -1,11 +1,9 @@
 "use client";
 
-import * as motion from "motion/react-client";
 
 import React, { useEffect, useRef, useState } from "react";
 import "animate.css";
-import AboutBanner from "@/components/about/AboutBanner";
-import AboutDescription from "@/components/about/AboutDescription";
+import { motion } from "motion/react"
 
 const AboutTeam = () => {
   const containerRef = useRef(null);
