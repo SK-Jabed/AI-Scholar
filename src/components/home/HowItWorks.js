@@ -52,7 +52,7 @@ export default function HowItWorks() {
   }, []);
 
   return (
-    <section className="mt-14">
+    <section className="mt-24">
       <div className="text-center">
         {/* Section Heading */}
         <SectionTitle
