@@ -1,8 +1,15 @@
 import { FaGithub, FaInstagram, FaLinkedinIn, FaTwitter } from "react-icons/fa";
 
+"use client"
+import { usePathname } from "next/navigation";
 const Footer = () => {
   const Year = new Date().getFullYear();
 
+  const pathname = usePathname();
+  
+  if (pathname.includes("dashboard")) {
+    return null;
+  }
   return (
     <footer className="relative bg-black text-white">
       {/* Wave Border */}

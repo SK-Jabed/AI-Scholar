@@ -7,6 +7,10 @@ import { useState } from "react";
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
+  
+  if (pathname.includes("dashboard")) {
+    return null;
+  }
   const links = [
     { name: "Home", href: "/" },
     { name: "About", href: "/about" },
