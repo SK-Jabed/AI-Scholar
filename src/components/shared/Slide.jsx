@@ -3,12 +3,13 @@ import Link from "next/link";
 
 const Slide = ({ img, text, title }) => {
   return (
-    <div className="relative h-[600px] w-full">
+    <div className="relative h-[400px] md:h-[300px] w-full ">
       <Image
         src={img}
         alt={title}
         layout="fill"
         objectFit="cover"
+        sizes="(max-width: 768px) 100vw, 50vw" // Responsive sizes
         className="absolute inset-0"
       />
       <div className="inset-0 absolute text-center bg-gradient-to-b from-black/40 to-black/70">
