@@ -14,8 +14,9 @@ const Login = () => {
     event.preventDefault();
 
     try {
-      const formData = new FormData(event.currentTarget);
+      const formData = new FormData(event.target);
 
+   
       const response = await doCredentialLogin(formData);
 
       if (response.error) {
