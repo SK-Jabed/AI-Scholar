@@ -3,6 +3,22 @@
 import SocialLogin from "@/components/shared/SocialLogin";
 
 const Register = () => {
+
+const formHandler =async(e)=>{
+    e.preventDefault()
+    const formData = new FormData(e.target)
+    const userData = {}
+  formData.forEach((value, key)=> {userData[key] = value})
+    const data = await fetch("/api/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      }, 
+      body: JSON.stringify(userData)
+    })
+
+    console.log({data})
+  }
   return (
     <div className="flex items-center justify-center min-h-screen">
       <div className="bg-white border border-blue-500 rounded p-8 w-full max-w-md">
@@ -11,14 +27,14 @@ const Register = () => {
         </h2>
         <p className="text-gray-500 text-center mb-6">Join us today!</p>
 
-        <form className="space-y-4">
+        <form onSubmit={formHandler} className="space-y-4">
           <div>
             <label className="block text-gray-600 text-sm font-medium mb-1">
               Full Name
             </label>
             <input
               type="text"
-              name="text"
+              name="name"
               id="text"
               placeholder="Enter your name"
               className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
