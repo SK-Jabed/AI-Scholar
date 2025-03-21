@@ -1,24 +1,54 @@
 "use client";
 
-import { FcGoogle } from "react-icons/fc";
-import { FaFacebook } from "react-icons/fa";
+import SocialLogin from "@/components/shared/SocialLogin";
+import { doCredentialLogin } from "@/app/actions";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import Link from "next/link";
 
 const Login = () => {
+  const [error, setError] = useState("");
+  const router = useRouter();
+
+  const handleFormSubmit = async (event) => {
+    event.preventDefault();
+
+    try {
+      const formData = new FormData(event.currentTarget);
+
+      const response = await doCredentialLogin(formData);
+
+      if (response.error) {
+        setError(response.error.message);
+      } else {
+        router.push("/dashboard");
+      }
+    } catch (err) {
+      console.error(err);
+      setError("Check your credentials");
+    }
+  };
+
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100 px-4 lg:py-0 py-10">
+    <div className="flex items-center justify-center min-h-screen px-4 lg:py-0 py-10">
       <div className="bg-white border border-blue-500 rounded p-8 w-full max-w-md">
         <h2 className="text-3xl font-semibold text-center text-gray-700">
           Welcome Back
         </h2>
         <p className="text-gray-500 text-center mb-6">Login to your account</p>
 
-        <form className="space-y-4">
+        <form onSubmit={handleFormSubmit} className="space-y-4">
           <div>
-            <label className="block text-gray-600 text-sm font-medium mb-1">
+            <label
+              className="block text-gray-600 text-sm font-medium mb-1"
+              htmlFor="email"
+            >
               Email
             </label>
             <input
               type="email"
+              name="email"
+              id="email"
               placeholder="you@example.com"
               className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               required
@@ -26,20 +56,25 @@ const Login = () => {
           </div>
 
           <div>
-            <label className="block text-gray-600 text-sm font-medium mb-1">
+            <label
+              className="block text-gray-600 text-sm font-medium mb-1"
+              htmlFor="password"
+            >
               Password
             </label>
             <input
               type="password"
+              name="password"
+              id="password"
               placeholder="••••••••"
               className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               required
             />
           </div>
-
+          <p className="font-semibold text-red-600">{error}</p>
           <button
             type="submit"
-            className="w-full bg-blue-600 text-white font-semibold py-3 rounded-lg hover:bg-blue-700 transition duration-300"
+            className="w-full bg-blue-600 text-white font-semibold py-3 rounded-lg hover:bg-blue-700 transition duration-300 cursor-pointer"
           >
             Login
           </button>
@@ -52,23 +87,13 @@ const Login = () => {
         </div>
 
         {/* Social Login Buttons */}
-        <div className="space-y-3">
-          <button className="w-full flex items-center justify-center gap-2 bg-white border border-gray-300 py-3 rounded-lg shadow hover:bg-gray-100 transition">
-            <FcGoogle className="text-2xl" />
-            <span className="text-gray-700 font-medium">Login with Google</span>
-          </button>
-
-          <button className="w-full flex items-center justify-center gap-2 bg-blue-600 text-white py-3 rounded-lg shadow hover:bg-blue-700 transition">
-            <FaFacebook className="text-2xl" />
-            <span className="font-medium">Login with Facebook</span>
-          </button>
-        </div>
+        <SocialLogin />
 
         <p className="text-sm text-gray-500 text-center mt-4">
           New to AI Scholar?{" "}
-          <a href="/register" className="text-blue-500 hover:underline">
+          <Link href="/register" className="text-blue-500 hover:underline">
             Register
-          </a>
+          </Link>
         </p>
       </div>
     </div>
