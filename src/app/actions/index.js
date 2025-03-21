@@ -2,29 +2,26 @@
 
 import { signIn, signOut } from "@/lib/auth";
 
-// login with google/github , give action props google/github
+// Login with Google/Github , give action props Google/Github
 export const doSocialLogin = async (action) => {
-  await signIn(action, { redirectTo: "/" });
+  await signIn(action, { redirectTo: "/dashboard" });
 };
 
 // Log out
 export const doLogout = async () => {
-  await signOut({ redirectTo: "/" });
+  await signOut({ redirectTo: "/login" });
 };
 
-// log in with email, password
+// Log in with email, password
 export const doCredentialLogin = async (formData) => {
-  const email = formData.email;
-  const password = formData.password;
-
   try {
-    const res = await signIn("credentials", {
-      email,
-      password,
+    const response = await signIn("credentials", {
+      email: formData.get("email"),
+      password: formData.get("password"),
       redirect: false,
     });
 
-    return res;
+    return response;
   } catch (err) {
     console.log("Credential Login", err);
     throw err;
