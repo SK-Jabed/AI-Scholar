@@ -1,14 +1,18 @@
 import { NextResponse } from "next/server";
 
 export const POST = async (request) => {
-  const userData = await request.json();
-console.log({userData})
- const result = await fetch(`${process.env.SERVER_URL}/users`, {
-  method: "POST",
-  headers: {"Content-Type": "application/json"},body: JSON.stringify(userData)
- })
+  const { name, email, password } = await request.json();
 
-console.log({result})
+  console.log(name, email, password);
+
+  // Create a DB Connection
+
+  // Encrypt The Password
+
+  // Form a DB Payload
+
+  // Update The DB
+
   return new NextResponse("User successfully created", {
     status: 201,
   });

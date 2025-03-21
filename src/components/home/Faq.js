@@ -1,52 +1,74 @@
 "use client";
 
+import { motion } from "framer-motion";
+import SectionTitle from "../shared/SectionTitle";
+
+const faqData = [
+  {
+    question: "What is AI Course Management?",
+    answer:
+      "AI Course Management is an innovative platform that utilizes artificial intelligence to streamline and optimize the management of educational courses. It includes features such as automated grading, personalized learning paths, and insightful analytics for both students and instructors.",
+  },
+  {
+    question: "How can AI improve education?",
+    answer:
+      "AI enhances education by offering personalized learning experiences, providing intelligent feedback, and automating administrative tasks. This allows educators to focus more on teaching, while students benefit from tailored learning paths and real-time performance tracking.",
+  },
+  {
+    question: "Is the platform suitable for all types of courses?",
+    answer:
+      "Yes, our platform is designed to be flexible and adaptable, making it suitable for a wide range of courses, from technical and academic to creative and vocational. It supports a variety of teaching formats and content types.",
+  },
+  {
+    question: "How does AI track student progress?",
+    answer:
+      "The platform uses AI to analyze student performance based on assignments, quizzes, participation, and other metrics. It identifies learning gaps and suggests personalized interventions to help students improve.",
+  },
+];
+
 const Faq = () => {
   return (
-    <div className="py-12 px-4 max-w-5xl mx-auto">
-      {/* Header */}
-      <h1 className="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-8">
-        Common Questions About Us ?
-      </h1>
+    <div className="mb-4">
+    {/* Header */}
+    <SectionTitle
+      title="Frequently Asked Questions"
+      subTitle="Get answers to the most common questions about our AI-powered course management platform."
+    />
 
-      {/* FAQ Section */}
-      <div className="space-y-6">
-        <div className="bg-white shadow-lg rounded-lg p-6">
-          <h2 className="text-xl font-semibold text-gray-700">What is AI Course Management?</h2>
-          <p className="text-gray-600 mt-2">
-            AI Course Management is an innovative platform that utilizes artificial intelligence to streamline
-            and optimize the management of educational courses. It includes features such as automated grading,
-            personalized learning paths, and insightful analytics for both students and instructors.
-          </p>
-        </div>
-
-        <div className="bg-white shadow-lg rounded-lg p-6">
-          <h2 className="text-xl font-semibold text-gray-700">How can AI improve education?</h2>
-          <p className="text-gray-600 mt-2">
-            AI enhances education by offering personalized learning experiences, providing intelligent feedback,
-            and automating administrative tasks. This allows educators to focus more on teaching, while students
-            benefit from tailored learning paths and real-time performance tracking.
-          </p>
-        </div>
-
-        <div className="bg-white shadow-lg rounded-lg p-6">
-          <h2 className="text-xl font-semibold text-gray-700">Is the platform suitable for all types of courses?</h2>
-          <p className="text-gray-600 mt-2">
-            Yes, our platform is designed to be flexible and adaptable, making it suitable for a wide range of courses,
-            from technical and academic to creative and vocational. It supports a variety of teaching formats and
-            content types.
-          </p>
-        </div>
-
-        <div className="bg-white shadow-lg rounded-lg p-6">
-          <h2 className="text-xl font-semibold text-gray-700">How does AI track student progress?</h2>
-          <p className="text-gray-600 mt-2">
-            The platform uses AI to analyze student performance based on assignments, quizzes, participation, and
-            other metrics. It identifies learning gaps and suggests personalized interventions to help students
-            improve.
-          </p>
-        </div>
-      </div>
+    {/* FAQ Section */}
+    <div className="space-y-2">
+      {faqData.map((item, index) => (
+        <motion.div
+          key={index}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4, delay: index * 0.08, ease: "easeOut" }}
+          className="collapse collapse-arrow bg-white shadow-lg rounded-lg overflow-hidden transition-transform duration-300 hover:scale-[1.02]"
+        >
+          <div className="join join-vertical bg-base-100">
+            <div className="collapse collapse-arrow join-item border border-base-300 hover:bg-gray-50 transition-colors">
+              <input type="radio" name="faq-accordion" defaultChecked />
+              <motion.div
+                className="collapse-title font-semibold"
+                whileHover={{ scale: 1.02 }}
+                transition={{ duration: 0.2 }}
+              >
+                {item.question}
+              </motion.div>
+              <motion.div
+                className="collapse-content text-sm"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.3, delay: 0.2 }}
+              >
+                {item.answer}
+              </motion.div>
+            </div>
+          </div>
+        </motion.div>
+      ))}
     </div>
+  </div>
   );
 };
 
