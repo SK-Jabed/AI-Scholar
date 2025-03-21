@@ -7,6 +7,7 @@ import KeyFeatures from "@/components/home/KeyFeatures";
 import PopularCourses from "@/components/home/PopularCourses";
 import TestimonialsSection from "@/components/home/TestimonialsSection";
 import Container from "@/components/shared/Container";
+import Faq from "@/components/home/Faq";
 
 export default function Home() {
   return (
@@ -35,6 +36,9 @@ export default function Home() {
 
         {/* Student Testimonials Section */}
         <TestimonialsSection />
+
+        {/* Frequently Asked Questions Section */}
+        <Faq />
       </Container>
     </div>
   );
