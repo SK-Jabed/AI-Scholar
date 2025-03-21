@@ -1,17 +1,17 @@
 "use client";
+import { Menu, X } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-import { Menu, X } from "lucide-react";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
   const links = [
     { name: "Home", href: "/" },
-    { name: "About", href: "/About" },
+    { name: "About", href: "/about" },
     { name: "Contact", href: "/contact" },
-    { name: "History", href: "/history" },
+    { name: "Dashboard", href: "/dashboard" },
     { name: "Services", href: "/services" },
     { name: "Projects", href: "/projects" },
     { name: "Blog", href: "/blog" },
@@ -25,18 +25,35 @@ const Navbar = () => {
       >
         Login
       </Link>
+
+      {/* login , logout, login with email and password handlers  */}
+
+      {/* <button onClick={() => doSocialLogin("google")}> google</button>
+      <button onClick={() => doSocialLogin("github")}> Github</button>
+      <button onClick={() => doLogout()}> Sign Out</button>
+      <button
+        onClick={() =>
+          doCredentialLogin({
+            email: "abc@gmail.com",
+            password: "145454",
+          })
+        }
+      >
+        {" "}
+        Credential
+      </button> */}
       <Link
         href="/register"
         className="bg-gradient-to-r from-gray-300 to-gray-400 text-gray-900 px-5 py-2 rounded-md shadow-md hover:scale-105 transition transform"
       >
-        Register
+       Register
       </Link>
     </div>
   );
 
   return (
     <header className="bg-white sticky top-0 z-50 mt-1.5">
-      <div className="mx-auto max-w-7xl px-6  md:py-4 lg:px-8">
+      <div className="mx-auto max-w-screen-2xl px-6 md:px-8 lg:px-24 py-2">
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
           <h1>

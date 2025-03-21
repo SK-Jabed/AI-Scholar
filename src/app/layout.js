@@ -11,6 +11,11 @@ const inter = Inter({
 export const metadata = {
   title: "AI Scholar",
   description: "This is an AI-powered Course Management System",
+  icons: {
+    icon: ["/favicon/favicon.ico?v=4"],
+    apple: ["/favicon/apple-touch-icon.png?v=4"],
+    shortcut: ["/favicon/apple-touch-icon.png"],
+  },
 };
 
 export default function RootLayout({ children }) {
@@ -22,11 +27,9 @@ export default function RootLayout({ children }) {
 
         {/* Main Content */}
         <CardSpotlight>
-          <main className="min-h-screen mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8 my-8">
-            {children}
-          </main>
+          <main className="min-h-screen">{children}</main>
         </CardSpotlight>
-        
+
         {/* Footer */}
         <Footer />
       </body>

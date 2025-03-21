@@ -1,7 +1,13 @@
+"use client";
 import { Star } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import img from "../../../public/webdevbeginners.jpg.webp";
+import img from "../../../public/assets/webdevbeginners.jpg.webp";
+import SectionTitle from "../shared/SectionTitle";
+import { motion } from "framer-motion";
+import "aos/dist/aos.css";
+import { useEffect } from "react";
+import AOS from "aos";
 
 const courses = [
   { title: "React & Next.js Mastery", rating: 4.9, students: "12,000+" },
@@ -13,42 +19,67 @@ const courses = [
 ];
 
 export default function PopularCourses() {
+  // Initialize AOS
+  useEffect(() => {
+    AOS.init({
+      duration: 800,
+      once: true,
+    });
+  }, []);
+
   return (
-    <section className="px-6 py-10">
-      <h2 className="text-2xl md:text-4xl font-bold text-center text-accent mb-8">
-        Popular Courses
-      </h2>
+    <section>
+      {/* Section Title with AOS */}
+      <div data-aos="fade-down" data-aos-delay="100">
+        <SectionTitle
+          title="Popular Courses"
+          subTitle={
+            "Explore our top-rated courses designed to boost your skills and knowledge. Learn from industry experts and achieve your goals with ease."
+          }
+        />
+      </div>
+
+      {/* Courses Grid with Framer Motion */}
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
         {courses.map((course, index) => (
-          <div
+          <motion.div
             key={index}
-            className="p-6 bg-white shadow-md rounded-lg hover:shadow-lg transition "
+            className="p-6 bg-white shadow-md rounded-lg hover:shadow-lg transition"
+            initial={{ opacity: 0, y: 50 }} // Initial animation state
+            whileInView={{ opacity: 1, y: 0 }} // Animation when in view
+            transition={{ duration: 0.5, delay: index * 0.2 }} // Staggered delay
+            viewport={{ once: true }} // Animate only once
           >
-            {/* image */}
+            {/* Image */}
             <div className="border rounded-md border-accent/20">
               <Image
                 src={img}
-                alt="curses"
+                alt="courses"
                 height={100}
                 width={300}
                 className="object-cover rounded-md"
               />
             </div>
 
-            <h3 className="text-xl font-semibold">{course.title}</h3>
+            {/* Course Title */}
+            <h3 className="text-xl font-semibold mt-4">{course.title}</h3>
+
+            {/* Rating and Students */}
             <div className="flex items-center mt-2">
               <Star size={20} className="text-yellow-500" />
               <span className="ml-2 font-medium">
                 {course.rating} ({course.students} Students)
               </span>
             </div>
+
+            {/* View Course Link */}
             <Link
               href={`/courses/${index}`}
               className="mt-4 inline-block text-blue-600 font-medium hover:underline"
             >
               View Course →
             </Link>
-          </div>
+          </motion.div>
         ))}
       </div>
     </section>

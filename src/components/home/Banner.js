@@ -3,18 +3,19 @@ import { Swiper, SwiperSlide } from "swiper/react";
 
 // Import Swiper styles
 import "swiper/css";
-import "swiper/css/pagination";
 import "swiper/css/navigation";
+import "swiper/css/pagination";
+
 // import required modules
-import { Autoplay, Pagination, Navigation } from "swiper/modules";
+import { Autoplay, Navigation, Pagination } from "swiper/modules";
 
 // import image
-import banner1 from "../../../public/banner1.jpg";
-import banner2 from "../../../public/banner2.jpg";
-import banner3 from "../../../public/banner3.jpg";
-import banner4 from "../../../public/banner4.jpg";
-import banner5 from "../../../public/banner5.jpg";
-import banner6 from "../../../public/banner6.jpg";
+import banner2 from "../../../public/banners/slider/banner2.jpg";
+import banner3 from "../../../public/banners/slider/banner3.jpg";
+import banner1 from "../../../public/banners/slider/banner1.jpg";
+import banner4 from "../../../public/banners/slider/banner4.jpg";
+import banner5 from "../../../public/banners/slider/banner5.jpg";
+import banner6 from "../../../public/banners/slider/banner6.jpg";
 import Slide from "../shared/Slide";
 
 const Banner = () => {

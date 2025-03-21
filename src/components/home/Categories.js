@@ -28,7 +28,7 @@ const categories = [
 const Categories = ({ onCategory, active }) => {
   return (
     <div className="col-span-12 md:col-span-3 bg-white p-6 shadow-md rounded-lg">
-      <h3 className="text-xl font-semibold text-gray-700 mb-4">Categories</h3>
+      <h3 className="text-xl font-semibold text-gray-700 mb-4">Categories →</h3>
       <div className="space-y-4">
         {categories.map((category, index) => (
           <button

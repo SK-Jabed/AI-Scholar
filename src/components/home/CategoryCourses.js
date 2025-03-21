@@ -1,4 +1,8 @@
-/* eslint-disable @next/next/no-img-element */
+"use client";
+import Image from "next/image";
+import img from "../../../public/assets/webdevbeginners.jpg.webp";
+import { motion } from "framer-motion";
+
 const courses = [
   {
     title: "Full-Stack Web Development",
@@ -43,16 +47,21 @@ const courses = [
     image: "https://source.unsplash.com/400x300/?ai,machine",
   },
 ];
+
 const CategoryCourses = () => {
   return (
-    <div className="col-span-12 md:col-span-9 grid grid-cols-1 sm:grid-cols-2  lg:grid-cols-3 gap-6">
+    <div className="col-span-12 md:col-span-9 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
       {courses.map((course, index) => (
-        <div
+        <motion.div
           key={index}
           className="bg-white shadow-lg rounded-lg overflow-hidden hover:shadow-xl transition"
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: index * 0.2 }}
+          viewport={{ once: true }}
         >
-          <img
-            src={course.image}
+          <Image
+            src={img}
             alt={course.title}
             className="w-full h-40 object-cover"
           />
@@ -64,12 +73,12 @@ const CategoryCourses = () => {
             <p className="text-primary font-bold mt-2">${course.price}</p>
           </div>
           <div className="p-4 bg-gray-100 flex justify-between items-center">
-            <button className="bg-primary text-white px-4 py-2 rounded-md hover:bg-primary-dark transition">
+            <button className="bg-accent/90 text-white px-4 py-2 cursor-pointer rounded-md hover:bg-accent transition">
               Enroll Now
             </button>
             <p className="text-sm text-gray-600">{course.duration} hrs</p>
           </div>
-        </div>
+        </motion.div>
       ))}
     </div>
   );

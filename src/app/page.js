@@ -1,30 +1,41 @@
+import AiBenefits from "@/components/home/AiBenefits";
+import TopInstructors from "@/components/home/TopInstructors";
 import Banner from "@/components/home/Banner";
 import ExploreCourseCategories from "@/components/home/ExploreCourseCategories";
 import HowItWorks from "@/components/home/HowItWorks";
+import KeyFeatures from "@/components/home/KeyFeatures";
 import PopularCourses from "@/components/home/PopularCourses";
-import KeyFeatures from "@/components/key_features/KeyFeatures";
-import TestimonialsSection from "@/components/testimonials/TestimonialsSection";
+import TestimonialsSection from "@/components/home/TestimonialsSection";
+import Container from "@/components/shared/Container";
 
 export default function Home() {
   return (
     <div>
-      {/* Hero Section */}
+      {/* Banner Section */}
       <Banner />
 
-      {/* How It Works Section */}
-      <HowItWorks />
+      <Container>
+        {/* How It Works Section */}
+        <HowItWorks />
 
-      {/* Key Features Section */}
-      <KeyFeatures />
+        {/* Benefits of AI section*/}
+        <AiBenefits />
 
-      {/* Course Categories Section */}
-      <ExploreCourseCategories />
+        {/* Key Features Section */}
+        <KeyFeatures />
 
-      {/* Popular Courses Section */}
-      <PopularCourses />
+        {/* Course Categories Section */}
+        <ExploreCourseCategories />
 
-      {/* Student Testimonials Section */}
-      <TestimonialsSection />
+        {/* Top Instructors section*/}
+        <TopInstructors />
+
+        {/* Popular Courses Section */}
+        <PopularCourses />
+
+        {/* Student Testimonials Section */}
+        <TestimonialsSection />
+      </Container>
     </div>
   );
 }

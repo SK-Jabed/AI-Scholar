@@ -6,24 +6,32 @@
 /* @plugin "tailwindcss-animate"; */
 
 .bg-dots-pattern {
-    background-image: radial-gradient(circle, rgba(59, 130, 246, 0.5) 1px, transparent 1px);
-    background-size: 15px 15px;
-    animation: dotAnimation 20s linear infinite;
+  background-image: radial-gradient(
+    circle,
+    rgba(59, 130, 246, 0.5) 1px,
+    transparent 1px
+  );
+  background-size: 15px 15px;
+  animation: dotAnimation 20s linear infinite;
+}
+@keyframes dotAnimation {
+  0% {
+    background-position: 0 0;
   }
-  @keyframes dotAnimation {
-    0% { background-position: 0 0; }
-    100% { background-position: 15px 15px; }
+  100% {
+    background-position: 15px 15px;
   }
+}
 :root {
-   --color-primary: #212A31;
-  --color-secondary: #2E3944;
-  --color-accent: #124E66;
-  --color-neutral: #748D92;
-  --color-light: #D3D9D4;
+  --color-primary: #212a31;
+  --color-secondary: #2e3944;
+  --color-accent: #124e66;
+  --color-neutral: #748d92;
+  --color-light: #d3d9d4;
 }
 
-.about{
-  background: url('../../public//about.jpg');
+.about {
+  background: url("/banners/about/about.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
