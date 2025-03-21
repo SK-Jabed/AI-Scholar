@@ -7,8 +7,8 @@ import Marquee from "react-fast-marquee";
 const ContactInfo = () => {
   return (
     <div>
-      <div className="w-full">
-        <div className=" p-8 shadow-sm shadow-accent ">
+      <div>
+        <div className="shadow-sm shadow-accent ">
           <h3 className="text-4xl font-bold text-center mb-6">Contact Info</h3>
           {/* <ul className="space-y-6">
            
