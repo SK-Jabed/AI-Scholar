@@ -8,8 +8,21 @@ export function cn(...inputs) {
 
 
 export const getUserByEmail=async(email)=>{
-// console.log({u: email})
-  const db = await getDatabase()
-  const user = await db.collection("users").findOne({ email });
+  const usersCollection = await getDatabase()
+  const user = await usersCollection.findOne({email});
 return user
+}
+
+
+export const createUser= async(userData)=>{
+  const usersCollection = await getDatabase()
+  const isUser = await getUserByEmail(userData.email)
+  let result
+  if(!isUser) {
+    result = await usersCollection.insertOne(userData)
+  }
+  else{
+    result = isUser
+  }
+  return result
 }
