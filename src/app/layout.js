@@ -1,8 +1,8 @@
+import Footer from "@/components/shared/Footer";
+import Navbar from "@/components/shared/Navbar";
+import { CardSpotlight } from "@/components/ui/CardSpotlight";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/shared/Navbar";
-import Footer from "@/components/shared/Footer";
-import { CardSpotlight } from "@/components/ui/CardSpotlight";
 
 const inter = Inter({
   subsets: ["latin"],

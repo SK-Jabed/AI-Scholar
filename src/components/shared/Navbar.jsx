@@ -19,7 +19,7 @@ const Navbar = () => {
     { name: "Services", href: "/services" },
     { name: "Projects", href: "/projects" },
     { name: "Blog", href: "/blog" },
-  ];
+  ]; 
 
   const authLink = (
     <div className="flex space-x-3">
@@ -57,7 +57,9 @@ const Navbar = () => {
 
   return (
     <header className="bg-white sticky top-0 z-50 mt-1.5">
-      <div className="mx-auto max-w-screen-2xl px-6 md:px-8 lg:px-24 py-2">
+
+      <div className="max-w-[2520px] mx-auto xl:px-28 lg:px-24 md:px-10 sm:px-4 px-6 py-2">
+
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
           <h1>

@@ -1,11 +1,11 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import { FaBookOpen, FaBrain, FaCertificate, FaChalkboardTeacher } from "react-icons/fa";
-import SectionTitle from "../shared/SectionTitle";
-import { motion } from "framer-motion";
-import { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import { motion } from "framer-motion";
+import { useEffect } from "react";
+import { FaBookOpen, FaBrain, FaCertificate, FaChalkboardTeacher } from "react-icons/fa";
+import SectionTitle from "../shared/SectionTitle";
 
 const steps = [
   {
