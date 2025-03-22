@@ -7,6 +7,10 @@ import { useState } from "react";
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
+  
+  if (pathname.includes("dashboard")) {
+    return null;
+  }
   const links = [
     { name: "Home", href: "/" },
     { name: "About", href: "/about" },
@@ -53,7 +57,9 @@ const Navbar = () => {
 
   return (
     <header className="bg-white sticky top-0 z-50 mt-1.5">
+
       <div className="max-w-[2520px] mx-auto xl:px-28 lg:px-24 md:px-10 sm:px-4 px-6 py-2">
+
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
           <h1>

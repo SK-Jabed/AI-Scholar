@@ -2,7 +2,9 @@ import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GithubProvider from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
+
 import { getUserByEmail } from "./utils";
+
 
 export const {
   handlers: { GET, POST },
@@ -21,9 +23,11 @@ export const {
         password: {},
       },
       authorize: async (credentials) => {
+
         if (!credentials) return null;
         try {
     const user = await getUserByEmail(credentials.email)
+
 
           if (user) {
             const isMatch = user?.password === credentials?.password;

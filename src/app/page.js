@@ -7,7 +7,9 @@ import KeyFeatures from "@/components/home/KeyFeatures";
 import PopularCourses from "@/components/home/PopularCourses";
 import TestimonialsSection from "@/components/home/TestimonialsSection";
 import Container from "@/components/shared/Container";
+
 import Faq from "@/components/home/Faq";
+
 
 export default function Home() {
   return (
@@ -18,6 +20,18 @@ export default function Home() {
       <Container>
         {/* How It Works Section */}
         <HowItWorks />
+
+    
+      {/*2. ToDo:  Key Features Section (Grid layout for main features)
+Student Testimonials Section (Carousel/grid for user reviews)- by Abdur Rahman  */}
+      <KeyFeatures />
+      {/* 3. toDo: Course Categories Section (Cards for different subjects)
+Popular Courses Section (Top-rated courses grid) -by Sushanto kumar
+ */}
+      {/* Course Categories */}
+      <CourseCategories />
+      {/* Popular Courses */}
+      <PopularCourses />
 
         {/* Benefits of AI section*/}
         <AiBenefits />
