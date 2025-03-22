@@ -20,7 +20,7 @@ export const POST = async (request) => {
   };
 
   // Update The DB
-  const result = await createUser(userData)
+  const result = await createUser(userData);
 
   return new NextResponse("User successfully created", {
     status: 201,
