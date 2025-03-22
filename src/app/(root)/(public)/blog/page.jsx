@@ -1,5 +1,6 @@
 import React from "react";
-import BlogArticle from "./blogArticle";
+import BlogArticle from "./BlogArticle";
+
 
 
 export default function Blog() {
