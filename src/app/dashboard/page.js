@@ -22,18 +22,15 @@ const DashboardPage = async () => {
         {session?.user?.email && session?.user?.name ? (
           <div className="flex items-center justify-center gap-2">
             Welcome, <h2>{session?.user?.name}</h2>
-   
-           {
-            session?.user?.image &&
-
-            <Image
-              src={session?.user?.image}
-              alt={session?.user?.name}
-              width={46}
-              height={46}
-              className="rounded-full"
-
-            />}
+            {session?.user?.image && (
+              <Image
+                src={session?.user?.image}
+                alt={session?.user?.name}
+                width={46}
+                height={46}
+                className="rounded-full"
+              />
+            )}
             <Logout />
           </div>
         ) : (
