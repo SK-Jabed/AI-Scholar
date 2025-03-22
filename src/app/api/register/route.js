@@ -3,9 +3,9 @@ import { NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
 
 export const POST = async (request) => {
-  const { name, email, password } = await request.json();
+  const { name, email, password, image, role } = await request.json();
 
-  console.log(name, email, password);
+  // console.log(name, email, password, image);
 
   // Create a DB Connection
 
@@ -17,6 +17,8 @@ export const POST = async (request) => {
     name,
     email,
     password: encryptedPassword,
+    image: image || "",
+    role: role || "student",
   };
 
   // Update The DB
