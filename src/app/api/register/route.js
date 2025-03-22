@@ -17,8 +17,6 @@ export const POST = async (request) => {
     name,
     email,
     password: encryptedPassword,
-    image: image || "",
-    role: role || "student",
   };
 
   // Update The DB
