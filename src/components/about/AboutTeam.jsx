@@ -1,9 +1,11 @@
 "use client";
 
-import * as motion from "motion/react-client";
 
 import React, { useEffect, useRef, useState } from "react";
 import "animate.css";
+
+import { motion } from "motion/react"
+
 
 const AboutTeam = () => {
   const containerRef = useRef(null);
@@ -47,7 +49,7 @@ const AboutTeam = () => {
         <div className="mx-auto text-center">
           <h2 className="text-4xl md:text-5xl font-bold mb-10 text-primary">Meet Our Team</h2>
 
-          {/* Team Members */}
+          
           <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6">
             {members.map((member, index) => (
               <div
