@@ -1,24 +1,39 @@
 "use client";
 
 import SocialLogin from "@/components/shared/SocialLogin";
+import { useRouter } from "next/navigation";
 
 const Register = () => {
+  const router = useRouter();
 
-const formHandler =async(e)=>{
-    e.preventDefault()
-    const formData = new FormData(e.target)
-    const userData = {}
-  formData.forEach((value, key)=> {userData[key] = value})
-    const data = await fetch("/api/register", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      }, 
-      body: JSON.stringify(userData)
-    })
+  const handleSubmit = async (event) => {
+    event.preventDefault();
 
-    console.log({data})
+    try {
+      const formData = new FormData(event.currentTarget);
+
+      const name = formData.get("name")
+      const email = formData.get("email")
+      const password = formData.get("password")
+
+      const response = await fetch(`/api/register`, {
+        method: "POST",
+        headers: {
+          "content-type": "application/json"
+        },
+        body: JSON.stringify({
+          name,
+          email, 
+          password
+        })
+      })
+
+      response.status === 201 && router.push("/login")
+    } catch (err) {
+      console.error(err.message);
+    }
   }
+
   return (
     <div className="flex items-center justify-center min-h-screen">
       <div className="bg-white border border-blue-500 rounded p-8 w-full max-w-md">
@@ -27,7 +42,7 @@ const formHandler =async(e)=>{
         </h2>
         <p className="text-gray-500 text-center mb-6">Join us today!</p>
 
-        <form onSubmit={formHandler} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label className="block text-gray-600 text-sm font-medium mb-1">
               Full Name
@@ -35,7 +50,7 @@ const formHandler =async(e)=>{
             <input
               type="text"
               name="name"
-              id="text"
+              id="name"
               placeholder="Enter your name"
               className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               required
@@ -72,7 +87,7 @@ const formHandler =async(e)=>{
 
           <button
             type="submit"
-            className="w-full bg-blue-600 text-white font-semibold py-3 rounded-lg hover:bg-blue-700 transition duration-300"
+            className="w-full bg-blue-600 text-white font-semibold py-3 rounded-lg hover:bg-blue-700 transition duration-300 cursor-pointer"
           >
             Register
           </button>
