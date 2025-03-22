@@ -1,9 +1,8 @@
 "use client";
 import { Swiper, SwiperSlide } from "swiper/react";
-
-// Import Swiper styles
 import "swiper/css";
 import "swiper/css/navigation";
+
 import "swiper/css/pagination";
 
 // import required modules
@@ -16,10 +15,12 @@ import banner1 from "../../../public/banners/slider/banner1.jpg";
 import banner4 from "../../../public/banners/slider/banner4.jpg";
 import banner5 from "../../../public/banners/slider/banner5.jpg";
 import banner6 from "../../../public/banners/slider/banner6.jpg";
+
 import Slide from "../shared/Slide";
 
 const Banner = () => {
   return (
+
     <div className="z-10">
       <Swiper
         spaceBetween={30}
@@ -78,6 +79,7 @@ const Banner = () => {
           ></Slide>
         </SwiperSlide>
       </Swiper>
+
     </div>
   );
 };
