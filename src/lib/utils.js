@@ -14,15 +14,22 @@ return user
 }
 
 
-export const createUser= async(userData)=>{
-  const usersCollection = await getDatabase()
-  const isUser = await getUserByEmail(userData.email)
-  let result
-  if(!isUser) {
-    result = await usersCollection.insertOne(userData)
+export const createUser = async (userData) => {
+  // console.log({ userData});
+
+  const usersCollection = await getDatabase(); // Get the User model
+  const isUser = await getUserByEmail(userData.email);
+
+  let result;
+
+  if (!isUser) {
+
+    result = await usersCollection.create(userData); // Save the user in DB
+
+  } else {
+    result = isUser; // If user exists, return existing data
+
   }
-  else{
-    result = isUser
-  }
-  return result
-}
+
+  return result; // Return the actual saved user
+};
