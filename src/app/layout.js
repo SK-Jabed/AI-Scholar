@@ -1,5 +1,3 @@
-import Footer from "@/components/shared/Footer";
-import Navbar from "@/components/shared/Navbar";
 import { CardSpotlight } from "@/components/ui/CardSpotlight";
 import { Inter } from "next/font/google";
 import "./globals.css";
@@ -28,7 +26,7 @@ export default function RootLayout({ children }) {
         {/* <Navbar /> */}
 
         {/* Main Content */}
-<<<<<<< HEAD
+
         <CardSpotlight>
           <ThemeProvider>
             <SidebarProvider>
@@ -36,14 +34,9 @@ export default function RootLayout({ children }) {
             </SidebarProvider>
           </ThemeProvider>
         </CardSpotlight>
-<<<<<<< HEAD
 
-=======
-        <main className="min-h-screen my-8">{children}</main>
->>>>>>> d81d0ac ( conflict request)
-=======
->>>>>>> eae7c02 ([ADDED]: Implement layout components, sidebar functionality, and new pages for contact and about sections)
-        {/* Footer */}
+
+
         {/* <Footer /> */}
       </body>
     </html>
