@@ -1,8 +1,8 @@
+import { CardSpotlight } from "@/components/ui/CardSpotlight";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/shared/Navbar";
-import Footer from "@/components/shared/Footer";
-import { CardSpotlight } from "@/components/ui/CardSpotlight";
+import { ThemeProvider } from "@/context/ThemeContext";
+import { SidebarProvider } from "@/context/SidebarContext";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -23,15 +23,21 @@ export default function RootLayout({ children }) {
     <html lang="en" data-theme="light" suppressHydrationWarning>
       <body className={`${inter.className}`}>
         {/* Header */}
-        <Navbar />
+        {/* <Navbar /> */}
 
         {/* Main Content */}
+
         <CardSpotlight>
-          <main className="min-h-screen">{children}</main>
+          <ThemeProvider>
+            <SidebarProvider>
+              <main className="min-h-screen">{children}</main>
+            </SidebarProvider>
+          </ThemeProvider>
         </CardSpotlight>
 
-        {/* Footer */}
-        <Footer />
+
+
+        {/* <Footer /> */}
       </body>
     </html>
   );

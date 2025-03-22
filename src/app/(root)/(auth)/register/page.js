@@ -1,3 +1,4 @@
+
 "use client";
 
 import SocialLogin from "@/components/shared/SocialLogin";
@@ -54,10 +55,12 @@ const Register = () => {
               placeholder="Enter your name"
               className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               required
+
             />
           </div>
 
           <div>
+
             <label className="block text-gray-600 text-sm font-medium mb-1">
               Email
             </label>
@@ -68,10 +71,12 @@ const Register = () => {
               placeholder="abc@gmail.com"
               className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               required
+
             />
           </div>
 
           <div>
+  
             <label className="block text-gray-600 text-sm font-medium mb-1">
               Password
             </label>
@@ -88,6 +93,7 @@ const Register = () => {
           <button
             type="submit"
             className="w-full bg-blue-600 text-white font-semibold py-3 rounded-lg hover:bg-blue-700 transition duration-300 cursor-pointer"
+
           >
             Register
           </button>
@@ -100,6 +106,7 @@ const Register = () => {
         </div>
 
         {/* Social Login Buttons */}
+
         <SocialLogin />
 
         <p className="text-sm text-gray-500 text-center mt-4">
@@ -107,6 +114,7 @@ const Register = () => {
           <a href="/login" className="text-blue-500 hover:underline">
             LogIn
           </a>
+
         </p>
       </div>
     </div>
