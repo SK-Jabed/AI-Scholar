@@ -7,7 +7,7 @@ export default function Logout() {
     <button
       type="submit"
       onClick={doLogout}
-      className="block py-3 px-5 w-full text-red-600 hover:bg-red-100 hover:text-red-900 transition-colors duration-200 cursor-pointer"
+      className="py-3 px-7 border-2 rounded-xl bg-red-500 text-white hover:bg-red-700 transition-colors duration-200 cursor-pointer"
     >
       <div className="flex items-center gap-2 pl-2">
         <span>Logout</span>
