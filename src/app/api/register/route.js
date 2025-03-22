@@ -2,9 +2,9 @@ import { createUser } from "@/lib/utils";
 import { NextResponse } from "next/server";
 
 export const POST = async (request) => {
-  const { name, email, password } = await request.json();
+  const { name, email, password,image,role } = await request.json();
 
-  console.log(name, email, password);
+  // console.log(name, email, password, image);
 
   // Create a DB Connection
 
@@ -13,7 +13,7 @@ export const POST = async (request) => {
 
   // Form a DB Payload
   const userData = {
-    name, email, password
+    name, email, password, image: image || "", role: role ||"student"
   }
 
   // Update The DB
