@@ -4,7 +4,7 @@ export const middleware = async (request) => {
   const { nextUrl } = request;
   const token = await getToken({
     req: request,
-    secret: process.env.AUTH_SECRET,
+    secret:process.env.NEXTAUTH_SECRET,
   });
   const isAuthenticated = !!token;
 
