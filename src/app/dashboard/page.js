@@ -16,7 +16,7 @@ const DashboardPage = async () => {
   return (
     <>
       <h1 className="text-3xl font-bold text-center">
-        Welcome to the Dashboard
+        Welcome to the Dashboard of AI Scholar
       </h1>
       <div className="text-center mt-2 font-semibold text-accent">
         {session?.user?.email && session?.user?.name ? (
