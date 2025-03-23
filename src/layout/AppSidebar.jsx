@@ -39,7 +39,7 @@ const navItems = [
   {
     icon: <CalendarHeartIcon />,
     name: "All Users",
-    path: "/users",
+    path: "/dashboard/users",
   },
   {
     icon: <CalendarHeartIcon />,
