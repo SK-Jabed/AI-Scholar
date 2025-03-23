@@ -11,6 +11,7 @@ import {
   ChevronDownIcon,
   FlipHorizontal,
   GridIcon,
+  LayoutDashboardIcon,
   ListIcon,
   PackageIcon,
   PieChartIcon,
@@ -21,14 +22,34 @@ import {
 
 const navItems = [
   {
-    icon: <GridIcon />,
+    icon: <LayoutDashboardIcon />,
     name: "Dashboard",
-    subItems: [{ name: "Ecommerce", path: "/", pro: false }],
+    path: "/dashboard",
   },
   {
     icon: <CalendarHeartIcon />,
-    name: "Calendar",
-    path: "/calendar",
+    name: "Add a Course",
+    path: "/add-course",
+  },
+  {
+    icon: <CalendarHeartIcon />,
+    name: "All Instructors",
+    path: "/instructors",
+  },
+  {
+    icon: <CalendarHeartIcon />,
+    name: "All Users",
+    path: "/users",
+  },
+  {
+    icon: <CalendarHeartIcon />,
+    name: "My Courses",
+    path: "/courses",
+  },
+  {
+    icon: <CalendarHeartIcon />,
+    name: "Home",
+    path: "/",
   },
   {
     icon: <UserCircleIcon />,
@@ -41,8 +62,8 @@ const navItems = [
     name: "Pages",
     icon: <PackageIcon />,
     subItems: [
-      { name: "Blank Page", path: "/blank", pro: false },
-      { name: "404 Error", path: "/error-404", pro: false },
+      { name: "Services", path: "/services", pro: false },
+      { name: "404 Error", path: "/not-found", pro: false },
     ],
   },
 ];
@@ -56,13 +77,13 @@ const AppSidebar = () => {
   const pathname = usePathname();
 
   const renderMenuItems = (navItems, menuType) => (
-    <ul className="flex flex-col gap-4">
+    <ul className="flex flex-col gap-6">
       {navItems.map((nav, index) => (
         <li key={nav.name}>
           {nav.subItems ? (
             <button
               onClick={() => handleSubmenuToggle(index, menuType)}
-              className={`menu-item group  ${
+              className={`menu-item group ${
                 openSubmenu?.type === menuType && openSubmenu?.index === index
                   ? "menu-item-active"
                   : "menu-item-inactive"
