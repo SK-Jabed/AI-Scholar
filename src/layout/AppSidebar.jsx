@@ -352,7 +352,7 @@ const AppSidebar = () => {
                 {isExpanded || isHovered || isMobileOpen ? (
                   "Others"
                 ) : (
-                  <HorizontaLDots />
+                  ""
                 )}
               </h2>
               {renderMenuItems(othersItems, "others")}
