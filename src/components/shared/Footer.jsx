@@ -1,11 +1,10 @@
 import { FaGithub, FaInstagram, FaLinkedinIn, FaTwitter } from "react-icons/fa";
 
-
 const Footer = () => {
   const Year = new Date().getFullYear();
 
   return (
-    <footer className="relative bg-black text-white border">
+    <footer className="relative bg-black text-white border mt-20">
       {/* Wave Border */}
       <div className="absolute top-0 left-0 w-full overflow-hidden">
         <svg
@@ -89,47 +88,35 @@ const Footer = () => {
             <li>
               <a href="#" className="text-gray-300 hover:text-blue-500">
                 Home
-
               </a>
             </li>
             <li>
               <a href="#" className="text-gray-300 hover:text-blue-500">
-
                 Courses
-
               </a>
             </li>
             <li>
               <a href="#" className="text-gray-300 hover:text-blue-500">
-
                 About
-
               </a>
             </li>
             <li>
               <a href="#" className="text-gray-300 hover:text-blue-500">
-
                 Contact
-
               </a>
             </li>
             <li>
               <a href="#" className="text-gray-300 hover:text-blue-500">
-
                 Blog
-
               </a>
             </li>
             <li>
               <a href="#" className="text-gray-300 hover:text-blue-500">
-
                 Features
-
               </a>
             </li>
           </ul>
         </div>
-
 
         {/* Column 3: Company */}
         <div>
@@ -138,47 +125,35 @@ const Footer = () => {
             <li>
               <a href="#" className="text-gray-300 hover:text-blue-500">
                 About
-
               </a>
             </li>
             <li>
               <a href="#" className="text-gray-300 hover:text-blue-500">
-
                 Contact
-
               </a>
             </li>
             <li>
               <a href="#" className="text-gray-300 hover:text-blue-500">
-
                 Blog
-
               </a>
             </li>
             <li>
               <a href="#" className="text-gray-300 hover:text-blue-500">
-
                 Reviews
-
               </a>
             </li>
             <li>
               <a href="#" className="text-gray-300 hover:text-blue-500">
-
                 Careers
-
               </a>
             </li>
             <li>
               <a href="#" className="text-gray-300 hover:text-blue-500">
-
                 Pricing
-
               </a>
             </li>
           </ul>
         </div>
-
 
         {/* Column 4: Features */}
         <div>
@@ -187,47 +162,35 @@ const Footer = () => {
             <li>
               <a href="#" className="text-gray-300 hover:text-blue-500">
                 Course Management
-
               </a>
             </li>
             <li>
               <a href="#" className="text-gray-300 hover:text-blue-500">
-
                 User Management
-
               </a>
             </li>
             <li>
               <a href="#" className="text-gray-300 hover:text-blue-500">
-
                 Course Recommendation
-
               </a>
             </li>
             <li>
               <a href="#" className="text-gray-300 hover:text-blue-500">
-
                 Progress Tracker
-
               </a>
             </li>
             <li>
               <a href="#" className="text-gray-300 hover:text-blue-500">
-
                 AI Assistant
-
               </a>
             </li>
             <li>
               <a href="#" className="text-gray-300 hover:text-blue-500">
-
                 Integrations
-
               </a>
             </li>
           </ul>
         </div>
-
 
         {/* Column 5: Compliance */}
         <div>

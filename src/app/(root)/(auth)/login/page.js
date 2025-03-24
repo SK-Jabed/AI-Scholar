@@ -16,7 +16,6 @@ const Login = () => {
     try {
       const formData = new FormData(event.target);
 
-   
       const response = await doCredentialLogin(formData);
 
       if (response.error) {
@@ -91,7 +90,6 @@ const Login = () => {
         <SocialLogin />
 
         <p className="text-sm text-gray-500 text-center mt-4">
-
           New to AI Scholar?{" "}
           <Link href="/register" className="text-blue-500 hover:underline">
             Register

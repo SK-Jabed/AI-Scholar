@@ -1,4 +1,3 @@
-
 "use client";
 
 import SocialLogin from "@/components/shared/SocialLogin";
@@ -13,27 +12,27 @@ const Register = () => {
     try {
       const formData = new FormData(event.currentTarget);
 
-      const name = formData.get("name")
-      const email = formData.get("email")
-      const password = formData.get("password")
+      const name = formData.get("name");
+      const email = formData.get("email");
+      const password = formData.get("password");
 
       const response = await fetch(`/api/register`, {
         method: "POST",
         headers: {
-          "content-type": "application/json"
+          "content-type": "application/json",
         },
         body: JSON.stringify({
           name,
-          email, 
-          password
-        })
-      })
+          email,
+          password,
+        }),
+      });
 
-      response.status === 201 && router.push("/login")
+      response.status === 201 && router.push("/login");
     } catch (err) {
       console.error(err.message);
     }
-  }
+  };
 
   return (
     <div className="flex items-center justify-center min-h-screen">
@@ -55,12 +54,10 @@ const Register = () => {
               placeholder="Enter your name"
               className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               required
-
             />
           </div>
 
           <div>
-
             <label className="block text-gray-600 text-sm font-medium mb-1">
               Email
             </label>
@@ -71,12 +68,10 @@ const Register = () => {
               placeholder="abc@gmail.com"
               className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               required
-
             />
           </div>
 
           <div>
-  
             <label className="block text-gray-600 text-sm font-medium mb-1">
               Password
             </label>
@@ -93,7 +88,6 @@ const Register = () => {
           <button
             type="submit"
             className="w-full bg-blue-600 text-white font-semibold py-3 rounded-lg hover:bg-blue-700 transition duration-300 cursor-pointer"
-
           >
             Register
           </button>
@@ -114,7 +108,6 @@ const Register = () => {
           <a href="/login" className="text-blue-500 hover:underline">
             LogIn
           </a>
-
         </p>
       </div>
     </div>
