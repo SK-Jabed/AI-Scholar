@@ -5,7 +5,7 @@
 
 /* @plugin "tailwindcss-animate"; */
 
-.bg-dots-pattern {
+/* .bg-dots-pattern {
   background-image: radial-gradient(
     circle,
     rgba(59, 130, 246, 0.5) 1px,
@@ -21,7 +21,7 @@
   100% {
     background-position: 15px 15px;
   }
-}
+} */
 :root {
   --color-primary: #212a31;
   --color-secondary: #2e3944;
