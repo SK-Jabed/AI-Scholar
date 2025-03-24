@@ -1,8 +1,6 @@
 import React from "react";
 import BlogArticle from "./BlogArticle";
 
-
-
 export default function Blog() {
   return (
     <div className="p-6">
@@ -15,7 +13,7 @@ export default function Blog() {
         </p>
       </div>
       <div>
-        <BlogArticle/>
+        <BlogArticle />
       </div>
     </div>
   );
