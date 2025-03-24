@@ -1,70 +1,46 @@
 "use client";
 import Image from "next/image";
-import img from "../../../public/assets/webdevbeginners.jpg.webp";
 import { motion } from "framer-motion";
-
-const courses = [
-  {
-    title: "Full-Stack Web Development",
-    instructor: "John Doe",
-    price: 49.99,
-    duration: 40,
-    image: "https://source.unsplash.com/400x300/?technology,code",
-  },
-  {
-    title: "UI/UX Design Fundamentals",
-    instructor: "Jane Smith",
-    price: 29.99,
-    duration: 25,
-    image: "https://source.unsplash.com/400x300/?design,ui",
-  },
-  {
-    title: "Data Science with Python",
-    instructor: "Alice Johnson",
-    price: 59.99,
-    duration: 50,
-    image: "https://source.unsplash.com/400x300/?data,science",
-  },
-  {
-    title: "Digital Marketing Strategies",
-    instructor: "Robert Brown",
-    price: 39.99,
-    duration: 30,
-    image: "https://source.unsplash.com/400x300/?marketing,digital",
-  },
-  {
-    title: "Cybersecurity Essentials",
-    instructor: "Michael Scott",
-    price: 44.99,
-    duration: 35,
-    image: "https://source.unsplash.com/400x300/?security,cyber",
-  },
-  {
-    title: "Artificial Intelligence & Machine Learning",
-    instructor: "Sarah Connor",
-    price: 69.99,
-    duration: 60,
-    image: "https://source.unsplash.com/400x300/?ai,machine",
-  },
-];
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 const CategoryCourses = () => {
+  const [courses, setCourses] = useState([]);
+
+  useEffect(() => {
+    const dataFetch = async () => {
+      try {
+        const res = await axios.get('http://localhost:5000/courses');
+        setCourses(res.data.data || []);
+      } catch (error) {
+        console.error("Error fetching courses:", error);
+        setCourses([]);
+      }
+    };
+    dataFetch();
+  }, []);
+
   return (
     <div className="col-span-12 md:col-span-9 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
       {courses.map((course, index) => (
         <motion.div
-          key={index}
+          key={course._id || index} 
           className="bg-white shadow-lg rounded-lg overflow-hidden hover:shadow-xl transition"
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: index * 0.2 }}
-          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: index * 0.1 }}
+          viewport={{ once: true, margin: "0px 0px -100px 0px" }} 
         >
-          <Image
-            src={img}
-            alt={course.title}
-            className="w-full h-40 object-cover"
-          />
+          <div className="relative w-full h-[250px]">
+            <Image
+              src={course?.image || '/default-course-image.jpg'} 
+              alt={course.title || 'Course image'}
+              fill
+              className="object-cover"
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              priority={index < 3} 
+            />
+          </div>
           <div className="p-4">
             <h3 className="text-lg font-semibold text-gray-800 truncate">
               {course.title}
