@@ -1,5 +1,4 @@
 "use client";
-
 import Container from "@/components/shared/Container";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";

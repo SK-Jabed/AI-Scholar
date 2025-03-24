@@ -58,7 +58,6 @@ export default function Error({ error, reset }) {
             {error.message}
           </pre>
         </details>
-
         {/* Retry Button */}
         <motion.button
           onClick={() => reset()}
@@ -68,7 +67,6 @@ export default function Error({ error, reset }) {
         >
           Try Again
         </motion.button>
-
         {/* Home Button */}
         <motion.button
           whileHover={{ scale: 1.05 }}
