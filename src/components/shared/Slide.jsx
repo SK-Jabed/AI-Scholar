@@ -3,7 +3,7 @@ import Link from "next/link";
 
 const Slide = ({ img, text, title }) => {
   return (
-    <div className="relative h-[400px] md:h-[300px] w-full ">
+    <div className="relative h-[400px] md:h-[550px] w-full ">
       <Image
         src={img}
         alt={title}

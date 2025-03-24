@@ -1,43 +1,70 @@
-
-// import { EcommerceMetrics } from "@/components/ecommerce/EcommerceMetrics";
-// import React from "react";
-// import MonthlyTarget from "@/components/ecommerce/MonthlyTarget";
-// import MonthlySalesChart from "@/components/ecommerce/MonthlySalesChart";
-// import StatisticsChart from "@/components/ecommerce/StatisticsChart";
-// import RecentOrders from "@/components/ecommerce/RecentOrders";
-// import DemographicCard from "@/components/ecommerce/DemographicCard";
+import Logout from "@/components/shared/Logout";
+import { auth } from "@/lib/auth";
+import Image from "next/image";
+import { redirect } from "next/navigation";
 
 export const metadata = {
-  title:
-    "Next.js E-commerce Dashboard | TailAdmin - Next.js Dashboard Template",
-  description: "This is Next.js Home for TailAdmin Dashboard Template",
+  title: "Dashboard | Home",
+  description: " Dashboard of AI Scholar",
 };
 
-export default function Ecommerce() {
+const DashboardPage = async () => {
+  const session = await auth();
+
+  if (!session?.user) redirect("/login");
+
   return (
-    // <div className="grid grid-cols-12 gap-4 md:gap-6">
-    //   <div className="col-span-12 space-y-6 xl:col-span-7 ">
-    //     {/* <EcommerceMetrics /> */}
-
-    //     {/* <MonthlySalesChart /> */}
-    //   </div>
-
-    //   <div className="col-span-12 xl:col-span-5">
-    //     {/* <MonthlyTarget /> */}
-    //   </div>
-
-    //   <div className="col-span-12">
-    //     {/* <StatisticsChart /> */}
-    //   </div>
-
-    //   <div className="col-span-12 xl:col-span-5">
-    //     {/* <DemographicCard /> */}
-    //   </div>
-
-    //   <div className="col-span-12 xl:col-span-7">
-    //     {/* <RecentOrders /> */}
-    //   </div>
-    // </div>
-    <h2>This is Dashboard</h2>
+    <>
+      <h1 className="text-3xl font-bold text-center">
+        Welcome to the Dashboard of AI Scholar
+      </h1>
+      <div className="text-center mt-2 font-semibold text-accent">
+        {session?.user?.email && session?.user?.name ? (
+          <div className="flex items-center justify-center gap-2">
+            Welcome, <h2>{session?.user?.name}</h2>
+            {session?.user?.image && (
+              <Image
+                src={session?.user?.image}
+                alt={session?.user?.name}
+                width={46}
+                height={46}
+                className="rounded-full"
+              />
+            )}
+            <Logout />
+          </div>
+        ) : (
+          <h2>Welcome, {session?.user?.email}</h2>
+        )}
+      </div>
+      <div className="grid gap-6 grid-cols-2 grid-rows-2 p-8">
+        <div className="bg-white p-8 rounded-lg shadow-lg">
+          <h2 className="text-2xl font-semibold text-gray-800">Dashboard</h2>
+          <p className="mt-4 text-gray-600">
+            This is the dashboard of AI Scholar.
+          </p>
+        </div>
+        <div className="bg-white p-8 rounded-lg shadow-lg">
+          <h2 className="text-2xl font-semibold text-gray-800">Dashboard</h2>
+          <p className="mt-4 text-gray-600">
+            This is the dashboard of AI Scholar.
+          </p>
+        </div>
+        <div className="bg-white p-8 rounded-lg shadow-lg">
+          <h2 className="text-2xl font-semibold text-gray-800">Dashboard</h2>
+          <p className="mt-4 text-gray-600">
+            This is the dashboard of AI Scholar.
+          </p>
+        </div>
+        <div className="bg-white p-8 rounded-lg shadow-lg">
+          <h2 className="text-2xl font-semibold text-gray-800">Dashboard</h2>
+          <p className="mt-4 text-gray-600">
+            This is the dashboard of AI Scholar.
+          </p>
+        </div>
+      </div>
+    </>
   );
-}
+};
+
+export default DashboardPage;
