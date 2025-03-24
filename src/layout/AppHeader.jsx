@@ -83,8 +83,11 @@ const AppHeader = () => {
             {/* Cross Icon */}
           </button>
 
-          <Link href="/" className="lg:hidden">
-            LOGO
+          <Link
+            href="/"
+            className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-sky-500 to-indigo-500 lg:hidden"
+          >
+            AI Scholar
           </Link>
 
           <button
@@ -152,11 +155,11 @@ const AppHeader = () => {
             <ThemeToggleButton />
             {/* <!-- Dark Mode Toggler --> */}
 
-            <NotificationDropdown /> 
+            <NotificationDropdown />
             {/* <!-- Notification Menu Area --> */}
           </div>
           {/* <!-- User Area --> */}
-          <UserDropdown /> 
+          <UserDropdown />
         </div>
       </div>
     </header>
