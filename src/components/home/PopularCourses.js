@@ -1,24 +1,17 @@
 "use client";
-import { Star } from "lucide-react";
+import { Star, StarHalf } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import img from "../../../public/assets/webdevbeginners.jpg.webp";
 import SectionTitle from "../shared/SectionTitle";
 import { motion } from "framer-motion";
 import "aos/dist/aos.css";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import AOS from "aos";
-
-const courses = [
-  { title: "React & Next.js Mastery", rating: 4.9, students: "12,000+" },
-  { title: "Python for Data Science", rating: 4.8, students: "9,500+" },
-  { title: "AI & Machine Learning", rating: 4.7, students: "8,200+" },
-  { title: "Graphic Design Fundamentals", rating: 4.6, students: "7,000+" },
-  { title: "Digital Marketing Pro", rating: 4.5, students: "6,500+" },
-  { title: "Cybersecurity Essentials", rating: 4.4, students: "5,800+" },
-];
+import axios from "axios";
 
 export default function PopularCourses() {
+  const [popularCourses, setPopularCourses] = useState([]);
+
   // Initialize AOS
   useEffect(() => {
     AOS.init({
@@ -26,6 +19,44 @@ export default function PopularCourses() {
       once: true,
     });
   }, []);
+
+  useEffect(() => {
+    const dataFetch = async () => {
+      try {
+        const res = await axios.get('http://localhost:5000/courses');
+        setPopularCourses(res.data.data || []);
+      } catch (error) {
+        console.error("Error fetching courses:", error);
+        setPopularCourses([]);
+      }
+    };
+    dataFetch();
+  }, []);
+
+  // Function to render star ratings
+  const renderStars = (rating) => {
+    const stars = [];
+    const fullStars = Math.floor(rating);
+    const hasHalfStar = rating % 1 >= 0.5;
+    const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
+
+    // Full stars
+    for (let i = 0; i < fullStars; i++) {
+      stars.push(<Star key={`full-${i}`} size={20} className="text-yellow-500 fill-yellow-500" />);
+    }
+
+    // Half star
+    if (hasHalfStar) {
+      stars.push(<StarHalf key="half" size={20} className="text-yellow-500 fill-yellow-500" />);
+    }
+
+    // Empty stars
+    for (let i = 0; i < emptyStars; i++) {
+      stars.push(<Star key={`empty-${i}`} size={20} className="text-gray-300" />);
+    }
+
+    return stars;
+  };
 
   return (
     <section>
@@ -41,23 +72,24 @@ export default function PopularCourses() {
 
       {/* Courses Grid with Framer Motion */}
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
-        {courses.map((course, index) => (
+        {popularCourses.map((course, index) => (
           <motion.div
-            key={index}
+            key={course._id || index}
             className="p-6 bg-white shadow-md rounded-lg hover:shadow-lg transition"
-            initial={{ opacity: 0, y: 50 }} // Initial animation state
-            whileInView={{ opacity: 1, y: 0 }} // Animation when in view
-            transition={{ duration: 0.5, delay: index * 0.2 }} // Staggered delay
-            viewport={{ once: true }} // Animate only once
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: index * 0.2 }}
+            viewport={{ once: true }}
           >
             {/* Image */}
-            <div className="border rounded-md border-accent/20">
+            <div className="relative w-full h-[250px] rounded-lg overflow-hidden">
               <Image
-                src={img}
-                alt="courses"
-                height={100}
-                width={300}
-                className="object-cover rounded-md"
+                src={course?.image || '/default-course-image.jpg'}
+                alt={course.title || 'Course image'}
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                priority={index < 3}
               />
             </div>
 
@@ -65,16 +97,21 @@ export default function PopularCourses() {
             <h3 className="text-xl font-semibold mt-4">{course.title}</h3>
 
             {/* Rating and Students */}
-            <div className="flex items-center mt-2">
-              <Star size={20} className="text-yellow-500" />
-              <span className="ml-2 font-medium">
-                {course.rating} ({course.students} Students)
+            <div className="flex items-center mt-2 gap-1">
+              {renderStars(course.rating || 0)}
+              <span className="ml-2 text-sm text-gray-600">
+                ({course.students || 0} students)
               </span>
+            </div>
+
+            {/* Price */}
+            <div className="mt-2 text-lg font-bold text-gray-800">
+              ${course.price || 0}
             </div>
 
             {/* View Course Link */}
             <Link
-              href={`/courses/${index}`}
+              href={`/courses/${course._id || index}`}
               className="mt-4 inline-block text-blue-600 font-medium hover:underline"
             >
               View Course →

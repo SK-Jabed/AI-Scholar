@@ -1,16 +1,15 @@
-import Footer from "@/components/shared/Footer"
-import Navbar from "@/components/shared/Navbar"
+import Footer from "@/components/shared/Footer";
+import Navbar from "@/components/shared/Navbar";
 
-
-const layout = ({children}) => {
+const layout = ({ children }) => {
   return (
     <div>
-        <Navbar />
-        {/* Main Content */}
-        {children}
-        <Footer />
+      <Navbar />
+      {/* Main Content */}
+      {children}
+      <Footer />
     </div>
-  )
-}
+  );
+};
 
-export default layout
+export default layout;
