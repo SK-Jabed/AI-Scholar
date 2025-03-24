@@ -2,7 +2,7 @@ import React from 'react';
 
 const loading = () => {
   return (
-    <div className="w-full flex items-center justify-center min-h-[calc(100vh-306px)]">
+    <div className="w-full flex items-center justify-center min-h-[calc(100vh-350px)]">
       <div
         aria-label="Loading..."
         role="status"
