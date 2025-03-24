@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useCallback } from "react";
+import React, { useCallback } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useSidebar } from "../context/SidebarContext";
@@ -10,13 +10,8 @@ import {
   UserCircleIcon,
   SettingsIcon,
   FileTextIcon,
-  CalendarIcon,
   HomeIcon,
-  MessageSquareIcon,
   LockIcon,
-  LogOutIcon,
-  Users2Icon,
-  UserCogIcon,
   UserCircle2Icon,
   PlusCircleIcon,
 } from "lucide-react";
@@ -47,7 +42,7 @@ const navItems = [
     path: "/dashboard/add-course",
     roles: ["admin", "instructor", "user"],
   },
-  
+
   {
     icon: <UsersIcon className="w-5 h-5" />,
     name: "Users",
@@ -119,7 +114,11 @@ const AppSidebar = () => {
                       ? "bg-blue-50 dark:bg-blue-900 text-blue-600 dark:text-blue-300"
                       : "hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-300"
                   }
-                  ${!isExpanded && !isHovered ? "justify-center" : "justify-start"}`}
+                  ${
+                    !isExpanded && !isHovered
+                      ? "justify-center"
+                      : "justify-start"
+                  }`}
               >
                 <span>{item.icon}</span>
                 {(isExpanded || isHovered || isMobileOpen) && (
@@ -144,7 +143,9 @@ const AppSidebar = () => {
                     ? "bg-blue-50 dark:bg-blue-900 text-blue-600 dark:text-blue-300"
                     : "hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-300"
                 }
-                ${!isExpanded && !isHovered ? "justify-center" : "justify-start"}`}
+                ${
+                  !isExpanded && !isHovered ? "justify-center" : "justify-start"
+                }`}
             >
               <UserCircleIcon className="w-5 h-5" />
               {(isExpanded || isHovered || isMobileOpen) && (
@@ -161,7 +162,9 @@ const AppSidebar = () => {
                     ? "bg-blue-50 dark:bg-blue-900 text-blue-600 dark:text-blue-300"
                     : "hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-300"
                 }
-                ${!isExpanded && !isHovered ? "justify-center" : "justify-start"}`}
+                ${
+                  !isExpanded && !isHovered ? "justify-center" : "justify-start"
+                }`}
             >
               <SettingsIcon className="w-5 h-5" />
               {(isExpanded || isHovered || isMobileOpen) && (
