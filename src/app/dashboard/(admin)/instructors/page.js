@@ -3,7 +3,7 @@ import React from 'react';
 const page = () => {
     return (
         <div>
-            All Users will appear here
+            All Instructors will appear here
         </div>
     );
 };
