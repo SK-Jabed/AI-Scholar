@@ -4,6 +4,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/context/ThemeContext";
 import { SidebarProvider } from "@/context/SidebarContext";
 
+
 const inter = Inter({
   subsets: ["latin"],
 });
@@ -29,6 +30,7 @@ export default function RootLayout({ children }) {
 
         {/* <CardSpotlight> */}
         <ThemeProvider>
+        
           <SidebarProvider>
             <main className="min-h-screen">{children}</main>
           </SidebarProvider>

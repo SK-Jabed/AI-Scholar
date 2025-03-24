@@ -11,15 +11,11 @@ const nextConfig = {
   images: {
     remotePatterns: [
       {
-        protocol: "https",
-        hostname: "lh3.googleusercontent.com",
-      },
-      {
-        protocol: "https",
-        hostname: "avatars.githubusercontent.com",
+        protocol: 'https',
+        hostname: '**', // Allows all domains (not recommended for production)
       },
     ],
-  },
+  }
 };
 
 export default nextConfig;

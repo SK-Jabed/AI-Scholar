@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { FaGithub, FaInstagram, FaLinkedinIn, FaTwitter } from "react-icons/fa";
 
 const Footer = () => {
@@ -239,12 +240,12 @@ const Footer = () => {
             &copy; {Year} AI Scholar. All rights reserved.
           </p>
           <div className="flex space-x-4 mt-4 md:mt-0">
-            <a href="#" className="text-gray-300 hover:text-blue-500">
+            <Link href="/privacy-policy" className="text-gray-300 hover:text-blue-500">
               Privacy Policy
-            </a>
-            <a href="#" className="text-gray-300 hover:text-blue-500">
+            </Link>
+            <Link href="/termsandconditions" className="text-gray-300 hover:text-blue-500">
               Terms & Conditions
-            </a>
+            </Link>
           </div>
         </div>
       </div>
