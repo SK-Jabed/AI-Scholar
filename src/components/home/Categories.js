@@ -13,7 +13,6 @@ const Categories = ({ onCategory, active, categories }) => {
               active === category.category ? "bg-accent text-white" : "bg-gray-100 "
             }  rounded-lg cursor-pointer hover:bg-accent hover:text-white transition w-full `}
           >
-            <span className="text-2xl">{category?.icon}</span>
             <p className="font-medium ">{category?.category}</p>
           </button>
         ))}

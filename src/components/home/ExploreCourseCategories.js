@@ -12,6 +12,7 @@ export default function ExploreCourseCategories() {
   const [categories, setCategories] = useState([{ category: "All Categories", _id: 124 }]);
   const [category, setCategory] = useState("All Categories");
 
+
   useEffect(() => {
     getAllCategories();
   }, []);
@@ -50,7 +51,7 @@ export default function ExploreCourseCategories() {
         <Categories categories={categories} active={category} onCategory={setCategory} />
 
         {/* Courses Grid */}
-        <CategoryCourses/>
+        <CategoryCourses selectedCategory={category} loading={loading}/>
       </div>
     </section>
   );
