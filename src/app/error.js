@@ -1,7 +1,7 @@
-'use client'
-import { useEffect } from 'react';
-import { motion } from 'framer-motion';
-import Link from 'next/link';
+"use client";
+import { useEffect } from "react";
+import { motion } from "framer-motion";
+import Link from "next/link";
 
 export default function Error({ error, reset }) {
   useEffect(() => {
@@ -19,33 +19,46 @@ export default function Error({ error, reset }) {
         {/* Error Icon with Animation */}
         <motion.div
           className="mx-auto mb-6 w-20 h-20 bg-red-100 rounded-full flex items-center justify-center"
-          animate={{ 
+          animate={{
             rotate: [0, 10, -10, 0],
-            scale: [1, 1.1, 1]
+            scale: [1, 1.1, 1],
           }}
           transition={{ duration: 0.8 }}
         >
-          <svg className="w-10 h-10 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          <svg
+            className="w-10 h-10 text-red-500"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+            />
           </svg>
         </motion.div>
-        
+
         <h1 className="text-4xl font-bold text-gray-800 mb-4">
           Something went wrong!
         </h1>
-        
+
         <p className="text-lg text-gray-600 mb-6">
-          We encountered an unexpected error. Our team has been notified and we are working to fix it.
+          We encountered an unexpected error. Our team has been notified and we
+          are working to fix it.
         </p>
-        
+
         {/* Error Details (Collapsible) */}
         <details className="mb-8 text-left">
-          <summary className="text-red-500 cursor-pointer">Technical Details</summary>
+          <summary className="text-red-500 cursor-pointer">
+            Technical Details
+          </summary>
           <pre className="mt-2 p-4 bg-gray-100 rounded text-sm text-gray-800 overflow-x-auto">
             {error.message}
           </pre>
         </details>
-        
+
         {/* Retry Button */}
         <motion.button
           onClick={() => reset()}
@@ -55,7 +68,7 @@ export default function Error({ error, reset }) {
         >
           Try Again
         </motion.button>
-        
+
         {/* Home Button */}
         <motion.button
           whileHover={{ scale: 1.05 }}
