@@ -10,7 +10,7 @@ const SocialLogin = () => {
         type="submit"
         name="action"
         value="google"
-        className="w-full flex items-center justify-center gap-2 bg-white border border-gray-300 py-3 rounded-lg shadow hover:bg-gray-100 transition cursor-pointer"
+        className="w-full flex items-center justify-center gap-2 bg-white border border-gray-300 py-3 rounded-lg shadow hover:bg-gray-100 transition mb-3 cursor-pointer"
       >
         <FcGoogle className="text-2xl" />
         <span className="text-gray-800 font-medium">Login with Google</span>

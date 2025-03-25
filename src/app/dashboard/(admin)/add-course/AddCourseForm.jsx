@@ -93,9 +93,9 @@ export default function AddCourseForm() {
         icon: "success",
         title: "Course created successfully",
         showConfirmButton: true,
-        timer: 1500
+        timer: 1500,
       });
-      
+
       // Reset form
       setFormData({
         title: "",

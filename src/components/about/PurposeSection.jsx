@@ -26,12 +26,16 @@ const PurposeSection = () => {
           data-aos="fade-up"
           className="p-8 bg-white border border-gray-200 rounded-xl shadow-lg transition-all duration-300 hover:shadow-2xl"
         >
-          <h3 className="text-2xl font-semibold mb-4 text-accent">Our Mission</h3>
+          <h3 className="text-2xl font-semibold mb-4 text-accent">
+            Our Mission
+          </h3>
           <p className="text-lg text-gray-600">
-            Our mission is to provide AI-driven learning experiences that enhance education worldwide. 
-            We strive to bridge the gap between technology and learning, ensuring accessibility and 
-            personalized education for students everywhere. Through cutting-edge innovations, we aim 
-            to empower learners with tailored knowledge, making education more engaging and effective.
+            Our mission is to provide AI-driven learning experiences that
+            enhance education worldwide. We strive to bridge the gap between
+            technology and learning, ensuring accessibility and personalized
+            education for students everywhere. Through cutting-edge innovations,
+            we aim to empower learners with tailored knowledge, making education
+            more engaging and effective.
           </p>
         </motion.div>
 
@@ -44,12 +48,16 @@ const PurposeSection = () => {
           data-aos="fade-down"
           className="p-8 bg-white border border-gray-200 rounded-xl shadow-lg transition-all duration-300 hover:shadow-2xl"
         >
-          <h3 className="text-2xl font-semibold mb-4 text-accent">Our Vision</h3>
+          <h3 className="text-2xl font-semibold mb-4 text-accent">
+            Our Vision
+          </h3>
           <p className="text-lg text-gray-600">
-            Our vision is to shape the future of education with AI-powered innovations. 
-            We aspire to create a world where learning is smarter, adaptive, and personalized 
-            for each individual. By leveraging artificial intelligence, we aim to make education 
-            more interactive, insightful, and globally accessible, driving the next revolution in knowledge.
+            Our vision is to shape the future of education with AI-powered
+            innovations. We aspire to create a world where learning is smarter,
+            adaptive, and personalized for each individual. By leveraging
+            artificial intelligence, we aim to make education more interactive,
+            insightful, and globally accessible, driving the next revolution in
+            knowledge.
           </p>
         </motion.div>
       </div>

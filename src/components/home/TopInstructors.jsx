@@ -117,43 +117,43 @@ const TopInstructors = () => {
               </motion.div>
 
               {/* Hover Overlay */}
-            <div
-              className="absolute inset-0 bg-black/80 text-white flex flex-col items-center justify-center px-6 text-sm 
+              <div
+                className="absolute inset-0 bg-black/80 text-white flex flex-col items-center justify-center px-6 text-sm 
                 opacity-0 translate-x-full transition-all duration-500 md:group-hover:opacity-100 md:group-hover:translate-x-0 
                 focus-within:opacity-100 focus-within:translate-x-0"
-            >
-              <p className="mb-4">{instructor.description}</p>
+              >
+                <p className="mb-4">{instructor.description}</p>
 
-              {/* Social Media Links */}
-              <div className="flex gap-4 mb-4">
+                {/* Social Media Links */}
+                <div className="flex gap-4 mb-4">
+                  <a
+                    href={instructor.social.facebook}
+                    className="text-blue-600 hover:text-blue-800 transition"
+                  >
+                    <FaFacebookF size={20} />
+                  </a>
+                  <a
+                    href={instructor.social.linkedin}
+                    className="text-blue-700 hover:text-blue-900 transition"
+                  >
+                    <FaLinkedinIn size={20} />
+                  </a>
+                  <a
+                    href={instructor.social.twitter}
+                    className="text-blue-400 hover:text-blue-600 transition"
+                  >
+                    <FaTwitter size={20} />
+                  </a>
+                </div>
+
+                {/* "Go to Profile" Button */}
                 <a
-                  href={instructor.social.facebook}
-                  className="text-blue-600 hover:text-blue-800 transition"
+                  href="#"
+                  className="bg-green-500 hover:bg-green-700 text-white px-4 py-2 rounded-full transition"
                 >
-                  <FaFacebookF size={20} />
-                </a>
-                <a
-                  href={instructor.social.linkedin}
-                  className="text-blue-700 hover:text-blue-900 transition"
-                >
-                  <FaLinkedinIn size={20} />
-                </a>
-                <a
-                  href={instructor.social.twitter}
-                  className="text-blue-400 hover:text-blue-600 transition"
-                >
-                  <FaTwitter size={20} />
+                  Go to Profile
                 </a>
               </div>
-
-              {/* "Go to Profile" Button */}
-              <a
-                href="#"
-                className="bg-green-500 hover:bg-green-700 text-white px-4 py-2 rounded-full transition"
-              >
-                Go to Profile
-              </a>
-            </div>
             </motion.div>
           ))}
         </div>

@@ -20,7 +20,6 @@ import Slide from "../shared/Slide";
 
 const Banner = () => {
   return (
-
     <div className="z-10">
       <Swiper
         spaceBetween={30}
@@ -79,7 +78,6 @@ const Banner = () => {
           ></Slide>
         </SwiperSlide>
       </Swiper>
-
     </div>
   );
 };

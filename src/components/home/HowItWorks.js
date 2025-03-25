@@ -4,7 +4,12 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import { motion } from "framer-motion";
 import { useEffect } from "react";
-import { FaBookOpen, FaBrain, FaCertificate, FaChalkboardTeacher } from "react-icons/fa";
+import {
+  FaBookOpen,
+  FaBrain,
+  FaCertificate,
+  FaChalkboardTeacher,
+} from "react-icons/fa";
 import SectionTitle from "../shared/SectionTitle";
 
 const steps = [
@@ -29,7 +34,9 @@ const steps = [
     title: "Interactive Lessons",
     description:
       "Engage with dynamic content including real-time quizzes, video lectures, and AI-powered feedback for an immersive learning experience.",
-    icon: <FaChalkboardTeacher className="text-yellow-500 text-7xl drop-shadow-md" />,
+    icon: (
+      <FaChalkboardTeacher className="text-yellow-500 text-7xl drop-shadow-md" />
+    ),
     link: "/interactive-lessons",
   },
   {
@@ -85,7 +92,9 @@ export default function HowItWorks() {
                 <h3 className="text-2xl font-semibold text-gray-800 mb-3 group-hover:text-blue-600 transition-all duration-300">
                   {step.title}
                 </h3>
-                <p className="text-gray-600 leading-relaxed mb-4">{step.description}</p>
+                <p className="text-gray-600 leading-relaxed mb-4">
+                  {step.description}
+                </p>
                 <Button className="px-5 py-3 bg-blue-600 text-white font-medium rounded-lg transition-all duration-300 hover:bg-blue-700 shadow-md">
                   <a href={step.link}>Learn More</a>
                 </Button>
