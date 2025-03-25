@@ -240,10 +240,16 @@ const Footer = () => {
             &copy; {Year} AI Scholar. All rights reserved.
           </p>
           <div className="flex space-x-4 mt-4 md:mt-0">
-            <Link href="/privacy-policy" className="text-gray-300 hover:text-blue-500">
+            <Link
+              href="/privacy-policy"
+              className="text-gray-300 hover:text-blue-500"
+            >
               Privacy Policy
             </Link>
-            <Link href="/termsandconditions" className="text-gray-300 hover:text-blue-500">
+            <Link
+              href="/termsandconditions"
+              className="text-gray-300 hover:text-blue-500"
+            >
               Terms & Conditions
             </Link>
           </div>

@@ -39,7 +39,11 @@ const KeyFeatures = () => {
               viewport={{ once: true }}
             >
               <div className="card-body items-center text-center">
-                <div className="mb-4" data-aos="zoom-in" data-aos-delay={index * 100}>
+                <div
+                  className="mb-4"
+                  data-aos="zoom-in"
+                  data-aos-delay={index * 100}
+                >
                   {feature.icon}
                 </div>
                 <h3 className="card-title text-xl font-bold mb-2">
