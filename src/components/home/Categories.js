@@ -7,23 +7,23 @@ import {
   Volleyball,
 } from "lucide-react";
 
-const categories = [
-  {
-    name: "All Categories",
-    icon: <Volleyball size={28} className="text-gray-600" />,
-  },
-  { name: "Programming", icon: <Code size={28} className="text-blue-600" /> },
-  {
-    name: "Marketing",
-    icon: <BadgePercent size={28} className="text-purple-600" />,
-  },
-  { name: "Finance", icon: <Globe size={28} className="text-orange-600" /> },
-  {
-    name: "UI/UX",
-    icon: <Droplet size={28} className="text-pink-600" />,
-  },
-  { name: "Business", icon: <Book size={28} className="text-yellow-600" /> },
-];
+// const defaultCategories = [
+//   {
+//     _id:1,category: "All Categories",
+//     icon: <Volleyball size={28} className="text-gray-600" />,
+//   },
+//   { _id:2,category: "Programming", icon: <Code size={28} className="text-blue-600" /> },
+//   {
+//     _id:3,category: "Marketing",
+//     icon: <BadgePercent size={28} className="text-purple-600" />,
+//   },
+//   { _id:4,category: "Finance", icon: <Globe size={28} className="text-orange-600" /> },
+//   {
+//     _id:5,category: "UI/UX",
+//     icon: <Droplet size={28} className="text-pink-600" />,
+//   },
+//   { _id:6,category: "Business", icon: <Book size={28} className="text-yellow-600" /> },
+// ];
 
 const Categories = ({ onCategory, active, categories }) => {
 
