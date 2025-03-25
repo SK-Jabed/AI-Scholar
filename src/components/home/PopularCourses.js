@@ -21,7 +21,7 @@ export default function PopularCourses() {
   }, []);
 
   useEffect(() => {
-    const dataFetch = async () => {
+    const FetchData = async () => {
       try {
         const res = await axios.get("http://localhost:5000/courses");
         setPopularCourses(res.data.data || []);
@@ -30,7 +30,7 @@ export default function PopularCourses() {
         setPopularCourses([]);
       }
     };
-    dataFetch();
+    FetchData();
   }, []);
 
   // Function to render star ratings

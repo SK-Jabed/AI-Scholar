@@ -50,7 +50,7 @@ export default function ExploreCourseCategories() {
         <Categories categories={categories} active={category} onCategory={setCategory} />
 
         {/* Courses Grid */}
-        <CategoryCourses />
+        <CategoryCourses/>
       </div>
     </section>
   );
