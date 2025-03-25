@@ -29,48 +29,47 @@ const faqData = [
 const Faq = () => {
   return (
     <div className="mb-4">
-    {/* Header */}
-    <SectionTitle
-      title="Frequently Asked Questions"
-      subTitle="Get answers to the most common questions about our AI-powered course management platform."
-    />
+      {/* Header */}
+      <SectionTitle
+        title="Frequently Asked Questions"
+        subTitle="Get answers to the most common questions about our AI-powered course management platform."
+      />
 
-    {/* FAQ Section */}
-    <div className="space-y-2">
-      {faqData.map((item, index) => (
-        <motion.div
-          key={index}
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4, delay: index * 0.08, ease: "easeOut" }}
-          className="collapse collapse-arrow bg-white shadow-lg rounded-lg overflow-hidden transition-transform duration-300 hover:scale-[1.02]"
-        >
-          <div className="join join-vertical bg-base-100">
-            <div className="collapse collapse-arrow join-item border border-base-300 hover:bg-gray-50 transition-colors">
-              <input type="radio" name="faq-accordion" defaultChecked />
-              <motion.div
-                className="collapse-title font-semibold"
-                whileHover={{ scale: 1.02 }}
-                transition={{ duration: 0.2 }}
-              >
-                {item.question}
-              </motion.div>
-              <motion.div
-                className="collapse-content text-sm"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.3, delay: 0.2 }}
-              >
-                {item.answer}
-              </motion.div>
+      {/* FAQ Section */}
+      <div className="space-y-2">
+        {faqData.map((item, index) => (
+          <motion.div
+            key={index}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, delay: index * 0.08, ease: "easeOut" }}
+            className="collapse collapse-arrow bg-white shadow-lg rounded-lg overflow-hidden transition-transform duration-300 hover:scale-[1.02]"
+          >
+            <div className="join join-vertical bg-base-100">
+              <div className="collapse collapse-arrow join-item border border-base-300 hover:bg-gray-50 transition-colors">
+                <input type="radio" name="faq-accordion" defaultChecked />
+                <motion.div
+                  className="collapse-title font-semibold"
+                  whileHover={{ scale: 1.02 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  {item.question}
+                </motion.div>
+                <motion.div
+                  className="collapse-content text-sm"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.3, delay: 0.2 }}
+                >
+                  {item.answer}
+                </motion.div>
+              </div>
             </div>
-          </div>
-        </motion.div>
-      ))}
+          </motion.div>
+        ))}
+      </div>
     </div>
-  </div>
   );
 };
 
 export default Faq;
-

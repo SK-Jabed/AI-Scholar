@@ -72,19 +72,19 @@ export const {
     }),
   ],
   callbacks: {
-    async jwt({ token}) {
-      let isExistingUser = await getUserByEmail(token.email)
-      if(!isExistingUser){
-        const userData={
+    async jwt({ token }) {
+      let isExistingUser = await getUserByEmail(token.email);
+      if (!isExistingUser) {
+        const userData = {
           name: token.name,
           email: token.email,
           image: token.picture,
           password: "default_password",
-          role:"student"
-        }
-        isExistingUser = await createUser(userData) 
+          role: "student",
+        };
+        isExistingUser = await createUser(userData);
       }
-      token.role = isExistingUser.role
+      token.role = isExistingUser.role;
       return token;
     },
     async session({ session, token }) {
