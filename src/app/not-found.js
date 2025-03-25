@@ -84,8 +84,8 @@ export default function NotFound() {
         <h2 className="text-3xl font-semibold mb-6">Lost in Space</h2>
         
         <p className="text-lg text-gray-300 mb-8">
-          The page you're looking for has drifted into the cosmic void.
-          Let's navigate back to familiar territory.
+          The page you are looking for has drifted into the cosmic void.
+          Navigate back to familiar territory.
         </p>
 
         <motion.div
@@ -99,7 +99,7 @@ export default function NotFound() {
             <svg className="mr-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
             </svg>
-            Return to Homebase
+            Return to Home
           </Link>
         </motion.div>
       </motion.div>

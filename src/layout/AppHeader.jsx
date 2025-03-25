@@ -80,7 +80,6 @@ const AppHeader = () => {
                 />
               </svg>
             )}
-            {/* Cross Icon */}
           </button>
 
           <Link
@@ -153,11 +152,11 @@ const AppHeader = () => {
           <div className="flex items-center gap-2 2xsm:gap-3">
             {/* <!-- Dark Mode Toggler --> */}
             <ThemeToggleButton />
-            {/* <!-- Dark Mode Toggler --> */}
 
-            <NotificationDropdown />
             {/* <!-- Notification Menu Area --> */}
+            <NotificationDropdown />
           </div>
+
           {/* <!-- User Area --> */}
           <UserDropdown />
         </div>

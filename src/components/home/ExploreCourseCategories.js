@@ -8,8 +8,13 @@ import { useEffect } from "react";
 import AOS from "aos";
 
 export default function ExploreCourseCategories() {
-  const [activeCategory, setActiveCategory] = useState("All Categories");
+  const [loading, setLoading] = useState(false);
+  const [categories, setCategories] = useState([{ category: "All Categories", _id: 124 }]);
+  const [category, setCategory] = useState("All Categories");
 
+  useEffect(() => {
+    getAllCategories();
+  }, []);
   // Initialize AOS
   useEffect(() => {
     AOS.init({
@@ -17,6 +22,16 @@ export default function ExploreCourseCategories() {
       once: true,
     });
   }, []);
+
+  const getAllCategories = async () => {
+    try {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/courses/categories`);
+      const { data } = await res.json();
+      setCategories([{ category: "All Categories", _id: 124 }, ...data]);
+    } catch (error) {
+      console.error("Error fetching categories:", error);
+    }
+  };
 
   return (
     <section>
@@ -32,7 +47,7 @@ export default function ExploreCourseCategories() {
 
       <div className="grid grid-cols-12 gap-6 mt-10">
         {/* Sidebar with Categories */}
-        <Categories onCategory={setActiveCategory} active={activeCategory} />
+        <Categories categories={categories} active={category} onCategory={setCategory} />
 
         {/* Courses Grid */}
         <CategoryCourses/>

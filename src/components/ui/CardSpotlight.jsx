@@ -1,5 +1,5 @@
 "use client";
-// CardSpotlight.jsx
+
 import React, { useRef, useState } from "react";
 
 const CardSpotlight = ({ children, className = "" }) => {

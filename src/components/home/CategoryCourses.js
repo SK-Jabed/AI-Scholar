@@ -11,7 +11,7 @@ const CategoryCourses = () => {
   useEffect(() => {
     const dataFetch = async () => {
       try {
-        const res = await axios.get(`http://localhost:5000/courses`);
+        const res = await axios.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/courses`);
         setCourses(res.data.data || []);
       } catch (error) {
         console.error("Error fetching courses:", error);

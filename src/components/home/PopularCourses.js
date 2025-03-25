@@ -23,7 +23,7 @@ export default function PopularCourses() {
   useEffect(() => {
     const FetchData = async () => {
       try {
-        const res = await axios.get('http://localhost:5000/courses');
+        const res = await axios.get("http://localhost:5000/courses");
         setPopularCourses(res.data.data || []);
       } catch (error) {
         console.error("Error fetching courses:", error);
@@ -42,17 +42,31 @@ export default function PopularCourses() {
 
     // Full stars
     for (let i = 0; i < fullStars; i++) {
-      stars.push(<Star key={`full-${i}`} size={20} className="text-yellow-500 fill-yellow-500" />);
+      stars.push(
+        <Star
+          key={`full-${i}`}
+          size={20}
+          className="text-yellow-500 fill-yellow-500"
+        />
+      );
     }
 
     // Half star
     if (hasHalfStar) {
-      stars.push(<StarHalf key="half" size={20} className="text-yellow-500 fill-yellow-500" />);
+      stars.push(
+        <StarHalf
+          key="half"
+          size={20}
+          className="text-yellow-500 fill-yellow-500"
+        />
+      );
     }
 
     // Empty stars
     for (let i = 0; i < emptyStars; i++) {
-      stars.push(<Star key={`empty-${i}`} size={20} className="text-gray-300" />);
+      stars.push(
+        <Star key={`empty-${i}`} size={20} className="text-gray-300" />
+      );
     }
 
     return stars;
@@ -84,8 +98,8 @@ export default function PopularCourses() {
             {/* Image */}
             <div className="relative w-full h-[250px] rounded-lg overflow-hidden">
               <Image
-                src={course?.image || '/default-course-image.jpg'}
-                alt={course.title || 'Course image'}
+                src={course?.image || "/default-course-image.jpg"}
+                alt={course.title || "Course image"}
                 fill
                 className="object-cover"
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
