@@ -1,3 +1,4 @@
+import StatsSection from "@/components/about/StatsSection";
 import Logout from "@/components/shared/Logout";
 import { auth } from "@/lib/auth";
 import Image from "next/image";
@@ -18,7 +19,7 @@ const DashboardPage = async () => {
       <h1 className="text-3xl font-bold text-center">
         Welcome to the Dashboard of AI Scholar
       </h1>
-      <div className="text-center mt-2 font-semibold text-accent">
+      <div className="text-center mt-2 font-semibold text-accent mb-16">
         {session?.user?.email && session?.user?.name ? (
           <div className="flex items-center justify-center gap-2">
             Welcome, <h2>{session?.user?.name}</h2>
@@ -37,26 +38,17 @@ const DashboardPage = async () => {
           <h2>Welcome, {session?.user?.email}</h2>
         )}
       </div>
-      <div className="grid gap-6 grid-cols-2 grid-rows-2 p-8">
-        <div className="bg-white p-8 rounded-lg shadow-lg">
+
+      <StatsSection />
+
+      <div className="grid gap-6 grid-cols-2 grid-rows-2 mt-16">
+        <div className="bg-white p-8 rounded-lg shadow-lg border border-gray-200">
           <h2 className="text-2xl font-semibold text-gray-800">Dashboard</h2>
           <p className="mt-4 text-gray-600">
             This is the dashboard of AI Scholar.
           </p>
         </div>
-        <div className="bg-white p-8 rounded-lg shadow-lg">
-          <h2 className="text-2xl font-semibold text-gray-800">Dashboard</h2>
-          <p className="mt-4 text-gray-600">
-            This is the dashboard of AI Scholar.
-          </p>
-        </div>
-        <div className="bg-white p-8 rounded-lg shadow-lg">
-          <h2 className="text-2xl font-semibold text-gray-800">Dashboard</h2>
-          <p className="mt-4 text-gray-600">
-            This is the dashboard of AI Scholar.
-          </p>
-        </div>
-        <div className="bg-white p-8 rounded-lg shadow-lg">
+        <div className="bg-white p-8 rounded-lg shadow-lg border border-gray-200">
           <h2 className="text-2xl font-semibold text-gray-800">Dashboard</h2>
           <p className="mt-4 text-gray-600">
             This is the dashboard of AI Scholar.
