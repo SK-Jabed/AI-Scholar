@@ -1,9 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  //   experimental: {
-  //   taint: true,
-  //   serverExternalPackages: ['@next/swc-linux-x64-gnu']
-  // },
+    experimental: {
+    taint: true,
+    serverExternalPackages: ['@next/swc-linux-x64-gnu']
+  },
   output: 'standalone',
   typescript: {
     ignoreBuildErrors: true

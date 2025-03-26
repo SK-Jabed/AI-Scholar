@@ -7,9 +7,10 @@ import { motion } from "framer-motion";
 import "aos/dist/aos.css";
 import { useEffect, useState } from "react";
 import AOS from "aos";
-import axios from "axios";
+import useAxiosInstance from "@/hooks/useAxiosInstance";
 
 export default function PopularCourses() {
+  const axiosInstance = useAxiosInstance();
   const [popularCourses, setPopularCourses] = useState([]);
 
   // Initialize AOS
@@ -21,17 +22,17 @@ export default function PopularCourses() {
   }, []);
 
   useEffect(() => {
-    const FetchData = async () => {
+    const fetchData = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/courses");
+        const res = await axiosInstance.get("/courses");
         setPopularCourses(res.data.data || []);
       } catch (error) {
         console.error("Error fetching courses:", error);
         setPopularCourses([]);
       }
     };
-    FetchData();
-  }, []);
+    fetchData();
+  }, [axiosInstance]);
 
   // Function to render star ratings
   const renderStars = (rating) => {

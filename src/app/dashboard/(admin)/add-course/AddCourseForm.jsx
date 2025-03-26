@@ -1,11 +1,12 @@
-"use client"; // Required for client-side functionality in Next.js 13+
+"use client";
 
 import React, { useState } from "react";
-import axios from "axios";
-import toast from "react-hot-toast";
 import Swal from "sweetalert2";
+import useAxiosInstance from "@/hooks/useAxiosInstance";
 
 export default function AddCourseForm() {
+  const axiosInstance = useAxiosInstance();
+
   const [formData, setFormData] = useState({
     title: "",
     description: "",
@@ -84,10 +85,7 @@ export default function AddCourseForm() {
         image: uploadedImageUrl,
       };
 
-      const response = await axios.post(
-        "http://localhost:5000/courses",
-        courseData
-      );
+      const response = await axiosInstance.post("/courses", courseData);
       Swal.fire({
         position: "top-center",
         icon: "success",
