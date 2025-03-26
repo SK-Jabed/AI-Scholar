@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import Container from "@/components/shared/Container";
 import Categories from "@/components/home/Categories";
 import Image from "next/image";
-import img from "../../../../../public/assets/webdevbeginners.jpg.webp";
 import { motion } from "framer-motion";
 
 const Courses = () => {
