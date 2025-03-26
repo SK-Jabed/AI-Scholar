@@ -22,7 +22,7 @@ export default function PopularCourses() {
   }, []);
 
   useEffect(() => {
-    const dataFetch = async () => {
+    const fetchData = async () => {
       try {
         const res = await axiosInstance.get("/courses");
         setPopularCourses(res.data.data || []);
@@ -31,7 +31,7 @@ export default function PopularCourses() {
         setPopularCourses([]);
       }
     };
-    dataFetch();
+    fetchData();
   }, [axiosInstance]);
 
   // Function to render star ratings
@@ -90,7 +90,7 @@ export default function PopularCourses() {
         {popularCourses.map((course, index) => (
           <motion.div
             key={course._id || index}
-            className="p-6 bg-white shadow-md rounded-lg hover:shadow-lg transition"
+            className="bg-white border border-gray-300 shadow-lg p-2 rounded-xl overflow-hidden hover:scale-105 transition w-full"
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: index * 0.2 }}
