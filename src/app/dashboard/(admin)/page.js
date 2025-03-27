@@ -1,6 +1,5 @@
 import Logout from "@/components/shared/Logout";
 import { auth } from "@/lib/auth";
-import Image from "next/image";
 import { redirect } from "next/navigation";
 
 export const metadata = {
@@ -15,7 +14,7 @@ const DashboardPage = async () => {
 
   return (
     <>
-      <h1 className="text-3xl font-bold text-center">
+      <h1 className="text-3xl font-bold text-center mb-12">
         Welcome to the Dashboard of AI Scholar
       </h1>
       <div className="text-center mt-2 font-semibold text-accent">
