@@ -1,7 +1,5 @@
 import StatsSection from "@/components/about/StatsSection";
-import Logout from "@/components/shared/Logout";
 import { auth } from "@/lib/auth";
-import Image from "next/image";
 import { redirect } from "next/navigation";
 
 export const metadata = {
@@ -16,28 +14,9 @@ const DashboardPage = async () => {
 
   return (
     <>
-      <h1 className="text-3xl font-bold text-center">
+      <h1 className="text-3xl font-bold text-center mb-12">
         Welcome to the Dashboard of AI Scholar
       </h1>
-      <div className="text-center mt-2 font-semibold text-accent mb-16">
-        {session?.user?.email && session?.user?.name ? (
-          <div className="flex items-center justify-center gap-2">
-            Welcome, <h2>{session?.user?.name}</h2>
-            {session?.user?.image && (
-              <Image
-                src={session?.user?.image}
-                alt={session?.user?.name}
-                width={46}
-                height={46}
-                className="rounded-full"
-              />
-            )}
-            <Logout />
-          </div>
-        ) : (
-          <h2>Welcome, {session?.user?.email}</h2>
-        )}
-      </div>
 
       <StatsSection />
 
