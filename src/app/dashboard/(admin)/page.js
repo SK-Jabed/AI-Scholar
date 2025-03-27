@@ -14,7 +14,7 @@ const DashboardPage = async () => {
 
   return (
     <>
-      <h1 className="text-3xl font-bold text-center mb-12">
+      <h1 className="text-3xl font-bold text-center text-accent mb-12">
         Welcome to the Dashboard of AI Scholar
       </h1>
 
