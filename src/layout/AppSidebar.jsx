@@ -14,7 +14,9 @@ import {
   LockIcon,
   UserCircle2Icon,
   PlusCircleIcon,
+  LogOutIcon,
 } from "lucide-react";
+import { doLogout } from "@/app/actions";
 
 // Define navigation items for Admin, Instructors, and Users
 const navItems = [
@@ -54,12 +56,6 @@ const navItems = [
     name: "Assignments",
     path: "/assignments",
     roles: ["admin", "instructor", "user"],
-  },
-  {
-    icon: <LockIcon className="w-5 h-5" />,
-    name: "Admin Panel",
-    path: "/admin",
-    roles: ["admin"],
   },
   {
     icon: <HomeIcon className="w-5 h-5" />,
@@ -171,6 +167,18 @@ const AppSidebar = () => {
                 <span className="text-sm font-medium">Settings</span>
               )}
             </Link>
+          </li>
+          <li>
+            <button
+              type="submit"
+              onClick={doLogout}
+              className="flex items-center text-left gap-3 w-full p-3 rounded-lg transition-all duration-200 bg-red-600 text-white hover:bg-red-700 cursor-pointer"
+            >
+              <LogOutIcon className="w-5 h-5" />
+              {(isExpanded || isHovered || isMobileOpen) && (
+                <span className="text-sm font-medium">Logout</span>
+              )}
+            </button>
           </li>
         </ul>
       </nav>

@@ -1,9 +1,11 @@
 "use client";
 
+import { SessionProvider } from "next-auth/react";
+
 export default function DashboardLayout({ children }) {
-  return (
-    <div>
-      <div>{children}</div>
-    </div>
+   return (
+    <SessionProvider>
+      {children}
+    </SessionProvider>
   );
 }
