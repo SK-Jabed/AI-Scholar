@@ -24,7 +24,7 @@ const Courses = () => {
     setLoading(true);
     try {
       const query = category === "All Categories" ? "" : `category=${encodeURIComponent(category)}`;
-      const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/courses?${query}&limit=9`);
+      const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/courses?${query}&limit=6`);
       const { data } = await res.json();
       setCourses(data);
     } catch (error) {
