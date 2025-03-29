@@ -1,9 +1,16 @@
 "use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import React, { useState } from "react";
 import { Dropdown } from "../ui/dropdown/Dropdown";
 import { DropdownItem } from "../ui/dropdown/DropdownItem";
+import user1 from "../../../public/assets/clients/client-1.jpg"
+import user2 from "../../../public/assets/clients/client-2.jpg"
+import user3 from "../../../public/assets/clients/client-3.jpg"
+import user4 from "../../../public/assets/clients/client-4.png"
+import user5 from "../../../public/assets/clients/client-5.png"
+import user6 from "../../../public/assets/clients/client-1.jpg"
 
 export default function NotificationDropdown() {
   const [isOpen, setIsOpen] = useState(false);
@@ -21,6 +28,7 @@ export default function NotificationDropdown() {
     toggleDropdown();
     setNotifying(false);
   };
+
   return (
     <div className="relative">
       <button
@@ -89,7 +97,7 @@ export default function NotificationDropdown() {
                 <Image
                   width={40}
                   height={40}
-                  src="/images/user/user-02.jpg"
+                  src={user1}
                   alt="User"
                   className="w-full overflow-hidden rounded-full"
                 />
@@ -125,7 +133,7 @@ export default function NotificationDropdown() {
                 <Image
                   width={40}
                   height={40}
-                  src="/images/user/user-03.jpg"
+                  src={user2}
                   alt="User"
                   className="w-full overflow-hidden rounded-full"
                 />
@@ -162,7 +170,7 @@ export default function NotificationDropdown() {
                 <Image
                   width={40}
                   height={40}
-                  src="/images/user/user-04.jpg"
+                  src={user3}
                   alt="User"
                   className="w-full overflow-hidden rounded-full"
                 />
@@ -199,7 +207,7 @@ export default function NotificationDropdown() {
                 <Image
                   width={40}
                   height={40}
-                  src="/images/user/user-05.jpg"
+                  src={user4}
                   alt="User"
                   className="w-full overflow-hidden rounded-full"
                 />
@@ -235,7 +243,7 @@ export default function NotificationDropdown() {
                 <Image
                   width={40}
                   height={40}
-                  src="/images/user/user-02.jpg"
+                  src={user5}
                   alt="User"
                   className="w-full overflow-hidden rounded-full"
                 />
@@ -271,7 +279,7 @@ export default function NotificationDropdown() {
                 <Image
                   width={40}
                   height={40}
-                  src="/images/user/user-03.jpg"
+                  src={user6}
                   alt="User"
                   className="w-full overflow-hidden rounded-full"
                 />
@@ -307,7 +315,7 @@ export default function NotificationDropdown() {
                 <Image
                   width={40}
                   height={40}
-                  src="/images/user/user-04.jpg"
+                  src={user4}
                   alt="User"
                   className="w-full overflow-hidden rounded-full"
                 />
@@ -344,7 +352,7 @@ export default function NotificationDropdown() {
                 <Image
                   width={40}
                   height={40}
-                  src="/images/user/user-05.jpg"
+                  src={user5}
                   alt="User"
                   className="overflow-hidden rounded-full"
                 />
@@ -373,7 +381,7 @@ export default function NotificationDropdown() {
           {/* Add more items as needed */}
         </ul>
         <Link
-          href="/"
+          href="/dashboard"
           className="block px-4 py-2 mt-3 text-sm font-medium text-center text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700"
         >
           View All Notifications

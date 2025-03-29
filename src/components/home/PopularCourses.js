@@ -7,9 +7,10 @@ import { motion } from "framer-motion";
 import "aos/dist/aos.css";
 import { useEffect, useState } from "react";
 import AOS from "aos";
-import axios from "axios";
+import useAxiosInstance from "@/hooks/useAxiosInstance";
 
 export default function PopularCourses() {
+  const axiosInstance = useAxiosInstance();
   const [popularCourses, setPopularCourses] = useState([]);
 
   // Initialize AOS
@@ -21,17 +22,17 @@ export default function PopularCourses() {
   }, []);
 
   useEffect(() => {
-    const dataFetch = async () => {
+    const fetchData = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/courses");
+        const res = await axiosInstance.get("/courses");
         setPopularCourses(res.data.data || []);
       } catch (error) {
         console.error("Error fetching courses:", error);
         setPopularCourses([]);
       }
     };
-    dataFetch();
-  }, []);
+    fetchData();
+  }, [axiosInstance]);
 
   // Function to render star ratings
   const renderStars = (rating) => {
@@ -89,7 +90,7 @@ export default function PopularCourses() {
         {popularCourses.map((course, index) => (
           <motion.div
             key={course._id || index}
-            className="p-6 bg-white shadow-md rounded-lg hover:shadow-lg transition"
+            className="bg-white border border-gray-300 shadow-lg p-2 rounded-xl overflow-hidden hover:scale-105 transition w-full"
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: index * 0.2 }}
