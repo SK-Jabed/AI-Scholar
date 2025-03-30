@@ -1,8 +1,8 @@
+import { CardSpotlight } from "@/components/ui/CardSpotlight";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/shared/Navbar";
-import Footer from "@/components/shared/Footer";
-import { CardSpotlight } from "@/components/ui/CardSpotlight";
+import { ThemeProvider } from "@/context/ThemeContext";
+import { SidebarProvider } from "@/context/SidebarContext";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -11,6 +11,11 @@ const inter = Inter({
 export const metadata = {
   title: "AI Scholar",
   description: "This is an AI-powered Course Management System",
+  icons: {
+    icon: ["/favicon/favicon.ico?v=4"],
+    apple: ["/favicon/apple-touch-icon.png?v=4"],
+    shortcut: ["/favicon/apple-touch-icon.png"],
+  },
 };
 
 export default function RootLayout({ children }) {
@@ -18,17 +23,19 @@ export default function RootLayout({ children }) {
     <html lang="en" data-theme="light" suppressHydrationWarning>
       <body className={`${inter.className}`}>
         {/* Header */}
-        <Navbar />
+        {/* <Navbar /> */}
 
         {/* Main Content */}
-        <CardSpotlight>
-          <main className="min-h-screen mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8 my-8">
-            {children}
-          </main>
-        </CardSpotlight>
-        
-        {/* Footer */}
-        <Footer />
+
+        {/* <CardSpotlight> */}
+        <ThemeProvider>
+          <SidebarProvider>
+            <main className="min-h-screen">{children}</main>
+          </SidebarProvider>
+        </ThemeProvider>
+        {/* </CardSpotlight> */}
+
+        {/* <Footer /> */}
       </body>
     </html>
   );
