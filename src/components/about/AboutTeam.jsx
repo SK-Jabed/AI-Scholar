@@ -1,6 +1,6 @@
 "use client";
 
-import * as motion from "motion/react-client";
+// import * as motion from "motion/react-client";
 
 import React, { useEffect, useRef, useState } from "react";
 import "animate.css";
