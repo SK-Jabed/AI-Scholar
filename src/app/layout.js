@@ -26,7 +26,6 @@ export default function RootLayout({ children }) {
         {/* <Navbar /> */}
 
         {/* Main Content */}
-
         {/* <CardSpotlight> */}
         <ThemeProvider>
           <SidebarProvider>
