@@ -7,6 +7,7 @@ const page = () => {
   return (
     <div>
       <AddCourseForm />
+      {/* Add a course */}
     </div>
   );
 };
