@@ -32,6 +32,12 @@ const navItems = [
     path: "/dashboard/my-courses",
     roles: ["admin", "instructor", "user"],
   },
+  // {
+  //   icon: <BookOpenIcon className="w-5 h-5" />,
+  //   name: "All Courses",
+  //   path: "/dashboard/my-courses",
+  //   roles: ["admin", "instructor", "user"],
+  // },
   {
     icon: <UserCircle2Icon className="w-5 h-5" />,
     name: "Instructors",
