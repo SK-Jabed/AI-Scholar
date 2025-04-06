@@ -1,6 +1,6 @@
+import React from "react";
 import { doLogout } from "@/app/actions";
 import { LogOutIcon } from "lucide-react";
-import React from "react";
 
 export default function Logout() {
   return (

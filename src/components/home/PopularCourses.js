@@ -24,7 +24,7 @@ export default function PopularCourses() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axiosInstance.get("/courses");
+        const res = await axiosInstance.get("/courses/get-courses");
         setPopularCourses(res.data.data || []);
       } catch (error) {
         console.error("Error fetching courses:", error);
@@ -113,20 +113,20 @@ export default function PopularCourses() {
 
             {/* Rating and Students */}
             <div className="flex items-center mt-2 gap-1">
-              {renderStars(course.rating || 0)}
+              {renderStars(course?.rating || 4)}
               <span className="ml-2 text-sm text-gray-600">
-                ({course.students || 0} students)
+                ({course?.students || 0} students)
               </span>
             </div>
 
             {/* Price */}
             <div className="mt-2 text-lg font-bold text-gray-800">
-              ${course.price || 0}
+              ${course?.pricing || 0}
             </div>
 
             {/* View Course Link */}
             <Link
-              href={`/courses/${course._id || index}`}
+              href={`/courses/get-courses/${course._id || index}`}
               className="mt-4 inline-block text-blue-600 font-medium hover:underline"
             >
               View Course →

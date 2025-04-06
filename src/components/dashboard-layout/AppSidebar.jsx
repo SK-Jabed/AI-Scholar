@@ -1,22 +1,22 @@
 "use client";
-import React, { useCallback } from "react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { useSidebar } from "../context/SidebarContext";
+
+import { doLogout } from "@/app/actions";
 import {
-  LayoutDashboardIcon,
   BookOpenIcon,
-  UsersIcon,
-  UserCircleIcon,
-  SettingsIcon,
   FileTextIcon,
   HomeIcon,
-  LockIcon,
-  UserCircle2Icon,
-  PlusCircleIcon,
+  LayoutDashboardIcon,
   LogOutIcon,
+  PlusCircleIcon,
+  SettingsIcon,
+  UserCircle2Icon,
+  UserCircleIcon,
+  UsersIcon
 } from "lucide-react";
-import { doLogout } from "@/app/actions";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useCallback } from "react";
+import { useSidebar } from "../../context/SidebarContext";
 
 // Define navigation items for Admin, Instructors, and Users
 const navItems = [
@@ -141,7 +141,7 @@ const AppSidebar = () => {
               href="/dashboard/profile"
               className={`flex items-center gap-3 p-3 rounded-lg transition-all duration-200
                 ${
-                  isActive("/profile")
+                  isActive("/dashboard/profile")
                     ? "bg-blue-50 dark:bg-blue-900 text-blue-600 dark:text-blue-300"
                     : "hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-300"
                 }
@@ -157,10 +157,10 @@ const AppSidebar = () => {
           </li>
           <li>
             <Link
-              href="/settings"
+              href="/dashboard/settings"
               className={`flex items-center gap-3 p-3 rounded-lg transition-all duration-200
                 ${
-                  isActive("/settings")
+                  isActive("/dashboard/settings")
                     ? "bg-blue-50 dark:bg-blue-900 text-blue-600 dark:text-blue-300"
                     : "hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-300"
                 }

@@ -1,19 +1,18 @@
 [
-    {
-      "name": "Automated Assistance",
-      "desc": "AI-powered help with instant responses, tutoring, and 24/7 support."
-    },
-    {
-      "name": "Real-time Feedback",
-      "desc": "Performance analysis on the spot to help you improve quickly."
-    },
-    {
-      "name": "Smart Recommendations",
-      "desc": "Custom course suggestions based on your learning behavior."
-    },
-    {
-      "name": "Personalized Learning Paths",
-      "desc": "Curriculum tailored to your goals and progress."
-    }
-  ]
-  
+  {
+    "name": "Automated Assistance",
+    "desc": "AI-powered help with instant responses, tutoring, and 24/7 support."
+  },
+  {
+    "name": "Real-time Feedback",
+    "desc": "Performance analysis on the spot to help you improve quickly."
+  },
+  {
+    "name": "Smart Recommendations",
+    "desc": "Custom course suggestions based on your learning behavior."
+  },
+  {
+    "name": "Personalized Learning Paths",
+    "desc": "Curriculum tailored to your goals and progress."
+  }
+]
