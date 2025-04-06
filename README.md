@@ -331,7 +331,7 @@ CLOUDINARY_API_SECRET=xxx
 | -------------------- | ----------------------- |
 | **Rafi Ahmed**       | Web Developer & Leader  |
 | **Sheikh Jabed**     | Full-Stack Developer    |
-| **Imran Ahmed**      | MERN-Stack Developer    |
+| **Imran Ahmed**      | MERN Stack Developer    |
 | **Sushanto Sharkar** | AI & Analytics Engineer |
 | **Abdur Rahman**     | Full-Stack Developer    |
 | **Shoyon Kumar**     | Integration & API Dev   |
