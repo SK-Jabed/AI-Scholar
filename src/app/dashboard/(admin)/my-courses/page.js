@@ -26,7 +26,8 @@ const page = () => {
               //   setCourseCurriculumFormData(courseCurriculumInitialFormData);
               //   navigate("/instructor/create-new-course");
               // }}
-              className="px-8 py-4 text-white flex items-center gap-1 cursor-pointer font-semibold"
+              variant="default"
+              className="flex items-center gap-1 cursor-pointer font-semibold"
             >
               <span>Create New Course</span>
               <PlusCircle className="h-6 w-6" />
@@ -67,12 +68,12 @@ const page = () => {
                       //     `/instructor/edit-course/${course?._id}`
                       //   );
                       // }}
-                      variant="ghost"
+                      variant="primary"
                       size="sm"
                     >
                       <Edit className="h-6 w-6" />
                     </Button>
-                    <Button variant="ghost" size="sm">
+                    <Button className="ml-1" variant="primary" size="sm">
                       <Trash className="h-6 w-6" />
                     </Button>
                   </TableCell>

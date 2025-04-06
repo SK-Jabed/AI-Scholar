@@ -1,6 +1,6 @@
 "use client";
 
-import { testimonials } from "@/utils/testimonials";
+import { testimonials } from "@/data/testimonials";
 import { useCallback, useEffect, useState } from "react";
 import SectionTitle from "../shared/SectionTitle";
 import { motion, AnimatePresence } from "framer-motion";

@@ -1,5 +1,5 @@
 "use client";
-import { features } from "@/utils/features";
+import { features } from "@/data/features";
 import SectionTitle from "../shared/SectionTitle";
 import { motion } from "framer-motion";
 import "aos/dist/aos.css";

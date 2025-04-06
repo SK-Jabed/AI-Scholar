@@ -1,9 +1,11 @@
 "use client";
+
 import { useState, useEffect } from "react";
 import Container from "@/components/shared/Container";
 import Categories from "@/components/home/Categories";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { LoaderIcon } from "lucide-react";
 
 const Courses = () => {
   const [courses, setCourses] = useState([]);
@@ -30,7 +32,7 @@ const Courses = () => {
           ? ""
           : `category=${encodeURIComponent(category)}`;
       const res = await fetch(
-        `${process.env.NEXT_PUBLIC_SERVER_URL}/courses?${query}&limit=9`
+        `${process.env.NEXT_PUBLIC_SERVER_URL}/courses/get-courses?${query}&limit=9`
       );
       const { data } = await res.json();
       setCourses(data);
@@ -68,8 +70,8 @@ const Courses = () => {
 
           <div className="col-span-9 grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-6">
             {loading ? (
-              <p className="text-center col-span-full text-gray-500">
-                Loading courses...
+              <p className="text-center flex justify-center col-span-full text-gray-500">
+                <LoaderIcon />
               </p>
             ) : courses.length > 0 ? (
               courses.map((course, index) => (
@@ -94,14 +96,12 @@ const Courses = () => {
                     <h3 className="text-lg font-semibold text-gray-800 truncate">
                       {course.title}
                     </h3>
-                    <p className="text-sm text-gray-600 mt-2">
-                      {course.instructor}
-                    </p>
+                    <p className="text-sm text-gray-600 mt-2">{course.level}</p>
                     <p className="text-primary font-bold mt-2">
-                      ${course.price}
+                      ${course.pricing}
                     </p>
                     <p className="text-primary/80 mt-2">
-                      ${course.description.slice(0, 50)}...
+                      {course.description.slice(0, 50)}...
                     </p>
                   </div>
                   <div className="p-4 bg-gray-100 flex justify-between items-center">
@@ -109,7 +109,7 @@ const Courses = () => {
                       Enroll Now
                     </button>
                     <p className="text-sm text-gray-600">
-                      {course.duration} hrs
+                      {course.primaryLanguage}
                     </p>
                   </div>
                 </motion.div>

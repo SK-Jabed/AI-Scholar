@@ -1,9 +1,8 @@
-import LearningTool from "@/components/service/LearningTool";
-import Productivity from "@/components/service/Productivity";
-import Security from "@/components/service/Security";
-import ServiceBanner from "@/components/service/ServiceBanner";
+import LearningTool from "@/components/services/LearningTool";
+import Productivity from "@/components/services/Productivity";
+import Security from "@/components/services/Security";
+import ServiceBanner from "@/components/services/ServiceBanner";
 import Container from "@/components/shared/Container";
-import React from "react";
 
 const Services = () => {
   return (

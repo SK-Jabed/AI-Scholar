@@ -1,8 +1,9 @@
-import { CardSpotlight } from "@/components/ui/CardSpotlight";
+// import { CardSpotlight } from "@/components/ui/CardSpotlight";
 import { Inter } from "next/font/google";
-import "./globals.css";
 import { ThemeProvider } from "@/context/ThemeContext";
 import { SidebarProvider } from "@/context/SidebarContext";
+import InstructorProvider from "@/context/InstructorContext";
+import "./globals.css";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -28,9 +29,11 @@ export default function RootLayout({ children }) {
         {/* Main Content */}
         {/* <CardSpotlight> */}
         <ThemeProvider>
-          <SidebarProvider>
-            <main className="min-h-screen">{children}</main>
-          </SidebarProvider>
+          <InstructorProvider>
+            <SidebarProvider>
+              <main className="min-h-screen">{children}</main>
+            </SidebarProvider>
+          </InstructorProvider>
         </ThemeProvider>
         {/* </CardSpotlight> */}
 

@@ -19,7 +19,7 @@ const CategoryCourses = ({ selectedCategory }) => {
           ? ""
           : `category=${encodeURIComponent(selectedCategory)}`;
       const res = await fetch(
-        `${process.env.NEXT_PUBLIC_SERVER_URL}/courses?${query}`
+        `${process.env.NEXT_PUBLIC_SERVER_URL}/courses/get-courses?${query}`
       );
       const { data } = await res.json();
       setCourses(data);
@@ -64,9 +64,9 @@ const CategoryCourses = ({ selectedCategory }) => {
                   {course.title}
                 </h3>
                 <p className="text-sm text-gray-600 mt-2">
-                  {course.instructor}
+                  {course.level}
                 </p>
-                <p className="text-primary font-bold mt-2">${course.price}</p>
+                <p className="text-primary font-bold mt-2">${course.pricing}</p>
               </div>
 
               {/* Footer */}
@@ -74,7 +74,7 @@ const CategoryCourses = ({ selectedCategory }) => {
                 <button className="bg-accent/90 text-white px-4 py-2 cursor-pointer rounded-md hover:bg-accent transition">
                   Enroll Now
                 </button>
-                <p className="text-sm text-gray-600">{course.duration} hrs</p>
+                <p className="text-sm text-gray-600">{course.primaryLanguage}</p>
               </div>
             </motion.div>
           ))
