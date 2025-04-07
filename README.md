@@ -14,22 +14,22 @@ Developed using **Next.js**, styled with **Tailwind CSS** and enhanced with **Sh
 
 ## 🧭 Table of Contents
 
-- [📚 Project Overview](#project-overview)
-- [🎯 Purpose & Goals](#purpose--goals)
-- [🚀 Live Site & Deployment](#live-site--deployment)
-- [✨ Features](#features)
-- [🧱 Tech Stack](#tech-stack)
-- [🧩 Folder Structure](#folder-structure)
-- [🔐 Authentication Guide](#authentication-guide)
-- [🔧 Installation](#installation)
-- [⚙️ Environment Variables](#environment-variables)
-- [📡 API Endpoints Reference](#api-endpoints-reference)
-- [🎨 Design Philosophy](#design-philosophy)
-- [🧑‍💻 Contributors](#contributors)
-- [🚧 Future Enhancements](#future-enhancements)
-- [❓ FAQ](#faq)
-- [🔑 Default Credentials](#default-credentials)
-- [📄 License](#license)
+- [📚 Project Overview](#-project-overview)
+- [🎯 Purpose & Goals](#-purpose--goals)
+- [🚀 Live Site & Deployment](#-live-site--deployment)
+- [✨ Features](#-features)
+- [🧱 Tech Stack](#-tech-stack)
+- [🧩 Folder Structure](#-folder-structure)
+- [🔐 Authentication Guide](#-authentication-guide)
+- [🔧 Installation](#-installation)
+- [⚙️ Environment Variables](#-environment-variables)
+- [📡 API Endpoints Reference](#-api-endpoints-reference)
+- [🎨 Design Philosophy](#-design-philosophy)
+- [🧑‍💻 Contributors](#-contributors)
+- [🚧 Future Enhancements](#-future-enhancements)
+- [❓ FAQ](#-faq)
+- [🔑 Default Credentials](#-default-credentials)
+- [📄 License](#-license)
 
 ---
 

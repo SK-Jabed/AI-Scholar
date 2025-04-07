@@ -50,10 +50,10 @@ const Users = () => {
               Total: <span className="text-gray-900">{users.length}</span>
             </span>
           </div>
-          <button className="flex items-center bg-white rounded-lg shadow-xs px-4 py-2 border border-gray-200 hover:bg-gray-50 transition-colors duration-200">
+          {/* <button className="flex items-center bg-white rounded-lg shadow-xs px-4 py-2 border border-gray-200 hover:bg-gray-50 transition-colors duration-200">
             <UserPlus className="w-5 h-5 text-gray-500 mr-2" />
             <span className="text-sm font-medium text-gray-700">Add User</span>
-          </button>
+          </button> */}
         </div>
       </div>
 
