@@ -1,21 +1,22 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    experimental: {
+  experimental: {
     taint: true,
-    serverExternalPackages: ['@next/swc-linux-x64-gnu']
+    serverExternalPackages: ["@next/swc-linux-x64-gnu"],
   },
-  output: 'standalone',
+  output: "standalone",
   typescript: {
-    ignoreBuildErrors: true
+    ignoreBuildErrors: true,
   },
   images: {
+    domains: ["res.cloudinary.com"],
     remotePatterns: [
       {
-        protocol: 'https',
-        hostname: '**',
+        protocol: "https",
+        hostname: "**",
       },
     ],
-  }
+  },
 };
 
 export default nextConfig;

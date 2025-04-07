@@ -1,18 +1,18 @@
 [
-    {
-      "name": "Smart Scheduling",
-      "desc": "Optimize your study sessions with AI-synced schedules."
-    },
-    {
-      "name": "Mobile Learning",
-      "desc": "Access all materials on any device, even offline."
-    },
-    {
-      "name": "Collaborative Learning",
-      "desc": "Join AI-matched study groups and discussions."
-    },
-    {
-      "name": "Multilingual Support",
-      "desc": "Learn in your native language using AI translation."
-    }
-  ]
+  {
+    "name": "Smart Scheduling",
+    "desc": "Optimize your study sessions with AI-synced schedules."
+  },
+  {
+    "name": "Mobile Learning",
+    "desc": "Access all materials on any device, even offline."
+  },
+  {
+    "name": "Collaborative Learning",
+    "desc": "Join AI-matched study groups and discussions."
+  },
+  {
+    "name": "Multilingual Support",
+    "desc": "Learn in your native language using AI translation."
+  }
+]

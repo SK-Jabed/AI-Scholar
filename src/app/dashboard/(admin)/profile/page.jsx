@@ -14,7 +14,7 @@ export default function Profile() {
         <h3 className="mb-5 text-lg font-semibold text-center mt-6 text-gray-800 dark:text-white/80 lg:mb-6">
           User's profile will appear here...
         </h3>
-        
+
         <div className="space-y-6">
           {/* <UserMetaCard />
           <UserInfoCard />

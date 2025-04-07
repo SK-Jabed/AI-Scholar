@@ -1,6 +1,7 @@
-'use client'
-import { motion } from 'framer-motion'
-import Link from 'next/link'
+"use client";
+
+import { motion } from "framer-motion";
+import Link from "next/link";
 
 export default function NotFound() {
   return (
@@ -12,10 +13,10 @@ export default function NotFound() {
             key={i}
             className="absolute bg-white rounded-full"
             style={{
-              width: Math.random() * 3 + 1 + 'px',
-              height: Math.random() * 3 + 1 + 'px',
-              left: Math.random() * 100 + '%',
-              top: Math.random() * 100 + '%',
+              width: Math.random() * 3 + 1 + "px",
+              height: Math.random() * 3 + 1 + "px",
+              left: Math.random() * 100 + "%",
+              top: Math.random() * 100 + "%",
             }}
             animate={{
               opacity: [0.2, 1, 0.2],
@@ -23,7 +24,7 @@ export default function NotFound() {
             transition={{
               duration: Math.random() * 3 + 2,
               repeat: Infinity,
-              ease: 'easeInOut',
+              ease: "easeInOut",
             }}
           />
         ))}
@@ -42,7 +43,7 @@ export default function NotFound() {
           transition={{
             duration: 8,
             repeat: Infinity,
-            ease: 'easeInOut',
+            ease: "easeInOut",
           }}
           className="mb-8"
         >
@@ -67,11 +68,11 @@ export default function NotFound() {
           </svg>
         </motion.div>
 
-        <motion.h1 
+        <motion.h1
           className="text-7xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-blue-500"
-          animate={{ 
+          animate={{
             scale: [1, 1.05, 1],
-            textShadow: ["0 0 0px #fff", "0 0 10px #8B5CF6", "0 0 0px #fff"]
+            textShadow: ["0 0 0px #fff", "0 0 10px #8B5CF6", "0 0 0px #fff"],
           }}
           transition={{
             duration: 3,
@@ -82,27 +83,34 @@ export default function NotFound() {
         </motion.h1>
 
         <h2 className="text-3xl font-semibold mb-6">Lost in Space</h2>
-        
+
         <p className="text-lg text-gray-300 mb-8">
           The page you are looking for has drifted into the cosmic void.
           Navigate back to familiar territory.
         </p>
 
-        <motion.div
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-        >
+        <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
           <Link
             href="/"
             className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-gradient-to-r from-purple-600 to-blue-500 hover:from-purple-700 hover:to-blue-600"
           >
-            <svg className="mr-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+            <svg
+              className="mr-2 h-5 w-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+              />
             </svg>
             Return to Home
           </Link>
         </motion.div>
       </motion.div>
     </div>
-  )
+  );
 }

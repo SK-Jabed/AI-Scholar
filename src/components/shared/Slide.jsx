@@ -17,7 +17,7 @@ const Slide = ({ img, text, title }) => {
           <h1 className="text-3xl md:text-4xl font-bold mb-4">{title}</h1>
           <p className="text-md md:w-3xl text-gray-300 mb-6">{text}</p>
           <Link href="#">
-            <button className="px-6 bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 text-white hover:from-blue-600 hover:via-blue-700 hover:to-blue-800 py-2 rounded-md transition duration-300 hover:scale-110">
+            <button className="px-6 bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 text-white hover:from-blue-600 hover:via-blue-700 hover:to-blue-800 py-2 rounded-md transition duration-300 hover:scale-110 cursor-pointer">
               Get Started
             </button>
           </Link>
