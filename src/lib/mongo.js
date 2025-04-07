@@ -38,6 +38,8 @@ const userSchema = new mongoose.Schema(
       required: true,
     },
     image: { type: String, default: "" }, // Ensure image has a default
+    failed_attempts: { type: Number, default: 0 },
+    lockout_time: { type: Date, default: null }
   },
   { timestamps: true }
 );
