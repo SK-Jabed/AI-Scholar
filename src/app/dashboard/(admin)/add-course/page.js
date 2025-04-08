@@ -14,12 +14,13 @@ import {
 } from "@/config";
 import {
   addNewCourseService,
-  // fetchInstructorCourseDetailsService,
-  // updateCourseByIdService,
+  fetchInstructorCourseDetailsService,
+  updateCourseByIdService,
 } from "@/services";
-// import { useNavigate, useParams } from "react-router-dom";
+
 import { InstructorContext } from "@/context/InstructorContext";
 import { useSession } from "next-auth/react";
+import { useRouter, useSearchParams } from "next/navigation";
 import Swal from "sweetalert2";
 
 const AddCoursePage = () => {
@@ -28,15 +29,16 @@ const AddCoursePage = () => {
     courseCurriculumFormData,
     setCourseLandingFormData,
     setCourseCurriculumFormData,
-    // currentEditedCourseId,
-    // setCurrentEditedCourseId,
+    currentEditedCourseId,
+    setCurrentEditedCourseId,
   } = useContext(InstructorContext);
 
   const { data: session } = useSession();
-  // const navigate = useNavigate();
-  // const params = useParams();
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const getCurrentEditedCourseId = searchParams.get("id");
 
-  // console.log(params);
+  // console.log(getCurrentEditedCourseId);
 
   function isEmpty(value) {
     if (Array.isArray(value)) {
@@ -86,17 +88,18 @@ const AddCoursePage = () => {
       isPublished: true,
     };
 
-    const response = await addNewCourseService(courseFinalFormData);
-    // currentEditedCourseId !== null
-    //   ? await updateCourseByIdService(
-    //       currentEditedCourseId,
-    //       courseFinalFormData
-    //     )
-    //   :
+    const response =
+      currentEditedCourseId !== null
+        ? await updateCourseByIdService(
+            currentEditedCourseId,
+            courseFinalFormData
+          )
+        : await addNewCourseService(courseFinalFormData);
 
     if (response?.success) {
       setCourseLandingFormData(courseLandingInitialFormData);
       setCourseCurriculumFormData(courseCurriculumInitialFormData);
+
       Swal.fire({
         position: "center",
         icon: "success",
@@ -104,44 +107,42 @@ const AddCoursePage = () => {
         showConfirmButton: false,
         timer: 1500,
       });
-      // navigate(-1);
-      // setCurrentEditedCourseId(null);
+      router.push("/dashboard/my-courses");
+      setCurrentEditedCourseId(null);
     }
 
-    console.log(courseFinalFormData, "courseFinalFormData");
+    // console.log(courseFinalFormData, "courseFinalFormData");
   }
 
-  // async function fetchCurrentCourseDetails() {
-  //   const response = await fetchInstructorCourseDetailsService(
-  //     currentEditedCourseId
-  //   );
+  async function fetchCurrentCourseDetails() {
+    const response = await fetchInstructorCourseDetailsService(
+      currentEditedCourseId
+    );
 
-  //   if (response?.success) {
-  //     const setCourseFormData = Object.keys(
-  //       courseLandingInitialFormData
-  //     ).reduce((acc, key) => {
-  //       acc[key] = response?.data[key] || courseLandingInitialFormData[key];
+    if (response?.success) {
+      const setCourseFormData = Object.keys(
+        courseLandingInitialFormData
+      ).reduce((acc, key) => {
+        acc[key] = response?.data[key] || courseLandingInitialFormData[key];
 
-  //       return acc;
-  //     }, {});
+        return acc;
+      }, {});
 
-  //     console.log(setCourseFormData, response?.data, "setCourseFormData");
-  //     setCourseLandingFormData(setCourseFormData);
-  //     setCourseCurriculumFormData(response?.data?.curriculum);
-  //   }
+      setCourseLandingFormData(setCourseFormData);
+      setCourseCurriculumFormData(response?.data?.curriculum);
+    }
+  }
 
-  //   console.log(response, "response");
-  // }
+  useEffect(() => {
+    if (currentEditedCourseId !== null) fetchCurrentCourseDetails();
+    // console.log(currentEditedCourseId);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentEditedCourseId]);
 
-  // useEffect(() => {
-  //   if (currentEditedCourseId !== null) fetchCurrentCourseDetails();
-  // }, [currentEditedCourseId]);
-
-  // useEffect(() => {
-  //   if (params?.courseId) setCurrentEditedCourseId(params?.courseId);
-  // }, [params?.courseId]);
-
-  // console.log(params, currentEditedCourseId, "params");
+  useEffect(() => {
+    if (getCurrentEditedCourseId)
+      setCurrentEditedCourseId(getCurrentEditedCourseId);
+  }, [getCurrentEditedCourseId, setCurrentEditedCourseId]);
 
   return (
     <div>

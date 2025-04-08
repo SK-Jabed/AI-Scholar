@@ -18,8 +18,8 @@ const InstructorProvider = ({ children }) => {
   const [mediaUploadProgress, setMediaUploadProgress] = useState(false);
   const [mediaUploadProgressPercentage, setMediaUploadProgressPercentage] =
     useState(0);
-  //   const [instructorCoursesList, setInstructorCoursesList] = useState([]);
-  //   const [currentEditedCourseId, setCurrentEditedCourseId] = useState(null);
+  const [instructorCoursesList, setInstructorCoursesList] = useState([]);
+  const [currentEditedCourseId, setCurrentEditedCourseId] = useState(null);
 
   return (
     <InstructorContext.Provider
@@ -32,10 +32,10 @@ const InstructorProvider = ({ children }) => {
         setMediaUploadProgress,
         mediaUploadProgressPercentage,
         setMediaUploadProgressPercentage,
-        // instructorCoursesList,
-        // setInstructorCoursesList,
-        // currentEditedCourseId,
-        // setCurrentEditedCourseId,
+        instructorCoursesList,
+        setInstructorCoursesList,
+        currentEditedCourseId,
+        setCurrentEditedCourseId,
       }}
     >
       {children}
