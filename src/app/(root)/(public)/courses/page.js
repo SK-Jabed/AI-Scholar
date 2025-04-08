@@ -32,11 +32,7 @@ const Courses = () => {
           ? ""
           : `category=${encodeURIComponent(category)}`;
       const res = await fetch(
-<<<<<<< HEAD
-        `${process.env.NEXT_PUBLIC_SERVER_URL}/courses?${query}&limit=6`
-=======
         `${process.env.NEXT_PUBLIC_SERVER_URL}/courses/get-courses?${query}&limit=9`
->>>>>>> d2d9a084ad5bd376b6329094e28d0f8aaee466a0
       );
       const { data } = await res.json();
       setCourses(data);
