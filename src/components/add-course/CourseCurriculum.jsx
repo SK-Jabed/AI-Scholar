@@ -4,15 +4,10 @@ import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { Switch } from "../ui/switch";
 import { Label } from "../ui/label";
-// import {
-//   mediaBulkUploadService,
-//   mediaDeleteService,
-//   mediaUploadService,
-// } from "@/services";
 import { Upload } from "lucide-react";
 import { InstructorContext } from "@/context/InstructorContext";
 import { courseCurriculumInitialFormData } from "@/config";
-import { mediaDeleteService, mediaUploadService } from "@/services";
+import { mediaBulkUploadService, mediaDeleteService, mediaUploadService } from "@/services";
 import MediaProgressBar from "../shared/MediaProgressBar";
 import VideoPlayer from "../video-player/VideoPlayer";
 
