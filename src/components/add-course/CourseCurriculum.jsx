@@ -267,7 +267,7 @@ const CourseCurriculum = () => {
         <div className="mt-4 space-y-4">
           {courseCurriculumFormData.map((curriculumItem, index) => (
             <div key={index} className="border p-5 rounded-md">
-              <div className="flex gap-5 items-center">
+              <div className="flex gap-4 items-center">
                 <h3 className="font-semibold">Lecture {index + 1}</h3>
                 <Input
                   name={`title-${index + 1}`}
