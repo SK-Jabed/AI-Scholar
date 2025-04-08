@@ -103,7 +103,7 @@ const AddCoursePage = () => {
       Swal.fire({
         position: "center",
         icon: "success",
-        title: "Your course has been created",
+        title: "Your submission has been done",
         showConfirmButton: false,
         timer: 1500,
       });

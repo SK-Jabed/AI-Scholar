@@ -54,6 +54,16 @@ const CourseSettings = () => {
             ...courseLandingFormData,
             image: response.data.url,
           });
+
+          Swal.fire({
+            icon: "success",
+            title: "Uploaded!",
+            text: "Your image has been uploaded.",
+            toast: true,
+            position: "center",
+            showConfirmButton: false,
+            timer: 3000,
+          });
           setMediaUploadProgress(false);
         }
       } catch (e) {
@@ -72,7 +82,7 @@ const CourseSettings = () => {
           title: "Error",
           text: "Could not extract image ID for deletion",
           toast: true,
-          position: "top-end",
+          position: "center",
           showConfirmButton: false,
           timer: 3000,
         });
@@ -103,7 +113,7 @@ const CourseSettings = () => {
           title: "Deleted!",
           text: "Your image has been deleted.",
           toast: true,
-          position: "top-end",
+          position: "center",
           showConfirmButton: false,
           timer: 3000,
         });
@@ -113,7 +123,7 @@ const CourseSettings = () => {
           title: "Failed",
           text: "Failed to delete image from server",
           toast: true,
-          position: "top-end",
+          position: "center",
           showConfirmButton: false,
           timer: 3000,
         });

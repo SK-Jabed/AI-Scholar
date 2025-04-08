@@ -7,9 +7,14 @@ import { Label } from "../ui/label";
 import { Upload } from "lucide-react";
 import { InstructorContext } from "@/context/InstructorContext";
 import { courseCurriculumInitialFormData } from "@/config";
-import { mediaBulkUploadService, mediaDeleteService, mediaUploadService } from "@/services";
+import {
+  mediaBulkUploadService,
+  mediaDeleteService,
+  mediaUploadService,
+} from "@/services";
 import MediaProgressBar from "../shared/MediaProgressBar";
 import VideoPlayer from "../video-player/VideoPlayer";
+import Swal from "sweetalert2";
 
 const CourseCurriculum = () => {
   const {
@@ -21,7 +26,7 @@ const CourseCurriculum = () => {
     setMediaUploadProgressPercentage,
   } = useContext(InstructorContext);
 
-  //   const bulkUploadInputRef = useRef(null);
+  const bulkUploadInputRef = useRef(null);
 
   const handleNewLecture = () => {
     setCourseCurriculumFormData([
@@ -71,6 +76,17 @@ const CourseCurriculum = () => {
             videoUrl: response?.data?.url,
             public_id: response?.data?.public_id,
           };
+
+          Swal.fire({
+            icon: "success",
+            title: "Uploaded!",
+            text: "Your lecture has been uploaded.",
+            toast: true,
+            position: "center",
+            showConfirmButton: false,
+            timer: 3000,
+          });
+
           setCourseCurriculumFormData(cpyCourseCurriculumFormData);
           setMediaUploadProgress(false);
         }
@@ -110,77 +126,100 @@ const CourseCurriculum = () => {
       );
     });
   };
-  console.log(courseCurriculumFormData);
 
-  //   function handleOpenBulkUploadDialog() {
-  //     bulkUploadInputRef.current?.click();
-  //   }
+  // console.log(courseCurriculumFormData);
 
-  //   function areAllCourseCurriculumFormDataObjectsEmpty(arr) {
-  //     return arr.every((obj) => {
-  //       return Object.entries(obj).every(([key, value]) => {
-  //         if (typeof value === "boolean") {
-  //           return true;
-  //         }
-  //         return value === "";
-  //       });
-  //     });
-  //   }
+  const handleOpenBulkUploadDialog = () => {
+    bulkUploadInputRef.current?.click();
+  };
 
-  //   async function handleMediaBulkUpload(event) {
-  //     const selectedFiles = Array.from(event.target.files);
-  //     const bulkFormData = new FormData();
+  const areAllCourseCurriculumFormDataObjectsEmpty = (arr) => {
+    return arr.every((obj) => {
+      return Object.entries(obj).every(([key, value]) => {
+        if (typeof value === "boolean") {
+          return true;
+        }
+        return value === "";
+      });
+    });
+  };
 
-  //     selectedFiles.forEach((fileItem) => bulkFormData.append("files", fileItem));
+  const handleMediaBulkUpload = async (event) => {
+    const selectedFiles = Array.from(event.target.files);
+    const bulkFormData = new FormData();
 
-  //     try {
-  //       setMediaUploadProgress(true);
-  //       const response = await mediaBulkUploadService(
-  //         bulkFormData,
-  //         setMediaUploadProgressPercentage
-  //       );
+    selectedFiles.forEach((fileItem) => bulkFormData.append("files", fileItem));
 
-  //       console.log(response, "bulk");
-  //       if (response?.success) {
-  //         let cpyCourseCurriculumFormdata =
-  //           areAllCourseCurriculumFormDataObjectsEmpty(courseCurriculumFormData)
-  //             ? []
-  //             : [...courseCurriculumFormData];
+    try {
+      setMediaUploadProgress(true);
+      const response = await mediaBulkUploadService(
+        bulkFormData,
+        setMediaUploadProgressPercentage
+      );
 
-  //         cpyCourseCurriculumFormdata = [
-  //           ...cpyCourseCurriculumFormdata,
-  //           ...response?.data.map((item, index) => ({
-  //             videoUrl: item?.url,
-  //             public_id: item?.public_id,
-  //             title: `Lecture ${
-  //               cpyCourseCurriculumFormdata.length + (index + 1)
-  //             }`,
-  //             freePreview: false,
-  //           })),
-  //         ];
-  //         setCourseCurriculumFormData(cpyCourseCurriculumFormdata);
-  //         setMediaUploadProgress(false);
-  //       }
-  //     } catch (e) {
-  //       console.log(e);
-  //     }
-  //   }
+      // console.log(response, "bulk");
 
-  //   async function handleDeleteLecture(currentIndex) {
-  //     let cpyCourseCurriculumFormData = [...courseCurriculumFormData];
-  //     const getCurrentSelectedVideoPublicId =
-  //       cpyCourseCurriculumFormData[currentIndex].public_id;
+      if (response?.success) {
+        let cpyCourseCurriculumFormdata =
+          areAllCourseCurriculumFormDataObjectsEmpty(courseCurriculumFormData)
+            ? []
+            : [...courseCurriculumFormData];
 
-  //     const response = await mediaDeleteService(getCurrentSelectedVideoPublicId);
+        cpyCourseCurriculumFormdata = [
+          ...cpyCourseCurriculumFormdata,
+          ...response?.data.map((item, index) => ({
+            videoUrl: item?.url,
+            public_id: item?.public_id,
+            title: `Lecture ${
+              cpyCourseCurriculumFormdata.length + (index + 1)
+            }`,
+            freePreview: false,
+          })),
+        ];
 
-  //     if (response?.success) {
-  //       cpyCourseCurriculumFormData = cpyCourseCurriculumFormData.filter(
-  //         (_, index) => index !== currentIndex
-  //       );
+        Swal.fire({
+          icon: "success",
+          title: "Uploaded!",
+          text: "Your lectures has been uploaded.",
+          toast: true,
+          position: "center",
+          showConfirmButton: false,
+          timer: 3000,
+        });
 
-  //       setCourseCurriculumFormData(cpyCourseCurriculumFormData);
-  //     }
-  //   }
+        setCourseCurriculumFormData(cpyCourseCurriculumFormdata);
+        setMediaUploadProgress(false);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleDeleteLecture = async (currentIndex) => {
+    let cpyCourseCurriculumFormData = [...courseCurriculumFormData];
+    const getCurrentSelectedVideoPublicId =
+      cpyCourseCurriculumFormData[currentIndex].public_id;
+
+    const response = await mediaDeleteService(getCurrentSelectedVideoPublicId);
+
+    if (response?.success) {
+      Swal.fire({
+        icon: "success",
+        title: "Deleted!",
+        text: "Your lecture has been deleted.",
+        toast: true,
+        position: "center",
+        showConfirmButton: false,
+        timer: 3000,
+      });
+
+      cpyCourseCurriculumFormData = cpyCourseCurriculumFormData.filter(
+        (_, index) => index !== currentIndex
+      );
+
+      setCourseCurriculumFormData(cpyCourseCurriculumFormData);
+    }
+  };
 
   return (
     <Card>
@@ -191,19 +230,19 @@ const CourseCurriculum = () => {
         <div>
           <Input
             type="file"
-            // ref={bulkUploadInputRef}
+            ref={bulkUploadInputRef}
             accept="video/*"
             multiple
             className="hidden"
             id="bulk-media-upload"
-            // onChange={handleMediaBulkUpload}
+            onChange={handleMediaBulkUpload}
           />
           <Button
             as="label"
             htmlFor="bulk-media-upload"
             variant="outline"
             className="cursor-pointer"
-            // onClick={handleOpenBulkUploadDialog}
+            onClick={handleOpenBulkUploadDialog}
           >
             <Upload className="w-4 h-5 mr-2" />
             Bulk Upload
@@ -262,7 +301,7 @@ const CourseCurriculum = () => {
                       Replace Video
                     </Button>
                     <Button
-                      //   onClick={() => handleDeleteLecture(index)}
+                      onClick={() => handleDeleteLecture(index)}
                       className="bg-red-900"
                     >
                       Delete Lecture
