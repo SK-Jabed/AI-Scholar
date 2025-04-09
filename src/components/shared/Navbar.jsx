@@ -1,5 +1,5 @@
 "use client";
-import { Menu, X } from "lucide-react";
+import { GraduationCap, Menu, X } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState, useCallback } from "react";
@@ -28,40 +28,43 @@ const Navbar = () => {
   ];
 
   // Memoize authLink to prevent unnecessary re-renders
-  const authLink = useCallback(() => (
-    <div className="flex space-x-3">
-      {session?.user ? (
-        <>
-          <p className="btn btn-outline">{session?.user?.email}</p>
-          <button
-            onClick={doLogout}
-            className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white px-5 py-2 rounded-md shadow-md hover:scale-105 transition transform"
-          >
-            Logout
-          </button>
-        </>
-      ) : (
-        <>
-          <Link
-            href={"/login"}
-            className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white px-5 py-2 rounded-md shadow-md hover:scale-105 transition transform"
-          >
-            Login
-          </Link>
+  const authLink = useCallback(
+    () => (
+      <div className="flex space-x-3">
+        {session?.user ? (
+          <>
+            <p className="btn btn-outline">{session?.user?.email}</p>
+            <button
+              onClick={doLogout}
+              className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white px-5 py-2 rounded-md shadow-md hover:scale-105 transition transform"
+            >
+              Logout
+            </button>
+          </>
+        ) : (
+          <>
+            <Link
+              href={"/login"}
+              className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white px-5 py-2 rounded-md shadow-md hover:scale-105 transition transform"
+            >
+              Login
+            </Link>
 
-          <Link
-            href="/register"
-            className="bg-gradient-to-r from-gray-300 to-gray-400 text-gray-900 px-5 py-2 rounded-md shadow-md hover:scale-105 transition transform"
-          >
-            Register
-          </Link>
-        </>
-      )}
-    </div>
-  ), [session?.user]);
+            <Link
+              href="/register"
+              className="bg-gradient-to-r from-gray-300 to-gray-400 text-gray-900 px-5 py-2 rounded-md shadow-md hover:scale-105 transition transform"
+            >
+              Register
+            </Link>
+          </>
+        )}
+      </div>
+    ),
+    [session?.user]
+  );
 
   // Mobile menu toggle handler
-  const toggleMenu = () => setIsOpen(prev => !prev);
+  const toggleMenu = () => setIsOpen((prev) => !prev);
 
   return (
     <header className="bg-white sticky top-0 z-50 mt-1.5">
@@ -69,11 +72,11 @@ const Navbar = () => {
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
           <h1>
-            <Link
-              href="/"
-              className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-sky-500 to-indigo-500"
-            >
-              AI Scholar
+            <Link href="/" className="flex items-center hover:text-black">
+              <GraduationCap className="h-8 w-8 mr-2" />
+              <span className="font-extrabold md:text-2xl text-[16px]">
+                AI Scholar
+              </span>
             </Link>
           </h1>
 
@@ -125,7 +128,7 @@ const Navbar = () => {
               <Link
                 key={link.href}
                 href={link.href}
-                onClick={toggleMenu}  // Close the menu on click
+                onClick={toggleMenu} // Close the menu on click
                 className={`hover:text-blue-600 transition text-lg ${
                   pathname === link.href ? "text-blue-600 font-semibold" : ""
                 }`}

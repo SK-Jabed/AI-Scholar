@@ -10,6 +10,7 @@ const CategoryCourses = ({ selectedCategory }) => {
 
   useEffect(() => {
     fetchCourses();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedCategory]);
 
   const fetchCourses = async () => {
