@@ -1,5 +1,6 @@
 // app/details/[id]/page.js
 import Navbar from '@/components/shared/Navbar';
+import Image from 'next/image';
 import React from 'react';
 
 export default async function Page({ params }) {
@@ -62,7 +63,7 @@ export default async function Page({ params }) {
 
             {/* Instructor Information */}
             <div className="flex items-center gap-4 mt-6">
-              <img
+              <Image
                 src={data?.instructor?.instructorImage || "https://i.ibb.co/2n4zC6F/user.png"}
                 alt="Instructor"
                 className="h-12 w-12 rounded-full object-cover"
