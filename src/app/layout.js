@@ -4,6 +4,7 @@ import { ThemeProvider } from "@/context/ThemeContext";
 import { SidebarProvider } from "@/context/SidebarContext";
 import InstructorProvider from "@/context/InstructorContext";
 import "./globals.css";
+import { SessionProvider } from "next-auth/react";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -28,13 +29,15 @@ export default function RootLayout({ children }) {
 
         {/* Main Content */}
         {/* <CardSpotlight> */}
-        <ThemeProvider>
-          <InstructorProvider>
-            <SidebarProvider>
-              <main className="min-h-screen">{children}</main>
-            </SidebarProvider>
-          </InstructorProvider>
-        </ThemeProvider>
+        <SessionProvider>
+          <ThemeProvider>
+            <InstructorProvider>
+              <SidebarProvider>
+                <main className="min-h-screen">{children}</main>
+              </SidebarProvider>
+            </InstructorProvider>
+          </ThemeProvider>
+        </SessionProvider>
         {/* </CardSpotlight> */}
 
         {/* <Footer /> */}
