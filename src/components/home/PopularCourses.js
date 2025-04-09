@@ -126,7 +126,7 @@ export default function PopularCourses() {
 
             {/* View Course Link */}
             <Link
-              href={`/courses/get-courses/${course._id || index}`}
+              href={`/course/${course._id}`}
               className="mt-4 inline-block text-blue-600 font-medium hover:underline"
             >
               View Course →

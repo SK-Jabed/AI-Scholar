@@ -30,13 +30,13 @@ export default function RootLayout({ children }) {
         {/* Main Content */}
         {/* <CardSpotlight> */}
         <SessionProvider>
-        <ThemeProvider>
-          <InstructorProvider>
-            <SidebarProvider>
-              <main className="min-h-screen">{children}</main>
-            </SidebarProvider>
-          </InstructorProvider>
-        </ThemeProvider>
+          <ThemeProvider>
+            <InstructorProvider>
+              <SidebarProvider>
+                <main className="min-h-screen">{children}</main>
+              </SidebarProvider>
+            </InstructorProvider>
+          </ThemeProvider>
         </SessionProvider>
         {/* </CardSpotlight> */}
 
