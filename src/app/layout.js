@@ -38,15 +38,6 @@ export default function RootLayout({ children }) {
             </InstructorProvider>
           </ThemeProvider>
         </SessionProvider>
-        <SessionProvider>
-          <ThemeProvider>
-            <InstructorProvider>
-              <SidebarProvider>
-                <main className="min-h-screen">{children}</main>
-              </SidebarProvider>
-            </InstructorProvider>
-          </ThemeProvider>
-        </SessionProvider>
         {/* </CardSpotlight> */}
 
         {/* <Footer /> */}
@@ -54,4 +45,3 @@ export default function RootLayout({ children }) {
     </html>
   );
 }
-
