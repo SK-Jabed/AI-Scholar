@@ -6,6 +6,7 @@ import Categories from "@/components/home/Categories";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { LoaderIcon } from "lucide-react";
+import Link from "next/link";
 
 const Courses = () => {
   const [courses, setCourses] = useState([]);
@@ -105,9 +106,11 @@ const Courses = () => {
                     </p>
                   </div>
                   <div className="p-4 bg-gray-100 flex justify-between items-center">
-                    <button className="bg-accent/90 text-white px-4 py-2 cursor-pointer rounded-md hover:bg-accent transition">
-                      Enroll Now
-                    </button>
+                    <Link href={`/course/${course._id}`}>
+                      <button className="bg-accent/90 text-white px-4 py-2 cursor-pointer rounded-md hover:bg-accent transition">
+                        Enroll Now
+                      </button>
+                    </Link>
                     <p className="text-sm text-gray-600">
                       {course.primaryLanguage}
                     </p>

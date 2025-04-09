@@ -1,10 +1,8 @@
-// app/details/[id]/page.js
-import Navbar from '@/components/shared/Navbar';
 import Image from 'next/image';
 import React from 'react';
 
-export default async function Page({ params }) {
-  const { id } = params;
+export default async function CourseDetailsPage({ params }) {
+  const { id } = await params;
 
   try {
     const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/courses/get-course/details/${id}`, {
@@ -20,7 +18,6 @@ export default async function Page({ params }) {
 
     return (
       <div className="min-h-screen bg-gray-100 px-4 md:px-8">
-        <Navbar/>
         <div className="max-w-4xl mx-auto bg-white shadow-sm rounded-lg overflow-hidden py-4">
           {/* Course Image */}
           <div className="w-full h-64 bg-cover bg-center" style={{ backgroundImage: `url(${data?.image})` }}></div>
@@ -63,11 +60,11 @@ export default async function Page({ params }) {
 
             {/* Instructor Information */}
             <div className="flex items-center gap-4 mt-6">
-              <Image
+              {/* <Image
                 src={data?.instructor?.instructorImage || "https://i.ibb.co/2n4zC6F/user.png"}
                 alt="Instructor"
                 className="h-12 w-12 rounded-full object-cover"
-              />
+              /> */}
               <div>
                 <p className="font-semibold">{data?.instructor?.instructorName}</p>
                 <p className="text-sm text-gray-500">{data?.instructor?.instructorEmail}</p>
