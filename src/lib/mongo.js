@@ -4,7 +4,7 @@ import mongoose from "mongoose";
 
 dotenv.config();
 
-const uri = process.env.DB_URL;
+const uri = process.env.DB_URI;
 
 if (!uri) {
   throw new Error(
