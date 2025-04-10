@@ -70,8 +70,20 @@ const Login = () => {
               className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               required
             />
+            <div className="text-sm text-gray-500 text-right mt-1">
+              <Link
+                href="/forget-password" 
+                className="text-blue-500 hover:underline"
+              >
+                <span className="text-blue-500 hover:underline">
+                  Forget Password?
+                </span>
+              </Link>
+             
+            </div>
           </div>
           <p className="font-semibold text-red-600">{error}</p>
+          
           <button
             type="submit"
             className="w-full bg-blue-600 text-white font-semibold py-3 rounded-lg hover:bg-blue-700 transition duration-300 cursor-pointer"
