@@ -34,7 +34,17 @@ const Users = () => {
     currentPage * itemsPerPage
   );
 
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = async (data, userId) =>{
+    try {
+      const res = await axiosInstance.patch(`/users/${userId}`, { role: data });
+  
+      console.log("User role updated:", res?.data?.data);
+      // Optional: refresh user list here
+  
+    } catch (error) {
+      console.error("Error updating user role:", error);
+    }
+  };
 
   return (
     <div className="min-h-screen py-6 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
@@ -121,7 +131,7 @@ const Users = () => {
                             data[`role${index}`]
                               ? data[`role${index}`]
                               : "anonymous",
-                            index
+                              user?._id
                           )
                         )}
                       >
