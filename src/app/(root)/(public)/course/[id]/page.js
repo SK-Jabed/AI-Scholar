@@ -1,116 +1,250 @@
-import Image from 'next/image';
-import React from 'react';
+"use client";
 
-export default async function CourseDetailsPage({ params }) {
-  const { id } = await params;
+import React, { useContext, useEffect, useState } from "react";
 
-  try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/courses/get-course/details/${id}`, {
-      cache: 'no-store',
-    });
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { Skeleton } from "@/components/ui/skeleton";
+import VideoPlayer from "@/components/video-player/VideoPlayer";
+import { StudentContext } from "@/context/studentContext";
 
-    if (!res.ok) {
-      throw new Error(`Failed to fetch course. Status: ${res.status}`);
+import { CheckCircle, Globe, Lock, PlayCircle } from "lucide-react";
+import { fetchStudentViewCourseDetailsService } from "@/services";
+import { usePathname } from "next/navigation";
+import { useRouter } from "next/navigation";
+
+export default function CourseDetailsPage({ params }) {
+  const {
+    studentViewCourseDetails,
+    setStudentViewCourseDetails,
+    currentCourseDetailsId,
+    setCurrentCourseDetailsId,
+    loadingState,
+    setLoadingState,
+  } = useContext(StudentContext);
+
+  const [displayCurrentVideoFreePreview, setDisplayCurrentVideoFreePreview] =
+    useState(null);
+  const [showFreePreviewDialog, setShowFreePreviewDialog] = useState(false);
+  const [approvalUrl, setApprovalUrl] = useState("");
+
+  const { id } = React.use(params);
+
+  const router = useRouter();
+  const pathname = usePathname();
+
+  async function fetchStudentViewCourseDetails() {
+    const response = await fetchStudentViewCourseDetailsService(
+      currentCourseDetailsId
+    );
+
+    if (response?.success) {
+      setStudentViewCourseDetails(response?.data);
+      setLoadingState(false);
+    } else {
+      setStudentViewCourseDetails(null);
+      setLoadingState(false);
     }
-
-    const course = await res.json();
-    const data = course?.data;
-
-    return (
-      <div className="min-h-screen bg-gray-100 px-4 md:px-8">
-        <div className="max-w-4xl mx-auto bg-white shadow-sm rounded-lg overflow-hidden py-4">
-          {/* Course Image */}
-          <div className="w-full h-64 bg-cover bg-center" style={{ backgroundImage: `url(${data?.image})` }}></div>
-
-          <div className="p-6 space-y-4">
-            {/* Title and Subtitle */}
-            <h1 className="text-2xl font-bold text-gray-800">{data?.title}</h1>
-            <h2 className="text-lg text-gray-500">{data?.subtitle}</h2>
-
-            {/* Category, Level, Language */}
-            <div className="text-sm text-gray-600">
-              <span className="font-medium">Category:</span> {data?.category} •
-              <span className="ml-2 font-medium">Level:</span> {data?.level} •
-              <span className="ml-2 font-medium">Language:</span> {data?.primaryLanguage}
-            </div>
-
-            {/* Description */}
-            <p className="text-gray-700 mt-4">{data?.description}</p>
-
-            {/* Objectives */}
-            <div>
-              <p className="font-semibold text-gray-600">Course Objectives:</p>
-              <ul className="list-disc pl-5 text-gray-700">
-                {data?.objectives.split(',').map((item, index) => (
-                  <li key={index}>{item.trim()}</li>
-                ))}
-              </ul>
-            </div>
-
-            {/* Welcome Message */}
-            <div>
-              <p className="font-semibold text-gray-600">Welcome Message:</p>
-              <p className="text-indigo-700 italic">{data?.welcomeMessage}</p>
-            </div>
-
-            {/* Pricing */}
-            <div className="mt-4">
-              <p className="text-xl font-semibold text-gray-900">${data?.pricing}</p>
-            </div>
-
-            {/* Instructor Information */}
-            <div className="flex items-center gap-4 mt-6">
-              {/* <Image
-                src={data?.instructor?.instructorImage || "https://i.ibb.co/2n4zC6F/user.png"}
-                alt="Instructor"
-                className="h-12 w-12 rounded-full object-cover"
-              /> */}
-              <div>
-                <p className="font-semibold">{data?.instructor?.instructorName}</p>
-                <p className="text-sm text-gray-500">{data?.instructor?.instructorEmail}</p>
-              </div>
-            </div>
-
-            {/* Enrollment Button */}
-            <div className="mt-6">
-              <button className="w-full py-2 bg-blue-500 text-white rounded-lg transition">
-                Enroll Now
-              </button>
-            </div>
-          </div>
-        </div>
- 
-        {/* Curriculum Section */}
-        <div className="max-w-4xl mx-auto mt-10 space-y-6">
-          <h2 className="text-2xl font-bold text-gray-800">Course Curriculum</h2>
-          {data?.curriculum?.map((lesson, index) => (
-            <div key={index} className="p-4 bg-white shadow rounded-lg">
-              <h3 className="font-semibold text-indigo-600">{lesson?.title}</h3>
-              <p className="text-gray-600">{lesson?.description}</p>
-            </div>
-          ))}
-        </div>
-
-        {/* Additional Info */}
-        <div className="max-w-4xl mx-auto mt-10 p-6 bg-white rounded-lg shadow-sm">
-          <h3 className="text-lg font-semibold text-gray-800">Course ID: {data?._id}</h3>
-          <div className="mt-4 text-sm text-gray-600">
-            <p><span className="font-medium">Date:</span> {new Date(data?.date).toLocaleDateString()}</p>
-            <p><span className="font-medium">Enrolled Students:</span> {data?.students?.length || 0}</p>
-          </div>
-        </div>
-      </div>
-    );
-  } catch (error) {
-    console.error("Error fetching course:", error);
-
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-100">
-        <div className="text-center">
-          <h1 className="text-2xl font-bold text-red-500 mb-2">Error Loading Course</h1>
-          <p className="text-gray-600">{error.message}</p>
-        </div>
-      </div>
-    );
   }
+
+  function handleSetFreePreview(getCurrentVideoInfo) {
+    console.log(getCurrentVideoInfo);
+    setDisplayCurrentVideoFreePreview(getCurrentVideoInfo?.videoUrl);
+  }
+
+  useEffect(() => {
+    if (displayCurrentVideoFreePreview !== null) setShowFreePreviewDialog(true);
+  }, [displayCurrentVideoFreePreview]);
+
+  useEffect(() => {
+    if (currentCourseDetailsId !== null) fetchStudentViewCourseDetails();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentCourseDetailsId]);
+
+  useEffect(() => {
+    if (id) setCurrentCourseDetailsId(id);
+  }, [id, setCurrentCourseDetailsId]);
+
+  useEffect(() => {
+    if (!pathname.includes("/course"))
+      setStudentViewCourseDetails(null),
+        setCurrentCourseDetailsId(null),
+        setCoursePurchaseId(null);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pathname]);
+
+  if (loadingState) return <Skeleton />;
+
+  if (approvalUrl !== "") {
+    window.location.href = approvalUrl;
+  }
+
+  const getIndexOfFreePreviewUrl =
+    studentViewCourseDetails !== null
+      ? studentViewCourseDetails?.curriculum?.findIndex(
+          (item) => item.freePreview
+        )
+      : -1;
+
+  return (
+    <div className="min-h-screen mx-auto p-4">
+      <div className="bg-gray-900 text-white p-8 rounded-t-lg">
+        <h1 className="text-3xl font-bold mb-4">
+          {studentViewCourseDetails?.title}
+        </h1>
+        <p className="text-xl mb-4">{studentViewCourseDetails?.subtitle}</p>
+        <div className="flex items-center space-x-4 mt-2 text-sm">
+          <span>
+            Created By: {studentViewCourseDetails?.instructor?.instructorName}
+          </span>
+          <span>Created On: {studentViewCourseDetails?.date.split("T")[0]}</span>
+          <span className="flex items-center">
+            <Globe className="mr-1 h-4 w-4" />
+            {studentViewCourseDetails?.primaryLanguage}
+          </span>
+          <span>
+            {studentViewCourseDetails?.students.length}{" "}
+            {studentViewCourseDetails?.students.length <= 1
+              ? "Student"
+              : "Students"}
+          </span>
+        </div>
+      </div>
+      <div className="flex flex-col md:flex-row gap-8 mt-8">
+        <main className="flex-grow">
+          <Card className="mb-8">
+            <CardHeader>
+              <CardTitle>What you will learn</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <ul className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                {studentViewCourseDetails?.objectives
+                  .split(",")
+                  .map((objective, index) => (
+                    <li key={index} className="flex items-start">
+                      <CheckCircle className="mr-2 h-5 w-5 text-green-500 flex-shrink-0" />
+                      <span>{objective}</span>
+                    </li>
+                  ))}
+              </ul>
+            </CardContent>
+          </Card>
+          <Card className="mb-8">
+            <CardHeader>
+              <CardTitle>Course Description</CardTitle>
+            </CardHeader>
+            <CardContent>{studentViewCourseDetails?.description}</CardContent>
+          </Card>
+          <Card className="mb-8">
+            <CardHeader>
+              <CardTitle>Course Curriculum</CardTitle>
+            </CardHeader>
+            <CardContent>
+              {studentViewCourseDetails?.curriculum?.map(
+                (curriculumItem, index) => (
+                  <li
+                    key={index}
+                    className={`${
+                      curriculumItem?.freePreview
+                        ? "cursor-pointer"
+                        : "cursor-not-allowed"
+                    } flex items-center mb-4`}
+                    onClick={
+                      curriculumItem?.freePreview
+                        ? () => handleSetFreePreview(curriculumItem)
+                        : null
+                    }
+                  >
+                    {curriculumItem?.freePreview ? (
+                      <PlayCircle className="mr-2 h-4 w-4" />
+                    ) : (
+                      <Lock className="mr-2 h-4 w-4" />
+                    )}
+                    <span>{curriculumItem?.title}</span>
+                  </li>
+                )
+              )}
+            </CardContent>
+          </Card>
+        </main>
+        <aside className="w-full md:w-[600px]">
+          <Card className="sticky top-4">
+            <CardContent className="p-6">
+              <div className="aspect-video mb-4 rounded-lg flex items-center justify-center">
+                <VideoPlayer
+                  url={
+                    getIndexOfFreePreviewUrl !== -1
+                      ? studentViewCourseDetails?.curriculum[
+                          getIndexOfFreePreviewUrl
+                        ].videoUrl
+                      : ""
+                  }
+                  width="550px"
+                  height="300px"
+                />
+              </div>
+              <div className="mb-4">
+                <span className="text-3xl font-bold">
+                  ${studentViewCourseDetails?.pricing}
+                </span>
+              </div>
+              <Button className="w-full">Buy Now</Button>
+            </CardContent>
+          </Card>
+        </aside>
+      </div>
+      <Dialog
+        open={showFreePreviewDialog}
+        onOpenChange={() => {
+          setShowFreePreviewDialog(false);
+          setDisplayCurrentVideoFreePreview(null);
+        }}
+      >
+        <DialogContent className="w-[500px]">
+          <DialogHeader>
+            <DialogTitle>Course Preview</DialogTitle>
+          </DialogHeader>
+          <div className="aspect-video rounded-lg flex items-center justify-center">
+            <VideoPlayer
+              url={displayCurrentVideoFreePreview}
+              width="450px"
+              height="250px"
+            />
+          </div>
+          <div className="flex flex-col gap-2">
+            {studentViewCourseDetails?.curriculum
+              ?.filter((item) => item.freePreview)
+              .map((filteredItem, index) => (
+                <p
+                  key={index}
+                  onClick={() => handleSetFreePreview(filteredItem)}
+                  className="cursor-pointer text-[16px] font-medium"
+                >
+                  {filteredItem?.title}
+                </p>
+              ))}
+          </div>
+          <DialogFooter className="sm:justify-start">
+            <DialogClose asChild>
+              <Button
+                className={"bg-red-600 hover:bg-red-700 cursor-pointer"}
+                type="button"
+                variant="default"
+              >
+                Close
+              </Button>
+            </DialogClose>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+    </div>
+  );
 }
