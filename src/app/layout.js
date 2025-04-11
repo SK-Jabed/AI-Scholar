@@ -5,7 +5,7 @@ import { SidebarProvider } from "@/context/SidebarContext";
 import InstructorProvider from "@/context/InstructorContext";
 import "./globals.css";
 import { SessionProvider } from "next-auth/react";
-import StudentProvider from "@/context/studentContext";
+import StudentProvider from "@/context/StudentContext";
 
 const inter = Inter({
   subsets: ["latin"],

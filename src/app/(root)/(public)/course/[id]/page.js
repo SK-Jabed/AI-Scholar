@@ -14,7 +14,7 @@ import {
 } from "@/components/ui/dialog";
 import { Skeleton } from "@/components/ui/skeleton";
 import VideoPlayer from "@/components/video-player/VideoPlayer";
-// import { StudentContext } from "@/context/studentContext";
+import { StudentContext } from "@/context/StudentContext";
 
 import { CheckCircle, Globe, Lock, PlayCircle } from "lucide-react";
 import { fetchStudentViewCourseDetailsService } from "@/services";
@@ -22,20 +22,14 @@ import { usePathname } from "next/navigation";
 import { useRouter } from "next/navigation";
 
 export default function CourseDetailsPage({ params }) {
-  // const {
-  //   studentViewCourseDetails,
-  //   setStudentViewCourseDetails,
-  //   currentCourseDetailsId,
-  //   setCurrentCourseDetailsId,
-  //   loadingState,
-  //   setLoadingState,
-  // } = useContext(StudentContext);
-
-    const [loadingState, setLoadingState] = useState(true);
-    const [studentViewCoursesList, setStudentViewCoursesList] = useState([]);
-    const [studentViewCourseDetails, setStudentViewCourseDetails] =
-      useState(null);
-    const [currentCourseDetailsId, setCurrentCourseDetailsId] = useState(null);
+  const {
+    studentViewCourseDetails,
+    setStudentViewCourseDetails,
+    currentCourseDetailsId,
+    setCurrentCourseDetailsId,
+    loadingState,
+    setLoadingState,
+  } = useContext(StudentContext);
 
   const [displayCurrentVideoFreePreview, setDisplayCurrentVideoFreePreview] =
     useState(null);
@@ -84,6 +78,7 @@ export default function CourseDetailsPage({ params }) {
       setStudentViewCourseDetails(null),
         setCurrentCourseDetailsId(null),
         setCoursePurchaseId(null);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname]);
 
   if (loadingState) return <Skeleton />;
