@@ -5,6 +5,7 @@ import { SidebarProvider } from "@/context/SidebarContext";
 import InstructorProvider from "@/context/InstructorContext";
 import "./globals.css";
 import { SessionProvider } from "next-auth/react";
+import StudentProvider from "@/context/studentContext";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -32,9 +33,11 @@ export default function RootLayout({ children }) {
         <SessionProvider>
           <ThemeProvider>
             <InstructorProvider>
-              <SidebarProvider>
-                <main className="min-h-screen">{children}</main>
-              </SidebarProvider>
+              <StudentProvider>
+                <SidebarProvider>
+                  <main className="min-h-screen">{children}</main>
+                </SidebarProvider>
+              </StudentProvider>
             </InstructorProvider>
           </ThemeProvider>
         </SessionProvider>
