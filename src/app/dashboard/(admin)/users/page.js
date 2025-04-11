@@ -4,8 +4,11 @@ import { useEffect, useState } from "react";
 import { User, UserCog, ChevronDown, UserPlus } from "lucide-react";
 import Pagination from "@/components/common/Pagination";
 import useAxiosInstance from "@/hooks/useAxiosInstance";
+import { useForm } from "react-hook-form";
 
 const Users = () => {
+  const { register, handleSubmit } = useForm();
+
   const axiosInstance = useAxiosInstance();
   const [users, setUsers] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -15,7 +18,8 @@ const Users = () => {
     const dataFetch = async () => {
       try {
         const res = await axiosInstance.get("/users");
-        setUsers(res.data.message || []);
+        // console.log(res?.data?.data)
+        setUsers(res?.data?.data || []);
       } catch (error) {
         console.error("Error fetching courses:", error);
         setUsers([]);
@@ -29,6 +33,8 @@ const Users = () => {
     (currentPage - 1) * itemsPerPage,
     currentPage * itemsPerPage
   );
+
+  const onSubmit = (data) => console.log(data);
 
   return (
     <div className="min-h-screen py-6 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
@@ -108,18 +114,30 @@ const Users = () => {
                     <div className="text-xs text-gray-500">Active</div>
                   </td>
                   <td className="px-8 py-5 whitespace-nowrap">
-                    {user.role === "admin" ? (
-                      <div className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
-                        <UserCog className="w-4 h-4 mr-1.5" />
-                        Administrator
-                      </div>
-                    ) : (
-                      <button className="inline-flex items-center px-3 py-2 rounded-full text-xs font-medium bg-gray-100 text-gray-800 hover:bg-gray-200 transition-colors duration-200">
-                        <User className="w-4 h-4 mr-1.5" />
-                        Student
-                        <ChevronDown className="w-3 h-3 ml-1.5 opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
-                      </button>
-                    )}
+                    <div className="relative">
+                      <form
+                        onSubmit={handleSubmit((data) =>
+                          onSubmit(
+                            data[`role${index}`]
+                              ? data[`role${index}`]
+                              : "anonymous",
+                            index
+                          )
+                        )}
+                      >
+                        <select {...register(`role${index}`)}>
+                          <option value="admin">Admin</option>
+                          <option value="instructor">Instructor</option>
+                          <option value="student">Student</option>
+                        </select>
+                        <button
+                          type="submit"
+                          className="btn-outline btn rounded-md hover:bg-gray-300 transition"
+                        >
+                          Update role
+                        </button>
+                      </form>
+                    </div>
                   </td>
                 </tr>
               ))}
