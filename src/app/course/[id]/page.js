@@ -1,6 +1,5 @@
-// app/details/[id]/page.js
-import Navbar from "@/components/shared/Navbar";
-import Link from "next/link";
+
+import EnrollButton from "@/components/enrollbutton/enrollbutton";
 import React from "react";
 
 export default async function Page({ params }) {
@@ -91,9 +90,7 @@ export default async function Page({ params }) {
 
             {/* Enrollment Button */}
             <div className="mt-6">
-                <button className="w-full py-2 bg-blue-500 text-white rounded-lg transition">
-                  Enroll Now
-                </button>
+              <EnrollButton/>
             </div>
           </div>
         </div>
