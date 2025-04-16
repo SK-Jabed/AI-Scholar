@@ -14,10 +14,6 @@ import {
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
 import Image from "next/image";
-import { Dialog } from "../ui/dialog";
-import { Label } from "../ui/label";
-import { Input } from "../ui/input";
-import { Button } from "../ui/button";
 
 export default function UserMetaCard() {
   const handleSave = () => {
