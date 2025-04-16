@@ -1,6 +1,6 @@
 // import UserAddressCard from "@/components/user-profile/UserAddressCard";
 // import UserInfoCard from "@/components/user-profile/UserInfoCard";
-// import UserMetaCard from "@/components/user-profile/UserMetaCard";
+import UserMetaCard from "@/components/user-profile/UserMetaCard";
 
 export const metadata = {
   title: "Profile | AI Scholar",
@@ -16,9 +16,9 @@ export default function Profile() {
         </h3>
 
         <div className="space-y-6">
-          {/* <UserMetaCard />
-          <UserInfoCard />
-          <UserAddressCard /> */}
+          <UserMetaCard />
+          {/* <UserInfoCard /> */}
+          {/* <UserAddressCard /> */}
         </div>
       </div>
     </div>
