@@ -25,7 +25,8 @@ export default function PopularCourses() {
     const fetchData = async () => {
       try {
         const res = await axiosInstance.get("/courses/get-courses");
-        setPopularCourses(res.data.data || []);
+        console.log(res?.data)
+        setPopularCourses(res?.data?.data || []);
       } catch (error) {
         console.error("Error fetching courses:", error);
         setPopularCourses([]);
@@ -87,7 +88,7 @@ export default function PopularCourses() {
 
       {/* Courses Grid with Framer Motion */}
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
-        {popularCourses.map((course, index) => (
+        {popularCourses?.map((course, index) => (
           <motion.div
             key={course._id || index}
             className="bg-white border border-gray-300 shadow-lg p-2 rounded-xl overflow-hidden hover:scale-105 transition w-full"
@@ -115,7 +116,7 @@ export default function PopularCourses() {
             <div className="flex items-center mt-2 gap-1">
               {renderStars(course?.rating || 4)}
               <span className="ml-2 text-sm text-gray-600">
-                ({course?.students || 0} students)
+                ({course?.students?.length || 0} students)
               </span>
             </div>
 

@@ -100,7 +100,7 @@ const navItems = [
   {
     icon: <UserCircleIcon className="w-5 h-5" />,
     name: "Profile",
-    path: "/profile",
+    path: "/dashboard/profile",
     roles: ["admin", "instructor", "student"],
   },
   {
