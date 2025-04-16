@@ -2,10 +2,13 @@
 
 import { doLogout } from "@/app/actions";
 import {
+  BellIcon,
   BookOpenIcon,
   FileTextIcon,
+  HelpCircleIcon,
   HomeIcon,
   LayoutDashboardIcon,
+  LockIcon,
   LogOutIcon,
   PlusCircleIcon,
   SettingsIcon,
@@ -17,61 +20,151 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useCallback } from "react";
 import { useSidebar } from "../../context/SidebarContext";
+import { useSession } from "next-auth/react";
 
 // Define navigation items for Admin, Instructors, and Users
+// const navItems = [
+//   {
+//     icon: <LayoutDashboardIcon className="w-5 h-5" />,
+//     name: "Dashboard",
+//     path: "/dashboard",
+//     roles: ["admin", "instructor", "user"],
+//   },
+//   {
+//     icon: <BookOpenIcon className="w-5 h-5" />,
+//     name: "My Courses",
+//     path: "/dashboard/my-courses",
+//     roles: ["admin", "instructor", "user"],
+//   },
+//   // {
+//   //   icon: <BookOpenIcon className="w-5 h-5" />,
+//   //   name: "All Courses",
+//   //   path: "/dashboard/my-courses",
+//   //   roles: ["admin", "instructor", "user"],
+//   // },
+//   {
+//     icon: <UserCircle2Icon className="w-5 h-5" />,
+//     name: "Instructors",
+//     path: "/dashboard/instructors",
+//     roles: ["admin", "user"],
+//   },
+//   {
+//     icon: <PlusCircleIcon className="w-5 h-5" />,
+//     name: "Add Course",
+//     path: "/dashboard/add-course",
+//     roles: ["admin", "instructor", "user"],
+//   },
+
+//   {
+//     icon: <UsersIcon className="w-5 h-5" />,
+//     name: "Users",
+//     path: "/dashboard/users",
+//     roles: ["admin", "instructor", "user"],
+//   },
+//   {
+//     icon: <FileTextIcon className="w-5 h-5" />,
+//     name: "Assignments",
+//     path: "/assignments",
+//     roles: ["admin", "instructor", "user"],
+//   },
+//   {
+//     icon: <HomeIcon className="w-5 h-5" />,
+//     name: "Home",
+//     path: "/",
+//     roles: ["admin", "instructor", "user"],
+//   },
+// ];
 const navItems = [
   {
     icon: <LayoutDashboardIcon className="w-5 h-5" />,
     name: "Dashboard",
     path: "/dashboard",
-    roles: ["admin", "instructor", "user"],
+    roles: ["admin", "instructor", "student"], // Accessible to all roles
   },
   {
     icon: <BookOpenIcon className="w-5 h-5" />,
     name: "My Courses",
     path: "/dashboard/my-courses",
-    roles: ["admin", "instructor", "user"],
+    roles: ["admin", "instructor"], // Accessible to all roles
+  },
+  {
+    icon: <BookOpenIcon className="w-5 h-5" />,
+    name: "Enrolled Courses",
+    path: "/enrolled-courses",
+    roles: ["student"], // Accessible to all roles
   },
   // {
-  //   icon: <BookOpenIcon className="w-5 h-5" />,
-  //   name: "All Courses",
-  //   path: "/dashboard/my-courses",
-  //   roles: ["admin", "instructor", "user"],
+  //   icon: <UserCircle2Icon className="w-5 h-5" />,
+  //   name: "Instructors",
+  //   path: "/dashboard/instructors",
+  //   roles: ["admin"], // Only admin and user can see this
   // },
-  {
-    icon: <UserCircle2Icon className="w-5 h-5" />,
-    name: "Instructors",
-    path: "/dashboard/instructors",
-    roles: ["admin", "user"],
-  },
   {
     icon: <PlusCircleIcon className="w-5 h-5" />,
     name: "Add Course",
     path: "/dashboard/add-course",
-    roles: ["admin", "instructor", "user"],
+    roles: ["admin", "instructor"], // Only instructor can see this
   },
-
   {
     icon: <UsersIcon className="w-5 h-5" />,
     name: "Users",
     path: "/dashboard/users",
-    roles: ["admin", "instructor", "user"],
+    roles: ["admin"], // Only admin can see this
   },
   {
     icon: <FileTextIcon className="w-5 h-5" />,
     name: "Assignments",
     path: "/assignments",
-    roles: ["admin", "instructor", "user"],
+    roles: ["instructor", "student"], // Accessible to all roles
+  },
+  {
+    icon: <FileTextIcon className="w-5 h-5" />,
+    name: "Reports",
+    path: "/reports",
+    roles: ["admin", "instructor", "student"], // Only admin and instructor can see this
   },
   {
     icon: <HomeIcon className="w-5 h-5" />,
     name: "Home",
     path: "/",
-    roles: ["admin", "instructor", "user"],
+    roles: ["admin", "instructor", "student"], // Accessible to all roles
   },
-];
 
+  // New routes added below
+
+  // {
+  //   icon: <UserCircleIcon className="w-5 h-5" />,
+  //   name: "Profile",
+  //   path: "/profile",
+  //   roles: ["admin", "instructor", "student"], // Accessible to all roles
+  // },
+  // {
+  //   icon: <SettingsIcon className="w-5 h-5" />,
+  //   name: "Settings",
+  //   path: "/settings",
+  //   roles: ["admin", "instructor", "student"], // Accessible to all roles
+  // },
+  // {
+  //   icon: <BellIcon className="w-5 h-5" />,
+  //   name: "Notifications",
+  //   path: "/notifications",
+  //   roles: ["admin", "instructor", "student"], // Accessible to all roles
+  // },
+  // {
+  //   icon: <LockIcon className="w-5 h-5" />,
+  //   name: "Security",
+  //   path: "/security",
+  //   roles: ["admin"], // Only admin can see this
+  // },
+  // {
+  //   icon: <HelpCircleIcon className="w-5 h-5" />,
+  //   name: "Help",
+  //   path: "/help",
+  //   roles: ["admin", "instructor", "student"], // Accessible to all roles
+  // },
+];
 const AppSidebar = () => {
+  const {data: session} = useSession()
   const { isExpanded, isMobileOpen, isHovered, setIsHovered } = useSidebar();
   const pathname = usePathname();
 
@@ -106,27 +199,27 @@ const AppSidebar = () => {
       {/* Navigation Menu */}
       <nav className="flex-1 overflow-y-auto no-scrollbar">
         <ul className="flex flex-col gap-2">
-          {navItems.map((item) => (
+        {navItems.map((item) => (
             <li key={item.name}>
-              <Link
-                href={item.path}
-                className={`flex items-center gap-3 p-3 rounded-lg transition-all duration-200
-                  ${
-                    isActive(item.path)
-                      ? "bg-blue-50 dark:bg-blue-900 text-blue-600 dark:text-blue-300"
-                      : "hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-300"
-                  }
-                  ${
-                    !isExpanded && !isHovered
-                      ? "justify-center"
-                      : "justify-start"
-                  }`}
-              >
-                <span>{item.icon}</span>
-                {(isExpanded || isHovered || isMobileOpen) && (
-                  <span className="text-sm font-medium">{item.name}</span>
-                )}
-              </Link>
+              {item.roles.includes(session?.user?.role) && (
+                <Link
+                  href={item.path}
+                  className={`flex items-center gap-3 p-3 rounded-lg transition-all duration-200
+                ${
+                  isActive(item.path)
+                    ? "bg-blue-50 dark:bg-blue-900 text-blue-600 dark:text-blue-300"
+                    : "hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-300"
+                }
+                ${
+                  !isExpanded && !isHovered ? "justify-center" : "justify-start"
+                }`}
+                >
+                  <span>{item.icon}</span>
+                  {(isExpanded || isHovered || isMobileOpen) && (
+                    <span className="text-sm font-medium">{item.name}</span>
+                  )}
+                </Link>
+              )}
             </li>
           ))}
         </ul>

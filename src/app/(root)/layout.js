@@ -1,16 +1,19 @@
-'use client'
+"use client";
 import Footer from "@/components/shared/Footer";
 import Navbar from "@/components/shared/Navbar";
+import StudentProvider from "@/context/StudentContext";
 import { SessionProvider } from "next-auth/react";
 
 const layout = ({ children }) => {
   return (
     <div>
       <SessionProvider>
-        <Navbar />
-        {/* Main Content */}
-        <div>{children}</div>
-        <Footer />
+        <StudentProvider>
+          <Navbar />
+          {/* Main Content */}
+          <div>{children}</div>
+          <Footer />
+        </StudentProvider>
       </SessionProvider>
     </div>
   );

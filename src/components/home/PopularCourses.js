@@ -115,7 +115,7 @@ export default function PopularCourses() {
             <div className="flex items-center mt-2 gap-1">
               {renderStars(course?.rating || 4)}
               <span className="ml-2 text-sm text-gray-600">
-                ({course?.students || 0} students)
+                ({course?.student || 0} students)
               </span>
             </div>
 
@@ -126,7 +126,7 @@ export default function PopularCourses() {
 
             {/* View Course Link */}
             <Link
-              href={`/courses/get-courses/${course._id || index}`}
+              href={`/course/${course._id}`}
               className="mt-4 inline-block text-blue-600 font-medium hover:underline"
             >
               View Course →

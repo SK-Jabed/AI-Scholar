@@ -4,9 +4,13 @@ import { useModal } from "../../hooks/useModal";
 // import Button from "../ui/button/Button";
 // import Input from "../form/input/InputField";
 // import Label from "../form/Label";
-import { Button } from "../courses/button";
-import { Input } from "../courses/input";
-import { Label } from "@radix-ui/react-dropdown-menu";
+// import { Button } from "../courses/button";
+// import { Input } from "../courses/input";
+// import { Label } from "@radix-ui/react-dropdown-menu";
+import { Dialog } from "../ui/dialog";
+import { Label } from "../ui/label";
+import { Input } from "../ui/input";
+import { Button } from "../ui/button";
 
 export default function UserInfoCard() {
   const { isOpen, openModal, closeModal } = useModal();
@@ -94,7 +98,7 @@ export default function UserInfoCard() {
         </button>
       </div>
 
-      <Modal isOpen={isOpen} onClose={closeModal} className="max-w-[700px] m-4">
+      <Dialog isOpen={isOpen} onClose={closeModal} className="max-w-[700px] m-4">
         <div className="no-scrollbar relative w-full max-w-[700px] overflow-y-auto rounded-3xl bg-white p-4 dark:bg-gray-900 lg:p-11">
           <div className="px-2 pr-14">
             <h4 className="mb-2 text-2xl font-semibold text-gray-800 dark:text-white/90">
@@ -185,7 +189,7 @@ export default function UserInfoCard() {
             </div>
           </form>
         </div>
-      </Modal>
+      </Dialog>
     </div>
   );
 }
