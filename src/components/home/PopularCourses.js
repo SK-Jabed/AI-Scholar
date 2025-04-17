@@ -116,7 +116,7 @@ export default function PopularCourses() {
             <div className="flex items-center mt-2 gap-1">
               {renderStars(course?.rating || 4)}
               <span className="ml-2 text-sm text-gray-600">
-                ({course?.students?.length || 0} students)
+                
               </span>
             </div>
 
