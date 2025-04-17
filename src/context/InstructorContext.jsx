@@ -20,6 +20,7 @@ const InstructorProvider = ({ children }) => {
     useState(0);
   const [instructorCoursesList, setInstructorCoursesList] = useState([]);
   const [currentEditedCourseId, setCurrentEditedCourseId] = useState(null);
+  const [requestBecomeingnstructor, setRequestBecomeingnstructor] = useState(false);
 
   return (
     <InstructorContext.Provider
@@ -36,6 +37,8 @@ const InstructorProvider = ({ children }) => {
         setInstructorCoursesList,
         currentEditedCourseId,
         setCurrentEditedCourseId,
+        requestBecomeingnstructor,
+        setRequestBecomeingnstructor
       }}
     >
       {children}

@@ -2,7 +2,6 @@
 import { CameraIcon, Edit2Icon } from "lucide-react";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
-
 export default function Profile() {
   const { data: session } = useSession();
   const [userProfileInfo, setUserProfileInfo] = useState(null);
@@ -204,5 +203,6 @@ export default function Profile() {
         </div>
       )}
     </div>
+
   );
 }

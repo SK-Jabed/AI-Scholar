@@ -33,11 +33,12 @@ const userSchema = new mongoose.Schema(
     password: { type: String, required: true },
     role: {
       type: String,
-      enum: ["student", "teacher", "admin"],
+      enum: ["student", "instructor", "admin"],
       default: "student",
       required: true,
     },
     image: { type: String, default: "" }, // Ensure image has a default
+    instructorStatus: { type: String, default: "" }, // Ensure image has a default
     failed_attempts: { type: Number, default: 0 },
     lockout_time: { type: Date, default: null }
   },

@@ -101,7 +101,7 @@ const navItems = [
     icon: <UserCircleIcon className="w-5 h-5" />,
     name: "Profile",
     path: "/dashboard/profile",
-    roles: ["admin", "instructor", "student"],
+    roles: ["instructor", "student"],
   },
   {
     icon: <SettingsIcon className="w-5 h-5" />,
@@ -132,7 +132,7 @@ const navItems = [
   {
     icon: <UserPlusIcon className="w-5 h-5" />,
     name: "Become Instructor",
-    path: "/become-instructor",
+    path: "/dashboard/become-instructor",
     roles: ["student"],
   },
 
@@ -172,7 +172,7 @@ const navItems = [
   {
     icon: <UserCheckIcon className="w-5 h-5" />,
     name: "Instructor Requests",
-    path: "/dashboard/instructor-requests",
+    path: "/dashboard/instructor-rquest",
     roles: ["admin"],
   },
   {

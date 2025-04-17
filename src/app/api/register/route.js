@@ -19,10 +19,12 @@ export const POST = async (request) => {
     password: encryptedPassword,
     image: image || "",
     role: role || "student",
+    instructorStatus: ""
   };
 
   // Update The DB
   const result = await createUser(userData);
+  // console.log('result', result)
 
   return new NextResponse("User successfully created", {
     status: 201,
