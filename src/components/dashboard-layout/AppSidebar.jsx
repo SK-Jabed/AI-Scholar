@@ -90,7 +90,7 @@ const navItems = [
   {
     icon: <BookOpenIcon className="w-5 h-5" />,
     name: "Enrolled Courses",
-    path: "/enrolled-courses",
+    path: "/dashboard/student-courses",
     roles: ["student"], // Accessible to all roles
   },
   // {
