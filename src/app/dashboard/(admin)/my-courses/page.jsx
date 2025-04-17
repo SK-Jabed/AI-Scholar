@@ -20,8 +20,10 @@ import { fetchInstructorCourseListService } from "@/services";
 import { Edit, PlusCircle, Trash } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 
 const page = () => {
+  const {data: session} = useSession()
   const router = useRouter();
   const { instructorCoursesList, setInstructorCoursesList } =
     useContext(InstructorContext);
@@ -31,16 +33,21 @@ const page = () => {
     setCourseLandingFormData,
     setCourseCurriculumFormData,
   } = useContext(InstructorContext);
-
-  async function fetchAllCourses() {
-    const response = await fetchInstructorCourseListService();
-    if (response?.success) setInstructorCoursesList(response?.data);
-    console.log(response);
-  }
+console.log(session?.user?.email)
+  // async function fetchAllCourses() {
+  //   const response = await fetchInstructorCourseListService(session?.user?.email);
+  //   if (response?.success) setInstructorCoursesList(response?.data);
+  //   console.log(response);
+  // }
 
   useEffect(() => {
+    async function fetchAllCourses() {
+      const response = await fetchInstructorCourseListService(session?.user?.email);
+      if (response?.success) setInstructorCoursesList(response?.data);
+      console.log(response);
+    }
     fetchAllCourses();
-  }, []);
+  }, [session?.user?.email, setInstructorCoursesList]);
 
   return (
     <div>

@@ -152,7 +152,7 @@ const AddCoursePage = () => {
             Create a new course
           </h1>
           <Button
-            disabled={!validateFormData()}
+            // disabled={!validateFormData()}
             variant="default"
             className="text-sm tracking-wider font-bold px-8 cursor-pointer"
             onClick={handleCreateCourse}
