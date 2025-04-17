@@ -5,28 +5,25 @@ import { User, UserCog, ChevronDown, UserPlus } from "lucide-react";
 import Pagination from "@/components/common/Pagination";
 import useAxiosInstance from "@/hooks/useAxiosInstance";
 import { useForm } from "react-hook-form";
+import usetGetAllUsers from "@/hooks/usetGetAllUsers";
 
 const Users = () => {
   const { register, handleSubmit } = useForm();
 
   const axiosInstance = useAxiosInstance();
+  const [data, refetch] = usetGetAllUsers()
   const [users, setUsers] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(5);
+console.log(data)
 
   useEffect(() => {
-    const dataFetch = async () => {
-      try {
-        const res = await axiosInstance.get("/users");
-        // console.log(res?.data?.data)
-        setUsers(res?.data?.data || []);
-      } catch (error) {
-        console.error("Error fetching courses:", error);
-        setUsers([]);
-      }
-    };
-    dataFetch();
-  }, [axiosInstance]);
+    if (data) {
+      setUsers(data);
+    }
+  }, [data]);
+  
+
 
   const totalPages = Math.ceil(users.length / itemsPerPage);
   const paginatedUsers = users.slice(
@@ -34,17 +31,25 @@ const Users = () => {
     currentPage * itemsPerPage
   );
 
-  const onSubmit = async (data, userId) =>{
-    try {
-      const res = await axiosInstance.patch(`/users/${userId}`, { role: data });
   
-      console.log("User role updated:", res?.data?.data);
-      // Optional: refresh user list here
+    const onSubmit = async (data, userId) =>{
+      try {
+        const res = await axiosInstance.patch(`/users/${userId}`, { role: data });
+    
+        console.log("User role updated:", res?.data?.data);
+        const updatedUser = res?.data?.data;
+
+        // Optional: refresh user list here
+        setUsers((prevUsers) =>
+          prevUsers.map((user) =>
+            user._id === userId ? { ...user, role: updatedUser.role } : user
+          )
+        );
+      } catch (error) {
+        console.error("Error updating user role:", error);
+      }
+    };
   
-    } catch (error) {
-      console.error("Error updating user role:", error);
-    }
-  };
 
   return (
     <div className="min-h-screen py-6 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
@@ -91,6 +96,9 @@ const Users = () => {
                 <th className="px-8 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
                   Status
                 </th>
+                <th className="px-8 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                  Update
+                </th>
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
@@ -123,6 +131,7 @@ const Users = () => {
                     <div className="text-sm text-gray-900">{user.email}</div>
                     <div className="text-xs text-gray-500">Active</div>
                   </td>
+                  <td>{user.role}</td>
                   <td className="px-8 py-5 whitespace-nowrap">
                     <div className="relative">
                       <form

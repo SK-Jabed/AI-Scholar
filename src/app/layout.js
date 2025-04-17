@@ -1,11 +1,8 @@
 // import { CardSpotlight } from "@/components/ui/CardSpotlight";
+
 import { Inter } from "next/font/google";
-import { ThemeProvider } from "@/context/ThemeContext";
-import { SidebarProvider } from "@/context/SidebarContext";
-import InstructorProvider from "@/context/InstructorContext";
 import "./globals.css";
-import { SessionProvider } from "next-auth/react";
-import StudentProvider from "@/context/StudentContext";
+import Providers from "@/providers/Providers";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -30,17 +27,9 @@ export default function RootLayout({ children }) {
 
         {/* Main Content */}
         {/* <CardSpotlight> */}
-        <SessionProvider>
-          <ThemeProvider>
-            <InstructorProvider>
-              <StudentProvider>
-                <SidebarProvider>
-                  <main className="min-h-screen">{children}</main>
-                </SidebarProvider>
-              </StudentProvider>
-            </InstructorProvider>
-          </ThemeProvider>
-        </SessionProvider>
+        <Providers>
+        <main className="min-h-screen">{children}</main>
+        </Providers>
         {/* </CardSpotlight> */}
 
         {/* <Footer /> */}
