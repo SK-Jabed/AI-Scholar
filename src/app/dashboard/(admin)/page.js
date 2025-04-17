@@ -9,6 +9,7 @@ export const metadata = {
 
 const DashboardPage = async () => {
   const session = await auth();
+  // console.log(session)
 
   if (!session?.user) redirect("/login");
 
@@ -16,6 +17,9 @@ const DashboardPage = async () => {
     <>
       <h1 className="text-3xl font-bold text-center text-accent mb-12">
         Welcome to the Dashboard of AI Scholar
+      </h1>
+      <h1 className="text-2xl font-bold text-center text-accent mb-12">
+        You have logged in as <span className="uppercase">{session?.user?.role}</span>
       </h1>
 
       <StatsSection />

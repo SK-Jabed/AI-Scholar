@@ -12,8 +12,11 @@ import {
   LogOutIcon,
   PlusCircleIcon,
   SettingsIcon,
+  ShieldIcon,
+  UserCheckIcon,
   UserCircle2Icon,
   UserCircleIcon,
+  UserPlusIcon,
   UsersIcon
 } from "lucide-react";
 import Link from "next/link";
@@ -75,94 +78,117 @@ import { useSession } from "next-auth/react";
 //   },
 // ];
 const navItems = [
+  // === COMMON TO ALL ROLES ===
   {
     icon: <LayoutDashboardIcon className="w-5 h-5" />,
     name: "Dashboard",
     path: "/dashboard",
-    roles: ["admin", "instructor", "student"], // Accessible to all roles
-  },
-  {
-    icon: <BookOpenIcon className="w-5 h-5" />,
-    name: "My Courses",
-    path: "/dashboard/my-courses",
-    roles: ["admin", "instructor"], // Accessible to all roles
-  },
-  {
-    icon: <BookOpenIcon className="w-5 h-5" />,
-    name: "Enrolled Courses",
-    path: "/enrolled-courses",
-    roles: ["student"], // Accessible to all roles
-  },
-  // {
-  //   icon: <UserCircle2Icon className="w-5 h-5" />,
-  //   name: "Instructors",
-  //   path: "/dashboard/instructors",
-  //   roles: ["admin"], // Only admin and user can see this
-  // },
-  {
-    icon: <PlusCircleIcon className="w-5 h-5" />,
-    name: "Add Course",
-    path: "/dashboard/add-course",
-    roles: ["admin", "instructor"], // Only instructor can see this
-  },
-  {
-    icon: <UsersIcon className="w-5 h-5" />,
-    name: "Users",
-    path: "/dashboard/users",
-    roles: ["admin"], // Only admin can see this
-  },
-  {
-    icon: <FileTextIcon className="w-5 h-5" />,
-    name: "Assignments",
-    path: "/assignments",
-    roles: ["instructor", "student"], // Accessible to all roles
-  },
-  {
-    icon: <FileTextIcon className="w-5 h-5" />,
-    name: "Reports",
-    path: "/reports",
-    roles: ["admin", "instructor", "student"], // Only admin and instructor can see this
+    roles: ["admin", "instructor", "student"],
   },
   {
     icon: <HomeIcon className="w-5 h-5" />,
     name: "Home",
     path: "/",
-    roles: ["admin", "instructor", "student"], // Accessible to all roles
+    roles: ["admin", "instructor", "student"],
+  },
+  {
+    icon: <FileTextIcon className="w-5 h-5" />,
+    name: "Reports",
+    path: "/reports",
+    roles: ["admin", "instructor", "student"],
+  },
+  {
+    icon: <UserCircleIcon className="w-5 h-5" />,
+    name: "Profile",
+    path: "/dashboard/profile",
+    roles: ["admin", "instructor", "student"],
+  },
+  {
+    icon: <SettingsIcon className="w-5 h-5" />,
+    name: "Settings",
+    path: "/settings",
+    roles: ["admin", "instructor", "student"],
+  },
+  {
+    icon: <BellIcon className="w-5 h-5" />,
+    name: "Notifications",
+    path: "/notifications",
+    roles: ["admin", "instructor", "student"],
   },
 
-  // New routes added below
+  // === STUDENT ONLY ===
+  {
+    icon: <BookOpenIcon className="w-5 h-5" />,
+    name: "Enrolled Courses",
+    path: "/enrolled-courses",
+    roles: ["student"],
+  },
+  {
+    icon: <FileTextIcon className="w-5 h-5" />,
+    name: "Assignments",
+    path: "/assignments",
+    roles: ["student"],
+  },
+  {
+    icon: <UserPlusIcon className="w-5 h-5" />,
+    name: "Become Instructor",
+    path: "/become-instructor",
+    roles: ["student"],
+  },
 
-  // {
-  //   icon: <UserCircleIcon className="w-5 h-5" />,
-  //   name: "Profile",
-  //   path: "/profile",
-  //   roles: ["admin", "instructor", "student"], // Accessible to all roles
-  // },
-  // {
-  //   icon: <SettingsIcon className="w-5 h-5" />,
-  //   name: "Settings",
-  //   path: "/settings",
-  //   roles: ["admin", "instructor", "student"], // Accessible to all roles
-  // },
-  // {
-  //   icon: <BellIcon className="w-5 h-5" />,
-  //   name: "Notifications",
-  //   path: "/notifications",
-  //   roles: ["admin", "instructor", "student"], // Accessible to all roles
-  // },
-  // {
-  //   icon: <LockIcon className="w-5 h-5" />,
-  //   name: "Security",
-  //   path: "/security",
-  //   roles: ["admin"], // Only admin can see this
-  // },
-  // {
-  //   icon: <HelpCircleIcon className="w-5 h-5" />,
-  //   name: "Help",
-  //   path: "/help",
-  //   roles: ["admin", "instructor", "student"], // Accessible to all roles
-  // },
+  // === INSTRUCTOR ONLY ===
+  {
+    icon: <BookOpenIcon className="w-5 h-5" />,
+    name: "My Courses",
+    path: "/dashboard/my-courses",
+    roles: ["instructor"],
+  },
+  {
+    icon: <PlusCircleIcon className="w-5 h-5" />,
+    name: "Add Course",
+    path: "/dashboard/add-course",
+    roles: ["instructor"],
+  },
+  {
+    icon: <FileTextIcon className="w-5 h-5" />,
+    name: "Assignments",
+    path: "/assignments",
+    roles: ["instructor"],
+  },
+
+  // === ADMIN ONLY ===
+  {
+    icon: <UsersIcon className="w-5 h-5" />,
+    name: "Users",
+    path: "/dashboard/users",
+    roles: ["admin"],
+  },
+  {
+    icon: <UserCheckIcon className="w-5 h-5" />,
+    name: "Manage Instructors",
+    path: "/dashboard/manage-instructors",
+    roles: ["admin"],
+  },
+  {
+    icon: <UserCheckIcon className="w-5 h-5" />,
+    name: "Instructor Requests",
+    path: "/dashboard/instructor-requests",
+    roles: ["admin"],
+  },
+  {
+    icon: <ShieldIcon className="w-5 h-5" />,
+    name: "Security",
+    path: "/dashboard/security",
+    roles: ["admin"],
+  },
+  {
+    icon: <HelpCircleIcon className="w-5 h-5" />,
+    name: "Help & Support",
+    path: "/dashboard/help",
+    roles: ["admin"],
+  },
 ];
+
 const AppSidebar = () => {
   const {data: session} = useSession()
   const { isExpanded, isMobileOpen, isHovered, setIsHovered } = useSidebar();
@@ -199,8 +225,8 @@ const AppSidebar = () => {
       {/* Navigation Menu */}
       <nav className="flex-1 overflow-y-auto no-scrollbar">
         <ul className="flex flex-col gap-2">
-        {navItems.map((item) => (
-            <li key={item.name}>
+        {navItems.map((item,i) => (
+            <li key={i}>
               {item.roles.includes(session?.user?.role) && (
                 <Link
                   href={item.path}
