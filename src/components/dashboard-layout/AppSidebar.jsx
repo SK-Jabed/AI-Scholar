@@ -171,6 +171,12 @@ const navItems = [
   },
   {
     icon: <UserCheckIcon className="w-5 h-5" />,
+    name: "Manage Popular Banner",
+    path: "/dashboard/manage-popular-banner",
+    roles: ["admin"],
+  },
+  {
+    icon: <UserCheckIcon className="w-5 h-5" />,
     name: "Instructor Requests",
     path: "/dashboard/instructor-rquest",
     roles: ["admin"],
