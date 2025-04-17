@@ -8,17 +8,20 @@ import Swal from "sweetalert2";
 import axiosInstance from "@/app/api/axiosInstance/axiosInstance";
 
 const InstructorRequest = () => {
-  const { userss } = usetGetAllUsers();
+  const [data, refetch] = usetGetAllUsers();
+
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(5);
   const [users, setUsers] = useState([]);
   useEffect(() => {
-    if (userss) {
-        // console.log(userss)
-        const pendingInstructors = userss?.filter(user=> user.instructorStatus === 'pending')
+    if (data) {
+      // console.log(userss)
+      const pendingInstructors = data?.filter(
+        (user) => user.instructorStatus === "pending"
+      );
       setUsers(pendingInstructors);
     }
-  }, [userss]);
+  }, [data]);
 
   const totalPages = Math.ceil(users.length / itemsPerPage);
   const paginatedUsers = users.slice(
@@ -26,48 +29,43 @@ const InstructorRequest = () => {
     currentPage * itemsPerPage
   );
 
-
-  const handlePendingRequest= async (email)=>{
-    console.log(email)
+  const handlePendingRequest = (email) => {
+    console.log(email);
     const data = {
       role: "instructor",
-      instructorStatus : 'done'
+      instructorStatus: "done",
     };
     Swal.fire({
-        title: "Are you sure?",
-        text: "You won't be able to revert this!",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Yes, delete it!"
-      }).then((result) => {
-        if (result.isConfirmed) {
-            try {
-                const res =  axiosInstance.patch(`/users/user/${email}`, data);
-          
-                console.log("User role updated:", res);
-                const updatedUser = res?.data?.data;
-          
-                if (updatedUser) {
-                  setisClicked(true)
-                  Swal.fire({
-                    title: "Deleted!",
-                    text: "Your file has been deleted.",
-                    icon: "success"
-                  });
-                }
-          
-             
-              } catch (error) {
-                console.error("Error updating user role:", error);
-              }
-          
-        }
-      });
-   
-  }
+      title: "Are you sure?",
+      text: "You are about to approve this instructor request.",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, approve it!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        console.log(email);
+        try {
+          const res = await axiosInstance.patch(`/users/user/${email}`, data);
 
+          console.log("User role updated:", res?.data);
+          const updatedUser = res?.data?.data;
+
+          if (updatedUser) {
+            refetch();
+            Swal.fire({
+              title: "Approved!",
+              text: "The user has been promoted to instructor.",
+              icon: "success",
+            });
+          }
+        } catch (error) {
+          console.error("Error updating user role:", error);
+        }
+      }
+    });
+  };
 
   return (
     <div>
@@ -88,7 +86,6 @@ const InstructorRequest = () => {
                 <th className="px-8 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
                   Pending Status
                 </th>
-               
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
@@ -121,10 +118,14 @@ const InstructorRequest = () => {
                     <div className="text-sm text-gray-900">{user.email}</div>
                     <div className="text-xs text-gray-500">Active</div>
                   </td>
-                  <td >
-                    <Button onClick={()=>handlePendingRequest(user.email)} className="btn btn-accent">{user.instructorStatus}</Button>
+                  <td>
+                    <Button
+                      onClick={() => handlePendingRequest(user.email)}
+                      className="btn btn-accent"
+                    >
+                      {user.instructorStatus}
+                    </Button>
                   </td>
-                  
                 </tr>
               ))}
             </tbody>
