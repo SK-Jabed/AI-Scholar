@@ -3,10 +3,16 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { checkCoursePurchaseInfoService } from "@/services";
+import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 
 const CategoryCourses = ({ selectedCategory }) => {
   const [courses, setCourses] = useState([]);
   const [loading, setLoading] = useState(false);
+  const router = useRouter()
+    const { data: session } = useSession();
+
 
   useEffect(() => {
     fetchCourses();
@@ -31,6 +37,21 @@ const CategoryCourses = ({ selectedCategory }) => {
       setLoading(false);
     }
   };
+
+    async function handleCourseNavigate(getCurrentCourseId) {
+    const response = await checkCoursePurchaseInfoService(
+      getCurrentCourseId,
+      session?.user?.id
+    );
+
+    if (response?.success) {
+      if (response?.data) {
+        router.push(`/course-progress/${getCurrentCourseId}`);
+      } else {
+        router.push(`/course/${getCurrentCourseId}`);
+      }
+    }
+  }
 
   return (
     <div className="col-span-12 md:col-span-9 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -71,11 +92,12 @@ const CategoryCourses = ({ selectedCategory }) => {
 
             {/* Footer */}
             <div className="p-4 bg-gray-100 flex justify-between items-center">
-              <Link href={`/course/${course._id}`}>
-                <button className="bg-accent/90 text-white px-4 py-2 cursor-pointer rounded-md hover:bg-accent transition">
+                <button 
+                               onClick={() => handleCourseNavigate(course._id)}
+
+                className="bg-accent/90 text-white px-4 py-2 cursor-pointer rounded-md hover:bg-accent transition">
                   Enroll Now
                 </button>
-              </Link>
               <p className="text-sm text-gray-600">{course.primaryLanguage}</p>
             </div>
           </motion.div>

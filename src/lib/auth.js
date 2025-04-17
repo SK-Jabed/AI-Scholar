@@ -71,6 +71,7 @@ export const {
       },
     }),
   ],
+
   callbacks: {
     async jwt({ token }) {
       let isExistingUser = await getUserByEmail(token.email);
@@ -84,10 +85,14 @@ export const {
         };
         isExistingUser = await createUser(userData);
       }
+
+      token.id = isExistingUser._id.toString();
       token.role = isExistingUser.role;
       return token;
     },
+
     async session({ session, token }) {
+      session.user.id = token.id;
       session.user.role = token.role;
       return session;
     },

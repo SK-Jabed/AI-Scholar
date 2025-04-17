@@ -1,132 +1,262 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import Container from "@/components/shared/Container";
-import Categories from "@/components/home/Categories";
+import React, { useContext, useEffect, useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardTitle } from "@/components/ui/card";
+import { Checkbox } from "@/components/ui/checkbox";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { Label } from "@/components/ui/label";
+import { Skeleton } from "@/components/ui/skeleton";
+import { filterOptions, sortOptions } from "@/config";
+// import { AuthContext } from "@/context/auth-context";
+import { StudentContext } from "@/context/StudentContext";
+// import {
+//   checkCoursePurchaseInfoService,
+//   fetchStudentViewCourseListService,
+// } from "@/services";
+import { ArrowUpDownIcon } from "lucide-react";
+import { useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
-import { motion } from "framer-motion";
-import { LoaderIcon } from "lucide-react";
-import Link from "next/link";
+import {
+  checkCoursePurchaseInfoService,
+  fetchStudentViewCourseListService,
+} from "@/services";
+import { useSession } from "next-auth/react";
+// import { useNavigate, useSearchParams } from "react-router-dom";
 
-const Courses = () => {
-  const [courses, setCourses] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [categories, setCategories] = useState([
-    { category: "All Categories", _id: 124 },
-  ]);
-  const [category, setCategory] = useState("All Categories");
+function createSearchParamsHelper(filterParams) {
+  const queryParams = [];
+
+  for (const [key, value] of Object.entries(filterParams)) {
+    if (Array.isArray(value) && value.length > 0) {
+      const paramValue = value.join(",");
+
+      queryParams.push(`${key}=${encodeURIComponent(paramValue)}`);
+    }
+  }
+
+  return queryParams.join("&");
+}
+
+function StudentViewCoursesPage() {
+  const [sort, setSort] = useState("price-lowtohigh");
+  const [filters, setFilters] = useState({});
+  const [searchParams, setSearchParams] = useSearchParams();
+  const {
+    studentViewCoursesList,
+    setStudentViewCoursesList,
+    loadingState,
+    setLoadingState,
+  } = useContext(StudentContext);
+  // const navigate = useNavigate();
+  const { data: session } = useSession();
+
+  const router = useRouter();
+  // const { auth } = useContext(AuthContext);
+
+  function handleFilterOnChange(getSectionId, getCurrentOption) {
+    let cpyFilters = { ...filters };
+    const indexOfCurrentSection = Object.keys(cpyFilters).indexOf(getSectionId);
+
+    console.log(indexOfCurrentSection, getSectionId);
+
+    if (indexOfCurrentSection === -1) {
+      cpyFilters = {
+        ...cpyFilters,
+        [getSectionId]: [getCurrentOption.id],
+      };
+
+      console.log(cpyFilters);
+    } else {
+      const indexOfCurrentOption = cpyFilters[getSectionId].indexOf(
+        getCurrentOption.id
+      );
+
+      if (indexOfCurrentOption === -1)
+        cpyFilters[getSectionId].push(getCurrentOption.id);
+      else cpyFilters[getSectionId].splice(indexOfCurrentOption, 1);
+    }
+
+    setFilters(cpyFilters);
+    sessionStorage.setItem("filters", JSON.stringify(cpyFilters));
+  }
+
+  async function fetchAllStudentViewCourses(filters, sort) {
+    const query = new URLSearchParams({
+      ...filters,
+      sortBy: sort,
+    });
+    const response = await fetchStudentViewCourseListService(query);
+    if (response?.success) {
+      setStudentViewCoursesList(response?.data);
+      setLoadingState(false);
+    }
+  }
+
+  async function handleCourseNavigate(getCurrentCourseId) {
+    const response = await checkCoursePurchaseInfoService(
+      getCurrentCourseId,
+      session?.user?.id
+    );
+
+    if (response?.success) {
+      if (response?.data) {
+        router.push(`/course-progress/${getCurrentCourseId}`);
+      } else {
+        router.push(`/course/${getCurrentCourseId}`);
+      }
+    }
+  }
 
   useEffect(() => {
-    fetchCourse();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [category]);
+    const buildQueryStringForFilters = createSearchParamsHelper(filters);
+    // setSearchParams(new URLSearchParams(buildQueryStringForFilters));
+  }, [filters]);
 
   useEffect(() => {
-    getAllCategories();
+    setSort("price-lowtohigh");
+    setFilters(JSON.parse(sessionStorage.getItem("filters")) || {});
   }, []);
 
-  const fetchCourse = async () => {
-    setLoading(true);
-    try {
-      const query =
-        category === "All Categories"
-          ? ""
-          : `category=${encodeURIComponent(category)}`;
-      const res = await fetch(
-        `${process.env.NEXT_PUBLIC_SERVER_URL}/courses/get-courses?${query}&limit=9`
-      );
-      const { data } = await res.json();
-      setCourses(data);
-    } catch (error) {
-      console.error("Error fetching courses:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
+  useEffect(() => {
+    if (filters !== null && sort !== null)
+      fetchAllStudentViewCourses(filters, sort);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [filters, sort]);
 
-  const getAllCategories = async () => {
-    try {
-      const res = await fetch(
-        `${process.env.NEXT_PUBLIC_SERVER_URL}/courses/categories`
-      );
-      const { data } = await res.json();
-      setCategories([{ category: "All Categories", _id: 124 }, ...data]);
-    } catch (error) {
-      console.error("Error fetching categories:", error);
-    }
-  };
+  useEffect(() => {
+    return () => {
+      sessionStorage.removeItem("filters");
+    };
+  }, []);
 
   return (
-    <Container>
-      <div className="min-h-screen ">
-        <h1 className="text-3xl font-bold text-center my-12">All Courses</h1>
-        <div className="grid grid-cols-12 gap-4 border border-gray-200 p-2 rounded-md">
-          <div className="col-span-3 border-r border-gray-200 pr-2">
-            <Categories
-              categories={categories}
-              active={category}
-              onCategory={setCategory}
-            />
+    <div className="container mx-auto p-4">
+      <h1 className="text-3xl font-bold mb-4">All Courses</h1>
+      <div className="flex flex-col md:flex-row gap-4">
+        <aside className="w-full md:w-64 space-y-4">
+          <div>
+            {Object.keys(filterOptions).map((ketItem, index) => (
+              <div key={index} className="p-4 border-b">
+                <h3 className="font-bold mb-3">{ketItem.toUpperCase()}</h3>
+                <div className="grid gap-2 mt-2">
+                  {filterOptions[ketItem].map((option, idx) => (
+                    <Label
+                      key={idx}
+                      className="flex font-medium items-center gap-3"
+                    >
+                      <Checkbox
+                        checked={
+                          filters &&
+                          Object.keys(filters).length > 0 &&
+                          filters[ketItem] &&
+                          filters[ketItem].indexOf(option.id) > -1
+                        }
+                        onCheckedChange={() =>
+                          handleFilterOnChange(ketItem, option)
+                        }
+                      />
+                      {option.label}
+                    </Label>
+                  ))}
+                </div>
+              </div>
+            ))}
           </div>
-
-          <div className="col-span-9 grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-6">
-            {loading ? (
-              <p className="text-center flex justify-center col-span-full text-gray-500">
-                <LoaderIcon />
-              </p>
-            ) : courses.length > 0 ? (
-              courses.map((course, index) => (
-                <motion.div
-                  key={course._id}
-                  className="flex flex-col justify-between bg-white shadow-lg rounded-lg overflow-hidden hover:shadow-xl transition"
-                  initial={{ opacity: 0, y: 50 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  viewport={{ once: true, margin: "0px 0px -100px 0px" }}
+        </aside>
+        <main className="flex-1">
+          <div className="flex justify-end items-center mb-4 gap-5">
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="flex items-center gap-2 p-5"
                 >
-                  <div className="relative w-full h-[250px]">
-                    <Image
-                      src={course?.image || "/default-course-image.jpg"}
-                      alt={course.title || "Course image"}
-                      fill
-                      className="object-cover"
-                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                    />
-                  </div>
-                  <div className="p-4">
-                    <h3 className="text-lg font-semibold text-gray-800 truncate">
-                      {course.title}
-                    </h3>
-                    <p className="text-sm text-gray-600 mt-2">{course.level}</p>
-                    <p className="text-primary font-bold mt-2">
-                      ${course.pricing}
-                    </p>
-                    <p className="text-primary/80 mt-2">
-                      {course.description.slice(0, 50)}...
-                    </p>
-                  </div>
-                  <div className="p-4 bg-gray-100 flex justify-between items-center">
-                    <Link href={`/course/${course._id}`}>
-                      <button className="bg-accent/90 text-white px-4 py-2 cursor-pointer rounded-md hover:bg-accent transition">
-                        Enroll Now
-                      </button>
-                    </Link>
-                    <p className="text-sm text-gray-600">
-                      {course.primaryLanguage}
-                    </p>
-                  </div>
-                </motion.div>
+                  <ArrowUpDownIcon className="h-4 w-4" />
+                  <span className="text-[16px] font-medium">Sort By</span>
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="w-[180px]">
+                <DropdownMenuRadioGroup
+                  value={sort}
+                  onValueChange={(value) => setSort(value)}
+                >
+                  {sortOptions.map((sortItem) => (
+                    <DropdownMenuRadioItem
+                      value={sortItem.id}
+                      key={sortItem.id}
+                    >
+                      {sortItem.label}
+                    </DropdownMenuRadioItem>
+                  ))}
+                </DropdownMenuRadioGroup>
+              </DropdownMenuContent>
+            </DropdownMenu>
+            <span className="text-sm text-black font-bold">
+              {studentViewCoursesList.length} Results
+            </span>
+          </div>
+          <div className="space-y-4">
+            {studentViewCoursesList && studentViewCoursesList.length > 0 ? (
+              studentViewCoursesList.map((courseItem) => (
+                <Card
+                  onClick={() => handleCourseNavigate(courseItem?._id)}
+                  className="cursor-pointer"
+                  key={courseItem?._id}
+                >
+                  <CardContent className="flex gap-4 p-4">
+                    <div className="w-48 h-32 flex-shrink-0">
+                      <Image
+                        src={courseItem?.image}
+                        alt="Course Image"
+                        width={250}
+                        height={128}
+                        className="object-cover"
+                      />
+                    </div>
+                    <div className="flex-1">
+                      <CardTitle className="text-xl mb-2">
+                        {courseItem?.title}
+                      </CardTitle>
+                      <p className="text-sm text-gray-600 mb-1">
+                        Created By:
+                        <span className="font-bold">
+                          {courseItem?.instructorName}
+                        </span>
+                      </p>
+                      <p className="text-[16px] text-gray-600 mt-3 mb-2">
+                        {`${courseItem?.curriculum?.length} ${
+                          courseItem?.curriculum?.length <= 1
+                            ? "Lecture"
+                            : "Lectures"
+                        } - ${courseItem?.level.toUpperCase()} Level`}
+                      </p>
+                      <p className="font-bold text-lg">
+                        ${courseItem?.pricing}
+                      </p>
+                    </div>
+                  </CardContent>
+                </Card>
               ))
+            ) : loadingState ? (
+              <Skeleton />
             ) : (
-              <p className="text-center col-span-full text-gray-500">
-                No courses available.
-              </p>
+              <h1 className="font-extrabold text-4xl text-center">
+                No Courses Found
+              </h1>
             )}
           </div>
-        </div>
+        </main>
       </div>
-    </Container>
+    </div>
   );
-};
+}
 
-export default Courses;
+export default StudentViewCoursesPage;

@@ -16,9 +16,14 @@ import VideoPlayer from "@/components/video-player/VideoPlayer";
 import { StudentContext } from "@/context/StudentContext";
 
 import { CheckCircle, Globe, Lock, PlayCircle } from "lucide-react";
-import { fetchStudentViewCourseDetailsService } from "@/services";
+import {
+  // checkCoursePurchaseInfoService,
+  fetchStudentViewCourseDetailsService,
+} from "@/services";
 import { usePathname } from "next/navigation";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
+import { useSession } from "next-auth/react";
 
 export default function CourseDetailsPage({ params }) {
   const {
@@ -36,11 +41,26 @@ export default function CourseDetailsPage({ params }) {
   const [approvalUrl, setApprovalUrl] = useState("");
 
   const { id } = React.use(params);
+  const { data: session } = useSession();
 
   const router = useRouter();
   const pathname = usePathname();
 
   async function fetchStudentViewCourseDetails() {
+    // const checkCoursePurchaseInfoResponse =
+    //   await checkCoursePurchaseInfoService(
+    //     currentCourseDetailsId,
+    //     session?.user?.id
+    //   );
+
+    // if (
+    //   checkCoursePurchaseInfoResponse?.success &&
+    //   checkCoursePurchaseInfoResponse?.data
+    // ) {
+    //   router.push(`/course-progress/${currentCourseDetailsId}`);
+    //   return;
+    // }
+
     const response = await fetchStudentViewCourseDetailsService(
       currentCourseDetailsId
     );
@@ -58,6 +78,10 @@ export default function CourseDetailsPage({ params }) {
     console.log(getCurrentVideoInfo);
     setDisplayCurrentVideoFreePreview(getCurrentVideoInfo?.videoUrl);
   }
+
+  const handlePurchase = () => {
+    router.push(`/payment?courseId=${id}`);
+  };
 
   useEffect(() => {
     if (displayCurrentVideoFreePreview !== null) setShowFreePreviewDialog(true);
@@ -104,7 +128,9 @@ export default function CourseDetailsPage({ params }) {
           <span>
             Created By: {studentViewCourseDetails?.instructor?.instructorName}
           </span>
-          <span>Created On: {studentViewCourseDetails?.date.split("T")[0]}</span>
+          <span>
+            Created On: {studentViewCourseDetails?.date.split("T")[0]}
+          </span>
           <span className="flex items-center">
             <Globe className="mr-1 h-4 w-4" />
             {studentViewCourseDetails?.primaryLanguage}
@@ -195,7 +221,9 @@ export default function CourseDetailsPage({ params }) {
                   ${studentViewCourseDetails?.pricing}
                 </span>
               </div>
-              <Button className="w-full">Buy Now</Button>
+              <Button className="w-full" onClick={handlePurchase}>
+                Buy Now
+              </Button>
             </CardContent>
           </Card>
         </aside>
