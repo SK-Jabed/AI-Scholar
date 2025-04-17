@@ -57,7 +57,7 @@
     "sharp": "^0.33.5",
     "sonner": "^2.0.3",
     "stripe": "^18.0.0",
-    "sweetalert2": "^11.17.2",
+    "sweetalert2": "^11.19.1",
     "swiper": "^11.2.5",
     "tailwind-merge": "^3.0.2",
     "tailwindcss-animate": "^1.0.7"

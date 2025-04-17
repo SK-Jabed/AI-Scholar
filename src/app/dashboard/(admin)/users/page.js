@@ -5,29 +5,25 @@ import { User, UserCog, ChevronDown, UserPlus } from "lucide-react";
 import Pagination from "@/components/common/Pagination";
 import useAxiosInstance from "@/hooks/useAxiosInstance";
 import { useForm } from "react-hook-form";
+import usetGetAllUsers from "@/hooks/usetGetAllUsers";
 
 const Users = () => {
   const { register, handleSubmit } = useForm();
 
   const axiosInstance = useAxiosInstance();
+  const {userss} = usetGetAllUsers()
   const [users, setUsers] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(5);
 
+
   useEffect(() => {
-    const dataFetch = async () => {
-      try {
-        const res = await axiosInstance.get("/users");
-        // console.log(res?.data?.data)
-        setUsers(res?.data?.data || []);
-        
-      } catch (error) {
-        console.error("Error fetching courses:", error);
-        setUsers([]);
-      }
-    };
-    dataFetch();
-  }, [axiosInstance]);
+    if (userss) {
+      setUsers(userss);
+    }
+  }, [userss]);
+  
+
 
   const totalPages = Math.ceil(users.length / itemsPerPage);
   const paginatedUsers = users.slice(
