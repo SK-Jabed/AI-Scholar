@@ -1,4 +1,5 @@
 "use client";
+
 import { Star, StarHalf } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -66,6 +67,21 @@ export default function PopularCourses() {
     return stars;
   };
 
+  async function handleCourseNavigate(getCurrentCourseId) {
+    const response = await checkCoursePurchaseInfoService(
+      getCurrentCourseId,
+      session?.user?.id
+    );
+
+    if (response?.success) {
+      if (response?.data) {
+        router.push(`/course-progress/${getCurrentCourseId}`);
+      } else {
+        router.push(`/course/${getCurrentCourseId}`);
+      }
+    }
+  }
+
   return (
     <section>
       {/* Section Title with AOS */}
@@ -108,7 +124,7 @@ export default function PopularCourses() {
             <div className="flex items-center mt-2 gap-1">
               {renderStars(course?.rating || 4)}
               <span className="ml-2 text-sm text-gray-600">
-                
+                ({course?.students.length || 0} students)
               </span>
             </div>
 
@@ -118,12 +134,12 @@ export default function PopularCourses() {
             </div>
 
             {/* View Course Link */}
-            <Link
-              href={`/course/${course._id}`}
-              className="mt-4 inline-block text-blue-600 font-medium hover:underline"
+            <button
+               onClick={() => handleCourseNavigate(course._id)}
+              className="bg-accent/90 text-white px-4 py-2 cursor-pointer rounded-md hover:bg-accent transition"
             >
               View Course →
-            </Link>
+            </button>
           </motion.div>
         ))}
       </div>

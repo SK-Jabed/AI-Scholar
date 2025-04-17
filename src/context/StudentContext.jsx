@@ -10,7 +10,7 @@ const StudentProvider = ({ children }) => {
   const [studentViewCourseDetails, setStudentViewCourseDetails] =
     useState(null);
   const [currentCourseDetailsId, setCurrentCourseDetailsId] = useState(null);
-  const [studentBoughtCoursesList, setStudentBoughtCoursesList] = useState([]);
+  const [studentEnrolledCoursesList, setStudentEnrolledCoursesList] = useState([]);
   const [studentCurrentCourseProgress, setStudentCurrentCourseProgress] =
     useState({});
 
@@ -25,8 +25,8 @@ const StudentProvider = ({ children }) => {
         setStudentViewCourseDetails,
         currentCourseDetailsId,
         setCurrentCourseDetailsId,
-        studentBoughtCoursesList,
-        setStudentBoughtCoursesList,
+        studentEnrolledCoursesList,
+        setStudentEnrolledCoursesList,
         studentCurrentCourseProgress,
         setStudentCurrentCourseProgress,
       }}
