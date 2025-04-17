@@ -11,17 +11,17 @@ const Users = () => {
   const { register, handleSubmit } = useForm();
 
   const axiosInstance = useAxiosInstance();
-  const {userss} = usetGetAllUsers()
+  const [data, refetch] = usetGetAllUsers()
   const [users, setUsers] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(5);
-
+console.log(data)
 
   useEffect(() => {
-    if (userss) {
-      setUsers(userss);
+    if (data) {
+      setUsers(data);
     }
-  }, [userss]);
+  }, [data]);
   
 
 
