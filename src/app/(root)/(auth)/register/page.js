@@ -15,6 +15,7 @@ const Register = () => {
       const name = formData.get("name");
       const email = formData.get("email");
       const password = formData.get("password");
+      const insructorStatus = ''
 
       const response = await fetch(`/api/register`, {
         method: "POST",
@@ -25,8 +26,10 @@ const Register = () => {
           name,
           email,
           password,
+          insructorStatus
         }),
       });
+      // console.log(response)
 
       response.status === 201 && router.push("/login");
     } catch (err) {

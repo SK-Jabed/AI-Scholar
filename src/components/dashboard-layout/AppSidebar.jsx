@@ -132,7 +132,7 @@ const navItems = [
   {
     icon: <UserPlusIcon className="w-5 h-5" />,
     name: "Become Instructor",
-    path: "/become-instructor",
+    path: "/dashboard/become-instructor",
     roles: ["student"],
   },
 
@@ -172,7 +172,7 @@ const navItems = [
   {
     icon: <UserCheckIcon className="w-5 h-5" />,
     name: "Instructor Requests",
-    path: "/dashboard/instructor-requests",
+    path: "/dashboard/instructor-rquest",
     roles: ["admin"],
   },
   {
