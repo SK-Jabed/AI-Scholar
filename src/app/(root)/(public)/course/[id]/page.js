@@ -17,12 +17,11 @@ import { StudentContext } from "@/context/StudentContext";
 
 import { CheckCircle, Globe, Lock, PlayCircle } from "lucide-react";
 import {
-  // checkCoursePurchaseInfoService,
+  checkCoursePurchaseInfoService,
   fetchStudentViewCourseDetailsService,
 } from "@/services";
 import { usePathname } from "next/navigation";
 import { useRouter } from "next/navigation";
-import Link from "next/link";
 import { useSession } from "next-auth/react";
 
 export default function CourseDetailsPage({ params }) {
@@ -39,6 +38,7 @@ export default function CourseDetailsPage({ params }) {
     useState(null);
   const [showFreePreviewDialog, setShowFreePreviewDialog] = useState(false);
   const [approvalUrl, setApprovalUrl] = useState("");
+  const [purchaseStatus, setPurchaseStatus] = useState(null);
 
   const { id } = React.use(params);
   const { data: session } = useSession();
@@ -47,20 +47,6 @@ export default function CourseDetailsPage({ params }) {
   const pathname = usePathname();
 
   async function fetchStudentViewCourseDetails() {
-    // const checkCoursePurchaseInfoResponse =
-    //   await checkCoursePurchaseInfoService(
-    //     currentCourseDetailsId,
-    //     session?.user?.id
-    //   );
-
-    // if (
-    //   checkCoursePurchaseInfoResponse?.success &&
-    //   checkCoursePurchaseInfoResponse?.data
-    // ) {
-    //   router.push(`/course-progress/${currentCourseDetailsId}`);
-    //   return;
-    // }
-
     const response = await fetchStudentViewCourseDetailsService(
       currentCourseDetailsId
     );
@@ -82,6 +68,29 @@ export default function CourseDetailsPage({ params }) {
   const handlePurchase = () => {
     router.push(`/payment?courseId=${id}`);
   };
+
+  useEffect(() => {
+    const checkPurchaseStatus = async () => {
+      if (session?.user?.id && id) {
+        try {
+          const response = await checkCoursePurchaseInfoService(
+            id,
+            session.user.id
+          );
+          if (response?.success) {
+            setPurchaseStatus(response.data);
+            if (response.data) {
+              router.push(`/course-progress/${id}`);
+            }
+          }
+        } catch (error) {
+          console.error("Purchase status check failed:", error);
+        }
+      }
+    };
+
+    checkPurchaseStatus();
+  }, [session?.user?.id, id, router]);
 
   useEffect(() => {
     if (displayCurrentVideoFreePreview !== null) setShowFreePreviewDialog(true);
@@ -235,7 +244,7 @@ export default function CourseDetailsPage({ params }) {
           setDisplayCurrentVideoFreePreview(null);
         }}
       >
-        <DialogContent className="w-[500px]">
+        <DialogContent className="w-[500px] bg-white">
           <DialogHeader>
             <DialogTitle>Course Preview</DialogTitle>
           </DialogHeader>
