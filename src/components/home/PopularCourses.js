@@ -8,9 +8,7 @@ import "aos/dist/aos.css";
 import { useEffect, useState } from "react";
 import AOS from "aos";
 import useAxiosInstance from "@/hooks/useAxiosInstance";
-import { checkCoursePurchaseInfoService } from "@/services";
-import { useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
+import useGetAllCourses from "@/hooks/useGetAllCourses";
 
 export default function PopularCourses() {
   const axiosInstance = useAxiosInstance();
@@ -20,6 +18,9 @@ export default function PopularCourses() {
 
   const { data: session } = useSession();
   const router = useRouter();
+  
+  // const [popularCourses, setPopularCourses] = useState([]);
+  const [courses, refetch] = useGetAllCourses()
 
   // Initialize AOS
   useEffect(() => {
@@ -28,6 +29,7 @@ export default function PopularCourses() {
       once: true,
     });
   }, []);
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -42,7 +44,10 @@ export default function PopularCourses() {
     };
     fetchData();
   }, [axiosInstance]);
-
+  
+  const popularCourses = courses?.filter(course=> course.status === "approved")
+  // console.log(popularCourses)
+ 
   // Function to render star ratings
   const renderStars = (rating) => {
     const stars = [];

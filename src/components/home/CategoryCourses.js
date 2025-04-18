@@ -28,11 +28,13 @@ const CategoryCourses = ({ selectedCategory }) => {
         selectedCategory === "All Categories"
           ? ""
           : `category=${encodeURIComponent(selectedCategory)}`;
+          console.log(query)
       const res = await fetch(
         `${process.env.NEXT_PUBLIC_SERVER_URL}/courses/get-courses?${query}`
       );
       const { data } = await res.json();
-      setCourses(data);
+      // console.log(data)
+      setCourses(data.slice(0,6));
     } catch (error) {
       console.error("Error fetching courses:", error);
     } finally {
@@ -84,10 +86,10 @@ const CategoryCourses = ({ selectedCategory }) => {
     <div className="col-span-12 md:col-span-9 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
       {loading ? (
         <p className="col-span-full text-center">Loading courses...</p>
-      ) : courses.length === 0 ? (
+      ) : courses?.length === 0 ? (
         <p className="col-span-full text-center">No courses found.</p>
       ) : (
-        courses.map((course, index) => (
+        courses?.map((course, index) => (
           <motion.div
             key={course._id || index}
             className="bg-white border border-gray-300 shadow-lg p-2 rounded-xl overflow-hidden hover:scale-105 transition w-full"
