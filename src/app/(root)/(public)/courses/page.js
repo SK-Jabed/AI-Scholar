@@ -14,12 +14,7 @@ import {
 import { Label } from "@/components/ui/label";
 import { Skeleton } from "@/components/ui/skeleton";
 import { filterOptions, sortOptions } from "@/config";
-// import { AuthContext } from "@/context/auth-context";
 import { StudentContext } from "@/context/StudentContext";
-// import {
-//   checkCoursePurchaseInfoService,
-//   fetchStudentViewCourseListService,
-// } from "@/services";
 import { ArrowUpDownIcon } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
@@ -28,7 +23,6 @@ import {
   fetchStudentViewCourseListService,
 } from "@/services";
 import { useSession } from "next-auth/react";
-// import { useNavigate, useSearchParams } from "react-router-dom";
 
 function createSearchParamsHelper(filterParams) {
   const queryParams = [];
@@ -47,18 +41,18 @@ function createSearchParamsHelper(filterParams) {
 function StudentViewCoursesPage() {
   const [sort, setSort] = useState("price-lowtohigh");
   const [filters, setFilters] = useState({});
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [isNavigating, setIsNavigating] = useState(false);
+  const [isSessionLoading, setIsSessionLoading] = useState(true);
+
   const {
     studentViewCoursesList,
     setStudentViewCoursesList,
     loadingState,
     setLoadingState,
   } = useContext(StudentContext);
-  // const navigate = useNavigate();
   const { data: session } = useSession();
 
   const router = useRouter();
-  // const { auth } = useContext(AuthContext);
 
   function handleFilterOnChange(getSectionId, getCurrentOption) {
     let cpyFilters = { ...filters };
@@ -99,20 +93,39 @@ function StudentViewCoursesPage() {
     }
   }
 
-  async function handleCourseNavigate(getCurrentCourseId) {
-    const response = await checkCoursePurchaseInfoService(
-      getCurrentCourseId,
-      session?.user?.id
-    );
+  const handleCourseNavigate = async (getCurrentCourseId) => {
+    if (!session?.user?.id) {
+      console.log("User not logged in - redirecting to login");
+      router.push("/login");
+      return;
+    }
 
-    if (response?.success) {
-      if (response?.data) {
-        router.push(`/course-progress/${getCurrentCourseId}`);
+    try {
+      setIsNavigating(true);
+
+      const response = await checkCoursePurchaseInfoService(
+        getCurrentCourseId,
+        session.user.id
+      );
+
+      if (response?.success) {
+        // Navigate based on purchase status
+        const targetPath = response.data
+          ? `/course-progress/${getCurrentCourseId}`
+          : `/course/${getCurrentCourseId}`;
+
+        router.push(targetPath);
       } else {
+        console.warn("Purchase check failed, defaulting to course details");
         router.push(`/course/${getCurrentCourseId}`);
       }
+    } catch (error) {
+      console.error("Navigation error:", error);
+      router.push(`/course/${getCurrentCourseId}`);
+    } finally {
+      setIsNavigating(false);
     }
-  }
+  };
 
   useEffect(() => {
     const buildQueryStringForFilters = createSearchParamsHelper(filters);
@@ -135,6 +148,12 @@ function StudentViewCoursesPage() {
       sessionStorage.removeItem("filters");
     };
   }, []);
+
+  useEffect(() => {
+    if (session !== undefined) {
+      setIsSessionLoading(false);
+    }
+  }, [session]);
 
   return (
     <div className="container mx-auto p-4">
