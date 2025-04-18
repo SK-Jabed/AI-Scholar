@@ -6,12 +6,15 @@ import CategoryCourses from "./CategoryCourses";
 import "aos/dist/aos.css";
 import { useEffect } from "react";
 import AOS from "aos";
+import Button from "../ui/Buttons";
+import Link from "next/link";
 
 export default function ExploreCourseCategories() {
   const [loading, setLoading] = useState(false);
-  const [categories, setCategories] = useState([{ category: "All Categories", _id: 124 }]);
+  const [categories, setCategories] = useState([
+    { category: "All Categories", _id: 124 },
+  ]);
   const [category, setCategory] = useState("All Categories");
-
 
   useEffect(() => {
     getAllCategories();
@@ -26,7 +29,9 @@ export default function ExploreCourseCategories() {
 
   const getAllCategories = async () => {
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/courses/categories`);
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_SERVER_URL}/courses/categories`
+      );
       const { data } = await res.json();
       setCategories([{ category: "All Categories", _id: 124 }, ...data]);
     } catch (error) {
@@ -45,14 +50,22 @@ export default function ExploreCourseCategories() {
           }
         />
       </div>
-
       <div className="grid grid-cols-12 gap-6 mt-10">
         {/* Sidebar with Categories */}
-        <Categories categories={categories} active={category} onCategory={setCategory} />
+        <Categories
+          categories={categories}
+          active={category}
+          onCategory={setCategory}
+        />
 
         {/* Courses Grid */}
-        <CategoryCourses selectedCategory={category} loading={loading}/>
+        <CategoryCourses selectedCategory={category} loading={loading} />
       </div>
+      <div className="flex justify-center  py-8 ">
+        <Link href='/courses' className="btn btn-primary w-fit">
+          View All Courses
+        </Link>
+      </div>{" "}
     </section>
   );
 }
