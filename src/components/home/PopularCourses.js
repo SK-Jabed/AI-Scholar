@@ -12,7 +12,7 @@ import useGetAllCourses from "@/hooks/useGetAllCourses";
 
 export default function PopularCourses() {
   const axiosInstance = useAxiosInstance();
-  const [popularCourses, setPopularCourses] = useState([]);
+  // const [popularCourses, setPopularCourses] = useState([]);
   const [isNavigating, setIsNavigating] = useState(false);
   const [isSessionLoading, setIsSessionLoading] = useState(true);
 
