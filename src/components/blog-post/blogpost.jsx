@@ -10,6 +10,7 @@ export default function BlogForm() {
 
   const userEmail = session?.user?.email;
   const authorImage = session?.user?.image;
+  const authorName = session?.user?.name;
 
   const handleBlogImage = async (event) => {
     const file = event.target.files[0];
@@ -40,6 +41,7 @@ export default function BlogForm() {
       banner: blogImage,
       email: userEmail,
       profile: authorImage,
+      author:authorName,
       postDate: new Date().toISOString(), 
     };
   
