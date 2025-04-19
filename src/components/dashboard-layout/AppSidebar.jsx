@@ -182,6 +182,12 @@ const navItems = [
     roles: ["admin"],
   },
   {
+    icon: <UserCheckIcon className="w-5 h-5" />,
+    name: "Post a Blog",
+    path: "/dashboard/blog-post",
+    roles: ["admin"],
+  },
+  {
     icon: <ShieldIcon className="w-5 h-5" />,
     name: "Security",
     path: "/dashboard/security",
