@@ -2,7 +2,7 @@
 import usetGetAllUsers from "@/hooks/usetGetAllUsers";
 import React, { useEffect, useState } from "react";
 import Pagination from "@/components/common/Pagination";
-import { User } from "lucide-react";
+import { Trash2, User } from "lucide-react";
 import Button from "@/components/ui/Buttons";
 import Swal from "sweetalert2";
 import axiosInstance from "@/app/api/axiosInstance/axiosInstance";
@@ -29,11 +29,11 @@ const InstructorRequest = () => {
     currentPage * itemsPerPage
   );
 
-  const handlePendingRequest = (email) => {
-    console.log(email);
+  const handlePendingRequest = (email, stat) => {
+    console.log(email, stat);
     const data = {
       role: "instructor",
-      instructorStatus: "done",
+      instructorStatus: stat,
     };
     Swal.fire({
       title: "Are you sure?",
@@ -47,9 +47,9 @@ const InstructorRequest = () => {
       if (result.isConfirmed) {
         console.log(email);
         try {
-          const res = await axiosInstance.patch(`/users/user/${email}`, data);
+          const res = await axiosInstance.patch(`/users/status/${email}`, data);
 
-          console.log("User role updated:", res?.data);
+          console.log("User role updated:", res?.data?.data._id);
           const updatedUser = res?.data?.data;
 
           if (updatedUser) {
@@ -83,8 +83,11 @@ const InstructorRequest = () => {
                 <th className="px-8 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
                   Contact
                 </th>
-                <th className="px-8 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                <th className=" py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
                   Pending Status
+                </th>
+                <th className=" py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                  Reject Request
                 </th>
               </tr>
             </thead>
@@ -120,10 +123,18 @@ const InstructorRequest = () => {
                   </td>
                   <td>
                     <Button
-                      onClick={() => handlePendingRequest(user.email)}
+                      onClick={() => handlePendingRequest(user.email, 'done')}
                       className="btn btn-accent"
                     >
                       {user.instructorStatus}
+                    </Button>
+                  </td>
+                  <td>
+                    <Button
+                      onClick={() => handlePendingRequest(user.email,'')}
+                      className="btn btn-accent"
+                    >
+                      <Trash2/>
                     </Button>
                   </td>
                 </tr>
