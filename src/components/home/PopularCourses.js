@@ -9,17 +9,19 @@ import { useEffect, useState } from "react";
 import AOS from "aos";
 import useAxiosInstance from "@/hooks/useAxiosInstance";
 import useGetAllCourses from "@/hooks/useGetAllCourses";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 export default function PopularCourses() {
   const axiosInstance = useAxiosInstance();
-  const [popularCourses, setPopularCourses] = useState([]);
+  // const [popularCourses, setPopularCourses] = useState([]);
   const [isNavigating, setIsNavigating] = useState(false);
   const [isSessionLoading, setIsSessionLoading] = useState(true);
 
   const { data: session } = useSession();
   const router = useRouter();
   
-  // const [popularCourses, setPopularCourses] = useState([]);
+  const [popularCourses, setPopularCourses] = useState([]);
   const [courses, refetch] = useGetAllCourses()
 
   // Initialize AOS
@@ -45,7 +47,7 @@ export default function PopularCourses() {
     fetchData();
   }, [axiosInstance]);
   
-  const popularCourses = courses?.filter(course=> course.status === "approved")
+  const aproveCourses = courses?.filter(course=> course.status === "approved")
   // console.log(popularCourses)
  
   // Function to render star ratings
@@ -141,7 +143,7 @@ export default function PopularCourses() {
 
       {/* Courses Grid with Framer Motion */}
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
-        {popularCourses?.map((course, index) => (
+        {aproveCourses?.map((course, index) => (
           <motion.div
             key={course._id || index}
             className="bg-white border border-gray-300 shadow-lg p-2 rounded-xl overflow-hidden hover:scale-105 transition w-full"
