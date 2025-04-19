@@ -1,10 +1,17 @@
-"use client"
-export default function BlogForm() {
-  const handleBlogForm =(e)=>{
-    e.preventDefault()
-  }
+"use client";
 
-  const handleBlogImage = async (event)=>{
+import axios from "axios";
+import { useSession } from "next-auth/react";
+import { useState } from "react";
+
+export default function BlogForm() {
+  const [blogImage, setBlogImage] = useState("");
+  const { data: session } = useSession();
+
+  const userEmail = session?.user?.email;
+  const authorImage = session?.user?.image;
+
+  const handleBlogImage = async (event) => {
     const file = event.target.files[0];
     const data = new FormData();
     data.append("file", file);
@@ -20,9 +27,30 @@ export default function BlogForm() {
     );
     const imageData = await res.json();
     const imageUrl = imageData.secure_url;
+    setBlogImage(imageUrl);
+  };
 
-    console.log(imageUrl)
-  }
+  const handleBlogForm = async (e) => {
+    e.preventDefault();
+    const form = e.target;
+  
+    const blogInfo = {
+      titleData: form.title.value.trim(),
+      descriptionData: form.description.value.trim(),
+      banner: blogImage,
+      email: userEmail,
+      profile: authorImage,
+      postDate: new Date().toISOString(), 
+    };
+  
+    try {
+      const res = await axios.post("http://localhost:5000/blogs", blogInfo);
+      console.log("✅ Blog created:", res.data);
+    } catch (error) {
+      console.error("❌ Blog creation failed:", error.response?.data || error.message);
+    }
+  };
+  
 
   return (
     <div className="max-w-2xl mx-auto mt-10 bg-white border rounded-2xl p-8">

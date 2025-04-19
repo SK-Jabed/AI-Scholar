@@ -73,11 +73,29 @@ export async function fetchStudentViewCourseDetailsService(courseId) {
 }
 
 export async function checkCoursePurchaseInfoService(courseId, studentId) {
-  const { data } = await axiosInstance.get(
-    `/student/courses/purchase-info/${courseId}/${studentId}`
-  );
+  // Validate inputs before making the request
+  if (!courseId || !studentId) {
+    console.warn("Missing courseId or studentId");
+    return { success: false, data: false };
+  }
 
-  return data;
+  try {
+    const { data } = await axiosInstance.get(
+      `/student/courses/purchase-info/${courseId}/${studentId}`
+    );
+    return data;
+  } catch (error) {
+    console.error(
+      "Purchase check API error:",
+      error.response?.data || error.message
+    );
+    return {
+      success: false,
+      data: false,
+      message:
+        error.response?.data?.message || "Failed to check purchase status",
+    };
+  }
 }
 
 export async function fetchStudentEnrolledCoursesService(studentId) {
@@ -123,7 +141,7 @@ export async function resetCourseProgressService(userId, courseId) {
 
 export async function createPaymentIntentService(data) {
   const { data: response } = await axiosInstance.post(
-    '/student/course-payment/create-payment-intent',
+    "/student/course-payment/create-payment-intent",
     data
   );
   return response;
@@ -131,7 +149,7 @@ export async function createPaymentIntentService(data) {
 
 export async function confirmPaymentService(data) {
   const { data: response } = await axiosInstance.post(
-    '/student/course-payment/confirm-payment',
+    "/student/course-payment/confirm-payment",
     data
   );
   return response;

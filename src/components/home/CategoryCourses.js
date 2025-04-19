@@ -1,8 +1,8 @@
 "use client";
+
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
-import Link from "next/link";
 import { checkCoursePurchaseInfoService } from "@/services";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
@@ -10,13 +10,15 @@ import { useSession } from "next-auth/react";
 const CategoryCourses = ({ selectedCategory }) => {
   const [courses, setCourses] = useState([]);
   const [loading, setLoading] = useState(false);
-  const router = useRouter()
-    const { data: session } = useSession();
+  const router = useRouter();
+  const { data: session } = useSession();
 
+  const [isSessionLoading, setIsSessionLoading] = useState(true);
+  const [isNavigating, setIsNavigating] = useState(false);
 
   useEffect(() => {
     fetchCourses();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedCategory]);
 
   const fetchCourses = async () => {
@@ -40,20 +42,45 @@ const CategoryCourses = ({ selectedCategory }) => {
     }
   };
 
-    async function handleCourseNavigate(getCurrentCourseId) {
-    const response = await checkCoursePurchaseInfoService(
-      getCurrentCourseId,
-      session?.user?.id
-    );
+  const handleCourseNavigate = async (getCurrentCourseId) => {
+    if (!session?.user?.id) {
+      console.log("User not logged in - redirecting to login");
+      router.push("/login");
+      return;
+    }
 
-    if (response?.success) {
-      if (response?.data) {
-        router.push(`/course-progress/${getCurrentCourseId}`);
+    try {
+      setIsNavigating(true);
+
+      const response = await checkCoursePurchaseInfoService(
+        getCurrentCourseId,
+        session.user.id
+      );
+
+      if (response?.success) {
+        // Navigate based on purchase status
+        const targetPath = response.data
+          ? `/course-progress/${getCurrentCourseId}`
+          : `/course/${getCurrentCourseId}`;
+
+        router.push(targetPath);
       } else {
+        console.warn("Purchase check failed, defaulting to course details");
         router.push(`/course/${getCurrentCourseId}`);
       }
+    } catch (error) {
+      console.error("Navigation error:", error);
+      router.push(`/course/${getCurrentCourseId}`);
+    } finally {
+      setIsNavigating(false);
     }
-  }
+  };
+
+  useEffect(() => {
+    if (session !== undefined) {
+      setIsSessionLoading(false);
+    }
+  }, [session]);
 
   return (
     <div className="col-span-12 md:col-span-9 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -94,12 +121,20 @@ const CategoryCourses = ({ selectedCategory }) => {
 
             {/* Footer */}
             <div className="p-4 bg-gray-100 flex justify-between items-center">
-                <button 
-                               onClick={() => handleCourseNavigate(course._id)}
+              <button
+                onClick={() =>
+                  !isSessionLoading && handleCourseNavigate(course._id)
+                }
+                disabled={isSessionLoading}
+                className={`bg-accent/90 text-white px-4 py-2 rounded-md hover:bg-accent transition ${
+                  isSessionLoading
+                    ? "opacity-50 cursor-not-allowed"
+                    : "cursor-pointer"
+                }`}
+              >
+                {isSessionLoading ? "Loading..." : "Enroll Now"}
+              </button>
 
-                className="bg-accent/90 text-white px-4 py-2 cursor-pointer rounded-md hover:bg-accent transition">
-                  Enroll Now
-                </button>
               <p className="text-sm text-gray-600">{course.primaryLanguage}</p>
             </div>
           </motion.div>

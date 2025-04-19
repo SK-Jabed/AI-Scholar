@@ -1,11 +1,12 @@
 "use client";
+
+import React from "react";
 import InstructorProvider from "@/context/InstructorContext";
 import { SidebarProvider } from "@/context/SidebarContext";
 import StudentProvider from "@/context/StudentContext";
 import { ThemeProvider } from "@/context/ThemeContext";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { SessionProvider } from "next-auth/react";
-import React from "react";
 const queryClient = new QueryClient();
 
 const Providers = ({ children }) => {

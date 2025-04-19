@@ -39,6 +39,7 @@ const userSchema = new mongoose.Schema(
     },
     image: { type: String, default: "" }, // Ensure image has a default
     instructorStatus: { type: String, default: "" }, // Ensure image has a default
+    banStatus: { type: Boolean, default: false }, // Ensure image has a default
     failed_attempts: { type: Number, default: 0 },
     lockout_time: { type: Date, default: null }
   },

@@ -2,7 +2,6 @@
 
 import { Star, StarHalf } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
 import SectionTitle from "../shared/SectionTitle";
 import { motion } from "framer-motion";
 import "aos/dist/aos.css";
@@ -10,10 +9,19 @@ import { useEffect, useState } from "react";
 import AOS from "aos";
 import useAxiosInstance from "@/hooks/useAxiosInstance";
 import useGetAllCourses from "@/hooks/useGetAllCourses";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 export default function PopularCourses() {
   const axiosInstance = useAxiosInstance();
   // const [popularCourses, setPopularCourses] = useState([]);
+  const [isNavigating, setIsNavigating] = useState(false);
+  const [isSessionLoading, setIsSessionLoading] = useState(true);
+
+  const { data: session } = useSession();
+  const router = useRouter();
+  
+  const [popularCourses, setPopularCourses] = useState([]);
   const [courses, refetch] = useGetAllCourses()
 
   // Initialize AOS
@@ -24,10 +32,24 @@ export default function PopularCourses() {
     });
   }, []);
 
-  const popularCourses = courses?.filter(course=> course.status === "approved")
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await axiosInstance.get("/courses/get-courses");
+        console.log(res?.data);
+        setPopularCourses(res?.data?.data || []);
+      } catch (error) {
+        console.error("Error fetching courses:", error);
+        setPopularCourses([]);
+      }
+    };
+    fetchData();
+  }, [axiosInstance]);
+  
+  const aproveCourses = courses?.filter(course=> course.status === "approved")
   // console.log(popularCourses)
  
-
   // Function to render star ratings
   const renderStars = (rating) => {
     const stars = [];
@@ -67,20 +89,45 @@ export default function PopularCourses() {
     return stars;
   };
 
-  async function handleCourseNavigate(getCurrentCourseId) {
-    const response = await checkCoursePurchaseInfoService(
-      getCurrentCourseId,
-      session?.user?.id
-    );
+  const handleCourseNavigate = async (getCurrentCourseId) => {
+    if (!session?.user?.id) {
+      console.log("User not logged in - redirecting to login");
+      router.push("/login");
+      return;
+    }
 
-    if (response?.success) {
-      if (response?.data) {
-        router.push(`/course-progress/${getCurrentCourseId}`);
+    try {
+      setIsNavigating(true);
+
+      const response = await checkCoursePurchaseInfoService(
+        getCurrentCourseId,
+        session.user.id
+      );
+
+      if (response?.success) {
+        // Navigate based on purchase status
+        const targetPath = response.data
+          ? `/course-progress/${getCurrentCourseId}`
+          : `/course/${getCurrentCourseId}`;
+
+        router.push(targetPath);
       } else {
+        console.warn("Purchase check failed, defaulting to course details");
         router.push(`/course/${getCurrentCourseId}`);
       }
+    } catch (error) {
+      console.error("Navigation error:", error);
+      router.push(`/course/${getCurrentCourseId}`);
+    } finally {
+      setIsNavigating(false);
     }
-  }
+  };
+
+  useEffect(() => {
+    if (session !== undefined) {
+      setIsSessionLoading(false);
+    }
+  }, [session]);
 
   return (
     <section>
@@ -96,7 +143,7 @@ export default function PopularCourses() {
 
       {/* Courses Grid with Framer Motion */}
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
-        {popularCourses?.map((course, index) => (
+        {aproveCourses?.map((course, index) => (
           <motion.div
             key={course._id || index}
             className="bg-white border border-gray-300 shadow-lg p-2 rounded-xl overflow-hidden hover:scale-105 transition w-full"
@@ -135,7 +182,7 @@ export default function PopularCourses() {
 
             {/* View Course Link */}
             <button
-               onClick={() => handleCourseNavigate(course._id)}
+              onClick={() => handleCourseNavigate(course._id)}
               className="bg-accent/90 text-white px-4 py-2 cursor-pointer rounded-md hover:bg-accent transition"
             >
               View Course →
