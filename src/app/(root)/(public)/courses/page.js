@@ -11,38 +11,31 @@ import {
   DropdownMenuRadioItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Skeleton } from "@/components/ui/skeleton";
 import { filterOptions, sortOptions } from "@/config";
 import { StudentContext } from "@/context/StudentContext";
-import { ArrowUpDownIcon } from "lucide-react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { ArrowUpDownIcon, SearchIcon } from "lucide-react";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
 import {
   checkCoursePurchaseInfoService,
   fetchStudentViewCourseListService,
+  searchCoursesService,
 } from "@/services";
 import { useSession } from "next-auth/react";
-
-function createSearchParamsHelper(filterParams) {
-  const queryParams = [];
-
-  for (const [key, value] of Object.entries(filterParams)) {
-    if (Array.isArray(value) && value.length > 0) {
-      const paramValue = value.join(",");
-
-      queryParams.push(`${key}=${encodeURIComponent(paramValue)}`);
-    }
-  }
-
-  return queryParams.join("&");
-}
+import { motion } from "framer-motion";
+import CourseCardSkeleton from "@/components/Skeletons/CourseCardSkeleton";
+import GradientText from "@/components/shared/GradientText";
 
 function StudentViewCoursesPage() {
   const [sort, setSort] = useState("price-lowtohigh");
   const [filters, setFilters] = useState({});
+  const [searchQuery, setSearchQuery] = useState("");
+  const [isSearching, setIsSearching] = useState(false);
   const [isNavigating, setIsNavigating] = useState(false);
   const [isSessionLoading, setIsSessionLoading] = useState(true);
+  const [debouncedQuery, setDebouncedQuery] = useState("");
 
   const {
     studentViewCoursesList,
@@ -50,9 +43,42 @@ function StudentViewCoursesPage() {
     loadingState,
     setLoadingState,
   } = useContext(StudentContext);
-  const { data: session } = useSession();
 
+  const { data: session } = useSession();
   const router = useRouter();
+
+  useEffect(() => {
+    const timerId = setTimeout(() => {
+      setDebouncedQuery(searchQuery);
+    }, 300);
+
+    return () => {
+      clearTimeout(timerId);
+    };
+  }, [searchQuery]);
+
+  useEffect(() => {
+    if (debouncedQuery.length >= 2) {
+      handleSearch(debouncedQuery);
+    } else if (debouncedQuery.length === 0) {
+      fetchAllStudentViewCourses(filters, sort);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [debouncedQuery, filters, sort]);
+
+  const handleSearch = async (query) => {
+    setIsSearching(true);
+    try {
+      const response = await searchCoursesService(query);
+      if (response.success) {
+        setStudentViewCoursesList(response.data);
+      }
+    } catch (error) {
+      console.error("Search failed:", error);
+    } finally {
+      setIsSearching(false);
+    }
+  };
 
   function handleFilterOnChange(getSectionId, getCurrentOption) {
     let cpyFilters = { ...filters };
@@ -81,19 +107,26 @@ function StudentViewCoursesPage() {
     sessionStorage.setItem("filters", JSON.stringify(cpyFilters));
   }
 
-  async function fetchAllStudentViewCourses(filters, sort) {
-    const query = new URLSearchParams({
-      ...filters,
-      sortBy: sort,
-    });
-    const response = await fetchStudentViewCourseListService(query);
-    if (response?.success) {
-      setStudentViewCoursesList(response?.data);
+  const fetchAllStudentViewCourses = async (filters, sort) => {
+    setLoadingState(true);
+    try {
+      const query = new URLSearchParams({
+        ...filters,
+        sortBy: sort,
+      });
+
+      const response = await fetchStudentViewCourseListService(query);
+      if (response?.success) {
+        setStudentViewCoursesList(response?.data);
+      }
+    } catch (error) {
+      console.error("Failed to fetch courses:", error);
+    } finally {
       setLoadingState(false);
     }
-  }
+  };
 
-  const handleCourseNavigate = async (getCurrentCourseId) => {
+  const handleCourseNavigate = async (courseId) => {
     if (!session?.user?.id) {
       console.log("User not logged in - redirecting to login");
       router.push("/login");
@@ -104,33 +137,28 @@ function StudentViewCoursesPage() {
       setIsNavigating(true);
 
       const response = await checkCoursePurchaseInfoService(
-        getCurrentCourseId,
-        session.user.id
+        courseId,
+        session?.user?.id
       );
 
       if (response?.success) {
         // Navigate based on purchase status
         const targetPath = response.data
-          ? `/course-progress/${getCurrentCourseId}`
-          : `/course/${getCurrentCourseId}`;
+          ? `/course-progress/${courseId}`
+          : `/course/${courseId}`;
 
         router.push(targetPath);
       } else {
         console.warn("Purchase check failed, defaulting to course details");
-        router.push(`/course/${getCurrentCourseId}`);
+        router.push(`/course/${courseId}`);
       }
     } catch (error) {
       console.error("Navigation error:", error);
-      router.push(`/course/${getCurrentCourseId}`);
+      router.push(`/course/${courseId}`);
     } finally {
       setIsNavigating(false);
     }
   };
-
-  useEffect(() => {
-    const buildQueryStringForFilters = createSearchParamsHelper(filters);
-    // setSearchParams(new URLSearchParams(buildQueryStringForFilters));
-  }, [filters]);
 
   useEffect(() => {
     setSort("price-lowtohigh");
@@ -156,122 +184,225 @@ function StudentViewCoursesPage() {
   }, [session]);
 
   return (
-    <div className="container mx-auto p-4">
-      <h1 className="text-3xl font-bold mb-4">All Courses</h1>
-      <div className="flex flex-col md:flex-row gap-4">
-        <aside className="w-full md:w-64 space-y-4">
-          <div>
-            {Object.keys(filterOptions).map((ketItem, index) => (
-              <div key={index} className="p-4 border-b">
-                <h3 className="font-bold mb-3">{ketItem.toUpperCase()}</h3>
-                <div className="grid gap-2 mt-2">
-                  {filterOptions[ketItem].map((option, idx) => (
-                    <Label
-                      key={idx}
-                      className="flex font-medium items-center gap-3"
-                    >
-                      <Checkbox
-                        checked={
-                          filters &&
-                          Object.keys(filters).length > 0 &&
-                          filters[ketItem] &&
-                          filters[ketItem].indexOf(option.id) > -1
-                        }
-                        onCheckedChange={() =>
-                          handleFilterOnChange(ketItem, option)
-                        }
-                      />
-                      {option.label}
-                    </Label>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-        </aside>
-        <main className="flex-1">
-          <div className="flex justify-end items-center mb-4 gap-5">
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  className="flex items-center gap-2 p-5"
-                >
-                  <ArrowUpDownIcon className="h-4 w-4" />
-                  <span className="text-[16px] font-medium">Sort By</span>
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="w-[180px]">
-                <DropdownMenuRadioGroup
-                  value={sort}
-                  onValueChange={(value) => setSort(value)}
-                >
-                  {sortOptions.map((sortItem) => (
-                    <DropdownMenuRadioItem
-                      value={sortItem.id}
-                      key={sortItem.id}
-                    >
-                      {sortItem.label}
-                    </DropdownMenuRadioItem>
-                  ))}
-                </DropdownMenuRadioGroup>
-              </DropdownMenuContent>
-            </DropdownMenu>
-            <span className="text-sm text-black font-bold">
-              {studentViewCoursesList.length} Results
+    <div className="container mx-auto px-4 py-8">
+      {/* Header Section */}
+      <div className="text-center mb-12">
+        <motion.h1
+          className="text-4xl md:text-5xl font-bold mb-4"
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          <GradientText>Explore Our Courses</GradientText>
+        </motion.h1>
+        <motion.p
+          className="text-lg text-gray-600 max-w-2xl mx-auto"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.2, duration: 0.5 }}
+        >
+          Discover the perfect course to advance your skills and knowledge
+        </motion.p>
+      </div>
+
+      {/* Search and Sort Bar */}
+      <motion.div
+        className="flex flex-col md:flex-row justify-between items-center gap-4 mb-8"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.4 }}
+      >
+        <div className="relative w-full md:w-[600px]">
+          <SearchIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
+          <Input
+            type="text"
+            placeholder="Search courses by title, instructor or description..."
+            className="pl-10 pr-4 py-6 text-md border-2 border-gray-200 focus:border-blue-500 transition-all"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
+        </div>
+
+        <div className="flex items-center gap-4 w-full md:w-auto">
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button
+                variant="outline"
+                size="lg"
+                className="flex items-center gap-2 px-6 py-5 border"
+              >
+                <ArrowUpDownIcon className="h-5 w-5" />
+                <span className="text-md font-medium">
+                  {sortOptions.find((opt) => opt.id === sort)?.label ||
+                    "Sort By"}
+                </span>
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent
+              align="end"
+              className="w-50 bg-white shadow-xl rounded-md"
+            >
+              <DropdownMenuRadioGroup
+                value={sort}
+                onValueChange={(value) => setSort(value)}
+                className="space-y-1 p-1"
+              >
+                {sortOptions.map((sortItem) => (
+                  <DropdownMenuRadioItem
+                    value={sortItem.id}
+                    key={sortItem.id}
+                    className="flex items-center px-3 py-2 text-sm text-gray-700 rounded hover:bg-gray-100 cursor-pointer"
+                  >
+                    <span className="ml-3">{sortItem.label}</span>
+                  </DropdownMenuRadioItem>
+                ))}
+              </DropdownMenuRadioGroup>
+            </DropdownMenuContent>
+          </DropdownMenu>
+
+          <div className="bg-blue-50 px-4 py-2 rounded-lg border border-blue-100">
+            <span className="text-blue-600 font-bold">
+              {studentViewCoursesList.length}{" "}
+              {studentViewCoursesList.length === 1 ? "Course" : "Courses"}
             </span>
           </div>
-          <div className="space-y-4">
-            {studentViewCoursesList && studentViewCoursesList.length > 0 ? (
-              studentViewCoursesList.map((courseItem) => (
-                <Card
-                  onClick={() => handleCourseNavigate(courseItem?._id)}
-                  className="cursor-pointer"
-                  key={courseItem?._id}
+        </div>
+      </motion.div>
+
+      {/* Main Content */}
+      <div className="flex flex-col md:flex-row gap-8">
+        {/* Filters Sidebar */}
+        <motion.aside
+          className="w-full md:w-64 space-y-6"
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ delay: 0.6 }}
+        >
+          <Card className="p-6 bg-gray-50 border-0 shadow-sm rounded-lg">
+            <h2 className="text-xl font-bold text-primary border-b pb-1 border-gray-500">
+              Filters
+            </h2>
+            <div className="space-y-6">
+              {Object.keys(filterOptions).map((ketItem, index) => (
+                <div key={index} className="space-y-3">
+                  <h3 className="font-bold text-gray-700">
+                    {ketItem.toUpperCase()}
+                  </h3>
+                  <div className="space-y-2">
+                    {filterOptions[ketItem].map((option, idx) => (
+                      <div key={idx} className="flex items-center gap-2">
+                        <Checkbox
+                          checked={
+                            filters &&
+                            Object.keys(filters).length > 0 &&
+                            filters[ketItem] &&
+                            filters[ketItem].indexOf(option.id) > -1
+                          }
+                          onCheckedChange={() =>
+                            handleFilterOnChange(ketItem, option)
+                          }
+                        />
+                        <Label className="font-medium text-gray-700 hover:text-blue-600 cursor-pointer">
+                          {option.label}
+                        </Label>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </Card>
+        </motion.aside>
+
+        {/* Courses List */}
+        <main className="flex-1">
+          {loadingState || isSearching ? (
+            <div className="grid gap-6">
+              {[...Array(3)].map((_, i) => (
+                <CourseCardSkeleton key={i} />
+              ))}
+            </div>
+          ) : studentViewCoursesList.length > 0 ? (
+            <motion.div
+              className="grid gap-6"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.8 }}
+            >
+              {studentViewCoursesList.map((courseItem) => (
+                <motion.div
+                  key={courseItem._id}
+                  whileHover={{ scale: 1.01 }}
+                  transition={{ type: "spring", stiffness: 400 }}
                 >
-                  <CardContent className="flex gap-4 p-4">
-                    <div className="w-48 h-32 flex-shrink-0">
-                      <Image
-                        src={courseItem?.image}
-                        alt="Course Image"
-                        width={250}
-                        height={128}
-                        className="object-cover"
-                      />
-                    </div>
-                    <div className="flex-1">
-                      <CardTitle className="text-xl mb-2">
-                        {courseItem?.title}
-                      </CardTitle>
-                      <p className="text-sm text-gray-600 mb-1">
-                        Created By:
-                        <span className="font-bold">
-                          {courseItem?.instructorName}
-                        </span>
-                      </p>
-                      <p className="text-[16px] text-gray-600 mt-3 mb-2">
-                        {`${courseItem?.curriculum?.length} ${
-                          courseItem?.curriculum?.length <= 1
-                            ? "Lecture"
-                            : "Lectures"
-                        } - ${courseItem?.level.toUpperCase()} Level`}
-                      </p>
-                      <p className="font-bold text-lg">
-                        ${courseItem?.pricing}
-                      </p>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))
-            ) : loadingState ? (
-              <Skeleton />
-            ) : (
-              <h1 className="font-extrabold text-4xl text-center">
+                  <Card
+                    onClick={() => handleCourseNavigate(courseItem._id)}
+                    className="cursor-pointer border-0 shadow-lg hover:shadow-xl transition-shadow"
+                  >
+                    <CardContent className="flex flex-col sm:flex-row gap-6 p-6">
+                      <div className="w-full sm:w-64 h-48 flex-shrink-0 relative rounded-lg overflow-hidden">
+                        <Image
+                          src={courseItem.image || "/default-course.jpg"}
+                          alt={courseItem.title}
+                          fill
+                          className="object-cover"
+                          sizes="(max-width: 640px) 100vw, 256px"
+                        />
+                        <div className="absolute bottom-2 left-2 bg-blue-600 text-white px-2 py-1 rounded text-xs font-bold">
+                          {courseItem.level.toUpperCase()}
+                        </div>
+                      </div>
+                      <div className="flex-1 space-y-3">
+                        <CardTitle className="text-2xl font-bold text-gray-800">
+                          {courseItem.title}
+                        </CardTitle>
+                        <p className="text-gray-600">
+                          By {courseItem.instructor.instructorName}
+                        </p>
+                        <p className="text-gray-700">
+                          {courseItem.curriculum?.length || 0} Lectures •{" "}
+                          {courseItem.primaryLanguage}
+                        </p>
+                        <p className="text-gray-500 line-clamp-2">
+                          {courseItem.subtitle}
+                        </p>
+                        <div className="flex justify-between items-center pt-2">
+                          <span className="text-2xl font-bold text-blue-600">
+                            ${courseItem.pricing}
+                          </span>
+                          <span className="text-sm text-gray-500">
+                            {new Date(courseItem.date).toLocaleDateString(
+                              "en-US",
+                              {
+                                year: "numeric",
+                                month: "short",
+                                day: "numeric",
+                              }
+                            )}
+                          </span>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </motion.div>
+              ))}
+            </motion.div>
+          ) : (
+            <motion.div
+              className="text-center py-16"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+            >
+              <h3 className="text-2xl font-bold text-gray-700 mb-2">
                 No Courses Found
-              </h1>
-            )}
-          </div>
+              </h3>
+              <p className="text-gray-500">
+                {searchQuery
+                  ? "Try a different search term"
+                  : "Adjust your filters to see more results"}
+              </p>
+            </motion.div>
+          )}
         </main>
       </div>
     </div>

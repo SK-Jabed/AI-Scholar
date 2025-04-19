@@ -64,6 +64,22 @@ export async function fetchStudentViewCourseListService(query) {
   return data;
 }
 
+export async function searchCoursesService(query) {
+  try {
+    const { data } = await axiosInstance.get(
+      `/student/courses/search?query=${encodeURIComponent(query)}`
+    );
+    return data;
+  } catch (error) {
+    console.error("Search error:", error);
+    return {
+      success: false,
+      data: [],
+      message: error.response?.data?.message || "Search failed",
+    };
+  }
+}
+
 export async function fetchStudentViewCourseDetailsService(courseId) {
   const { data } = await axiosInstance.get(
     `/student/courses/get-course/details/${courseId}`
