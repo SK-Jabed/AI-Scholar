@@ -4,8 +4,10 @@ import { Button } from "@/components/ui/button";
 import { GraduationCap, Sparkles } from "lucide-react";
 import { useSession } from "next-auth/react";
 import axiosInstance from "@/app/api/axiosInstance/axiosInstance";
+import usetGetAllUsers from "@/hooks/usetGetAllUsers";
 
 const BecomeInstructor = () => {
+  const [data, refetch] = usetGetAllUsers() 
   const { data: session } = useSession();
   const email = session?.user?.email;
   const [clicked, setisClicked] = useState(false);
@@ -25,6 +27,7 @@ const BecomeInstructor = () => {
       const updatedUser = res?.data?.data;
 
       if (updatedUser) {
+        refetch()
         setisClicked(true)
       }
 
