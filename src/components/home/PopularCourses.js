@@ -11,6 +11,7 @@ import useAxiosInstance from "@/hooks/useAxiosInstance";
 import useGetAllCourses from "@/hooks/useGetAllCourses";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { checkCoursePurchaseInfoService } from "@/services";
 
 export default function PopularCourses() {
   const axiosInstance = useAxiosInstance();

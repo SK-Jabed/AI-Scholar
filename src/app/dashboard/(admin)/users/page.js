@@ -1,29 +1,36 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { User, UserCog, ChevronDown, UserPlus } from "lucide-react";
+import {
+  User,
+  UserCog,
+  ChevronDown,
+  UserPlus,
+  Trash2,
+  Ban,
+} from "lucide-react";
 import Pagination from "@/components/common/Pagination";
 import useAxiosInstance from "@/hooks/useAxiosInstance";
 import { useForm } from "react-hook-form";
 import usetGetAllUsers from "@/hooks/usetGetAllUsers";
+import Button from "@/components/ui/Buttons";
+import Swal from "sweetalert2";
 
 const Users = () => {
   const { register, handleSubmit } = useForm();
 
   const axiosInstance = useAxiosInstance();
-  const [data, refetch] = usetGetAllUsers()
+  const [data, refetch] = usetGetAllUsers();
   const [users, setUsers] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(5);
-console.log(data)
+  // console.log(data)
 
   useEffect(() => {
     if (data) {
       setUsers(data);
     }
   }, [data]);
-  
-
 
   const totalPages = Math.ceil(users.length / itemsPerPage);
   const paginatedUsers = users.slice(
@@ -31,25 +38,76 @@ console.log(data)
     currentPage * itemsPerPage
   );
 
-  
-    const onSubmit = async (data, userId) =>{
-      try {
-        const res = await axiosInstance.patch(`/users/${userId}`, { role: data });
-    
-        console.log("User role updated:", res?.data?.data);
-        const updatedUser = res?.data?.data;
+  const onSubmit = async (data, userId, status) => {
+    try {
+      const sentData = {
+        role: data,
+        banStatus: status,
+      };
+      console.log(sentData);
+      const res = await axiosInstance.patch(`/users/${userId}`, {
+        role: data,
+        banStatus: status,
+      });
 
-        // Optional: refresh user list here
-        setUsers((prevUsers) =>
-          prevUsers.map((user) =>
-            user._id === userId ? { ...user, role: updatedUser.role } : user
-          )
-        );
-      } catch (error) {
-        console.error("Error updating user role:", error);
-      }
+      console.log("User role updated:", res?.data?.data);
+      const updatedUser = res?.data?.data;
+
+      // Optional: refresh user list here
+      setUsers((prevUsers) =>
+        prevUsers.map((user) =>
+          user._id === userId ? { ...user, role: updatedUser.role } : user
+        )
+      );
+    } catch (error) {
+      console.error("Error updating user role:", error);
+    }
+  };
+
+  const handleUserBan = async (id, status) => {
+    let banStatus = {
+      banStatus: true,
     };
-  
+    if (status) {
+      // console.log(status)
+      banStatus.banStatus = false;
+    } else {
+      banStatus.banStatus = true;
+    }
+    console.log(banStatus);
+    const res = await axiosInstance.patch(`/users/${id}`, banStatus);
+    if (res?.data?.success) {
+      console.log(res.data.data);
+      // console.log(object)
+      refetch();
+    }
+  };
+
+  const handleDeleteUser = (id) => {
+    // console.log(id);
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        const res = await axiosInstance.delete(`/users//user/${id}`);
+        // console.log(res.data)
+        if (res?.data?.success) {
+          refetch()
+          Swal.fire({
+            title: "Deleted!",
+            text: "Your file has been deleted.",
+            icon: "success",
+          });
+        }
+      }
+    });
+  };
 
   return (
     <div className="min-h-screen py-6 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
@@ -99,6 +157,12 @@ console.log(data)
                 <th className="px-8 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
                   Update
                 </th>
+                <th className="px-8 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                  Ban User
+                </th>
+                <th className=" py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                  Delete User
+                </th>
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
@@ -132,7 +196,7 @@ console.log(data)
                     <div className="text-xs text-gray-500">Active</div>
                   </td>
                   <td>{user.role}</td>
-                  <td className="px-8 py-5 whitespace-nowrap">
+                  <td className="p-8 pr-40 py-5 whitespace-nowrap ">
                     <div className="relative">
                       <form
                         onSubmit={handleSubmit((data) =>
@@ -140,11 +204,15 @@ console.log(data)
                             data[`role${index}`]
                               ? data[`role${index}`]
                               : "anonymous",
-                              user?._id
+                            user?._id,
+                            user.banStatus
                           )
                         )}
                       >
-                        <select {...register(`role${index}`)}>
+                        <select
+                          {...register(`role${index}`)}
+                          className="select "
+                        >
                           <option value="admin">Admin</option>
                           <option value="instructor">Instructor</option>
                           <option value="student">Student</option>
@@ -157,6 +225,23 @@ console.log(data)
                         </button>
                       </form>
                     </div>
+                  </td>
+                  <td className="px-8">
+                    <button
+                      onClick={() => handleUserBan(user._id, user.banStatus)}
+                      className="btn flex items-center"
+                    >
+                      <Ban />
+                      {!user.banStatus ? "Ban" : "Unban"}
+                    </button>
+                  </td>
+                  <td className="px-8 py-5 whitespace-nowrap">
+                    <button
+                      onClick={() => handleDeleteUser(user._id)}
+                      className="btn"
+                    >
+                      <Trash2 />
+                    </button>
                   </td>
                 </tr>
               ))}
