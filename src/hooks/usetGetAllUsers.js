@@ -3,7 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
 
 const usetGetAllUsers = () => {
-    const {data=[], refetch} = useQuery({ 
+    const {data = [], refetch} = useQuery({ 
         queryKey: ['users'], 
         queryFn: async ()=>{
             const res = await axiosInstance.get("/users");
