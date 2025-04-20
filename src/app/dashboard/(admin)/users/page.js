@@ -41,7 +41,7 @@ const Users = () => {
         banStatus: status,
       };
       console.log(sentData);
-      const res = await axiosInstance.patch(`/users/${userId}`, {
+      const res = await axiosInstance.patch(`/users/userId/${userId}`, {
         role: data,
         banStatus: status,
       });
@@ -71,7 +71,7 @@ const Users = () => {
       banStatus.banStatus = true;
     }
     console.log(banStatus);
-    const res = await axiosInstance.patch(`/users/${id}`, banStatus);
+    const res = await axiosInstance.patch(`/users/userId/${id}`, banStatus);
     if (res?.data?.success) {
       console.log(res.data.data);
       // console.log(object)
