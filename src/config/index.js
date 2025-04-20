@@ -125,10 +125,12 @@ export const sortOptions = [
   { id: "price-hightolow", label: "Price: High to Low" },
   { id: "title-atoz", label: "Title: A to Z" },
   { id: "title-ztoa", label: "Title: Z to A" },
+  { id: "date-newest", label: "Newest First" },
+  { id: "date-oldest", label: "Oldest First" },
 ];
 
 export const filterOptions = {
   category: courseCategories,
   level: courseLevelOptions,
-  primaryLanguage: languageOptions,
+  language: languageOptions,
 };
