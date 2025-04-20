@@ -359,9 +359,9 @@ function StudentViewCoursesPage() {
                         <p className="text-gray-600">
                           By {courseItem.instructor.instructorName}
                         </p>
-                        <p className="text-gray-700">
+                        <p className="text-gray-600">
                           {courseItem.curriculum?.length || 0} Lectures •{" "}
-                          {courseItem.primaryLanguage}
+                          {courseItem.primaryLanguage.toUpperCase()}
                         </p>
                         <p className="text-gray-500 line-clamp-2">
                           {courseItem.subtitle}

@@ -2,9 +2,9 @@
 import axiosInstance from "@/app/api/axiosInstance/axiosInstance";
 import Pagination from "@/components/common/Pagination";
 import Button from "@/components/ui/Buttons";
-import usetGetAllUsers from "@/hooks/usetGetAllUsers";
+import useGetAllUsers from "@/hooks/useGetAllUsers";
 import { User } from "lucide-react";
-import {  useState } from "react";
+import { useState } from "react";
 import Swal from "sweetalert2";
 
 // export const metadata = {
@@ -13,7 +13,7 @@ import Swal from "sweetalert2";
 // };
 
 export default function Instructors() {
-  const [data, refetch] = usetGetAllUsers();
+  const [data, refetch] = useGetAllUsers();
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(5);
 
