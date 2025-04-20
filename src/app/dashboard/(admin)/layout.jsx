@@ -19,7 +19,7 @@ export default function AdminLayout({ children }) {
     ? "lg:ml-[250px]"
     : "lg:ml-[80px]";
 
-console.log(session?.user?.banStatus)
+// console.log(session?.user?.banStatus)
   useEffect(() => {
     if (session?.user?.banStatus) {
       alert("You are banned. Contact support.");
