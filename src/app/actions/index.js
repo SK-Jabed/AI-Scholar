@@ -20,6 +20,7 @@ export const doCredentialLogin = async (formData) => {
       password: formData.get("password"),
       redirect: false,
     });
+    console.log(response)
 
     return response;
   } catch (err) {
