@@ -17,6 +17,7 @@ const Login = () => {
       const formData = new FormData(event.target);
 
       const response = await doCredentialLogin(formData);
+      
 
       if (response.error) {
         setError(response.error.message);

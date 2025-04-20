@@ -9,6 +9,10 @@ export function cn(...inputs) {
 export const getUserByEmail = async (email) => {
   const usersCollection = await getDatabase();
   const user = await usersCollection.findOne({ email });
+  // console.log("user....",user)
+  // if (user?.banStatus) {
+  //   return 'You are Banned.........'
+  // }
   return user;
 };
 

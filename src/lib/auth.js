@@ -25,23 +25,32 @@ export const {
         if (!credentials) return null;
         try {
           const user = await getUserByEmail(credentials.email);
-
-          if (user) {
+          console.log("user?.banStatus", user?.banStatus)
+          if (!user) {
+            throw new Error("User not found");
+          }
+      
+          if (user.banStatus) {
+            throw new Error("You are banned. Contact support.");
+          }
+      
+          
             const isMatch = await bcrypt.compare(
               credentials.password,
               user.password
             );
+            // console.log(user?.banStatus)
 
             if (isMatch) {
               return user;
             } else {
               throw new Error("Check your password");
             }
-          } else {
-            throw new Error("User not found");
-          }
+      
+            // throw new Error("User not found");
+          
         } catch (error) {
-          throw new Error(error);
+          throw error;
         }
       },
     }),
@@ -82,18 +91,21 @@ export const {
           image: token.picture,
           password: "default_password",
           role: "student",
+          banStatus: false,
         };
         isExistingUser = await createUser(userData);
       }
 
       token.id = isExistingUser._id.toString();
       token.role = isExistingUser.role;
+      token.banStatus = isExistingUser.banStatus || false;
       return token;
     },
 
     async session({ session, token }) {
       session.user.id = token.id;
       session.user.role = token.role;
+      session.user.banStatus = token.banStatus
       return session;
     },
   },
