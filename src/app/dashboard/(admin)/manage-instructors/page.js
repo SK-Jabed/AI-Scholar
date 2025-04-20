@@ -81,12 +81,12 @@ export default function Instructors() {
                 <th className="px-8 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
                   User Details
                 </th>
-                <th className="px-8 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                <th className=" py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
                   Contact
                 </th>
-                <th className="py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                {/* <th className="py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
                   Role
-                </th>
+                </th> */}
 
                 <th className=" py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
                   Make User
@@ -119,12 +119,12 @@ export default function Instructors() {
                       </div>
                     </div>
                   </td>
-                  <td className="px-8 py-5 whitespace-nowrap">
+                  <td className=" py-5 whitespace-nowrap">
                     <div className="text-sm text-gray-900">{user.email}</div>
                     <div className="text-xs text-gray-500">Active</div>
                   </td>
-                  <td className="font-bold">{user.role}</td>
-                  <td className="px-8 py-5 whitespace-nowrap">
+                  {/* <td className="font-bold">{user.role}</td> */}
+                  <td className=" py-5 whitespace-nowrap">
                     <Button
                       onClick={() => handleMakeUser(user.email)}
                       className="btn btn-accent"
