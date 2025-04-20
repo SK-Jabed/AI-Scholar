@@ -3,11 +3,7 @@
 import Pagination from "@/components/common/Pagination";
 import useAxiosInstance from "@/hooks/useAxiosInstance";
 import useGetAllUsers from "@/hooks/useGetAllUsers";
-import {
-    Ban,
-    Trash2,
-    User
-} from "lucide-react";
+import { Ban, ListFilterPlus, Trash2, User, UserPlus } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
@@ -18,6 +14,7 @@ const Users = () => {
   const axiosInstance = useAxiosInstance();
   const [data, refetch] = useGetAllUsers();
   const [users, setUsers] = useState([]);
+  const [filterUsers, setFilterUsers] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(5);
   // console.log(data)
@@ -25,6 +22,7 @@ const Users = () => {
   useEffect(() => {
     if (data) {
       setUsers(data);
+      setFilterUsers(data)
     }
   }, [data]);
 
@@ -40,7 +38,7 @@ const Users = () => {
         role: data,
         banStatus: status,
       };
-      console.log(sentData);
+      // console.log(sentData);
       const res = await axiosInstance.patch(`/users/userId/${userId}`, {
         role: data,
         banStatus: status,
@@ -73,7 +71,7 @@ const Users = () => {
     console.log(banStatus);
     const res = await axiosInstance.patch(`/users/userId/${id}`, banStatus);
     if (res?.data?.success) {
-      console.log(res.data.data);
+      // console.log(res.data.data);
       // console.log(object)
       refetch();
     }
@@ -94,7 +92,7 @@ const Users = () => {
         const res = await axiosInstance.delete(`/users//user/${id}`);
         // console.log(res.data)
         if (res?.data?.success) {
-          refetch()
+          refetch();
           Swal.fire({
             title: "Deleted!",
             text: "Your file has been deleted.",
@@ -104,6 +102,16 @@ const Users = () => {
       }
     });
   };
+  const handleFilters=(e)=>{
+    // e.target.value;
+    // console.log(filterUsers?.sort((a,b)=> a.name.localeCompare(b.name)))
+    const filter = e.target.value
+
+    // const filters = [...filterUsers]?.sort((a,b)=>a.filter.localeCompare(b.filter))
+   
+    setUsers([...filterUsers]?.sort((a,b)=>a[filter].localeCompare(b[filter])))
+
+  }
 
   return (
     <div className="min-h-screen py-6 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
@@ -118,17 +126,26 @@ const Users = () => {
         <p className="text-lg text-gray-600 max-w-2xl mx-auto">
           Manage users with precision and ease of your application
         </p>
-        <div className="mt-6 flex items-center justify-center gap-4">
+        <div className="mt-6 flex items-center justify-between gap-4">
           <div className="flex items-center bg-white rounded-lg shadow-xs px-4 py-2 border border-gray-200">
             <User className="w-5 h-5 text-gray-500 mr-2" />
             <span className="text-sm font-medium text-gray-700">
               Total: <span className="text-gray-900">{users.length}</span>
             </span>
           </div>
-          {/* <button className="flex items-center bg-white rounded-lg shadow-xs px-4 py-2 border border-gray-200 hover:bg-gray-50 transition-colors duration-200">
-            <UserPlus className="w-5 h-5 text-gray-500 mr-2" />
-            <span className="text-sm font-medium text-gray-700">Add User</span>
-          </button> */}
+          <div className="flex items-center gap-4 select" >
+          <ListFilterPlus />
+            <select onChange={handleFilters}
+              defaultValue="Filters"
+              className="select select-info"
+            >
+            
+              <option disabled={true}> Filter</option>
+              <option value='name'>Name</option>
+              <option value='email'>Email</option>
+              <option value='role'>Role</option>
+            </select>
+          </div>
         </div>
       </div>
 
