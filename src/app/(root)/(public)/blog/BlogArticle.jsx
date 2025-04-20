@@ -16,6 +16,7 @@ export default function BlogArticle() {
         queryKey: ["details", id],
         queryFn: async () => {
           const res = await axios.get(`http://localhost:5000/blogs/${id}`);
+          console.log(res.data)
           return res.data.data;
         },
       });

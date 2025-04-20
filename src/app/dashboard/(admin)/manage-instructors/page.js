@@ -26,7 +26,7 @@ export default function Instructors() {
   );
 
   const handleMakeUser = (email) => {
-    // console.log(email);
+    console.log(email);
     const data = {
       role: "student",
       instructorStatus: "",
@@ -43,7 +43,7 @@ export default function Instructors() {
       if (result.isConfirmed) {
         console.log(email);
         try {
-          const res = await axiosInstance.patch(`/users/user/${email}`, data);
+          const res = await axiosInstance.patch(`/users/${email}`, data);
 
           console.log("User role updated:", res?.data);
           const updatedUser = res?.data?.data;
