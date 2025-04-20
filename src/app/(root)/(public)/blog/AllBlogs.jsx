@@ -1,10 +1,11 @@
 "use client";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import { EditIcon, Trash } from "lucide-react";
+import { Trash } from "lucide-react";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Swal from "sweetalert2";
+import BlogModal from "./BlogModal";
 
 export default function AllBlogs() {
   const { data: session, status } = useSession();
@@ -44,7 +45,7 @@ export default function AllBlogs() {
           refetch();
           Swal.fire({
             title: "Deleted!",
-            text: "Your file has been deleted.",
+            text: "Your blog has been deleted.",
             icon: "success",
           });
         }
@@ -63,29 +64,16 @@ export default function AllBlogs() {
       <table className="min-w-full table-auto text-sm border-2 border-gray-300 overflow-hidden">
         <thead className="bg-gray-100 text-gray-700">
           <tr>
-            <th className="px-5 py-3 border border-gray-300 text-left">
-              Serial
-            </th>
-            <th className="px-5 py-3 border border-gray-300 text-center">
-              Banner
-            </th>
-            <th className="px-5 py-3 border border-gray-300 text-left">
-              Title
-            </th>
-            <th className="px-5 py-3 border border-gray-300 text-left">
-              Post Date
-            </th>
-            <th className="px-5 py-3 border border-gray-300 text-center">
-              Action
-            </th>
+            <th className="px-5 py-3 border border-gray-300 text-left">Serial</th>
+            <th className="px-5 py-3 border border-gray-300 text-center">Banner</th>
+            <th className="px-5 py-3 border border-gray-300 text-left">Title</th>
+            <th className="px-5 py-3 border border-gray-300 text-left">Post Date</th>
+            <th className="px-5 py-3 border border-gray-300 text-center">Action</th>
           </tr>
         </thead>
         <tbody className="bg-white divide-y divide-gray-200">
           {totalBlogs?.map((blog, inx) => (
-            <tr
-              key={blog._id || inx}
-              className="hover:bg-gray-50 transition-colors duration-150"
-            >
+            <tr key={blog._id || inx} className="hover:bg-gray-50 transition-colors">
               <td className="px-5 py-4 border border-gray-300">{inx + 1}</td>
               <td className="px-5 py-4 border border-gray-300">
                 <div className="flex justify-center">
@@ -94,24 +82,18 @@ export default function AllBlogs() {
                     alt={blog.titleData || "Blog banner"}
                     width={80}
                     height={50}
-                    className="w-20 h-12 object-cover rounded-md border border-gray-200 mx-auto"
+                    className="w-20 h-12 object-cover rounded-md border border-gray-200"
                   />
                 </div>
               </td>
-              <td className="px-5 py-4 border border-gray-300">
-                {blog.titleData}
-              </td>
-              <td className="px-5 py-4 border border-gray-300">
-                {blog.postDate}
-              </td>
+              <td className="px-5 py-4 border border-gray-300">{blog.titleData}</td>
+              <td className="px-5 py-4 border border-gray-300">{blog.postDate}</td>
               <td className="px-5 py-4 border border-gray-300">
                 <div className="flex justify-center gap-3">
-                  <button className="text-blue-500 hover:text-blue-700 transition-colors">
-                    <EditIcon className="w-5 h-5" />
-                  </button>
+                  <BlogModal blog={blog} refetch={refetch} />
                   <button
-                    onClick={() => handleDeleteBlog(`${blog._id}`)}
-                    className="text-red-500 hover:text-red-700 transition-colors"
+                    onClick={() => handleDeleteBlog(blog._id)}
+                    className="text-red-500 hover:text-red-700 transition"
                   >
                     <Trash className="w-5 h-5" />
                   </button>
