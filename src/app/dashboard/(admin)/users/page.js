@@ -1,26 +1,22 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import {
-  User,
-  UserCog,
-  ChevronDown,
-  UserPlus,
-  Trash2,
-  Ban,
-} from "lucide-react";
 import Pagination from "@/components/common/Pagination";
 import useAxiosInstance from "@/hooks/useAxiosInstance";
+import useGetAllUsers from "@/hooks/useGetAllUsers";
+import {
+    Ban,
+    Trash2,
+    User
+} from "lucide-react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import usetGetAllUsers from "@/hooks/usetGetAllUsers";
-import Button from "@/components/ui/Buttons";
 import Swal from "sweetalert2";
 
 const Users = () => {
   const { register, handleSubmit } = useForm();
 
   const axiosInstance = useAxiosInstance();
-  const [data, refetch] = usetGetAllUsers();
+  const [data, refetch] = useGetAllUsers();
   const [users, setUsers] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(5);

@@ -1,16 +1,16 @@
 "use client";
-import React, { useState } from "react";
+import axiosInstance from "@/app/api/axiosInstance/axiosInstance";
 import { Button } from "@/components/ui/button";
+import useGetAllUsers from "@/hooks/useGetAllUsers";
 import { GraduationCap, Sparkles } from "lucide-react";
 import { useSession } from "next-auth/react";
-import axiosInstance from "@/app/api/axiosInstance/axiosInstance";
-import usetGetAllUsers from "@/hooks/usetGetAllUsers";
+import { useState } from "react";
 
 const BecomeInstructor = () => {
-  const [data, refetch] = usetGetAllUsers() 
+  const [data, refetch] = useGetAllUsers() 
   const { data: session } = useSession();
   const email = session?.user?.email;
-  const [clicked, setisClicked] = useState(false);
+  const [clicked, setClicked] = useState(false);
   const handleBecomeInstructor = async () => {
     // console.log('object')
     // console.log(email);
@@ -28,7 +28,7 @@ const BecomeInstructor = () => {
 
       if (updatedUser) {
         refetch()
-        setisClicked(true)
+        setClicked(true)
       }
 
     //   TODO -----------------alert

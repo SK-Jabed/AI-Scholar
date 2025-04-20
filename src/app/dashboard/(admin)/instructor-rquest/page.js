@@ -1,14 +1,14 @@
 "use client";
-import usetGetAllUsers from "@/hooks/usetGetAllUsers";
-import React, { useEffect, useState } from "react";
-import Pagination from "@/components/common/Pagination";
-import { Trash2, User } from "lucide-react";
-import Button from "@/components/ui/Buttons";
-import Swal from "sweetalert2";
 import axiosInstance from "@/app/api/axiosInstance/axiosInstance";
+import Pagination from "@/components/common/Pagination";
+import Button from "@/components/ui/Buttons";
+import useGetAllUsers from "@/hooks/useGetAllUsers";
+import { Trash2, User } from "lucide-react";
+import { useEffect, useState } from "react";
+import Swal from "sweetalert2";
 
 const InstructorRequest = () => {
-  const [data, refetch] = usetGetAllUsers();
+  const [data, refetch] = useGetAllUsers();
 
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(5);

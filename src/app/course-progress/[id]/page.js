@@ -226,7 +226,7 @@ export default function CourseProgressPage({ params }) {
         </div>
       </div>
       <Dialog open={lockCourse}>
-        <DialogContent className="sm:w-[425px] bg-white">
+        <DialogContent className="sm:w-[350px] bg-white">
           <DialogHeader>
             <DialogTitle>You can not view this page</DialogTitle>
             <DialogDescription>
@@ -236,7 +236,7 @@ export default function CourseProgressPage({ params }) {
         </DialogContent>
       </Dialog>
       <Dialog open={showCourseCompleteDialog}>
-        <DialogContent className="sm:w-[425px] bg-white">
+        <DialogContent className="sm:w-[350px] bg-white">
           <DialogHeader>
             <DialogTitle>Congratulations!</DialogTitle>
             <div className="flex flex-col gap-3 mt-2">
