@@ -34,6 +34,7 @@ export default function BlogModal({ blog, refetch }) {
       titleData: title,
       descriptionData: description,
       banner: blogImage,
+      profile: blog.profile,
     };
 
     try {
