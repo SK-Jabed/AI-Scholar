@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import Image from "next/image";
-import PopularBlogs from "./popularBlogs";
+import PopularBlogs from "./PopularBlogs";
 import { useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 

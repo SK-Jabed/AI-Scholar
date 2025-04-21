@@ -27,6 +27,7 @@ import { useSession } from "next-auth/react";
 import { motion } from "framer-motion";
 import CourseCardSkeleton from "@/components/Skeletons/CourseCardSkeleton";
 import GradientText from "@/components/shared/GradientText";
+import Container from "@/components/shared/Container";
 
 function StudentViewCoursesPage() {
   const [sort, setSort] = useState("price-lowtohigh");
@@ -184,7 +185,8 @@ function StudentViewCoursesPage() {
   }, [session]);
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <Container>
+    <div className="py-8">
       {/* Header Section */}
       <div className="text-center mb-12">
         <motion.h1
@@ -406,6 +408,7 @@ function StudentViewCoursesPage() {
         </main>
       </div>
     </div>
+    </Container>
   );
 }
 
