@@ -26,7 +26,6 @@ import {
   BookOpen,
   MessageSquare,
   Award,
-  CheckCircle2,
   Video,
 } from "lucide-react";
 import {
@@ -67,6 +66,7 @@ export default function CourseDetailsPage({ params }) {
       const response = await fetchStudentViewCourseDetailsService(
         currentCourseDetailsId
       );
+      
       if (response?.success) {
         setStudentViewCourseDetails(response?.data);
       }
@@ -133,7 +133,7 @@ export default function CourseDetailsPage({ params }) {
     return (
       <div className="min-h-screen mx-auto xl:px-20 lg:px-16 md:px-10 sm:px-4 px-6">
         <div className="space-y-8">
-          <Skeleton className="h-12 w-full" />
+          <Skeleton className="h-32 w-full" />
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="space-y-4">
               {[...Array(3)].map((_, i) => (
@@ -267,14 +267,14 @@ export default function CourseDetailsPage({ params }) {
                 <CardContent className="px-6 py-2">
                   <div className="bg-blue-50 border border-blue-100 rounded-lg p-4">
                     <p className="text-gray-700 italic font-medium">
-                      {studentViewCourseDetails?.welcomeMessage}
+                      &ldquo;{studentViewCourseDetails?.welcomeMessage}&rdquo;
                     </p>
                   </div>
                 </CardContent>
               </Card>
             </motion.div>
 
-            {/* Curriculum - Enhanced with better visual hierarchy */}
+            {/* Course Curriculum */}
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
@@ -375,7 +375,7 @@ export default function CourseDetailsPage({ params }) {
             </motion.div>
           </main>
 
-          {/* Sidebar - Maintained your original structure with enhancements */}
+          {/* Sidebar */}
           <aside className="w-full lg:w-[600px]">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -409,7 +409,7 @@ export default function CourseDetailsPage({ params }) {
                   </div>
                   <Button
                     onClick={handlePurchase}
-                    className="w-full py-6 text-lg font-medium"
+                    className="w-full py-6 text-lg font-medium cursor-pointer"
                   >
                     Buy Now
                   </Button>
@@ -418,60 +418,6 @@ export default function CourseDetailsPage({ params }) {
             </motion.div>
           </aside>
         </div>
-
-        {/* Free Preview Dialog - Enhanced version */}
-        {/* <Dialog
-        open={showFreePreviewDialog}
-        onOpenChange={() => {
-          setShowFreePreviewDialog(false);
-          setDisplayCurrentVideoFreePreview(null);
-        }}
-      >
-        <DialogContent className="w-full max-w-4xl">
-          <DialogHeader>
-            <DialogTitle>Course Preview</DialogTitle>
-          </DialogHeader>
-          <div className="aspect-video bg-black rounded-lg">
-            <VideoPlayer
-              url={displayCurrentVideoFreePreview}
-              width="100%"
-              height="100%"
-            />
-          </div>
-          <div className="py-4">
-            <h3 className="font-bold mb-3">Available Previews</h3>
-            <div className="space-y-2">
-              {studentViewCourseDetails?.curriculum
-                ?.filter((item) => item.freePreview)
-                .map((filteredItem, index) => (
-                  <div
-                    key={index}
-                    onClick={() => handleSetFreePreview(filteredItem)}
-                    className={`flex items-center justify-between p-3 rounded-lg cursor-pointer ${
-                      displayCurrentVideoFreePreview === filteredItem.videoUrl
-                        ? "bg-blue-50"
-                        : "hover:bg-gray-50"
-                    }`}
-                  >
-                    <div className="flex items-center gap-3">
-                      <PlayCircle className="h-5 w-5 text-blue-600" />
-                      <span>{filteredItem?.title}</span>
-                    </div>
-                    <span className="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded-full">
-                      Free Preview
-                    </span>
-                  </div>
-                ))}
-            </div>
-          </div>
-          <DialogFooter>
-            <DialogClose asChild>
-              <Button variant="outline">Close</Button>
-            </DialogClose>
-            <Button onClick={handlePurchase}>Enroll Now</Button>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog> */}
 
         {/* Free Preview Dialog */}
         <Dialog
@@ -482,7 +428,7 @@ export default function CourseDetailsPage({ params }) {
           }}
         >
           <DialogContent className="max-w-4xl bg-white rounded-lg overflow-hidden">
-            <DialogHeader className="bg-gradient-to-r from-blue-600 to-purple-600 p-6">
+            <DialogHeader className="bg-gradient-to-r from-blue-600 to-purple-600 p-4 mt-4 rounded-t-md">
               <DialogTitle className="text-white">Course Preview</DialogTitle>
             </DialogHeader>
             <div className="aspect-video bg-black">
@@ -492,7 +438,7 @@ export default function CourseDetailsPage({ params }) {
                 height="100%"
               />
             </div>
-            <div className="p-6">
+            <div className="">
               <h3 className="font-bold text-lg mb-4">Preview Lessons</h3>
               <div className="space-y-2">
                 {studentViewCourseDetails?.curriculum
@@ -520,11 +466,11 @@ export default function CourseDetailsPage({ params }) {
                   ))}
               </div>
             </div>
-            <DialogFooter className="px-6 pb-6">
+            <DialogFooter className="pt-2 pb-6">
               <DialogClose asChild>
                 <Button
-                  variant="outline"
-                  className="border-gray-300 hover:bg-gray-50"
+                  variant="default"
+                  className="bg-red-600 hover:bg-red-700"
                 >
                   Close Preview
                 </Button>
