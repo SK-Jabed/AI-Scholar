@@ -65,11 +65,22 @@ export default function Instructors() {
 
   return (
     <div>
-      <div className="rounded-2xl border border-gray-200 bg-white p-6 dark:border-gray-800 dark:bg-white/[0.03] lg:p-6">
-        <h3 className="mb-5 text-lg font-semibold text-center mt-6 text-gray-800 dark:text-white/80 lg:mb-6">
-          All Instructor Data will Appear Here...{allInstructors?.length}
-        </h3>
-      </div>
+            {/* Header */}
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 gap-4">
+              <div>
+                <h1 className="text-2xl font-bold text-gray-900">Manage Instructors</h1>
+                <p className="text-sm text-gray-500 mt-1">
+                  {allInstructors.length} {allInstructors.length === 1 ? "instructor" : "instructors"}
+                </p>
+              </div>
+              {/* <Link
+                href="/dashboard/blog-post"
+                className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 transition-colors duration-300"
+              >
+                <ImagePlus className="mr-2 h-5 w-5" />
+                Post a Blog
+              </Link> */}
+            </div>
       <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
         <div className="overflow-x-auto">
           <table className="min-w-full divide-y divide-gray-200">

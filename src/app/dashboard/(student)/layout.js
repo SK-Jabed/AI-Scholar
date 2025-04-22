@@ -1,6 +1,6 @@
 "use client";
 
-export default function InstructorLayout({ children }) {
+export default function StudentLayout({ children }) {
   return (
     <div>
       {/* Page Content */}
