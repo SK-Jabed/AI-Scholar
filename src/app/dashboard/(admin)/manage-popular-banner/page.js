@@ -6,7 +6,7 @@ import { User } from "lucide-react";
 import Image from "next/image";
 import React, { useState } from "react";
 
-const ManagePopulatBannerAdvertise = () => {
+const ManagePopularBannerAdvertise = () => {
   const [courses, refetch] = useGetAllCourses();
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(5);
@@ -44,7 +44,7 @@ const ManagePopulatBannerAdvertise = () => {
 
   return (
     <div>
-      ManagePopulatBannerAdvertise
+      ManagePopularBannerAdvertise
       <tbody className="bg-white divide-y divide-gray-200">
         {paginatedUsers?.map((course, index) => (
           <tr
@@ -118,4 +118,4 @@ const ManagePopulatBannerAdvertise = () => {
   );
 };
 
-export default ManagePopulatBannerAdvertise;
+export default ManagePopularBannerAdvertise;

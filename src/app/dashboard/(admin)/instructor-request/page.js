@@ -15,7 +15,6 @@ const InstructorRequest = () => {
   const [users, setUsers] = useState([]);
   useEffect(() => {
     if (data) {
-      // console.log(userss)
       const pendingInstructors = data?.filter(
         (user) => user.instructorStatus === "pending"
       );
@@ -123,7 +122,7 @@ const InstructorRequest = () => {
                   </td>
                   <td>
                     <Button
-                      onClick={() => handlePendingRequest(user.email, 'done')}
+                      onClick={() => handlePendingRequest(user.email, "done")}
                       className="btn btn-accent"
                     >
                       {user.instructorStatus}
@@ -131,10 +130,10 @@ const InstructorRequest = () => {
                   </td>
                   <td>
                     <Button
-                      onClick={() => handlePendingRequest(user.email,'')}
+                      onClick={() => handlePendingRequest(user.email, "")}
                       className="btn btn-accent"
                     >
-                      <Trash2/>
+                      <Trash2 />
                     </Button>
                   </td>
                 </tr>
