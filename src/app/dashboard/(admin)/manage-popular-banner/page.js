@@ -10,7 +10,7 @@ const ManagePopularBannerAdvertise = () => {
   const [courses, refetch] = useGetAllCourses();
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(5);
-//   console.log(courses);
+  //   console.log(courses);
 
   const totalPages = Math.ceil(courses.length / itemsPerPage);
   const paginatedUsers = courses.slice(
@@ -18,33 +18,21 @@ const ManagePopularBannerAdvertise = () => {
     currentPage * itemsPerPage
   );
 
-
-
-  const handleApprovePopularBannerAdvertise= async (id)=>{
-    console.log(id)
-    const status ={
-        status: 'approved'
-    }
-    const res = await axiosInstance.patch(`/courses/course/${id}`, status)
-    console.log(res.data)
+  const handleApprovePopularBannerAdvertise = async (id, stat) => {
+    console.log(id);
+    const status = {
+      status: stat === "approved" ? 'remove' : "approved",
+    };
+    const res = await axiosInstance.patch(`/courses/course/${id}`, status);
+    console.log(res.data);
     if (res?.data) {
-        refetch()
+      refetch();
     }
-  }
-
-
-
-
-
-
-
-
-
-
+  };
 
   return (
     <div>
-      ManagePopularBannerAdvertise
+      <p className="text-3xl text-center">Manage Popular Banner Advertise</p>
       <tbody className="bg-white divide-y divide-gray-200">
         {paginatedUsers?.map((course, index) => (
           <tr
@@ -59,9 +47,7 @@ const ManagePopularBannerAdvertise = () => {
             <td className="px-8 py-5 whitespace-nowrap">
               <div className="flex items-center">
                 <div className="flex-shrink-0 h-10 w-10 rounded-full bg-gray-100 flex items-center justify-center overflow-hidden">
-                  
-                    <User className="h-5 w-5 text-gray-400" />
-                 
+                  <User className="h-5 w-5 text-gray-400" />
                 </div>
                 <div className="ml-4">
                   <div className="text-sm font-medium text-gray-900">
@@ -90,14 +76,18 @@ const ManagePopularBannerAdvertise = () => {
                     // handle update logic
                   }}
                 >
-                 
                   <button
-                  onClick={()=>handleApprovePopularBannerAdvertise(course._id)}
+                    onClick={() =>
+                      handleApprovePopularBannerAdvertise(course._id, course.status)
+                    }
                     type="submit"
                     className="btn-outline btn rounded-md hover:bg-gray-300 transition"
                   >
-                    Show On Home Page
-                  </button>
+                    {course.status === "approved"
+                      ? "Remove From Home Page"
+                      : " Show On Home Page"}
+                  </button>{" "}
+                  :
                 </form>
               </div>
             </td>
@@ -113,7 +103,6 @@ const ManagePopularBannerAdvertise = () => {
           onItemsPerPageChange={setItemsPerPage}
         />
       </div>{" "}
-     
     </div>
   );
 };
