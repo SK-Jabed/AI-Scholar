@@ -41,7 +41,7 @@ const Help = () => {
     key={index}
     className={`w-fit max-w-[70%] px-4 py-3 text-base rounded-lg ${
       msg.role === "user"
-        ? "bg-blue-600 text-white self-end ml-auto text-right"
+        ? "bg-amber-800 text-white self-end ml-auto text-right"
         : "bg-gray-100 text-gray-800 self-start mr-auto text-left"
     }`}
   >
