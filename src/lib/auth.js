@@ -4,6 +4,7 @@ import GithubProvider from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
 import { getUserByEmail, createUser } from "./utils";
 import bcrypt from "bcryptjs";
+import Error from "@/app/error";
 
 export const {
   handlers: { GET, POST },
@@ -31,8 +32,12 @@ export const {
           }
       
           if (user.banStatus) {
-            throw new Error("You are banned. Contact support.");
+            // Use return null + error message
+            const error = new Error("You are banned. Contact support.");
+            error.name = "CredentialsSignin"; // This is required
+            throw error;
           }
+        
       
           
             const isMatch = await bcrypt.compare(
@@ -44,7 +49,10 @@ export const {
             if (isMatch) {
               return user;
             } else {
-              throw new Error("Check your password");
+              const error = new Error("Incorrect password");
+        error.name = "CredentialsSignin";
+        throw error;
+
             }
       
             // throw new Error("User not found");
@@ -95,12 +103,16 @@ export const {
         };
         isExistingUser = await createUser(userData);
       }
+      if (isExistingUser.banStatus) {
+        throw new Error("You are banned. Contact support.");
+      }
 
       token.id = isExistingUser._id.toString();
       token.role = isExistingUser.role;
       token.banStatus = isExistingUser.banStatus || false;
       return token;
     },
+   
 
     async session({ session, token }) {
       session.user.id = token.id;

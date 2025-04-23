@@ -130,6 +130,12 @@ const navItems = [
     path: "/dashboard/security",
     roles: ["admin"],
   },
+  {
+    icon: <HelpCircleIcon className="w-5 h-5" />,
+    name: "Help",
+    path: "/dashboard/help",
+    roles: ["admin", "instructor", "student"],
+  },
 ];
 
 const AppSidebar = () => {
