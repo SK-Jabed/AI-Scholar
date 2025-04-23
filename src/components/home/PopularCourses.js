@@ -22,33 +22,45 @@ export default function PopularCourses() {
   const { data: session } = useSession();
   const router = useRouter();
   
-  const [popularCourses, setPopularCourses] = useState([]);
   const [courses, refetch] = useGetAllCourses()
+  const [popularCourses, setPopularCourses] = useState([]);
 
   // Initialize AOS
+  // useEffect(() => {
+  //   AOS.init({
+  //     duration: 800,
+  //     once: true,
+  //   });
+  // }, []);
   useEffect(() => {
-    AOS.init({
-      duration: 800,
-      once: true,
-    });
-  }, []);
-
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await axiosInstance.get("/courses/get-courses");
-        console.log(res?.data);
-        setPopularCourses(res?.data?.data || []);
-      } catch (error) {
-        console.error("Error fetching courses:", error);
-        setPopularCourses([]);
-      }
-    };
-    fetchData();
-  }, [axiosInstance]);
+    const interval = setInterval(() => {
+      refetch();
+    }, 5000); // every 5 seconds
   
-  const aproveCourses = courses?.filter(course=> course.status === "approved")
+    return () => clearInterval(interval); // cleanup on unmount
+  }, []);
+  
+  useEffect(()=>{
+    const aproveCourses = courses?.filter(course=> course.status === "approved")
+    setPopularCourses(aproveCourses)
+   
+  },[ courses])
+
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const res = await axiosInstance.get("/courses/get-courses");
+  //       console.log(res?.data);
+  //       setPopularCourses(res?.data?.data || []);
+  //     } catch (error) {
+  //       console.error("Error fetching courses:", error);
+  //       setPopularCourses([]);
+  //     }
+  //   };
+  //   fetchData();
+  // }, [axiosInstance]);
+
+   
   // console.log(popularCourses)
  
   // Function to render star ratings
@@ -144,7 +156,7 @@ export default function PopularCourses() {
 
       {/* Courses Grid with Framer Motion */}
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
-        {aproveCourses?.map((course, index) => (
+        {popularCourses?.map((course, index) => (
           <motion.div
             key={course._id || index}
             className="bg-white border border-gray-300 shadow-lg p-2 rounded-xl overflow-hidden hover:scale-105 transition w-full"
