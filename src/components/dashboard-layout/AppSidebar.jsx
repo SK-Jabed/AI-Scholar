@@ -195,9 +195,9 @@ const navItems = [
   },
   {
     icon: <HelpCircleIcon className="w-5 h-5" />,
-    name: "Help & Support",
+    name: "Help",
     path: "/dashboard/help",
-    roles: ["admin"],
+    roles: ["admin", "instructor", "student"],
   },
 ];
 

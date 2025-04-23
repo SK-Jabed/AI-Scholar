@@ -17,16 +17,17 @@ const Login = () => {
       const formData = new FormData(event.target);
 
       const response = await doCredentialLogin(formData);
+      console.log('response.....',response)
       
 
       if (response.error) {
-        setError(response.error.message);
+        setError(response.error);
       } else {
         router.push("/dashboard");
       }
     } catch (err) {
       console.error(err);
-      setError("Check your credentials");
+      setError("Something went wrong.");
     }
   };
 
