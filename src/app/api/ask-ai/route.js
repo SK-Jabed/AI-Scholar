@@ -3,6 +3,7 @@ import { GoogleGenAI } from "@google/genai";
 
 export async function POST(request) {
   const { prompt } = await request.json();
+
     const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
 
  

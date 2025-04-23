@@ -12,6 +12,8 @@ import {
   LogOutIcon,
   PlusCircleIcon,
   SettingsIcon,
+  ShieldCheck,
+  ShieldCheckIcon,
   ShieldIcon,
   UserCheckIcon,
   UserCircle2Icon,
@@ -64,6 +66,12 @@ const navItems = [
     icon: <UserPlusIcon className="w-5 h-5" />,
     name: "Become Instructor",
     path: "/dashboard/become-instructor",
+    roles: ["student"],
+  },
+  {
+    icon: <ShieldCheckIcon className="w-5 h-5" />,
+    name: "Path Recommendation",
+    path: "/dashboard/course-recommendation",
     roles: ["student"],
   },
 
@@ -134,7 +142,7 @@ const navItems = [
     icon: <HelpCircleIcon className="w-5 h-5" />,
     name: "Help",
     path: "/dashboard/help",
-    roles: ["admin", "instructor", "student"],
+    roles: ["student"],
   },
 ];
 
