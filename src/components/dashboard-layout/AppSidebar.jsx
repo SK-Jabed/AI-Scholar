@@ -25,58 +25,7 @@ import { useCallback } from "react";
 import { useSidebar } from "../../context/SidebarContext";
 import { useSession } from "next-auth/react";
 
-// Define navigation items for Admin, Instructors, and Users
-// const navItems = [
-//   {
-//     icon: <LayoutDashboardIcon className="w-5 h-5" />,
-//     name: "Dashboard",
-//     path: "/dashboard",
-//     roles: ["admin", "instructor", "user"],
-//   },
-//   {
-//     icon: <BookOpenIcon className="w-5 h-5" />,
-//     name: "My Courses",
-//     path: "/dashboard/my-courses",
-//     roles: ["admin", "instructor", "user"],
-//   },
-//   // {
-//   //   icon: <BookOpenIcon className="w-5 h-5" />,
-//   //   name: "All Courses",
-//   //   path: "/dashboard/my-courses",
-//   //   roles: ["admin", "instructor", "user"],
-//   // },
-//   {
-//     icon: <UserCircle2Icon className="w-5 h-5" />,
-//     name: "Instructors",
-//     path: "/dashboard/instructors",
-//     roles: ["admin", "user"],
-//   },
-//   {
-//     icon: <PlusCircleIcon className="w-5 h-5" />,
-//     name: "Add Course",
-//     path: "/dashboard/add-course",
-//     roles: ["admin", "instructor", "user"],
-//   },
 
-//   {
-//     icon: <UsersIcon className="w-5 h-5" />,
-//     name: "Users",
-//     path: "/dashboard/users",
-//     roles: ["admin", "instructor", "user"],
-//   },
-//   {
-//     icon: <FileTextIcon className="w-5 h-5" />,
-//     name: "Assignments",
-//     path: "/assignments",
-//     roles: ["admin", "instructor", "user"],
-//   },
-//   {
-//     icon: <HomeIcon className="w-5 h-5" />,
-//     name: "Home",
-//     path: "/",
-//     roles: ["admin", "instructor", "user"],
-//   },
-// ];
 const navItems = [
   // === COMMON TO ALL ROLES ===
   {
@@ -86,33 +35,15 @@ const navItems = [
     roles: ["admin", "instructor", "student"],
   },
   {
-    icon: <HomeIcon className="w-5 h-5" />,
-    name: "Home",
-    path: "/",
-    roles: ["admin", "instructor", "student"],
-  },
-  {
-    icon: <FileTextIcon className="w-5 h-5" />,
-    name: "Reports",
-    path: "/reports",
-    roles: ["admin", "instructor", "student"],
-  },
-  {
-    icon: <UserCircleIcon className="w-5 h-5" />,
-    name: "Profile",
-    path: "/dashboard/profile",
-    roles: ["instructor", "student"],
-  },
-  {
-    icon: <SettingsIcon className="w-5 h-5" />,
-    name: "Settings",
-    path: "/settings",
-    roles: ["admin", "instructor", "student"],
-  },
-  {
     icon: <BellIcon className="w-5 h-5" />,
     name: "Notifications",
     path: "/notifications",
+    roles: ["admin", "instructor", "student"],
+  },
+  {
+    icon: <HomeIcon className="w-5 h-5" />,
+    name: "Home",
+    path: "/",
     roles: ["admin", "instructor", "student"],
   },
 
@@ -123,12 +54,12 @@ const navItems = [
     path: "/dashboard/student-courses",
     roles: ["student"],
   },
-  {
-    icon: <FileTextIcon className="w-5 h-5" />,
-    name: "Assignments",
-    path: "/assignments",
-    roles: ["student"],
-  },
+  // {
+  //   icon: <FileTextIcon className="w-5 h-5" />,
+  //   name: "Assignments",
+  //   path: "/dashboard/assignments",
+  //   roles: ["student"],
+  // },
   {
     icon: <UserPlusIcon className="w-5 h-5" />,
     name: "Become Instructor",
@@ -149,18 +80,24 @@ const navItems = [
     path: "/dashboard/add-course",
     roles: ["instructor"],
   },
-  {
-    icon: <FileTextIcon className="w-5 h-5" />,
-    name: "Assignments",
-    path: "/assignments",
-    roles: ["instructor"],
-  },
+  // {
+  //   icon: <FileTextIcon className="w-5 h-5" />,
+  //   name: "Assignments",
+  //   path: "/assignments",
+  //   roles: ["instructor"],
+  // },
 
   // === ADMIN ONLY ===
   {
     icon: <UsersIcon className="w-5 h-5" />,
     name: "Users",
     path: "/dashboard/users",
+    roles: ["admin"],
+  },
+  {
+    icon: <UsersIcon className="w-5 h-5" />,
+    name: "My Blogs",
+    path: "/dashboard/my-blogs",
     roles: ["admin"],
   },
   {
@@ -171,14 +108,14 @@ const navItems = [
   },
   {
     icon: <UserCheckIcon className="w-5 h-5" />,
-    name: "Manage Popular Banner",
+    name: "Popular Banner",
     path: "/dashboard/manage-popular-banner",
     roles: ["admin"],
   },
   {
     icon: <UserCheckIcon className="w-5 h-5" />,
     name: "Instructor Requests",
-    path: "/dashboard/instructor-rquest",
+    path: "/dashboard/instructor-request",
     roles: ["admin"],
   },
   {

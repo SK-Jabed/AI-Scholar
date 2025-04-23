@@ -1,24 +1,29 @@
 "use client";
 
 import React, { useState } from "react";
-import AllBlogs from "@/app/(root)/(public)/blog/AllBlogs";
+import { motion } from "framer-motion";
 import BlogForm from "@/components/blog-post/blogpost";
+import GradientText from "@/components/shared/GradientText";
 
 export default function BlogPost() {
-  const [showForm, setShowForm] = useState(false);
-
   return (
     <div>
-      <button
-        onClick={() => setShowForm(true)}
-        className="text-xl text-center px-6 mb-6 py-3 cursor-pointer rounded-xl bg-gradient-to-r from-blue-500 to-blue-700 font-bold text-white shadow-lg w-fit mx-auto flex items-center gap-2"
+      {/* Header with animation */}
+      <motion.div
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        className="text-center mb-8"
       >
-        📝 Create New Blog
-      </button>
-      <div>
-        <BlogForm showForm={showForm} setShowForm={setShowForm} />
-        <AllBlogs />
-      </div>
+        <h1 className="text-3xl md:text-4xl font-bold mb-2">
+          <GradientText>Post a New Blog</GradientText>
+        </h1>
+        <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+          Share educational content, insights, tutorials, or opinions on a
+          specific topic or about online courses to engage and inform readers.
+        </p>
+      </motion.div>
+      <BlogForm />
     </div>
   );
 }
