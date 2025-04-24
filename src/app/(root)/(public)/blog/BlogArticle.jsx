@@ -1,4 +1,5 @@
 "use client";
+
 import React, { useState } from "react";
 import Image from "next/image";
 import PopularBlogs from "./PopularBlogs";
@@ -28,7 +29,6 @@ export default function BlogArticle() {
     }
   };
 
-  // Format date to a readable format
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     return date.toLocaleDateString("en-US", {
@@ -39,7 +39,6 @@ export default function BlogArticle() {
     });
   };
 
-  // Format description with line breaks
   const formatDescription = (description) => {
     return { __html: description.replace(/\n/g, "<br />") };
   };
