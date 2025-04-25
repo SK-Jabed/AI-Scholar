@@ -1,17 +1,24 @@
 "use client";
-import { GraduationCap, Menu, X } from "lucide-react";
+import { GraduationCap, Menu, User, X } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState, useCallback } from "react";
 import { useSession } from "next-auth/react";
 import { doLogout } from "@/app/actions";
+import useGetAllUsers from "@/hooks/useGetAllUsers";
+import Image from "next/image";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
   const { data: session } = useSession();
 
+  // console.log(session?.user);
+  const [data, refetch] = useGetAllUsers();
+  // console.log(data);
+  const currentUser = data?.find((user) => user.email === session?.user?.email);
   // Skip rendering the navbar on the dashboard page
+  // console.log(currentUser);
   if (pathname.includes("dashboard")) {
     return null;
   }
@@ -33,7 +40,21 @@ const Navbar = () => {
       <div className="flex space-x-3">
         {session?.user ? (
           <>
-            <p className="btn btn-outline">{session?.user?.email}</p>
+            <div className=" rounded-full p-1 w-16 h-12 flex items-center justify-center overflow-hidden">
+              {currentUser?.image ? (
+                <Image
+                  src={currentUser.image}
+                  alt="Profile"
+                  width={48}
+                  height={48}
+                  className="rounded-full "
+                />
+              ) : (
+                <User className="w-6 h-6 text-gray-500" />
+              )}
+            </div>
+
+            {/* <p className="btn btn-outline">{session?.user?.email}</p> */}
             <button
               onClick={doLogout}
               className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white px-5 py-2 rounded-md shadow-md hover:scale-105 transition transform"
