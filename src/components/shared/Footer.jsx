@@ -25,13 +25,16 @@ const Footer = () => {
 
       {/* Newsletter Section */}
       <div className="relative top-32 flex flex-col items-center justify-center w-full max-w-4xl mx-auto p-8 border border-white/30 backdrop-blur-lg bg-white/10 rounded-2xl shadow-lg mt-20">
-        <h2 className="text-2xl font-bold text-white mb-4">
-          Subscribe to Our Newsletter
-        </h2>
-        <p className="text-gray-200 text-center mb-6">
-          Get the latest updates and exclusive content.
-        </p>
-        <div className="flex w-full">
+       
+          
+          <h2 className="text-2xl font-bold text-white mb-4">
+            Subscribe to Our Newsletter
+          </h2>
+          <p className="text-gray-200 text-center mb-6">
+            Get the latest updates and exclusive content.
+          </p>
+    
+        <div className="flex flex-col md:flex-row w-full">
           <input
             type="email"
             placeholder="Enter your email"
