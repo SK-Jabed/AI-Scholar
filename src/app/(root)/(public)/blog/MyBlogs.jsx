@@ -67,8 +67,8 @@ export default function MyBlogs() {
   };
 
   const formatDate = (dateString) => {
-    const options = { year: 'numeric', month: 'short', day: 'numeric' };
-    return new Date(dateString).toLocaleDateString('en-US', options);
+    const options = { year: "numeric", month: "short", day: "numeric" };
+    return new Date(dateString).toLocaleDateString("en-US", options);
   };
 
   if (isLoading) {
@@ -86,7 +86,8 @@ export default function MyBlogs() {
         <div>
           <h1 className="text-2xl font-bold text-gray-900">My Blogs</h1>
           <p className="text-sm text-gray-500 mt-1">
-            {totalBlogs.length} {totalBlogs.length === 1 ? "blog" : "blogs"} published
+            {totalBlogs.length} {totalBlogs.length === 1 ? "blog" : "blogs"}{" "}
+            published
           </p>
         </div>
         <Link
