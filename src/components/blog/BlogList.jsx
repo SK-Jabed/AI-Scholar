@@ -32,20 +32,23 @@ export default function BlogList() {
   const totalPages = Math.ceil(blogs.length / blogsPerPage);
 
   const formatDate = (dateString) => {
-    const options = { year: 'numeric', month: 'short', day: 'numeric' };
-    return new Date(dateString).toLocaleDateString('en-US', options);
+    const options = { year: "numeric", month: "short", day: "numeric" };
+    return new Date(dateString).toLocaleDateString("en-US", options);
   };
 
   const truncateText = (text, length = 150) => {
     if (text.length <= length) return text;
-    return text.substring(0, length) + '...';
+    return text.substring(0, length) + "...";
   };
 
   if (isLoading) {
     return (
       <div className="space-y-6">
         {[...Array(3)].map((_, i) => (
-          <div key={i} className="bg-gray-100 rounded-xl p-6 animate-pulse h-64" />
+          <div
+            key={i}
+            className="bg-gray-100 rounded-xl p-6 animate-pulse h-64"
+          />
         ))}
       </div>
     );
@@ -54,7 +57,9 @@ export default function BlogList() {
   if (isError) {
     return (
       <div className="bg-red-50 border border-red-200 rounded-xl p-6 text-center">
-        <p className="text-red-600">Failed to load blogs. Please try again later.</p>
+        <p className="text-red-600">
+          Failed to load blogs. Please try again later.
+        </p>
       </div>
     );
   }
@@ -62,7 +67,9 @@ export default function BlogList() {
   if (blogs.length === 0) {
     return (
       <div className="bg-blue-50 border border-blue-200 rounded-xl p-8 text-center">
-        <h3 className="text-xl font-medium text-gray-800 mb-2">No blogs published yet</h3>
+        <h3 className="text-xl font-medium text-gray-800 mb-2">
+          No blogs published yet
+        </h3>
         <p className="text-gray-600 mb-4">Check back later for new articles</p>
       </div>
     );
@@ -81,7 +88,7 @@ export default function BlogList() {
           >
             <div className="p-6">
               {/* Blog Image */}
-              <div className="relative h-48 w-full rounded-lg overflow-hidden mb-4">
+              <div className="relative h-72 w-full rounded-lg overflow-hidden mb-4">
                 <Image
                   src={blog.banner || "/default-banner.jpg"}
                   alt={blog.titleData}

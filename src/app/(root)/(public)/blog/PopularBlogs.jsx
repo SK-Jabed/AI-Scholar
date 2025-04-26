@@ -50,7 +50,7 @@ export default function PopularBlogs() {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.3 }}
-      className="bg-[#F3F9FF] rounded-xl p-6 shadow-sm space-y-4 sticky top-40"
+      className="bg-[#F3F9FF] rounded-xl p-6 shadow-sm space-y-4 sticky top-20"
     >
       <h3 className="text-lg font-semibold text-gray-800">Recent Blogs</h3>
       <div className="space-y-4">

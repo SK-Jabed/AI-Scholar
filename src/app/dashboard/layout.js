@@ -6,6 +6,7 @@ import AppSidebar from "@/components/dashboard-layout/AppSidebar";
 import Backdrop from "@/components/dashboard-layout/Backdrop";
 import { useSidebar } from "@/context/SidebarContext";
 import { SessionProvider } from "next-auth/react";
+import { PageTransition } from "@/components/Transitions/PageTransition";
 
 export default function DashboardLayout({ children }) {
   const { isExpanded, isHovered, isMobileOpen } = useSidebar();
@@ -18,25 +19,27 @@ export default function DashboardLayout({ children }) {
 
   return (
     <SessionProvider>
-      <div className="min-h-screen xl:flex">
-        {/* Sidebar and Backdrop */}
-        <AppSidebar />
+      <PageTransition>
+        <div className="min-h-screen xl:flex">
+          {/* Sidebar and Backdrop */}
+          <AppSidebar />
 
-        <Backdrop />
+          <Backdrop />
 
-        {/* Main Content Area */}
-        <div
-          className={`flex-1 transition-all duration-300 ease-in-out ${mainContentMargin}`}
-        >
-          {/* Header */}
-          <AppHeader />
+          {/* Main Content Area */}
+          <div
+            className={`flex-1 transition-all duration-300 ease-in-out ${mainContentMargin}`}
+          >
+            {/* Header */}
+            <AppHeader />
 
-          {/* Page Content */}
-          <div className="p-4 mx-auto max-w-(--breakpoint-2xl) md:p-6">
-            {children}
+            {/* Page Content */}
+            <div className="p-4 mx-auto max-w-(--breakpoint-2xl) md:p-6">
+              {children}
+            </div>
           </div>
         </div>
-      </div>
+      </PageTransition>
     </SessionProvider>
   );
 }
