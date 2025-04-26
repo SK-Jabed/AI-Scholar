@@ -23,8 +23,8 @@ export default function BlogDetails({ params }) {
   });
 
   const formatDate = (dateString) => {
-    const options = { year: 'numeric', month: 'long', day: 'numeric' };
-    return new Date(dateString).toLocaleDateString('en-US', options);
+    const options = { year: "numeric", month: "long", day: "numeric" };
+    return new Date(dateString).toLocaleDateString("en-US", options);
   };
 
   if (isLoading) {
@@ -37,10 +37,15 @@ export default function BlogDetails({ params }) {
 
   if (isError || !blog) {
     return (
-      <div className="max-w-4xl mx-auto p-6">
+      <div className="max-w-6xl mx-auto p-6">
         <div className="bg-red-50 border border-red-200 rounded-xl p-6 text-center">
-          <p className="text-red-600">Failed to load blog. Please try again later.</p>
-          <Link href="/blog" className="mt-4 inline-flex items-center text-blue-600">
+          <p className="text-red-600">
+            Failed to load blog. Please try again later.
+          </p>
+          <Link
+            href="/blog"
+            className="mt-4 inline-flex items-center text-blue-600"
+          >
             <ArrowLeft className="mr-2 h-4 w-4" />
             Back to Blogs
           </Link>
@@ -50,7 +55,7 @@ export default function BlogDetails({ params }) {
   }
 
   return (
-    <div className="max-w-4xl mx-auto p-4 sm:px-6 lg:px-8 py-12">
+    <div className="max-w-6xl mx-auto p-4 sm:px-6 lg:px-8 py-12">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -88,7 +93,9 @@ export default function BlogDetails({ params }) {
               />
             </div>
             <div>
-              <h3 className="text-lg font-medium text-gray-800">{blog.author}</h3>
+              <h3 className="text-lg font-medium text-gray-800">
+                {blog.author}
+              </h3>
               <div className="flex items-center gap-2 text-gray-500 text-sm">
                 <Calendar className="h-4 w-4" />
                 <span>{formatDate(blog.postDate)}</span>
@@ -98,9 +105,11 @@ export default function BlogDetails({ params }) {
 
           {/* Blog Content */}
           <article className="prose max-w-none">
-            <h1 className="text-3xl font-bold text-gray-900 mb-6">{blog.titleData}</h1>
+            <h1 className="text-3xl font-bold text-gray-900 mb-6">
+              {blog.titleData}
+            </h1>
             <div className="text-gray-700 leading-relaxed space-y-4">
-              {blog.descriptionData.split('\n').map((paragraph, i) => (
+              {blog.descriptionData.split("\n").map((paragraph, i) => (
                 <p key={i}>{paragraph}</p>
               ))}
             </div>

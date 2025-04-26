@@ -1,55 +1,63 @@
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Skeleton } from '@/components/ui/skeleton';
-import { motion } from 'framer-motion';
-import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from 'recharts';
+"use client";
 
-const COLORS = ['#3b82f6', '#10b981', '#f59e0b'];
+import {
+  PieChart,
+  Pie,
+  Cell,
+  Tooltip,
+  Legend,
+  ResponsiveContainer,
+} from "recharts";
+import { motion } from "framer-motion";
+import { fadeIn } from "@/utils/animations";
 
-export default function RoleDistributionChart({ data, isLoading }) {
-  if (isLoading) {
-    return (
-      <Card>
-        <CardHeader>
-          <Skeleton className="h-6 w-1/4" />
-        </CardHeader>
-        <CardContent>
-          <Skeleton className="h-64 w-full" />
-        </CardContent>
-      </Card>
-    );
-  }
+const COLORS = ["#0088FE", "#00C49F", "#FFBB28"];
 
+export const RoleDistributionChart = ({ data }) => {
   return (
-    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
-      <Card>
-        <CardHeader>
-          <CardTitle>User Role Distribution</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="h-64">
-            <ResponsiveContainer width="100%" height="100%">
-              <PieChart>
-                <Pie
-                  data={data}
-                  dataKey="count"
-                  nameKey="role"
-                  cx="50%"
-                  cy="50%"
-                  innerRadius={60}
-                  outerRadius={80}
-                  fill="#8884d8"
-                  label
-                >
-                  {data?.map((entry, index) => (
-                    <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                  ))}
-                </Pie>
-                <Tooltip />
-              </PieChart>
-            </ResponsiveContainer>
-          </div>
-        </CardContent>
-      </Card>
+    <motion.div
+      className="h-80"
+      initial={fadeIn.initial}
+      animate={fadeIn.animate}
+      transition={{ ...fadeIn.transition, delay: 0.5 }}
+    >
+      <ResponsiveContainer width="100%" height="100%">
+        <PieChart>
+          <Pie
+            data={data}
+            cx="50%"
+            cy="50%"
+            innerRadius={60}
+            outerRadius={80}
+            fill="#8884d8"
+            paddingAngle={5}
+            dataKey="value"
+            label={({ name, percent }) =>
+              `${name}: ${(percent * 100).toFixed(0)}%`
+            }
+            animationBegin={500}
+            animationDuration={1000}
+            animationEasing="ease-out"
+          >
+            {data?.map((entry, index) => (
+              <Cell
+                key={`cell-${index}`}
+                fill={COLORS[index % COLORS.length]}
+              />
+            ))}
+          </Pie>
+          <Tooltip
+            contentStyle={{
+              backgroundColor: "rgba(255, 255, 255, 0.95)",
+              border: "1px solid #e2e8f0",
+              borderRadius: "0.5rem",
+              boxShadow: "0 4px 6px -1px rgba(0, 0, 0, 0.1)",
+            }}
+            formatter={(value, name) => [`${value} users`, name]}
+          />
+          <Legend />
+        </PieChart>
+      </ResponsiveContainer>
     </motion.div>
   );
-}
+};

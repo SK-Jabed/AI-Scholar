@@ -1,73 +1,132 @@
-import { Card, CardContent } from '@/components/ui/card';
-import { Skeleton } from '@/components/ui/skeleton';
-import { motion } from 'framer-motion';
-import { BookOpen, DollarSign, Users } from 'lucide-react';
+"use client";
 
-export default function StatsCards({ stats, isLoading }) {
-  const cards = [
+import { motion } from "framer-motion";
+import { BookOpen, Users, GraduationCap, DollarSign } from "lucide-react";
+import {
+  fadeIn,
+  slideUp,
+  staggerContainer,
+  AnimatedNumber,
+} from "@/utils/animations";
+import { StatsCardSkeleton } from "../Skeletons/DashboardSkeleton";
+
+const icons = {
+  courses: <BookOpen className="w-6 h-6" />,
+  instructors: <Users className="w-6 h-6" />,
+  students: <GraduationCap className="w-6 h-6" />,
+  revenue: <DollarSign className="w-6 h-6" />,
+};
+
+const colors = {
+  courses: {
+    bg: "bg-indigo-100",
+    text: "text-indigo-600",
+  },
+  instructors: {
+    bg: "bg-blue-100",
+    text: "text-blue-600",
+  },
+  students: {
+    bg: "bg-green-100",
+    text: "text-green-600",
+  },
+  revenue: {
+    bg: "bg-purple-100",
+    text: "text-purple-600",
+  },
+};
+
+export const StatsCards = ({ data, isLoading }) => {
+  const stats = [
     {
-      title: 'Total Courses',
-      value: stats?.totalCourses || 0,
-      icon: BookOpen,
-      color: 'bg-blue-100 text-blue-600',
+      id: "courses",
+      title: "Total Courses",
+      value: data?.totalCourses || 0,
+      change: "+12%",
+      changeType: "positive",
     },
     {
-      title: 'Total Instructors',
-      value: stats?.totalInstructors || 0,
-      icon: Users,
-      color: 'bg-green-100 text-green-600',
+      id: "instructors",
+      title: "Total Instructors",
+      value: data?.totalInstructors || 0,
+      change: "+5%",
+      changeType: "positive",
     },
     {
-      title: 'Total Students',
-      value: stats?.totalStudents || 0,
-      icon: Users,
-      color: 'bg-yellow-100 text-yellow-600',
+      id: "students",
+      title: "Total Students",
+      value: data?.totalStudents || 0,
+      change: "+23%",
+      changeType: "positive",
     },
     {
-      title: 'Total Revenue',
-      value: `$${stats?.totalRevenue || 0}`,
-      icon: DollarSign,
-      color: 'bg-purple-100 text-purple-600',
+      id: "revenue",
+      title: "Total Revenue",
+      value: data?.totalRevenue
+        ? `$${data.totalRevenue.toLocaleString()}`
+        : "$0",
+      change: "+18%",
+      changeType: "positive",
     },
   ];
 
   if (isLoading) {
     return (
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        {[...Array(4)].map((_, i) => (
-          <Card key={i}>
-            <CardContent className="p-6">
-              <Skeleton className="h-6 w-1/2 mb-4" />
-              <Skeleton className="h-8 w-1/3" />
-            </CardContent>
-          </Card>
+        {[1, 2, 3, 4].map((i) => (
+          <StatsCardSkeleton key={i} />
         ))}
       </div>
     );
   }
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-      {cards.map((card, index) => (
+    <motion.div
+      className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
+      variants={staggerContainer}
+      initial="initial"
+      animate="animate"
+    >
+      {stats.map((stat, index) => (
         <motion.div
-          key={card.title}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: index * 0.1 }}
+          key={stat.id}
+          variants={slideUp}
+          className={`${
+            colors[stat.id].bg
+          } p-6 rounded-xl shadow-sm transition-all duration-300 hover:shadow-md`}
         >
-          <Card className="hover:shadow-lg transition-shadow duration-300">
-            <CardContent className="p-6 flex items-center space-x-4">
-              <div className={`p-3 rounded-full ${card.color}`}>
-                <card.icon className="h-6 w-6" />
-              </div>
-              <div>
-                <p className="text-sm text-gray-500">{card.title}</p>
-                <h3 className="text-2xl font-bold">{card.value}</h3>
-              </div>
-            </CardContent>
-          </Card>
+          <div className="flex items-center justify-between">
+            <div>
+              <p className="text-sm font-medium text-gray-500">{stat.title}</p>
+              <p className="text-2xl font-semibold mt-1">
+                <AnimatedNumber
+                  value={stat.value}
+                  className={colors[stat.id].text}
+                />
+              </p>
+            </div>
+            <div
+              className={`${
+                colors[stat.id].text
+              } p-3 rounded-full bg-white bg-opacity-50`}
+            >
+              {icons[stat.id]}
+            </div>
+          </div>
+          <p className="text-sm mt-4">
+            <span
+              className={`${
+                stat.changeType === "positive"
+                  ? "text-green-600"
+                  : "text-red-600"
+              } font-medium`}
+            >
+              {stat.change}
+            </span>{" "}
+            from last month
+          </p>
         </motion.div>
       ))}
-    </div>
+    </motion.div>
   );
-}
+};

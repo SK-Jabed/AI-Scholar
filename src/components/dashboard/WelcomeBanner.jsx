@@ -1,48 +1,70 @@
-import { Card, CardContent } from '@/components/ui/card';
-import { Skeleton } from '@/components/ui/skeleton';
-import { motion } from 'framer-motion';
-import { Calendar, User } from 'lucide-react';
-import { format } from 'date-fns';
+"use client";
 
-export default function WelcomeBanner({ user, isLoading }) {
-  if (isLoading) {
-    return (
-      <Card className="p-6">
-        <Skeleton className="h-8 w-1/2 mb-4" />
-        <Skeleton className="h-4 w-3/4 mb-2" />
-        <Skeleton className="h-4 w-1/4" />
-      </Card>
-    );
-  }
+import { motion } from "framer-motion";
+import { Calendar, User, Shield, GraduationCap } from "lucide-react";
+import { format } from "date-fns";
+import {
+  fadeIn,
+  slideUp,
+  staggerContainer,
+  AnimatedText,
+} from "@/utils/animations";
+
+export const WelcomeBanner = ({ user }) => {
+  const getRoleIcon = () => {
+    switch (user?.role) {
+      case "admin":
+        return <Shield className="w-5 h-5" />;
+      case "instructor":
+        return <User className="w-5 h-5" />;
+      case "student":
+        return <GraduationCap className="w-5 h-5" />;
+      default:
+        return <User className="w-5 h-5" />;
+    }
+  };
 
   return (
     <motion.div
-      initial={{ scale: 0.95, opacity: 0 }}
-      animate={{ scale: 1, opacity: 1 }}
-      transition={{ duration: 0.5 }}
+      className="bg-gradient-to-r from-blue-600 to-indigo-700 rounded-xl p-6 shadow-lg transition-all duration-300 hover:shadow-xl"
+      initial={fadeIn.initial}
+      animate={fadeIn.animate}
+      transition={fadeIn.transition}
     >
-      <Card className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white shadow-lg hover:shadow-xl transition-shadow duration-300">
-        <CardContent className="p-6">
-          <h1 className="text-2xl md:text-3xl font-bold">
-            Welcome back, {user?.name} 👋
+      <motion.div
+        className="flex flex-col md:flex-row md:items-center md:justify-between gap-4"
+        variants={staggerContainer}
+        initial="initial"
+        animate="animate"
+      >
+        <motion.div variants={slideUp}>
+          <h1 className="text-2xl md:text-3xl font-bold text-white">
+            <AnimatedText text={`Welcome back, ${user?.name || "User"} 👋`} />
           </h1>
-          <p className="mt-2 text-sm md:text-base opacity-90">
-            Your AI Scholar dashboard provides insights into platform performance and user activity.
+          <p className="text-blue-100 mt-2">
+            Here's what's happening with your platform today.
           </p>
-          <div className="mt-4 flex items-center space-x-4">
-            <div className="flex items-center">
-              <User className="h-5 w-5 mr-2" />
-              <span className="text-sm font-medium">Role: {user?.role}</span>
-            </div>
-            <div className="flex items-center">
-              <Calendar className="h-5 w-5 mr-2" />
-              <span className="text-sm font-medium">
-                Today’s Date: {format(new Date(), 'PPP')}
-              </span>
-            </div>
+        </motion.div>
+
+        <motion.div
+          className="flex flex-col sm:flex-row gap-4"
+          variants={slideUp}
+        >
+          <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-lg">
+            {getRoleIcon()}
+            <span className="text-white font-medium capitalize">
+              {user?.role || "user"}
+            </span>
           </div>
-        </CardContent>
-      </Card>
+
+          <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-lg">
+            <Calendar className="w-5 h-5 text-white" />
+            <span className="text-white font-medium">
+              {format(new Date(), "MMMM d, yyyy")}
+            </span>
+          </div>
+        </motion.div>
+      </motion.div>
     </motion.div>
   );
-}
+};
