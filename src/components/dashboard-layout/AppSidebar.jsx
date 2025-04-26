@@ -19,14 +19,13 @@ import {
   UserCircle2Icon,
   UserCircleIcon,
   UserPlusIcon,
-  UsersIcon
+  UsersIcon,
 } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useCallback } from "react";
 import { useSidebar } from "../../context/SidebarContext";
 import { useSession } from "next-auth/react";
-
 
 const navItems = [
   // === COMMON TO ALL ROLES ===
@@ -147,7 +146,7 @@ const navItems = [
 ];
 
 const AppSidebar = () => {
-  const {data: session} = useSession()
+  const { data: session } = useSession();
   const { isExpanded, isMobileOpen, isHovered, setIsHovered } = useSidebar();
   const pathname = usePathname();
 
@@ -182,7 +181,7 @@ const AppSidebar = () => {
       {/* Navigation Menu */}
       <nav className="flex-1 overflow-y-auto no-scrollbar">
         <ul className="flex flex-col gap-2">
-        {navItems.map((item,i) => (
+          {navItems.map((item, i) => (
             <li key={i}>
               {item.roles.includes(session?.user?.role) && (
                 <Link
