@@ -10,12 +10,13 @@ import { useSession } from "next-auth/react";
 
 export default function DashboardPage() {
   const { data: session } = useSession();
+
   const user = session?.user;
 
   const { data, isLoading, error } = useQuery({
     queryKey: ["dashboard"],
     queryFn: fetchDashboardData,
-    staleTime: 1000 * 60 * 5, // 5 minutes
+    staleTime: 1000 * 60 * 5,
     onSuccess: (data) => {
       console.log("Dashboard data loaded:", data);
     },
@@ -34,7 +35,6 @@ export default function DashboardPage() {
     );
   }
 
-  // Log the data structure to verify it matches what components expect
   console.log("Rendering with data:", {
     stats: data?.stats,
     charts: data?.charts,

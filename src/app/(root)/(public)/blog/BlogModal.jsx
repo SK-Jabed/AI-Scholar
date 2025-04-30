@@ -104,7 +104,9 @@ export default function BlogModal({ blog, refetch }) {
   return (
     <>
       <button
-        onClick={() => document.getElementById(`blog_modal_${blog._id}`).showModal()}
+        onClick={() =>
+          document.getElementById(`blog_modal_${blog._id}`).showModal()
+        }
         className="text-blue-500 hover:text-blue-700 transition-colors duration-200 p-2 rounded-full hover:bg-blue-50"
       >
         <Edit className="w-5 h-5" />
@@ -115,7 +117,9 @@ export default function BlogModal({ blog, refetch }) {
           <div className="flex justify-between items-center mb-6">
             <h3 className="text-2xl font-bold text-gray-800">Update Blog</h3>
             <button
-              onClick={() => document.getElementById(`blog_modal_${blog._id}`).close()}
+              onClick={() =>
+                document.getElementById(`blog_modal_${blog._id}`).close()
+              }
               className="btn btn-sm btn-circle btn-ghost"
             >
               ✕
@@ -128,7 +132,7 @@ export default function BlogModal({ blog, refetch }) {
               <label className="block text-sm font-medium text-gray-700">
                 Blog Featured Image
               </label>
-              
+
               {imagePreview ? (
                 <div className="relative group">
                   <img
@@ -204,7 +208,9 @@ export default function BlogModal({ blog, refetch }) {
             <div className="flex justify-end gap-3 pt-4">
               <button
                 type="button"
-                onClick={() => document.getElementById(`blog_modal_${blog._id}`).close()}
+                onClick={() =>
+                  document.getElementById(`blog_modal_${blog._id}`).close()
+                }
                 className="px-6 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors duration-200"
               >
                 Cancel

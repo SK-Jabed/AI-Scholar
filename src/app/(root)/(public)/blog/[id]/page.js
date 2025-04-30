@@ -92,6 +92,7 @@ export default function BlogDetails({ params }) {
                 className="object-cover"
               />
             </div>
+
             <div>
               <h3 className="text-lg font-medium text-gray-800">
                 {blog.author}

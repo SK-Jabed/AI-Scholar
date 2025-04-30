@@ -11,6 +11,7 @@ import {
 import { motion } from "framer-motion";
 import { fadeIn } from "@/utils/animations";
 
+// PIE CHART COLORS
 const COLORS = ["#0088FE", "#00C49F", "#FFBB28"];
 
 export const RoleDistributionChart = ({ data }) => {
