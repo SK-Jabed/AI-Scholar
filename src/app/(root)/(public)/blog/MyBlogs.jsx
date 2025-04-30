@@ -1,13 +1,13 @@
 "use client";
 
+import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
 import { ImagePlus, Trash } from "lucide-react";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
 import BlogModal from "./BlogModal";
+import axios from "axios";
 import Swal from "sweetalert2";
 import Pagination from "@/components/common/Pagination";
 
@@ -32,7 +32,6 @@ export default function MyBlogs() {
     enabled: status === "authenticated" && !!userEmail,
   });
 
-  // Pagination logic
   const totalPages = Math.ceil(totalBlogs.length / itemsPerPage);
   const paginatedBlogs = totalBlogs.slice(
     (currentPage - 1) * itemsPerPage,

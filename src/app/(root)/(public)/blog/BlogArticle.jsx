@@ -8,7 +8,7 @@ import axios from "axios";
 
 export default function BlogArticle() {
   const [blogDetails, setBlogDetails] = useState(null);
-  const [isActiveId, setActiveId] = useState(null)
+  const [isActiveId, setActiveId] = useState(null);
   const queryClient = useQueryClient();
 
   const handleTitleBlog = async (id) => {
@@ -17,12 +17,12 @@ export default function BlogArticle() {
         queryKey: ["details", id],
         queryFn: async () => {
           const res = await axios.get(`http://localhost:5000/blogs/${id}`);
-          console.log(res.data)
+          console.log(res.data);
           return res.data.data;
         },
       });
       setBlogDetails(data);
-      setActiveId(id)
+      setActiveId(id);
       window.scrollTo({ top: 0, behavior: "smooth" });
     } catch (error) {
       console.error("Error fetching blog:", error);
@@ -89,7 +89,9 @@ export default function BlogArticle() {
 
             <article className="text-gray-700 leading-7 space-y-4">
               <p
-                dangerouslySetInnerHTML={formatDescription(blogDetails?.descriptionData)}
+                dangerouslySetInnerHTML={formatDescription(
+                  blogDetails?.descriptionData
+                )}
               />
             </article>
           </>
@@ -98,7 +100,10 @@ export default function BlogArticle() {
 
       {/* Sidebar */}
       <aside className="w-full md:w-72 mt-8 md:mt-0">
-        <PopularBlogs handleTitleBlog={handleTitleBlog} isActiveId={isActiveId}/>
+        <PopularBlogs
+          handleTitleBlog={handleTitleBlog}
+          isActiveId={isActiveId}
+        />
       </aside>
     </div>
   );
