@@ -16,7 +16,6 @@ export default function PopularBlogs() {
     queryKey: ["popularBlogs"],
     queryFn: async () => {
       const res = await axios.get("http://localhost:5000/blogs");
-      // Sort by date or add popularity metric in your backend
       return res.data?.data.slice(0, 6) || [];
     },
   });
@@ -70,6 +69,7 @@ export default function PopularBlogs() {
                   className="w-full h-full object-cover"
                 />
               </div>
+
               <div>
                 <h4 className="text-sm font-medium text-gray-800 group-hover:text-blue-600 line-clamp-2">
                   {blog.titleData}

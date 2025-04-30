@@ -29,6 +29,7 @@ export const RecentEnrollmentsTable = ({ data }) => {
             </th>
           </tr>
         </thead>
+
         <tbody className="bg-white divide-y divide-gray-200">
           {data?.map((enrollment, index) => (
             <motion.tr
