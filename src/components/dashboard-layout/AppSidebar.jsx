@@ -146,6 +146,9 @@ const navItems = [
   },
 ];
 
+
+
+
 const AppSidebar = () => {
   const {data: session} = useSession()
   const { isExpanded, isMobileOpen, isHovered, setIsHovered } = useSidebar();
