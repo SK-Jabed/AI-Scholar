@@ -20,23 +20,26 @@ export default function DashboardLayout({ children }) {
   return (
     <SessionProvider>
       <PageTransition>
-        <div className="min-h-screen xl:flex">
-          {/* Sidebar and Backdrop */}
-          <AppSidebar />
+        <div className="min-h-screen flex flex-col lg:flex-row">
+          {/* Sidebar */}
+          <div className="fixed lg:relative z-40">
+            <AppSidebar />
+          </div>
 
+          {/* Backdrop */}
           <Backdrop />
 
-          {/* Main Content Area */}
-          <div
-            className={`flex-1 transition-all duration-300 ease-in-out ${mainContentMargin}`}
-          >
+          {/* Main Content */}
+          <div className={`flex-1 flex flex-col ${mainContentMargin}`}>
             {/* Header */}
-            <AppHeader />
+            <div className="sticky top-0 z-30">
+              <AppHeader />
+            </div>
 
             {/* Page Content */}
-            <div className="p-4 mx-auto max-w-(--breakpoint-2xl) md:p-6">
-              {children}
-            </div>
+            <main className="flex-1 p-4 md:p-6 overflow-y-auto">
+              <div className="mx-auto max-w-[1800px]">{children}</div>
+            </main>
           </div>
         </div>
       </PageTransition>
